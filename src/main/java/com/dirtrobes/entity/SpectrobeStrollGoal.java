@@ -30,9 +30,18 @@ public class SpectrobeStrollGoal extends WaterAvoidingRandomStrollGoal {
         for (int i = 0; i < 5; i++) {
             Vec3 pos = super.getPosition();
             if (pos == null) return null;
-            if (owner == null || pos.distanceToSqr(owner.position()) > OWNER_CLEARANCE * OWNER_CLEARANCE) return pos;
+            if (owner == null || segmentDistance(mob.position(), pos, owner.position()) > OWNER_CLEARANCE) return pos;
         }
         return null;
+    }
+
+    /** Distance (horizontale) entre le point p et le segment [a, b]. */
+    private static double segmentDistance(Vec3 a, Vec3 b, Vec3 p) {
+        double dx = b.x - a.x, dz = b.z - a.z;
+        double len = dx * dx + dz * dz;
+        double t = len < 1.0E-6 ? 0 : Math.max(0, Math.min(1, ((p.x - a.x) * dx + (p.z - a.z) * dz) / len));
+        double cx = a.x + t * dx - p.x, cz = a.z + t * dz - p.z;
+        return Math.sqrt(cx * cx + cz * cz);
     }
 
     @Override
@@ -45,7 +54,7 @@ public class SpectrobeStrollGoal extends WaterAvoidingRandomStrollGoal {
     public boolean canContinueToUse() {
         if (++runningTicks > MAX_TICKS) return false;
         LivingEntity owner = spectrobe.getOwner();
-        if (owner != null && spectrobe.distanceToSqr(owner) < 2.0 * 2.0) return false;
+        if (owner != null && spectrobe.distanceToSqr(owner) < 2.5 * 2.5) return false;
         return super.canContinueToUse();
     }
 
