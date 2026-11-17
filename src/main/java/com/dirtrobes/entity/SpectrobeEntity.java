@@ -9,6 +9,7 @@ import com.dirtrobes.species.Stage;
 import com.dirtrobes.team.PrizmodTeam;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -46,6 +47,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+
+import org.joml.Vector3f;
 
 import javax.annotation.Nullable;
 
@@ -411,7 +414,7 @@ public class SpectrobeEntity extends TamableAnimal implements BedrockPosable {
         tickStrike();
         if (getStage() == Stage.CHILD && --searchCooldown <= 0) {
             searchCooldown = 40;
-            searchForFossils();
+            searchForTreasure();
         }
     }
 
@@ -462,32 +465,68 @@ public class SpectrobeEntity extends TamableAnimal implements BedrockPosable {
         player.displayClientMessage(Component.translatable(sit ? "message.dirtrobes.sit" : "message.dirtrobes.follow", getDisplayName()), true);
     }
 
-    // ----- Recherche de fossiles par l'enfant (portée de la fiche) -----
-    private void searchForFossils() {
-        if (!(level() instanceof ServerLevel server) || isOrderedToSit() || isKnockedOut()) return;
-        if (!(getOwner() instanceof ServerPlayer owner) || owner.distanceToSqr(this) > 20 * 20) return;
+    // ----- Recherche de l'enfant (portée de la fiche) : fossiles en jaune, minéraux en bleu -----
+
+    /** Résultat d'une recherche : bloc le plus proche de chaque sorte (null si rien). */
+    public record SearchResult(@Nullable BlockPos fossil, @Nullable BlockPos mineral) {}
+
+    private static final DustParticleOptions FOSSIL_SIGNAL = new DustParticleOptions(new Vector3f(1.0f, 0.82f, 0.2f), 1.4f);
+    private static final DustParticleOptions MINERAL_SIGNAL = new DustParticleOptions(new Vector3f(0.3f, 0.65f, 1.0f), 1.4f);
+
+    public int searchRadius() {
         Species s = getSpecies();
-        int radius = 4 + 2 * (s == null ? 3 : s.searchRange());
+        return 4 + 2 * (s == null ? 3 : s.searchRange());
+    }
+
+    /** Cherche fossiles et gisements autour du Spectrobe, sans effet visible. */
+    public SearchResult scanForTreasure() {
+        int radius = searchRadius();
         BlockPos center = blockPosition();
-        BlockPos nearest = null;
-        double best = Double.MAX_VALUE;
-        int shown = 0;
+        BlockPos fossil = null, mineral = null;
+        double bestFossil = Double.MAX_VALUE, bestMineral = Double.MAX_VALUE;
         for (BlockPos pos : BlockPos.betweenClosed(center.offset(-radius, -6, -radius), center.offset(radius, 6, radius))) {
-            BlockState state = server.getBlockState(pos);
+            BlockState state = level().getBlockState(pos);
             if (state.is(ModRegistry.FOSSIL_STONE.get()) || state.is(ModRegistry.DEEPSLATE_FOSSIL_STONE.get())) {
-                if (shown++ < 8) {
-                    server.sendParticles(owner, ParticleTypes.GLOW, true, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 6, 0.3, 0.3, 0.3, 0.0);
-                }
                 double d = pos.distSqr(center);
-                if (d < best) {
-                    best = d;
-                    nearest = pos.immutable();
+                if (d < bestFossil) {
+                    bestFossil = d;
+                    fossil = pos.immutable();
+                }
+            } else if (state.is(ModRegistry.MINERAL_DEPOSIT.get()) || state.is(ModRegistry.DEEPSLATE_MINERAL_DEPOSIT.get())) {
+                double d = pos.distSqr(center);
+                if (d < bestMineral) {
+                    bestMineral = d;
+                    mineral = pos.immutable();
                 }
             }
         }
-        if (nearest != null) {
-            owner.displayClientMessage(Component.translatable("message.dirtrobes.fossil_found", getDisplayName(), (int) Math.sqrt(best))
-                    .withStyle(ChatFormatting.YELLOW), true);
+        return new SearchResult(fossil, mineral);
+    }
+
+    private void searchForTreasure() {
+        if (!(level() instanceof ServerLevel server) || isOrderedToSit() || isKnockedOut()) return;
+        if (!(getOwner() instanceof ServerPlayer owner) || owner.distanceToSqr(this) > 20 * 20) return;
+        SearchResult result = scanForTreasure();
+        if (result.fossil() != null) signal(server, owner, result.fossil(), FOSSIL_SIGNAL);
+        if (result.mineral() != null) signal(server, owner, result.mineral(), MINERAL_SIGNAL);
+        BlockPos shown = result.fossil() != null ? result.fossil() : result.mineral();
+        if (shown != null) {
+            int dist = (int) Math.sqrt(shown.distSqr(owner.blockPosition()));
+            int dy = shown.getY() - owner.getBlockY();
+            Component where = Component.translatable(dy > 1 ? "direction.dirtrobes.above" : dy < -1 ? "direction.dirtrobes.below" : "direction.dirtrobes.level");
+            owner.displayClientMessage(Component.translatable(result.fossil() != null ? "message.dirtrobes.fossil_found" : "message.dirtrobes.mineral_found",
+                    getDisplayName(), dist, where).withStyle(result.fossil() != null ? ChatFormatting.YELLOW : ChatFormatting.AQUA), true);
+            getLookControl().setLookAt(shown.getX() + 0.5, shown.getY() + 0.5, shown.getZ() + 0.5);
+            if (tickCount % 120 < 40) level().broadcastEntityEvent(this, EVENT_CRY);
+        }
+    }
+
+    /** Signal coloré, visible seulement par le dresseur : une colonne au-dessus du bloc et un nuage autour. */
+    private static void signal(ServerLevel server, ServerPlayer owner, BlockPos pos, DustParticleOptions color) {
+        double x = pos.getX() + 0.5, y = pos.getY() + 0.5, z = pos.getZ() + 0.5;
+        server.sendParticles(owner, color, true, x, y, z, 10, 0.35, 0.35, 0.35, 0.0);
+        for (int i = 1; i <= 6; i++) {
+            server.sendParticles(owner, color, true, x, y + i * 0.5, z, 1, 0.02, 0.05, 0.02, 0.0);
         }
     }
 

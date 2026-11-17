@@ -67,6 +67,10 @@ public final class ModRegistry {
             BlockBehaviour.Properties.of().mapColor(MapColor.STONE).strength(3.0f, 3.0f).requiresCorrectToolForDrops().sound(SoundType.STONE));
     public static final DeferredBlock<Block> DEEPSLATE_FOSSIL_STONE = BLOCKS.registerSimpleBlock("deepslate_fossil_stone",
             BlockBehaviour.Properties.of().mapColor(MapColor.DEEPSLATE).strength(4.5f, 3.0f).requiresCorrectToolForDrops().sound(SoundType.DEEPSLATE));
+    public static final DeferredBlock<Block> MINERAL_DEPOSIT = BLOCKS.registerSimpleBlock("mineral_deposit",
+            BlockBehaviour.Properties.of().mapColor(MapColor.STONE).strength(3.0f, 3.0f).requiresCorrectToolForDrops().sound(SoundType.STONE));
+    public static final DeferredBlock<Block> DEEPSLATE_MINERAL_DEPOSIT = BLOCKS.registerSimpleBlock("deepslate_mineral_deposit",
+            BlockBehaviour.Properties.of().mapColor(MapColor.DEEPSLATE).strength(4.5f, 3.0f).requiresCorrectToolForDrops().sound(SoundType.DEEPSLATE));
     public static final DeferredBlock<IncubatorBlock> INCUBATOR = BLOCKS.registerBlock("incubator", IncubatorBlock::new,
             BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(3.5f).requiresCorrectToolForDrops().sound(SoundType.METAL)
                     .lightLevel(state -> state.getValue(IncubatorBlock.ACTIVE) ? 12 : 3).noOcclusion());
@@ -86,6 +90,8 @@ public final class ModRegistry {
     // ---------- Objets ----------
     public static final DeferredItem<BlockItem> FOSSIL_STONE_ITEM = ITEMS.registerSimpleBlockItem("fossil_stone", FOSSIL_STONE);
     public static final DeferredItem<BlockItem> DEEPSLATE_FOSSIL_STONE_ITEM = ITEMS.registerSimpleBlockItem("deepslate_fossil_stone", DEEPSLATE_FOSSIL_STONE);
+    public static final DeferredItem<BlockItem> MINERAL_DEPOSIT_ITEM = ITEMS.registerSimpleBlockItem("mineral_deposit", MINERAL_DEPOSIT);
+    public static final DeferredItem<BlockItem> DEEPSLATE_MINERAL_DEPOSIT_ITEM = ITEMS.registerSimpleBlockItem("deepslate_mineral_deposit", DEEPSLATE_MINERAL_DEPOSIT);
     public static final DeferredItem<BlockItem> INCUBATOR_ITEM = ITEMS.registerSimpleBlockItem("incubator", INCUBATOR);
     public static final DeferredItem<BlockItem> VORTEX_ITEM = ITEMS.registerSimpleBlockItem("krawl_vortex", VORTEX);
     public static final DeferredItem<DeferredSpawnEggItem> KRAWL_SPAWN_EGG = ITEMS.registerItem("krawl_spawn_egg",
@@ -119,6 +125,8 @@ public final class ModRegistry {
                 output.accept(INCUBATOR_ITEM.get());
                 output.accept(FOSSIL_STONE_ITEM.get());
                 output.accept(DEEPSLATE_FOSSIL_STONE_ITEM.get());
+                output.accept(MINERAL_DEPOSIT_ITEM.get());
+                output.accept(DEEPSLATE_MINERAL_DEPOSIT_ITEM.get());
                 output.accept(VORTEX_ITEM.get());
                 output.accept(KRAWL_SPAWN_EGG.get());
                 FOSSILS.values().forEach(f -> output.accept(f.get()));

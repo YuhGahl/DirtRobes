@@ -3,6 +3,8 @@
     "dirtrobes:fossil_stone",
     "dirtrobes:deepslate_fossil_stone",
     "dirtrobes:incubator",
-    "dirtrobes:krawl_vortex"
+    "dirtrobes:krawl_vortex",
+    "dirtrobes:mineral_deposit",
+    "dirtrobes:deepslate_mineral_deposit"
   ]
 }

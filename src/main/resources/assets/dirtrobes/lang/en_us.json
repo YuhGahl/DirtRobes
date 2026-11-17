@@ -23,7 +23,7 @@
   "message.dirtrobes.evolved": "%s evolved into %s!",
   "message.dirtrobes.knocked_out": "%s is knocked out! It recovers in a minute.",
   "message.dirtrobes.recovered": "%s has recovered.",
-  "message.dirtrobes.fossil_found": "%s senses a fossil %s blocks away!",
+  "message.dirtrobes.fossil_found": "%s senses a fossil %s blocks away (%s)!",
   "message.dirtrobes.special_none": "No Spectrobe ready for a special attack (target, cooldown or stage).",
   "message.dirtrobes.incubator_start": "Fossil cleaned (integrity %s%%): the awakening begins…",
   "message.dirtrobes.hatched": "A %s has awakened! (stats at %s%%)",
@@ -256,5 +256,11 @@
   "gui.dirtrobes.prizmod.ko": "KO",
   "gui.dirtrobes.prizmod.far": "Too far",
   "gui.dirtrobes.prizmod.send": "Send out",
-  "gui.dirtrobes.prizmod.recall": "Store"
+  "gui.dirtrobes.prizmod.recall": "Store",
+  "block.dirtrobes.mineral_deposit": "Mineral Deposit",
+  "block.dirtrobes.deepslate_mineral_deposit": "Deepslate Mineral Deposit",
+  "message.dirtrobes.mineral_found": "%s senses minerals %s blocks away (%s).",
+  "direction.dirtrobes.above": "above",
+  "direction.dirtrobes.below": "below",
+  "direction.dirtrobes.level": "at your level"
 }

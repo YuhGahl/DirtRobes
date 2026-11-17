@@ -23,7 +23,7 @@
   "message.dirtrobes.evolved": "%s a évolué en %s !",
   "message.dirtrobes.knocked_out": "%s est K.O. ! Il récupère dans une minute.",
   "message.dirtrobes.recovered": "%s a récupéré.",
-  "message.dirtrobes.fossil_found": "%s sent un fossile à %s blocs !",
+  "message.dirtrobes.fossil_found": "%s sent un fossile à %s blocs (%s) !",
   "message.dirtrobes.special_none": "Aucun Spectrobe prêt pour une attaque spéciale (cible, recharge ou stade).",
   "message.dirtrobes.incubator_start": "Fossile dégagé (intégrité %s %%) : l'éveil commence…",
   "message.dirtrobes.hatched": "Un %s s'est éveillé ! (stats à %s %%)",
@@ -256,5 +256,11 @@
   "gui.dirtrobes.prizmod.ko": "K.O.",
   "gui.dirtrobes.prizmod.far": "Trop loin",
   "gui.dirtrobes.prizmod.send": "Sortir",
-  "gui.dirtrobes.prizmod.recall": "Ranger"
+  "gui.dirtrobes.prizmod.recall": "Ranger",
+  "block.dirtrobes.mineral_deposit": "Gisement de minéraux",
+  "block.dirtrobes.deepslate_mineral_deposit": "Gisement de minéraux des abîmes",
+  "message.dirtrobes.mineral_found": "%s sent des minéraux à %s blocs (%s).",
+  "direction.dirtrobes.above": "au-dessus",
+  "direction.dirtrobes.below": "en dessous",
+  "direction.dirtrobes.level": "à ta hauteur"
 }

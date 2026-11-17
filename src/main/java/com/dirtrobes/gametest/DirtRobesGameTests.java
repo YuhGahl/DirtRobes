@@ -216,6 +216,22 @@ public class DirtRobesGameTests {
         helper.succeed();
     }
 
+    /** Recherche de l'enfant : trouve le fossile et le gisement de minéraux les plus proches, ignore ce qui est hors de portée. */
+    @GameTest(template = "platform")
+    public static void childFindsFossilsAndMinerals(GameTestHelper helper) {
+        ServerPlayer player = placePlayer(helper, 10.5, 12.5);
+        Species child = SpeciesManager.all().stream().filter(s -> s.stage() == Stage.CHILD).findFirst().orElseThrow();
+        SpectrobeEntity s = SpectrobeEntity.create(helper.getLevel(), child, 5, player, helper.absoluteVec(new Vec3(10.5, 1, 10.5)));
+        helper.setBlock(new BlockPos(13, 1, 10), ModRegistry.FOSSIL_STONE.get());
+        helper.setBlock(new BlockPos(6, 1, 9), ModRegistry.MINERAL_DEPOSIT.get());
+        helper.setBlock(new BlockPos(8, 1, 10), ModRegistry.DEEPSLATE_MINERAL_DEPOSIT.get());
+        SpectrobeEntity.SearchResult result = s.scanForTreasure();
+        log("Portée {} : fossile {} · minéral {}", s.searchRadius(), result.fossil(), result.mineral());
+        helper.assertTrue(helper.absolutePos(new BlockPos(13, 1, 10)).equals(result.fossil()), "Fossile attendu en (13,1,10)");
+        helper.assertTrue(helper.absolutePos(new BlockPos(8, 1, 10)).equals(result.mineral()), "Le gisement le plus proche est en (8,1,10)");
+        helper.succeed();
+    }
+
     /** Logique du mini-jeu de fouille. */
     @GameTest(template = "platform")
     public static void excavationLogic(GameTestHelper helper) {

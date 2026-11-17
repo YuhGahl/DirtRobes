@@ -1,6 +1,8 @@
 {
   "values": [
     "dirtrobes:fossil_stone",
-    "dirtrobes:deepslate_fossil_stone"
+    "dirtrobes:deepslate_fossil_stone",
+    "dirtrobes:mineral_deposit",
+    "dirtrobes:deepslate_mineral_deposit"
   ]
 }
