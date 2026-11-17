@@ -147,6 +147,16 @@ public class SpectrobeEntity extends TamableAnimal {
         });
     }
 
+    /** Pour les tests : comportements (goals) en cours d'exécution. */
+    public String debugRunningGoals() {
+        StringBuilder sb = new StringBuilder();
+        this.goalSelector.getAvailableGoals().stream().filter(net.minecraft.world.entity.ai.goal.WrappedGoal::isRunning)
+                .forEach(g -> sb.append(g.getGoal().getClass().getName()).append(' '));
+        this.targetSelector.getAvailableGoals().stream().filter(net.minecraft.world.entity.ai.goal.WrappedGoal::isRunning)
+                .forEach(g -> sb.append("cible:").append(g.getGoal().getClass().getName()).append(' '));
+        return sb.toString().trim();
+    }
+
     // =====================================================================
     // Espèce, propriété, stade
     // =====================================================================

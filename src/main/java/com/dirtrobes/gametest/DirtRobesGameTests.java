@@ -56,9 +56,9 @@ public class DirtRobesGameTests {
             List<SpectrobeEntity> found = helper.getEntities(ModRegistry.SPECTROBE.get());
             helper.assertTrue(found.size() == 1, "Un Spectrobe aurait dû éclore, trouvé : " + found.size());
             SpectrobeEntity s = found.get(0);
-            log("Éclos : {} niv. {} à {} (dresseur à {:.1f} blocs), apprivoisé={}, propriétaire={}, assis={}, noAi={}",
-                    s.getSpeciesId(), s.getSpectrobeLevel(), s.position(), s.distanceTo(player), s.isTame(),
-                    s.getOwner(), s.isOrderedToSit(), s.isNoAi());
+            log("Éclos : {} niv. {} (dresseur à {} blocs), apprivoisé={}, propriétaire={}, assis={}, noAi={}",
+                    s.getSpeciesId(), s.getSpectrobeLevel(), String.format("%.1f", s.distanceTo(player)), s.isTame(),
+                    s.getOwner() == player, s.isOrderedToSit(), s.isNoAi());
             helper.assertTrue(s.isOwnedBy(player), "Le Spectrobe éclos devrait appartenir au joueur");
             helper.assertTrue(s.getSpectrobeLevel() == 3, "Intégrité 95 % : niveau 3 attendu, obtenu " + s.getSpectrobeLevel());
         });
@@ -68,8 +68,9 @@ public class DirtRobesGameTests {
                 List<SpectrobeEntity> found = helper.getEntities(ModRegistry.SPECTROBE.get());
                 if (!found.isEmpty()) {
                     SpectrobeEntity s = found.get(0);
-                    log("+{} ticks : distance au dresseur {} , navigation en cours={}", dt,
-                            String.format("%.2f", s.distanceTo(player)), !s.getNavigation().isDone());
+                    log("+{} ticks : distance au dresseur {}, navigation en cours={}, cible={}, goals=[{}]", dt,
+                            String.format("%.2f", s.distanceTo(player)), !s.getNavigation().isDone(),
+                            s.getTarget(), s.debugRunningGoals());
                 }
             });
         }
