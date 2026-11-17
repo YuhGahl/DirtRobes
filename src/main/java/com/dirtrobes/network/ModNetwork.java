@@ -3,6 +3,9 @@ package com.dirtrobes.network;
 import com.dirtrobes.DirtRobes;
 import com.dirtrobes.block.IncubatorBlockEntity;
 import com.dirtrobes.combat.ChGauge;
+import com.dirtrobes.team.PrizmodTeam;
+import com.dirtrobes.team.TeamSummary;
+import net.minecraft.network.FriendlyByteBuf;
 import com.dirtrobes.entity.SpectrobeEntity;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.core.BlockPos;
@@ -61,14 +64,56 @@ public final class ModNetwork {
         }
     }
 
+    /** Équipe du Prizmod envoyée au client (openScreen = ouvrir l'écran). */
+    public record TeamSyncPayload(List<TeamSummary> members, boolean openScreen) implements CustomPacketPayload {
+        public static final Type<TeamSyncPayload> TYPE = new Type<>(DirtRobes.id("team_sync"));
+        public static final StreamCodec<FriendlyByteBuf, TeamSyncPayload> STREAM_CODEC = StreamCodec.composite(
+                TeamSummary.STREAM_CODEC.apply(ByteBufCodecs.list(PrizmodTeam.MAX)), TeamSyncPayload::members,
+                ByteBufCodecs.BOOL, TeamSyncPayload::openScreen,
+                TeamSyncPayload::new);
+
+        @Override
+        public Type<? extends CustomPacketPayload> type() {
+            return TYPE;
+        }
+    }
+
+    /** Le joueur clique sur « Sortir » / « Ranger » pour le membre n°slot. */
+    public record TeamActionPayload(int slot) implements CustomPacketPayload {
+        public static final Type<TeamActionPayload> TYPE = new Type<>(DirtRobes.id("team_action"));
+        public static final StreamCodec<ByteBuf, TeamActionPayload> STREAM_CODEC = StreamCodec.composite(
+                ByteBufCodecs.VAR_INT, TeamActionPayload::slot, TeamActionPayload::new);
+
+        @Override
+        public Type<? extends CustomPacketPayload> type() {
+            return TYPE;
+        }
+    }
+
     /** Dernière valeur reçue du serveur (côté client). */
     public static volatile int clientCh;
 
     public static void register(RegisterPayloadHandlersEvent event) {
-        event.registrar("3")
+        event.registrar("4")
                 .playToClient(ChSyncPayload.TYPE, ChSyncPayload.STREAM_CODEC, (payload, context) -> clientCh = payload.ch())
+                .playToClient(TeamSyncPayload.TYPE, TeamSyncPayload.STREAM_CODEC, ModNetwork::handleTeamSync)
+                .playToServer(TeamActionPayload.TYPE, TeamActionPayload.STREAM_CODEC, ModNetwork::handleTeamAction)
                 .playToServer(SpecialAttackPayload.TYPE, SpecialAttackPayload.STREAM_CODEC, ModNetwork::handleSpecialAttack)
                 .playToServer(ExcavationResultPayload.TYPE, ExcavationResultPayload.STREAM_CODEC, ModNetwork::handleExcavation);
+    }
+
+    private static void handleTeamSync(TeamSyncPayload payload, IPayloadContext context) {
+        // Classe client chargée seulement quand ce code s'exécute (donc jamais sur un serveur dédié).
+        context.enqueueWork(() -> com.dirtrobes.client.screen.PrizmodScreen.onSync(payload.members(), payload.openScreen()));
+    }
+
+    private static void handleTeamAction(TeamActionPayload payload, IPayloadContext context) {
+        context.enqueueWork(() -> {
+            if (context.player() instanceof ServerPlayer player) {
+                PrizmodTeam.toggle(player, payload.slot());
+                PrizmodTeam.sync(player, false);
+            }
+        });
     }
 
     private static void handleExcavation(ExcavationResultPayload payload, IPayloadContext context) {

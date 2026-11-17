@@ -2,6 +2,8 @@ package com.dirtrobes.item;
 
 import com.dirtrobes.entity.SpectrobeEntity;
 import net.minecraft.ChatFormatting;
+import com.dirtrobes.team.PrizmodTeam;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -16,10 +18,11 @@ import net.minecraft.world.level.Level;
 import java.util.List;
 
 /**
- * Prizmod (0.0.1-alpha) :
- * - clic droit sur un de ses Spectrobes : affiche sa fiche ;
- * - sneak + clic droit dessus : assis / suit ;
- * - clic droit dans le vide : rappelle tous ses Spectrobes (64 blocs).
+ * Prizmod :
+ * - clic droit dans le vide : écran d'équipe (6 Spectrobes, 2 dehors) ;
+ * - accroupi + clic droit dans le vide : rappelle auprès de soi les Spectrobes dehors ;
+ * - clic droit sur un de ses Spectrobes : sa fiche (et l'ajoute à l'équipe s'il n'y est pas) ;
+ * - accroupi + clic droit dessus : assis / suivre.
  */
 public class PrizmodItem extends Item {
     public PrizmodItem(Properties props) {
@@ -36,6 +39,9 @@ public class PrizmodItem extends Item {
                 spectrobe.toggleSit(player);
             } else {
                 spectrobe.describeTo(player);
+                if (player instanceof ServerPlayer sp && PrizmodTeam.team(sp).find(spectrobe.getUUID()) == null && PrizmodTeam.adopt(sp, spectrobe)) {
+                    player.displayClientMessage(Component.translatable("message.dirtrobes.team_added", spectrobe.getDisplayName()), false);
+                }
             }
         }
         return InteractionResult.sidedSuccess(player.level().isClientSide);
@@ -44,7 +50,9 @@ public class PrizmodItem extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
-        if (!level.isClientSide) {
+        if (!level.isClientSide && !player.isShiftKeyDown() && player instanceof ServerPlayer sp) {
+            PrizmodTeam.sync(sp, true);
+        } else if (!level.isClientSide) {
             List<SpectrobeEntity> mine = level.getEntitiesOfClass(SpectrobeEntity.class, player.getBoundingBox().inflate(64),
                     s -> s.isOwnedBy(player) && !s.isKnockedOut());
             for (SpectrobeEntity s : mine) {

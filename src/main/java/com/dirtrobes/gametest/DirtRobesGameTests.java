@@ -4,6 +4,7 @@ import com.dirtrobes.DirtRobes;
 import com.dirtrobes.block.IncubatorBlockEntity;
 import com.dirtrobes.combat.ChGauge;
 import com.dirtrobes.network.ModNetwork;
+import com.dirtrobes.team.PrizmodTeam;
 import com.dirtrobes.entity.SpectrobeEntity;
 import com.dirtrobes.entity.StatCalc;
 import com.dirtrobes.excavation.ExcavationGame;
@@ -187,6 +188,32 @@ public class DirtRobesGameTests {
                     + ", valeur " + ChGauge.get(player));
             helper.succeed();
         });
+    }
+
+    /** Équipe du Prizmod : 2 dehors au maximum, ranger et sortir conservent le Spectrobe (niveau, EV…). */
+    @GameTest(template = "platform", timeoutTicks = 100)
+    public static void prizmodTeamStoresAndSendsOut(GameTestHelper helper) {
+        ServerPlayer player = placePlayer(helper, 10.5, 10.5);
+        Species adult = SpeciesManager.all().stream().filter(s -> s.stage() == Stage.ADULT).findFirst().orElseThrow();
+        SpectrobeEntity a = SpectrobeEntity.create(helper.getLevel(), adult, 12, player, helper.absoluteVec(new Vec3(4.5, 1, 4.5)));
+        SpectrobeEntity b = SpectrobeEntity.create(helper.getLevel(), adult, 13, player, helper.absoluteVec(new Vec3(6.5, 1, 4.5)));
+        SpectrobeEntity c = SpectrobeEntity.create(helper.getLevel(), adult, 14, player, helper.absoluteVec(new Vec3(8.5, 1, 4.5)));
+        PrizmodTeam.Team team = PrizmodTeam.team(player);
+        helper.assertTrue(team.entries.size() == 3, "3 membres attendus, " + team.entries.size());
+        helper.assertTrue(team.outCount() == 2, "2 dehors attendus, " + team.outCount());
+        helper.assertTrue(c.isRemoved(), "Le 3e Spectrobe aurait dû être rangé d'office");
+
+        helper.assertTrue(!PrizmodTeam.toggle(player, 2), "Impossible de sortir un 3e Spectrobe");
+        helper.assertTrue(PrizmodTeam.toggle(player, 0), "Ranger le 1er devrait marcher");
+        helper.assertTrue(a.isRemoved(), "Le 1er devrait avoir quitté le monde");
+        helper.assertTrue(PrizmodTeam.toggle(player, 2), "Sortir le 3e devrait marcher maintenant");
+        List<SpectrobeEntity> inWorld = helper.getEntities(ModRegistry.SPECTROBE.get());
+        log("Dans le monde après échange : {}", inWorld.stream().map(s -> s.getSpectrobeLevel()).toList());
+        helper.assertTrue(inWorld.size() == 2, "2 Spectrobes attendus dans le monde, " + inWorld.size());
+        helper.assertTrue(inWorld.stream().anyMatch(s -> s.getUUID().equals(c.getUUID()) && s.getSpectrobeLevel() == 14 && s.isOwnedBy(player)),
+                "Le 3e devrait être revenu avec son niveau 14 et son dresseur");
+        helper.assertTrue(PrizmodTeam.summaries(player).size() == 3, "Le résumé de l'équipe devrait lister 3 membres");
+        helper.succeed();
     }
 
     /** Logique du mini-jeu de fouille. */

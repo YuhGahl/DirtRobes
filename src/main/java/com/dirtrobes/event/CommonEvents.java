@@ -5,6 +5,7 @@ import com.mojang.brigadier.arguments.StringArgumentType;
 import com.dirtrobes.DirtRobes;
 import com.dirtrobes.combat.ChGauge;
 import com.dirtrobes.entity.SpectrobeEntity;
+import com.dirtrobes.team.PrizmodTeam;
 import com.dirtrobes.krawl.KrawlEntity;
 import com.dirtrobes.krawl.KrawlManager;
 import com.dirtrobes.krawl.KrawlSpecies;
@@ -71,6 +72,7 @@ public final class CommonEvents {
         bus.addListener(CommonEvents::onCommands);
         bus.addListener(CommonEvents::onPlayerTick);
         bus.addListener(CommonEvents::onLogin);
+        bus.addListener(CommonEvents::onLogout);
     }
 
     private static void onReload(AddReloadListenerEvent event) {
@@ -121,7 +123,12 @@ public final class CommonEvents {
         if (event.getEntity() instanceof ServerPlayer player) ChGauge.sync(player);
     }
 
+    private static void onLogout(PlayerEvent.PlayerLoggedOutEvent event) {
+        if (event.getEntity() instanceof ServerPlayer player) PrizmodTeam.storeAllOut(player);
+    }
+
     private static void onDeath(LivingDeathEvent event) {
+        if (event.getEntity() instanceof SpectrobeEntity dead && !dead.level().isClientSide) PrizmodTeam.onSpectrobeDied(dead);
         if (event.getSource().getEntity() instanceof SpectrobeEntity spectrobe && !spectrobe.level().isClientSide) {
             spectrobe.onKill(event.getEntity());
         }

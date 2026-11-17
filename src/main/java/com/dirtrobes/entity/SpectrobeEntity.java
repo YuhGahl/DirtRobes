@@ -6,6 +6,7 @@ import com.dirtrobes.species.Property;
 import com.dirtrobes.species.Species;
 import com.dirtrobes.species.SpeciesManager;
 import com.dirtrobes.species.Stage;
+import com.dirtrobes.team.PrizmodTeam;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -655,6 +656,7 @@ public class SpectrobeEntity extends TamableAnimal implements BedrockPosable {
         if (owner != null) entity.tame(owner);
         level.addFreshEntity(entity);
         level.broadcastEntityEvent(entity, EVENT_CRY);
+        if (owner instanceof ServerPlayer serverOwner) PrizmodTeam.onObtained(serverOwner, entity);
         return entity;
     }
 }

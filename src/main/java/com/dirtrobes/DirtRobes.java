@@ -3,6 +3,7 @@ package com.dirtrobes;
 import com.mojang.logging.LogUtils;
 import com.dirtrobes.combat.ChGauge;
 import com.dirtrobes.event.CommonEvents;
+import com.dirtrobes.team.PrizmodTeam;
 import com.dirtrobes.gametest.DirtRobesGameTests;
 import com.dirtrobes.network.ModNetwork;
 import com.dirtrobes.registry.ModRegistry;
@@ -27,6 +28,7 @@ public class DirtRobes {
     public DirtRobes(IEventBus modBus, ModContainer container) {
         ModRegistry.register(modBus);
         ChGauge.ATTACHMENTS.register(modBus);
+        PrizmodTeam.ATTACHMENTS.register(modBus);
         modBus.addListener(CommonEvents::onAttributes);
         modBus.addListener(CommonEvents::onSpawnPlacements);
         modBus.addListener(ModNetwork::register);
