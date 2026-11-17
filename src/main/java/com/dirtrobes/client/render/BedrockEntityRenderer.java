@@ -11,7 +11,7 @@ import com.dirtrobes.client.model.MoLang;
 import com.dirtrobes.client.model.Pose;
 import com.dirtrobes.client.model.Poser;
 import com.dirtrobes.client.model.Resolver;
-import com.dirtrobes.entity.SpectrobeEntity;
+import com.dirtrobes.entity.BedrockPosable;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -20,15 +20,16 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.LivingEntity;
 
 /**
- * Rendu maison des Spectrobes (inspiré de Cobblemon) : modèle Bedrock + poser + animations Bedrock,
- * sans dépendance à GeckoLib.
+ * Rendu maison (inspiré de Cobblemon) : modèle Bedrock + poser + animations Bedrock, sans GeckoLib.
+ * Sert aux Spectrobes comme aux Krawl.
  */
-public class SpectrobeRenderer extends EntityRenderer<SpectrobeEntity> {
+public class BedrockEntityRenderer<T extends LivingEntity & BedrockPosable> extends EntityRenderer<T> {
     private static final ResourceLocation MISSING = DirtRobes.id("textures/spectrobes/placeholder.png");
 
-    public SpectrobeRenderer(EntityRendererProvider.Context context) {
+    public BedrockEntityRenderer(EntityRendererProvider.Context context) {
         super(context);
         this.shadowRadius = 0.45f;
     }
@@ -44,14 +45,14 @@ public class SpectrobeRenderer extends EntityRenderer<SpectrobeEntity> {
     }
 
     @Override
-    public ResourceLocation getTextureLocation(SpectrobeEntity entity) {
-        Resolver r = ModelRepository.resolver(entity.getSpeciesId(), entity.getStage().id());
+    public ResourceLocation getTextureLocation(T entity) {
+        Resolver r = ModelRepository.resolver(entity.getSpeciesId(), entity.resolverStage());
         return r == null ? MISSING : r.texture();
     }
 
     @Override
-    public void render(SpectrobeEntity entity, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource buffers, int packedLight) {
-        Resolver resolver = ModelRepository.resolver(entity.getSpeciesId(), entity.getStage().id());
+    public void render(T entity, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource buffers, int packedLight) {
+        Resolver resolver = ModelRepository.resolver(entity.getSpeciesId(), entity.resolverStage());
         BedrockModel model = resolver == null ? null : ModelRepository.model(resolver.model());
         if (model != null) {
             Poser poser = ModelRepository.poser(resolver.poser());
@@ -63,11 +64,11 @@ public class SpectrobeRenderer extends EntityRenderer<SpectrobeEntity> {
             poseStack.scale(scale, scale, scale);
 
             int overlay = LivingEntityRenderer.getOverlayCoords(entity, 0f);
-            int color = resolver.tint() ? tint(entity.getProperty().color(), 0.45f) : 0xFFFFFFFF;
+            int color = resolver.tint() ? tint(entity.tintColor(), 0.45f) : 0xFFFFFFFF;
             VertexConsumer base = buffers.getBuffer(RenderType.entityCutoutNoCull(resolver.texture()));
             for (BedrockModel.Bone bone : model.roots) renderBone(bone, pose, poseStack, base, packedLight, overlay, color);
             if (resolver.emissive() != null) {
-                int glow = resolver.tint() ? (0xFF000000 | entity.getProperty().color()) : 0xFFFFFFFF;
+                int glow = resolver.tint() ? (0xFF000000 | entity.tintColor()) : 0xFFFFFFFF;
                 VertexConsumer emissive = buffers.getBuffer(RenderType.eyes(resolver.emissive()));
                 for (BedrockModel.Bone bone : model.roots) renderBone(bone, pose, poseStack, emissive, LightTexture.FULL_BRIGHT, overlay, glow);
             }
@@ -123,17 +124,17 @@ public class SpectrobeRenderer extends EntityRenderer<SpectrobeEntity> {
     // Calcul de la pose (poser + animations)
     // =====================================================================
 
-    private Pose computePose(SpectrobeEntity entity, Poser poser, float pt) {
+    private Pose computePose(T entity, Poser poser, float pt) {
         Pose pose = new Pose();
         if (poser == null) return pose;
-        AnimState state = entity.clientAnimState instanceof AnimState s ? s : new AnimState();
-        entity.clientAnimState = state;
+        AnimState state = entity.clientAnimState() instanceof AnimState s ? s : new AnimState();
+        entity.setClientAnimState(state);
 
         float now = (entity.tickCount + pt) / 20f;
         MoLang.Context ctx = new MoLang.Context();
         ctx.lifeTime = now;
 
-        boolean down = entity.isKnockedOut() || entity.deathTime > 0;
+        boolean down = entity.isDown();
         if (down) {
             if (state.faintStart < 0) state.faintStart = now;
             Poser.Instruction faint = poser.oneShots.get("faint");
@@ -148,7 +149,7 @@ public class SpectrobeRenderer extends EntityRenderer<SpectrobeEntity> {
         }
 
         Poser.PoseType type;
-        if (entity.isSpectrobeSleeping()) type = Poser.PoseType.SLEEP;
+        if (entity.isPoseSleeping()) type = Poser.PoseType.SLEEP;
         else if (entity.walkAnimation.speed(pt) > 0.05f) type = Poser.PoseType.WALK;
         else type = Poser.PoseType.STAND;
 
@@ -166,8 +167,8 @@ public class SpectrobeRenderer extends EntityRenderer<SpectrobeEntity> {
         }
 
         // Animations ponctuelles : cri / attaque spéciale, recul quand il est touché.
-        if (entity.lastCryTick != state.seenCryTick) {
-            state.seenCryTick = entity.lastCryTick;
+        if (entity.lastCryTick() != state.seenCryTick) {
+            state.seenCryTick = entity.lastCryTick();
             state.cryStart = now;
         }
         if (entity.hurtTime == entity.hurtDuration && entity.hurtTime > 0) state.recoilStart = now;
@@ -176,14 +177,14 @@ public class SpectrobeRenderer extends EntityRenderer<SpectrobeEntity> {
         return pose;
     }
 
-    private void playOneShot(Poser poser, String key, SpectrobeEntity entity, Pose pose, MoLang.Context ctx, float elapsed, float pt) {
+    private void playOneShot(Poser poser, String key, T entity, Pose pose, MoLang.Context ctx, float elapsed, float pt) {
         Poser.Instruction ins = poser.oneShots.get(key);
         if (ins == null || elapsed < 0 || elapsed > 5f) return;
         BedrockAnimation anim = ModelRepository.animation(ins.arg(0, ""), ins.arg(1, ""));
         if (anim != null && !(anim.length > 0 && elapsed > anim.length)) anim.apply(pose, ctx, elapsed, 1f);
     }
 
-    private void runAll(java.util.List<Poser.Instruction> list, SpectrobeEntity entity, Pose pose, MoLang.Context ctx, float now, float pt,
+    private void runAll(java.util.List<Poser.Instruction> list, T entity, Pose pose, MoLang.Context ctx, float now, float pt,
                         boolean skipWalk) {
         for (Poser.Instruction ins : list) {
             if (skipWalk && ins.function().equals("quadruped_walk")) continue;
@@ -191,7 +192,7 @@ public class SpectrobeRenderer extends EntityRenderer<SpectrobeEntity> {
         }
     }
 
-    private void run(Poser.Instruction ins, SpectrobeEntity entity, Pose pose, MoLang.Context ctx, float time, float pt) {
+    private void run(Poser.Instruction ins, T entity, Pose pose, MoLang.Context ctx, float time, float pt) {
         switch (ins.function()) {
             case "bedrock", "bedrock_quirk", "bedrock_stateful", "bedrock_primary" -> {
                 BedrockAnimation anim = ModelRepository.animation(ins.arg(0, ""), ins.arg(1, ""));

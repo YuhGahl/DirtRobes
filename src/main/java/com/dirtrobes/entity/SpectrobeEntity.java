@@ -52,7 +52,7 @@ import javax.annotation.Nullable;
  * Le Spectrobe. Une seule entité pour toutes les espèces : l'espèce, le niveau, la propriété
  * et le stade sont des données synchronisées (même approche que Cobblemon).
  */
-public class SpectrobeEntity extends TamableAnimal {
+public class SpectrobeEntity extends TamableAnimal implements BedrockPosable {
     private static final EntityDataAccessor<String> DATA_SPECIES = SynchedEntityData.defineId(SpectrobeEntity.class, EntityDataSerializers.STRING);
     private static final EntityDataAccessor<Integer> DATA_LEVEL = SynchedEntityData.defineId(SpectrobeEntity.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Byte> DATA_PROPERTY = SynchedEntityData.defineId(SpectrobeEntity.class, EntityDataSerializers.BYTE);
@@ -162,6 +162,44 @@ public class SpectrobeEntity extends TamableAnimal {
     // Espèce, propriété, stade
     // =====================================================================
 
+    // ----- BedrockPosable (rendu) -----
+    @Override
+    public String resolverStage() {
+        return getStage().id();
+    }
+
+    @Override
+    public int tintColor() {
+        return getProperty().color();
+    }
+
+    @Override
+    public boolean isDown() {
+        return isKnockedOut() || deathTime > 0;
+    }
+
+    @Override
+    public boolean isPoseSleeping() {
+        return isSpectrobeSleeping();
+    }
+
+    @Override
+    public int lastCryTick() {
+        return lastCryTick;
+    }
+
+    @Override
+    @Nullable
+    public Object clientAnimState() {
+        return clientAnimState;
+    }
+
+    @Override
+    public void setClientAnimState(Object state) {
+        this.clientAnimState = state;
+    }
+
+    @Override
     @Nullable
     public ResourceLocation getSpeciesId() {
         String s = this.entityData.get(DATA_SPECIES);
@@ -240,6 +278,10 @@ public class SpectrobeEntity extends TamableAnimal {
     public int defenseStat() {
         Species s = getSpecies();
         return s == null ? 10 : StatCalc.applyQuality(StatCalc.other(s.baseDefense(), evDef, getSpectrobeLevel()), quality);
+    }
+
+    public int getXp() {
+        return xp;
     }
 
     public int getQuality() {

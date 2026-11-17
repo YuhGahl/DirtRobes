@@ -1,0 +1,15 @@
+{
+  "name": "Gris",
+  "property": "corona",
+  "behaviour": "melee",
+  "base_stats": {
+    "hp": 45,
+    "attack": 55,
+    "defense": 30
+  },
+  "min_level": 3,
+  "max_level": 10,
+  "scale": 0.85,
+  "speed": 0.3,
+  "weight": 24
+}

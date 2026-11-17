@@ -1,0 +1,15 @@
+{
+  "name": "Grisen",
+  "property": "corona",
+  "behaviour": "melee",
+  "base_stats": {
+    "hp": 65,
+    "attack": 80,
+    "defense": 45
+  },
+  "min_level": 12,
+  "max_level": 24,
+  "scale": 1.15,
+  "speed": 0.3,
+  "weight": 10
+}

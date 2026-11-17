@@ -1,0 +1,35 @@
+package com.dirtrobes.entity;
+
+import net.minecraft.resources.ResourceLocation;
+
+import javax.annotation.Nullable;
+
+/**
+ * Créature dessinée par le moteur de rendu maison (modèle Bedrock + poser), comme les Spectrobes
+ * et les Krawl. Le moteur trouve le resolver « &lt;espèce&gt; », sinon « default:&lt;stade&gt; ».
+ */
+public interface BedrockPosable {
+    @Nullable
+    ResourceLocation getSpeciesId();
+
+    /** Clé du resolver par défaut (child, adult, evolved, krawl…). */
+    String resolverStage();
+
+    /** Couleur RGB utilisée pour teinter le modèle provisoire et ses parties lumineuses. */
+    int tintColor();
+
+    /** À terre : K.O. ou en train de mourir (animation « faint »). */
+    boolean isDown();
+
+    boolean isPoseSleeping();
+
+    boolean isInBattle();
+
+    /** Tick client du dernier cri / attaque (animation ponctuelle « cry »). */
+    int lastCryTick();
+
+    @Nullable
+    Object clientAnimState();
+
+    void setClientAnimState(Object state);
+}

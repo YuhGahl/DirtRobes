@@ -228,5 +228,18 @@
   "gui.dirtrobes.excavation.broken_detail": "Il faudra en trouver un autre.",
   "gui.dirtrobes.excavation.result": "Intégrité %s %% → stats à %s %%",
   "gui.dirtrobes.excavation.done": "Terminer",
-  "message.dirtrobes.card.quality": "Qualité du fossile : stats à %s %%"
+  "message.dirtrobes.card.quality": "Qualité du fossile : stats à %s %%",
+  "entity.dirtrobes.krawl": "Krawl",
+  "block.dirtrobes.krawl_vortex": "Vortex Krawl",
+  "item.dirtrobes.krawl_spawn_egg": "Œuf d'apparition de Krawl",
+  "message.dirtrobes.unknown_krawl": "Krawl inconnu : %s",
+  "krawl.dirtrobes.swar": "Swar",
+  "krawl.dirtrobes.otorso": "Otorso",
+  "krawl.dirtrobes.subar": "Subar",
+  "krawl.dirtrobes.vizbar": "Vizbar",
+  "krawl.dirtrobes.orbix": "Orbix",
+  "krawl.dirtrobes.orbux": "Orbux",
+  "krawl.dirtrobes.gris": "Gris",
+  "krawl.dirtrobes.xelles": "Xelles",
+  "krawl.dirtrobes.grisen": "Grisen"
 }

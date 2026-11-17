@@ -1,0 +1,15 @@
+{
+  "name": "Xelles",
+  "property": "aurora",
+  "behaviour": "spore",
+  "base_stats": {
+    "hp": 60,
+    "attack": 35,
+    "defense": 55
+  },
+  "min_level": 6,
+  "max_level": 18,
+  "scale": 1.0,
+  "speed": 0.22,
+  "weight": 8
+}

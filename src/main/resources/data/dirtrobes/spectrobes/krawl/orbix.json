@@ -1,0 +1,15 @@
+{
+  "name": "Orbix",
+  "property": "flash",
+  "behaviour": "melee",
+  "base_stats": {
+    "hp": 50,
+    "attack": 40,
+    "defense": 60
+  },
+  "min_level": 4,
+  "max_level": 12,
+  "scale": 0.9,
+  "speed": 0.24,
+  "weight": 20
+}

@@ -3,7 +3,7 @@ package com.dirtrobes.client;
 import com.mojang.blaze3d.platform.InputConstants;
 import com.dirtrobes.DirtRobes;
 import com.dirtrobes.client.model.ModelRepository;
-import com.dirtrobes.client.render.SpectrobeRenderer;
+import com.dirtrobes.client.render.BedrockEntityRenderer;
 import com.dirtrobes.client.screen.IncubatorScreen;
 import com.dirtrobes.network.ModNetwork;
 import com.dirtrobes.registry.ModRegistry;
@@ -35,7 +35,8 @@ public class DirtRobesClient {
     }
 
     private static void onRenderers(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerEntityRenderer(ModRegistry.SPECTROBE.get(), SpectrobeRenderer::new);
+        event.registerEntityRenderer(ModRegistry.SPECTROBE.get(), BedrockEntityRenderer::new);
+        event.registerEntityRenderer(ModRegistry.KRAWL.get(), BedrockEntityRenderer::new);
     }
 
     private static void onReloadListeners(RegisterClientReloadListenersEvent event) {

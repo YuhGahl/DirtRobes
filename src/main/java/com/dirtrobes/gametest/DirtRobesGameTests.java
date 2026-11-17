@@ -5,6 +5,9 @@ import com.dirtrobes.block.IncubatorBlockEntity;
 import com.dirtrobes.entity.SpectrobeEntity;
 import com.dirtrobes.entity.StatCalc;
 import com.dirtrobes.excavation.ExcavationGame;
+import com.dirtrobes.krawl.KrawlEntity;
+import com.dirtrobes.krawl.KrawlManager;
+import com.dirtrobes.krawl.KrawlSpecies;
 import com.dirtrobes.registry.ModRegistry;
 import com.dirtrobes.species.Property;
 import com.dirtrobes.species.Species;
@@ -118,6 +121,47 @@ public class DirtRobesGameTests {
         helper.assertTrue(Math.abs(damaged.attackStat() * 2 - perfect.attackStat()) <= 1, "L'ATQ à 50 % devrait être la moitié de l'ATQ à 100 %");
         helper.assertTrue(damaged.getMaxHealth() < perfect.getMaxHealth(), "Les PV max devraient baisser avec la qualité");
         helper.succeed();
+    }
+
+    /** Un Krawl créé a bien son espèce, son niveau et des stats qui montent avec le niveau. */
+    @GameTest(template = "platform")
+    public static void krawlHasSpeciesAndStats(GameTestHelper helper) {
+        KrawlSpecies swar = KrawlManager.byName("swar");
+        helper.assertTrue(swar != null, "Le Krawl « swar » devrait être chargé (" + KrawlManager.all().size() + " Krawl)");
+        KrawlEntity weak = KrawlEntity.create(helper.getLevel(), swar, 2, helper.absoluteVec(new Vec3(4.5, 1, 4.5)));
+        KrawlEntity strong = KrawlEntity.create(helper.getLevel(), swar, 20, helper.absoluteVec(new Vec3(15.5, 1, 15.5)));
+        log("Swar niv. 2 : {} PV / niv. 20 : {} PV, propriété {}", weak.getMaxHealth(), strong.getMaxHealth(), weak.getProperty());
+        helper.assertTrue(swar.equals(weak.getSpecies()), "Espèce attendue : swar");
+        helper.assertTrue(strong.getMaxHealth() > weak.getMaxHealth(), "Un Krawl de plus haut niveau devrait avoir plus de PV");
+        helper.succeed();
+    }
+
+    /** Un Spectrobe adulte se défend contre un Krawl qui l'attaque, le bat et gagne de l'expérience. */
+    @GameTest(template = "platform", timeoutTicks = 600)
+    public static void spectrobeDefeatsKrawl(GameTestHelper helper) {
+        ServerPlayer player = placePlayer(helper, 2.5, 2.5);
+        Species adult = SpeciesManager.all().stream().filter(s -> s.stage() == Stage.ADULT).findFirst().orElseThrow();
+        SpectrobeEntity spectrobe = SpectrobeEntity.create(helper.getLevel(), adult, 30, player, helper.absoluteVec(new Vec3(8.5, 1, 10.5)));
+        int xpBefore = spectrobe.getXp();
+        KrawlEntity krawl = KrawlEntity.create(helper.getLevel(), KrawlManager.byName("swar"), 2, helper.absoluteVec(new Vec3(12.5, 1, 10.5)));
+        krawl.setTarget(spectrobe);
+        helper.succeedWhen(() -> {
+            helper.assertTrue(!krawl.isAlive(), "Le Krawl est encore en vie (" + krawl.getHealth() + " PV)");
+            helper.assertTrue(spectrobe.getXp() > xpBefore, "Le Spectrobe aurait dû gagner de l'XP");
+            log("Krawl vaincu, XP du Spectrobe : {} → {}", xpBefore, spectrobe.getXp());
+        });
+    }
+
+    /** Le vortex fait apparaître un Krawl quand un joueur est à proximité. */
+    @GameTest(template = "platform", timeoutTicks = 200)
+    public static void vortexSpawnsKrawl(GameTestHelper helper) {
+        placePlayer(helper, 10.5, 16.5);
+        helper.setBlock(new BlockPos(10, 1, 6), ModRegistry.VORTEX.get());
+        helper.succeedWhen(() -> {
+            List<KrawlEntity> krawl = helper.getEntities(ModRegistry.KRAWL.get());
+            helper.assertTrue(!krawl.isEmpty(), "Aucun Krawl n'est sorti du vortex");
+            helper.assertTrue(krawl.get(0).getSpecies() != null, "Le Krawl du vortex devrait avoir une espèce");
+        });
     }
 
     /** Logique du mini-jeu de fouille. */

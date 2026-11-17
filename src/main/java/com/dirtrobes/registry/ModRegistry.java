@@ -5,6 +5,9 @@ import com.dirtrobes.block.IncubatorBlock;
 import com.dirtrobes.block.IncubatorBlockEntity;
 import com.dirtrobes.entity.SpectrobeEntity;
 import com.dirtrobes.item.FossilItem;
+import com.dirtrobes.krawl.KrawlEntity;
+import com.dirtrobes.krawl.VortexBlock;
+import com.dirtrobes.krawl.VortexBlockEntity;
 import com.dirtrobes.item.MineralItem;
 import com.dirtrobes.item.PrizmodItem;
 import com.dirtrobes.menu.IncubatorMenu;
@@ -24,6 +27,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.extensions.IMenuTypeExtension;
+import net.neoforged.neoforge.common.DeferredSpawnEggItem;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -52,6 +56,12 @@ public final class ModRegistry {
                     .clientTrackingRange(10)
                     .build("spectrobe"));
 
+    public static final DeferredHolder<EntityType<?>, EntityType<KrawlEntity>> KRAWL = ENTITIES.register("krawl",
+            () -> EntityType.Builder.of(KrawlEntity::new, MobCategory.MONSTER)
+                    .sized(0.8f, 0.9f)
+                    .clientTrackingRange(10)
+                    .build("krawl"));
+
     // ---------- Blocs ----------
     public static final DeferredBlock<Block> FOSSIL_STONE = BLOCKS.registerSimpleBlock("fossil_stone",
             BlockBehaviour.Properties.of().mapColor(MapColor.STONE).strength(3.0f, 3.0f).requiresCorrectToolForDrops().sound(SoundType.STONE));
@@ -60,6 +70,12 @@ public final class ModRegistry {
     public static final DeferredBlock<IncubatorBlock> INCUBATOR = BLOCKS.registerBlock("incubator", IncubatorBlock::new,
             BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(3.5f).requiresCorrectToolForDrops().sound(SoundType.METAL)
                     .lightLevel(state -> state.getValue(IncubatorBlock.ACTIVE) ? 12 : 3).noOcclusion());
+
+    public static final DeferredBlock<VortexBlock> VORTEX = BLOCKS.registerBlock("krawl_vortex", VortexBlock::new,
+            BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_PURPLE).strength(2.0f, 6.0f).sound(SoundType.SCULK)
+                    .lightLevel(state -> 7).noOcclusion().noCollission());
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<VortexBlockEntity>> VORTEX_BE = BLOCK_ENTITIES.register("krawl_vortex",
+            () -> BlockEntityType.Builder.of(VortexBlockEntity::new, VORTEX.get()).build(null));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<IncubatorBlockEntity>> INCUBATOR_BE = BLOCK_ENTITIES.register("incubator",
             () -> BlockEntityType.Builder.of(IncubatorBlockEntity::new, INCUBATOR.get()).build(null));
@@ -71,6 +87,9 @@ public final class ModRegistry {
     public static final DeferredItem<BlockItem> FOSSIL_STONE_ITEM = ITEMS.registerSimpleBlockItem("fossil_stone", FOSSIL_STONE);
     public static final DeferredItem<BlockItem> DEEPSLATE_FOSSIL_STONE_ITEM = ITEMS.registerSimpleBlockItem("deepslate_fossil_stone", DEEPSLATE_FOSSIL_STONE);
     public static final DeferredItem<BlockItem> INCUBATOR_ITEM = ITEMS.registerSimpleBlockItem("incubator", INCUBATOR);
+    public static final DeferredItem<BlockItem> VORTEX_ITEM = ITEMS.registerSimpleBlockItem("krawl_vortex", VORTEX);
+    public static final DeferredItem<DeferredSpawnEggItem> KRAWL_SPAWN_EGG = ITEMS.registerItem("krawl_spawn_egg",
+            props -> new DeferredSpawnEggItem(KRAWL, 0x241A30, 0x9B5CFF, props), new Item.Properties());
 
     public static final DeferredItem<PrizmodItem> PRIZMOD = ITEMS.registerItem("prizmod", PrizmodItem::new, new Item.Properties().stacksTo(1));
 
@@ -100,6 +119,8 @@ public final class ModRegistry {
                 output.accept(INCUBATOR_ITEM.get());
                 output.accept(FOSSIL_STONE_ITEM.get());
                 output.accept(DEEPSLATE_FOSSIL_STONE_ITEM.get());
+                output.accept(VORTEX_ITEM.get());
+                output.accept(KRAWL_SPAWN_EGG.get());
                 FOSSILS.values().forEach(f -> output.accept(f.get()));
                 MINERALS.forEach(m -> output.accept(m.get()));
             }).build());

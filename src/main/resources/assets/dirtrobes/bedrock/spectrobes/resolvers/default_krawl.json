@@ -1,0 +1,8 @@
+{
+  "species": "default:krawl",
+  "model": "dirtrobes:placeholder_krawl",
+  "texture": "dirtrobes:textures/krawl/placeholder_krawl.png",
+  "emissive": "dirtrobes:textures/krawl/placeholder_krawl_emissive.png",
+  "poser": "dirtrobes:placeholder_krawl",
+  "tint": false
+}

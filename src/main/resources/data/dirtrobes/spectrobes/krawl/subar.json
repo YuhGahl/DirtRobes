@@ -1,0 +1,15 @@
+{
+  "name": "Subar",
+  "property": "eclipse",
+  "behaviour": "melee",
+  "base_stats": {
+    "hp": 55,
+    "attack": 60,
+    "defense": 45
+  },
+  "min_level": 8,
+  "max_level": 16,
+  "scale": 1.0,
+  "speed": 0.27,
+  "weight": 18
+}

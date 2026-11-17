@@ -1,0 +1,49 @@
+{
+  "animations": {
+    "cry": "q.bedrock_stateful('placeholder_krawl', 'cry')",
+    "faint": "q.bedrock_primary('placeholder_krawl', 'faint', q.curve('one'))",
+    "recoil": "q.bedrock_stateful('placeholder_krawl', 'recoil')"
+  },
+  "rootBone": "placeholder_krawl",
+  "poses": {
+    "battle-standing": {
+      "animations": [
+        "q.look('head')",
+        "q.bedrock('placeholder_krawl', 'battle_idle')"
+      ],
+      "isBattle": true,
+      "poseTypes": [
+        "STAND"
+      ],
+      "quirks": [
+        "q.bedrock_quirk('placeholder_krawl', 'blink')"
+      ]
+    },
+    "standing": {
+      "animations": [
+        "q.look('head')",
+        "q.bedrock('placeholder_krawl', 'ground_idle')"
+      ],
+      "isBattle": false,
+      "poseTypes": [
+        "STAND",
+        "NONE",
+        "FLOAT"
+      ],
+      "quirks": [
+        "q.bedrock_quirk('placeholder_krawl', 'blink')"
+      ]
+    },
+    "walking": {
+      "animations": [
+        "q.look('head')",
+        "q.bedrock('placeholder_krawl', 'ground_idle')",
+        "q.quadruped_walk(0.5, 1.2, 'front_leg_left', 'front_leg_right', 'back_leg_left', 'back_leg_right')"
+      ],
+      "poseTypes": [
+        "WALK",
+        "SWIM"
+      ]
+    }
+  }
+}
