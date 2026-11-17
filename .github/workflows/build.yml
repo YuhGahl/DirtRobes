@@ -1,6 +1,9 @@
 name: Build
 
-on: [push, pull_request]
+on: [push, pull_request, workflow_dispatch]
+
+permissions:
+  contents: write
 
 jobs:
   build:
@@ -29,3 +32,27 @@ jobs:
         with:
           name: dirtrobes-jar
           path: build/libs/*.jar
+
+      - name: Test - démarrage d'un serveur avec le mod
+        run: .github/scripts/server-smoke.sh
+
+      - name: Upload server log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: server-log
+          path: server.log
+          if-no-files-found: ignore
+
+      - name: Publier la dernière version (Release « latest »)
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest
+          name: DirtRobes (dernière version)
+          prerelease: true
+          make_latest: false
+          body: |
+            Version compilée automatiquement depuis le commit ${{ github.sha }}.
+            Mets le fichier .jar dans le dossier `mods` d'une instance NeoForge 1.21.1.
+          files: build/libs/*.jar
