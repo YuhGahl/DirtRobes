@@ -1,0 +1,14 @@
+{
+  "name": "Piximi",
+  "property": "aurora",
+  "stage": "adult",
+  "family": "hananomi",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 69,
+    "attack": 75,
+    "defense": 72
+  },
+  "evolves_into": "dirtrobes:florami",
+  "evolution_level": 30
+}

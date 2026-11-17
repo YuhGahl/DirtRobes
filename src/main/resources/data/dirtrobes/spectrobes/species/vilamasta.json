@@ -1,0 +1,14 @@
+{
+  "name": "Vilamasta",
+  "property": "corona",
+  "stage": "adult",
+  "family": "vilar",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 65,
+    "attack": 100,
+    "defense": 85
+  },
+  "evolves_into": "dirtrobes:vilanox",
+  "evolution_level": 30
+}

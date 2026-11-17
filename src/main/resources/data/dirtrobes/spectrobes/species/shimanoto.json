@@ -1,0 +1,14 @@
+{
+  "name": "Shimanoto",
+  "property": "eclipse",
+  "stage": "adult",
+  "family": "shimainu",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 80,
+    "attack": 86,
+    "defense": 79
+  },
+  "evolves_into": "dirtrobes:shimadoros",
+  "evolution_level": 30
+}

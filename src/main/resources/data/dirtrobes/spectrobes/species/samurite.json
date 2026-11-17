@@ -1,0 +1,14 @@
+{
+  "name": "Samurite",
+  "property": "flash",
+  "stage": "adult",
+  "family": "samukabu",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 84,
+    "attack": 80,
+    "defense": 122
+  },
+  "evolves_into": "dirtrobes:samugeki",
+  "evolution_level": 30
+}

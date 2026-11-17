@@ -1,0 +1,14 @@
+{
+  "name": "Spiko",
+  "property": "aurora",
+  "stage": "child",
+  "family": "spiko",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 56,
+    "attack": 61,
+    "defense": 65
+  },
+  "evolves_into": "dirtrobes:spikan",
+  "evolution_level": 10
+}

@@ -1,0 +1,14 @@
+{
+  "name": "Shakor",
+  "property": "flash",
+  "stage": "adult",
+  "family": "shakin",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 75,
+    "attack": 72,
+    "defense": 72
+  },
+  "evolves_into": "dirtrobes:shakoblad",
+  "evolution_level": 30
+}

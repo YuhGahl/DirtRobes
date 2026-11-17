@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "dirtrobes:block/incubator_top",
+    "bottom": "dirtrobes:block/incubator_top",
+    "side": "dirtrobes:block/incubator_side"
+  }
+}

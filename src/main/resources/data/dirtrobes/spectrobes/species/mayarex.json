@@ -1,0 +1,14 @@
+{
+  "name": "Mayarex",
+  "property": "eclipse",
+  "stage": "adult",
+  "family": "mayar",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 72,
+    "attack": 79,
+    "defense": 78
+  },
+  "evolves_into": "dirtrobes:mayazerra",
+  "evolution_level": 30
+}

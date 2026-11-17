@@ -1,0 +1,14 @@
+{
+  "name": "Mesabone",
+  "property": "corona",
+  "stage": "adult",
+  "family": "mesa",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 77,
+    "attack": 88,
+    "defense": 76
+  },
+  "evolves_into": "dirtrobes:mesathorn",
+  "evolution_level": 30
+}

@@ -1,0 +1,8 @@
+{
+  "species": "default:child",
+  "model": "dirtrobes:placeholder_child",
+  "texture": "dirtrobes:textures/spectrobes/placeholder_child.png",
+  "emissive": "dirtrobes:textures/spectrobes/placeholder_child_emissive.png",
+  "poser": "dirtrobes:placeholder_child",
+  "tint": true
+}

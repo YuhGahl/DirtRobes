@@ -1,7 +1,7 @@
 {
   "values": [
-    "spectrocraft:fossil_stone",
-    "spectrocraft:deepslate_fossil_stone",
-    "spectrocraft:incubator"
+    "dirtrobes:fossil_stone",
+    "dirtrobes:deepslate_fossil_stone",
+    "dirtrobes:incubator"
   ]
 }

@@ -1,0 +1,14 @@
+{
+  "name": "Maserobo",
+  "property": "aurora",
+  "stage": "adult",
+  "family": "masetto",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 76,
+    "attack": 87,
+    "defense": 80
+  },
+  "evolves_into": "dirtrobes:masetosu",
+  "evolution_level": 30
+}

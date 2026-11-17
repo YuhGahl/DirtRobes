@@ -1,0 +1,14 @@
+{
+  "name": "Ukabi",
+  "property": "flash",
+  "stage": "child",
+  "family": "ukabi",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 57,
+    "attack": 59,
+    "defense": 55
+  },
+  "evolves_into": "dirtrobes:ukalos",
+  "evolution_level": 10
+}

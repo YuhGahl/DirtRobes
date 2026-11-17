@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cube_all",
-  "textures": {
-    "all": "spectrocraft:block/deepslate_fossil_stone"
-  }
-}

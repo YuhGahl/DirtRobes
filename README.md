@@ -1,4 +1,4 @@
-# SpectroCraft 0.1.0 (NeoForge 1.21.1)
+# DirtRobes 0.1.0 (NeoForge 1.21.1)
 
 Mod fan inspiré de Spectrobes, construit sur le modèle de Cobblemon : les espèces sont des fichiers
 JSON (datapack), les modèles et les animations sont au format Bedrock / Blockbench (resource pack),
@@ -13,7 +13,7 @@ gradlew build          (Windows : gradlew.bat build)
 ```
 
 Le premier lancement télécharge Minecraft, NeoForge 21.1.266 et Gradle : ça prend quelques minutes.
-Le fichier du mod arrive dans `build/libs/spectrocraft-0.1.0.jar`. Il suffit de le copier dans le dossier
+Le fichier du mod arrive dans `build/libs/dirtrobes-0.1.0.jar`. Il suffit de le copier dans le dossier
 `mods` d'une instance NeoForge 1.21.1 (par exemple l'instance Cobblemon).
 
 Pour tester sans installer : `gradlew runClient`.
@@ -22,7 +22,7 @@ Pour tester sans installer : `gradlew runClient`.
 
 - **144 Spectrobes** (jeu DS + Origins), avec les stats et propriétés du document de conception.
 - **6 propriétés** : Corona > Aurora > Eclipse > Halo > Flash > Corona, Prisma neutre (×1,5 / ×0,67).
-  Les mobs vanilla ont une propriété via les tags `data/spectrocraft/tags/entity_type/property/`.
+  Les mobs vanilla ont une propriété via les tags `data/dirtrobes/tags/entity_type/property/`.
 - **Stats façon Pokémon sans IV** : PV/ATQ/DÉF calculés depuis la stat de base, le niveau et les EV
   (252 par stat, 510 au total), puis convertis en vie, dégâts et armure.
 - **Niveaux et évolutions** : enfant → adulte au niveau 10, adulte → évolué au niveau 30 (réglable par
@@ -36,7 +36,7 @@ Pour tester sans installer : `gradlew runClient`.
 - **Fossiles** (un par propriété) à éveiller dans l'**incubateur** → un enfant de cette propriété, apprivoisé.
 - **Minéraux** Power / Defence / Health (C, B, A, A+) : de l'XP et des EV pour ton Spectrobe.
 - **Prizmod** : fiche du Spectrobe, assis / suivre, rappel de tous tes Spectrobes.
-- **Commande de test** : `/spectrocraft spawn <espèce> [niveau]`.
+- **Commande de test** : `/dirtrobes spawn <espèce> [niveau]`.
 
 Recettes :
 - Incubateur : fer, verre et éclat d'améthyste (fer en haut et en bas, verre sur les côtés, améthyste au centre).
@@ -49,7 +49,7 @@ de la couleur de leur propriété). Pour donner son propre modèle à un Spectro
 
 1. Dans Blockbench (« Bedrock Entity »), fais le modèle et ses animations. Garde les noms d'os
    `body`, `head`, `front_leg_left`, `front_leg_right`, `back_leg_left`, `back_leg_right`, `tail`, `eye_left`, `eye_right`.
-2. Place les fichiers dans `assets/spectrocraft/` :
+2. Place les fichiers dans `assets/dirtrobes/` :
    - `bedrock/spectrobes/models/komainu.geo.json`
    - `bedrock/spectrobes/animations/komainu.animation.json` (animations `animation.komainu.ground_idle`, etc.)
    - `bedrock/spectrobes/posers/komainu.json` (copie de `placeholder_child.json` en remplaçant le nom)
@@ -58,10 +58,10 @@ de la couleur de leur propriété). Pour donner son propre modèle à un Spectro
 
 ```json
 {
-  "species": "spectrocraft:komainu",
-  "model": "spectrocraft:komainu",
-  "texture": "spectrocraft:textures/spectrobes/komainu.png",
-  "poser": "spectrocraft:komainu",
+  "species": "dirtrobes:komainu",
+  "model": "dirtrobes:komainu",
+  "texture": "dirtrobes:textures/spectrobes/komainu.png",
+  "poser": "dirtrobes:komainu",
   "tint": false
 }
 ```
@@ -70,7 +70,7 @@ de la couleur de leur propriété). Pour donner son propre modèle à un Spectro
 
 ## Ajouter ou modifier une espèce
 
-Un fichier par espèce dans `data/spectrocraft/spectrobes/species/` :
+Un fichier par espèce dans `data/dirtrobes/spectrobes/species/` :
 
 ```json
 {
@@ -80,7 +80,7 @@ Un fichier par espèce dans `data/spectrocraft/spectrobes/species/` :
   "family": "kasumi",
   "search_range": 6,
   "base_stats": { "hp": 41, "attack": 69, "defense": 37 },
-  "evolves_into": "spectrocraft:kasumite",
+  "evolves_into": "dirtrobes:kasumite",
   "evolution_level": 10
 }
 ```

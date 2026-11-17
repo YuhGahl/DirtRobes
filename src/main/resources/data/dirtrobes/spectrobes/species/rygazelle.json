@@ -1,0 +1,14 @@
+{
+  "name": "Rygazelle",
+  "property": "flash",
+  "stage": "adult",
+  "family": "ryza",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 69,
+    "attack": 70,
+    "defense": 73
+  },
+  "evolves_into": "dirtrobes:rydrake",
+  "evolution_level": 30
+}

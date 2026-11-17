@@ -1,0 +1,14 @@
+{
+  "name": "Gorgan",
+  "property": "eclipse",
+  "stage": "adult",
+  "family": "gorz",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 76,
+    "attack": 79,
+    "defense": 80
+  },
+  "evolves_into": "dirtrobes:gorberus",
+  "evolution_level": 30
+}

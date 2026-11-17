@@ -1,0 +1,14 @@
+{
+  "name": "Rapagu",
+  "property": "aurora",
+  "stage": "adult",
+  "family": "dongu",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 77,
+    "attack": 86,
+    "defense": 75
+  },
+  "evolves_into": "dirtrobes:daidongu",
+  "evolution_level": 30
+}

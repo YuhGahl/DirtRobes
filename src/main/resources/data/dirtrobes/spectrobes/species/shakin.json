@@ -1,0 +1,14 @@
+{
+  "name": "Shakin",
+  "property": "flash",
+  "stage": "child",
+  "family": "shakin",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 56,
+    "attack": 52,
+    "defense": 50
+  },
+  "evolves_into": "dirtrobes:shakor",
+  "evolution_level": 10
+}

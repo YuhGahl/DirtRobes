@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "dirtrobes:item/defence_a_plus"
+  }
+}

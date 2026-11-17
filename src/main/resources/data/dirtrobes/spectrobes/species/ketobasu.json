@@ -1,0 +1,14 @@
+{
+  "name": "Ketobasu",
+  "property": "eclipse",
+  "stage": "adult",
+  "family": "tobasu",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 69,
+    "attack": 74,
+    "defense": 72
+  },
+  "evolves_into": "dirtrobes:butobasu",
+  "evolution_level": 30
+}

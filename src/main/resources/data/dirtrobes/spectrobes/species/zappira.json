@@ -1,0 +1,14 @@
+{
+  "name": "Zappira",
+  "property": "halo",
+  "stage": "adult",
+  "family": "zappi",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 83,
+    "attack": 89,
+    "defense": 75
+  },
+  "evolves_into": "dirtrobes:zappizor",
+  "evolution_level": 30
+}

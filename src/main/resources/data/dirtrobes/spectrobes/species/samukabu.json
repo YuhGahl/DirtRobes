@@ -1,0 +1,14 @@
+{
+  "name": "Samukabu",
+  "property": "flash",
+  "stage": "child",
+  "family": "samukabu",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 58,
+    "attack": 49,
+    "defense": 101
+  },
+  "evolves_into": "dirtrobes:samurite",
+  "evolution_level": 10
+}

@@ -1,0 +1,14 @@
+{
+  "name": "Zozane",
+  "property": "corona",
+  "stage": "adult",
+  "family": "zoza",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 67,
+    "attack": 82,
+    "defense": 64
+  },
+  "evolves_into": "dirtrobes:zozanero",
+  "evolution_level": 30
+}
