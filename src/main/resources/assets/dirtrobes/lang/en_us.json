@@ -262,5 +262,7 @@
   "message.dirtrobes.mineral_found": "%s senses minerals %s blocks away (%s).",
   "direction.dirtrobes.above": "above",
   "direction.dirtrobes.below": "below",
-  "direction.dirtrobes.level": "at your level"
+  "direction.dirtrobes.level": "at your level",
+  "message.dirtrobes.team_leader_block": "A Krawl leader is nearby: you can't store your Spectrobes!",
+  "message.dirtrobes.krawl_leader": "%s, Krawl leader · lv. %s"
 }

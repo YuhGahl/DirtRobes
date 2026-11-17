@@ -262,5 +262,7 @@
   "message.dirtrobes.mineral_found": "%s sent des minéraux à %s blocs (%s).",
   "direction.dirtrobes.above": "au-dessus",
   "direction.dirtrobes.below": "en dessous",
-  "direction.dirtrobes.level": "à ta hauteur"
+  "direction.dirtrobes.level": "à ta hauteur",
+  "message.dirtrobes.team_leader_block": "Un Krawl chef est tout proche : impossible de ranger tes Spectrobes !",
+  "message.dirtrobes.krawl_leader": "%s, chef Krawl · niv. %s"
 }

@@ -11,6 +11,7 @@ import net.minecraft.util.GsonHelper;
  *   <li>behaviour : « melee » (corps à corps) ou « spore » (soigne les Krawl proches et en fait apparaître)</li>
  *   <li>min_level / max_level : niveau tiré à l'apparition</li>
  *   <li>weight : chance relative d'apparaître (0 = jamais naturellement)</li>
+ *   <li>leader : Krawl chef (barre de vie, renforce les Krawl proches, empêche de ranger ses Spectrobes)</li>
  * </ul>
  */
 public record KrawlSpecies(
@@ -25,7 +26,8 @@ public record KrawlSpecies(
         int maxLevel,
         float scale,
         float speed,
-        int weight
+        int weight,
+        boolean leader
 ) {
     public static KrawlSpecies fromJson(ResourceLocation id, JsonObject json) {
         JsonObject stats = GsonHelper.getAsJsonObject(json, "base_stats", new JsonObject());
@@ -42,7 +44,8 @@ public record KrawlSpecies(
                 Math.max(min, GsonHelper.getAsInt(json, "max_level", min + 10)),
                 GsonHelper.getAsFloat(json, "scale", 1.0f),
                 GsonHelper.getAsFloat(json, "speed", 0.25f),
-                GsonHelper.getAsInt(json, "weight", 10)
+                GsonHelper.getAsInt(json, "weight", 10),
+                GsonHelper.getAsBoolean(json, "leader", false)
         );
     }
 

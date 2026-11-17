@@ -116,7 +116,10 @@ public final class CommonEvents {
     }
 
     private static void onPlayerTick(PlayerTickEvent.Post event) {
-        if (event.getEntity() instanceof ServerPlayer player && player.tickCount % 20 == 0) ChGauge.tickDecay(player);
+        if (event.getEntity() instanceof ServerPlayer player) {
+            if (player.tickCount % 20 == 0) ChGauge.tickDecay(player);
+            if (player.tickCount % 100 == 0) PrizmodTeam.restStored(player, 100);
+        }
     }
 
     private static void onLogin(PlayerEvent.PlayerLoggedInEvent event) {

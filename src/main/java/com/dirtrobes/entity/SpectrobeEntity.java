@@ -284,6 +284,23 @@ public class SpectrobeEntity extends TamableAnimal implements BedrockPosable {
         return s == null ? 10 : StatCalc.applyQuality(StatCalc.other(s.baseDefense(), evDef, getSpectrobeLevel()), quality);
     }
 
+    /**
+     * Repos dans le Prizmod : récupère 5 % de ses PV max par tranche de 100 ticks, et se remet d'un K.O.
+     * deux fois plus vite que dehors.
+     */
+    public void restInPrizmod(int ticks) {
+        if (isKnockedOut()) {
+            koTicks -= ticks * 2;
+            if (koTicks <= 0) {
+                koTicks = 0;
+                setFlag(FLAG_KO, false);
+                setHealth(Math.max(getHealth(), getMaxHealth() * 0.5f));
+            }
+        } else {
+            setHealth(Math.min(getMaxHealth(), getHealth() + getMaxHealth() * 0.05f * ticks / 100f));
+        }
+    }
+
     public int getXp() {
         return xp;
     }

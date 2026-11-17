@@ -12,7 +12,12 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.BossEvent;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -54,6 +59,9 @@ public class KrawlEntity extends Monster implements BedrockPosable {
     public static final byte EVENT_CRY = 110;
 
     private int sporeCooldown = 80;
+    private int rallyCooldown = 20;
+    private final ServerBossEvent bossEvent = (ServerBossEvent) new ServerBossEvent(Component.empty(),
+            BossEvent.BossBarColor.PURPLE, BossEvent.BossBarOverlay.NOTCHED_10).setDarkenScreen(false);
     @Nullable
     private Object clientAnimState;
     private int lastCryTick = -1000;
@@ -116,6 +124,11 @@ public class KrawlEntity extends Monster implements BedrockPosable {
 
     public int getKrawlLevel() {
         return this.entityData.get(DATA_LEVEL);
+    }
+
+    public boolean isLeader() {
+        KrawlSpecies k = getSpecies();
+        return k != null && k.leader();
     }
 
     public void setSpecies(KrawlSpecies species, int level) {
@@ -181,10 +194,40 @@ public class KrawlEntity extends Monster implements BedrockPosable {
             if (k != null) setSpecies(k, Mth.nextInt(random, k.minLevel(), k.maxLevel()));
         }
         KrawlSpecies k = getSpecies();
+        if (k != null && k.leader()) {
+            bossEvent.setName(Component.translatable("message.dirtrobes.krawl_leader", Component.translatable(k.translationKey()), getKrawlLevel()));
+            bossEvent.setProgress(getHealth() / getMaxHealth());
+            if (--rallyCooldown <= 0) {
+                rallyCooldown = 40;
+                rally((ServerLevel) level());
+            }
+        }
         if (k != null && k.isSpore() && --sporeCooldown <= 0) {
             sporeCooldown = 100 + random.nextInt(60);
             releaseSpores((ServerLevel) level());
         }
+    }
+
+    /** Krawl chef : renforce les Krawl proches (force et résistance). */
+    private void rally(ServerLevel server) {
+        List<KrawlEntity> allies = server.getEntitiesOfClass(KrawlEntity.class, getBoundingBox().inflate(12), k -> k != this && k.isAlive());
+        for (KrawlEntity ally : allies) {
+            ally.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 60, 0, false, true));
+            ally.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 60, 0, false, true));
+            server.sendParticles(ParticleTypes.WITCH, ally.getX(), ally.getY() + ally.getBbHeight(), ally.getZ(), 3, 0.2, 0.2, 0.2, 0.0);
+        }
+    }
+
+    @Override
+    public void startSeenByPlayer(ServerPlayer player) {
+        super.startSeenByPlayer(player);
+        if (isLeader()) bossEvent.addPlayer(player);
+    }
+
+    @Override
+    public void stopSeenByPlayer(ServerPlayer player) {
+        super.stopSeenByPlayer(player);
+        bossEvent.removePlayer(player);
     }
 
     /** Krawl « spore » : soigne les Krawl proches et peut en faire apparaître un nouveau. */

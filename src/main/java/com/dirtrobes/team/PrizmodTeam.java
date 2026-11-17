@@ -152,6 +152,10 @@ public final class PrizmodTeam {
         Entry entry = team.entries.get(index);
         boolean ok;
         if (entry.isOut()) {
+            if (blockedByLeader(player)) {
+                player.displayClientMessage(Component.translatable("message.dirtrobes.team_leader_block").withStyle(ChatFormatting.RED), true);
+                return false;
+            }
             SpectrobeEntity s = findLoaded(player, entry.uuid);
             if (s == null) {
                 player.displayClientMessage(Component.translatable("message.dirtrobes.team_not_found"), true);
@@ -187,6 +191,31 @@ public final class PrizmodTeam {
         player.level().playSound(null, s.blockPosition(), SoundEvents.BEACON_ACTIVATE, SoundSource.PLAYERS, 0.5f, 1.8f);
         player.serverLevel().broadcastEntityEvent(s, SpectrobeEntity.EVENT_CRY);
         return true;
+    }
+
+    /** Soigne les Spectrobes rangés (appelé régulièrement pour chaque joueur connecté). */
+    public static void restStored(ServerPlayer player, int ticks) {
+        Team team = team(player);
+        boolean any = false;
+        for (Entry entry : team.entries) {
+            if (entry.isOut() || entry.data == null) continue;
+            SpectrobeEntity s = ModRegistry.SPECTROBE.get().create(player.serverLevel());
+            if (s == null) continue;
+            s.load(entry.data);
+            if (!s.isKnockedOut() && s.getHealth() >= s.getMaxHealth()) continue;
+            s.restInPrizmod(ticks);
+            CompoundTag tag = new CompoundTag();
+            s.saveWithoutId(tag);
+            entry.data = tag;
+            any = true;
+        }
+        if (any) changed(player);
+    }
+
+    /** Un Krawl chef à proximité empêche de ranger ses Spectrobes (on ne fuit pas un chef). */
+    public static boolean blockedByLeader(ServerPlayer player) {
+        return !player.level().getEntitiesOfClass(com.dirtrobes.krawl.KrawlEntity.class, player.getBoundingBox().inflate(24),
+                k -> k.isAlive() && k.isLeader()).isEmpty();
     }
 
     /** À la déconnexion : range tous les Spectrobes dehors pour ne pas les perdre. */

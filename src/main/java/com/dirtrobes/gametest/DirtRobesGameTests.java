@@ -20,6 +20,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
@@ -230,6 +231,35 @@ public class DirtRobesGameTests {
         helper.assertTrue(helper.absolutePos(new BlockPos(13, 1, 10)).equals(result.fossil()), "Fossile attendu en (13,1,10)");
         helper.assertTrue(helper.absolutePos(new BlockPos(8, 1, 10)).equals(result.mineral()), "Le gisement le plus proche est en (8,1,10)");
         helper.succeed();
+    }
+
+    /** Repos au Prizmod : un Spectrobe rangé blessé ou K.O. récupère avec le temps. */
+    @GameTest(template = "platform")
+    public static void storedSpectrobesRecover(GameTestHelper helper) {
+        ServerPlayer player = placePlayer(helper, 10.5, 10.5);
+        Species adult = SpeciesManager.all().stream().filter(s -> s.stage() == Stage.ADULT).findFirst().orElseThrow();
+        SpectrobeEntity s = SpectrobeEntity.create(helper.getLevel(), adult, 20, player, helper.absoluteVec(new Vec3(5.5, 1, 5.5)));
+        s.setHealth(s.getMaxHealth() * 0.2f);
+        helper.assertTrue(PrizmodTeam.toggle(player, 0), "Ranger devrait marcher");
+        float before = PrizmodTeam.summaries(player).get(0).health();
+        PrizmodTeam.restStored(player, 600);
+        float after = PrizmodTeam.summaries(player).get(0).health();
+        log("PV au repos : {} → {}", before, after);
+        helper.assertTrue(after > before, "Les PV auraient dû remonter au repos");
+        helper.succeed();
+    }
+
+    /** Krawl chef : renforce les Krawl proches et empêche de ranger ses Spectrobes. */
+    @GameTest(template = "platform", timeoutTicks = 120)
+    public static void krawlLeaderRalliesAndBlocksStoring(GameTestHelper helper) {
+        ServerPlayer player = placePlayer(helper, 2.5, 2.5);
+        Species adult = SpeciesManager.all().stream().filter(s -> s.stage() == Stage.ADULT).findFirst().orElseThrow();
+        SpectrobeEntity.create(helper.getLevel(), adult, 20, player, helper.absoluteVec(new Vec3(4.5, 1, 4.5)));
+        KrawlEntity leader = KrawlEntity.create(helper.getLevel(), KrawlManager.byName("otorso"), 30, helper.absoluteVec(new Vec3(15.5, 1, 15.5)));
+        KrawlEntity minion = KrawlEntity.create(helper.getLevel(), KrawlManager.byName("swar"), 5, helper.absoluteVec(new Vec3(13.5, 1, 15.5)));
+        helper.assertTrue(leader.isLeader(), "Otorso devrait être un chef");
+        helper.assertTrue(!PrizmodTeam.toggle(player, 0), "Impossible de ranger un Spectrobe près d'un chef");
+        helper.succeedWhen(() -> helper.assertTrue(minion.hasEffect(MobEffects.DAMAGE_BOOST), "Le Krawl proche du chef devrait être renforcé"));
     }
 
     /** Logique du mini-jeu de fouille. */
