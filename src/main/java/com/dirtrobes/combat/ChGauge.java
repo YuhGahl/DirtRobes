@@ -69,6 +69,8 @@ public final class ChGauge {
     }
 
     public static void sync(ServerPlayer player) {
-        if (player.connection != null) PacketDistributor.sendToPlayer(player, new ModNetwork.ChSyncPayload(get(player)));
+        if (player.connection != null && player.connection.hasChannel(ModNetwork.ChSyncPayload.TYPE)) {
+            PacketDistributor.sendToPlayer(player, new ModNetwork.ChSyncPayload(get(player)));
+        }
     }
 }
