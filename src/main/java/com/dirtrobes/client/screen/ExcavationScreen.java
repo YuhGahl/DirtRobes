@@ -4,7 +4,6 @@ import com.dirtrobes.entity.StatCalc;
 import com.dirtrobes.excavation.ExcavationGame;
 import com.dirtrobes.network.ModNetwork;
 import com.dirtrobes.species.Property;
-import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
@@ -76,17 +75,9 @@ public class ExcavationScreen extends Screen {
     }
 
     private void updateButtons() {
-        boolean playing = !game.isOver();
-        drillButton.active = playing;
-        chiselButton.active = playing;
-        drillButton.setMessage(toolLabel("gui.dirtrobes.excavation.drill", tool == ExcavationGame.Tool.DRILL));
-        chiselButton.setMessage(toolLabel("gui.dirtrobes.excavation.chisel", tool == ExcavationGame.Tool.CHISEL));
+        drillButton.active = tool != ExcavationGame.Tool.DRILL && !game.isOver();
+        chiselButton.active = tool != ExcavationGame.Tool.CHISEL && !game.isOver();
         doneButton.visible = game.isOver();
-    }
-
-    private static Component toolLabel(String key, boolean selected) {
-        Component name = Component.translatable(key);
-        return selected ? Component.literal("» ").append(name).append(" «").withStyle(ChatFormatting.YELLOW) : name;
     }
 
     @Override
@@ -270,9 +261,6 @@ public class ExcavationScreen extends Screen {
         Component hint = Component.translatable(tool == ExcavationGame.Tool.DRILL ? "gui.dirtrobes.excavation.drill_hint" : "gui.dirtrobes.excavation.chisel_hint");
         g.drawCenteredString(font, Component.translatable("gui.dirtrobes.excavation.exposed", Math.round(game.exposed() * 100)),
                 width / 2, top + GRID_H + 5, 0xFFFFFFFF);
-        // l'outil actif est encadré de la couleur de la propriété
-        Button selected = tool == ExcavationGame.Tool.DRILL ? drillButton : chiselButton;
-        if (!game.isOver()) g.renderOutline(selected.getX() - 1, selected.getY() - 1, selected.getWidth() + 2, selected.getHeight() + 2, accent);
         g.drawCenteredString(font, hint, width / 2, top + GRID_H + 42, 0xFFBFB6A8);
 
         // Résultat
