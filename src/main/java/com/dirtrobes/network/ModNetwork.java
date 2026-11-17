@@ -2,6 +2,7 @@ package com.dirtrobes.network;
 
 import com.dirtrobes.DirtRobes;
 import com.dirtrobes.block.IncubatorBlockEntity;
+import com.dirtrobes.combat.ChGauge;
 import com.dirtrobes.entity.SpectrobeEntity;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.core.BlockPos;
@@ -48,8 +49,24 @@ public final class ModNetwork {
         }
     }
 
+    /** Valeur de la jauge CH envoyée au client pour l'affichage. */
+    public record ChSyncPayload(int ch) implements CustomPacketPayload {
+        public static final Type<ChSyncPayload> TYPE = new Type<>(DirtRobes.id("ch_sync"));
+        public static final StreamCodec<ByteBuf, ChSyncPayload> STREAM_CODEC = StreamCodec.composite(
+                ByteBufCodecs.VAR_INT, ChSyncPayload::ch, ChSyncPayload::new);
+
+        @Override
+        public Type<? extends CustomPacketPayload> type() {
+            return TYPE;
+        }
+    }
+
+    /** Dernière valeur reçue du serveur (côté client). */
+    public static volatile int clientCh;
+
     public static void register(RegisterPayloadHandlersEvent event) {
-        event.registrar("2")
+        event.registrar("3")
+                .playToClient(ChSyncPayload.TYPE, ChSyncPayload.STREAM_CODEC, (payload, context) -> clientCh = payload.ch())
                 .playToServer(SpecialAttackPayload.TYPE, SpecialAttackPayload.STREAM_CODEC, ModNetwork::handleSpecialAttack)
                 .playToServer(ExcavationResultPayload.TYPE, ExcavationResultPayload.STREAM_CODEC, ModNetwork::handleExcavation);
     }
@@ -67,18 +84,31 @@ public final class ModNetwork {
 
     private static void handleSpecialAttack(SpecialAttackPayload payload, IPayloadContext context) {
         context.enqueueWork(() -> {
-            if (!(context.player() instanceof ServerPlayer player)) return;
-            LivingEntity looked = lookedAtEntity(player, 24.0);
-            List<SpectrobeEntity> mine = player.level().getEntitiesOfClass(SpectrobeEntity.class, player.getBoundingBox().inflate(24),
-                    s -> s.isOwnedBy(player));
-            int count = 0;
-            for (SpectrobeEntity s : mine) {
-                if (s.startSpecialAttack(looked)) count++;
-            }
-            if (count == 0) {
-                player.displayClientMessage(Component.translatable("message.dirtrobes.special_none"), true);
-            }
+            if (context.player() instanceof ServerPlayer player) triggerSpecialAttack(player, lookedAtEntity(player, 24.0));
         });
+    }
+
+    /**
+     * Attaque spéciale de tous les Spectrobes du joueur à portée. Coûte {@link ChGauge#SPECIAL_COST} points
+     * de jauge CH (une fois par appui). Renvoie le nombre de Spectrobes qui ont attaqué.
+     */
+    public static int triggerSpecialAttack(ServerPlayer player, LivingEntity looked) {
+        if (ChGauge.get(player) < ChGauge.SPECIAL_COST) {
+            player.displayClientMessage(Component.translatable("message.dirtrobes.ch_low", ChGauge.get(player), ChGauge.SPECIAL_COST), true);
+            return 0;
+        }
+        List<SpectrobeEntity> mine = player.level().getEntitiesOfClass(SpectrobeEntity.class, player.getBoundingBox().inflate(24),
+                s -> s.isOwnedBy(player));
+        int count = 0;
+        for (SpectrobeEntity s : mine) {
+            if (s.startSpecialAttack(looked)) count++;
+        }
+        if (count == 0) {
+            player.displayClientMessage(Component.translatable("message.dirtrobes.special_none"), true);
+        } else {
+            ChGauge.trySpend(player, ChGauge.SPECIAL_COST);
+        }
+        return count;
     }
 
     private static LivingEntity lookedAtEntity(ServerPlayer player, double range) {

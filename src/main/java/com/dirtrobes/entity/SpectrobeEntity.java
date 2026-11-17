@@ -506,7 +506,7 @@ public class SpectrobeEntity extends TamableAnimal implements BedrockPosable {
             hasImpulse = true;
         }
         level().broadcastEntityEvent(this, EVENT_SPECIAL);
-        specialCooldown = 100;
+        specialCooldown = 30;
         return true;
     }
 

@@ -3,6 +3,7 @@ package com.dirtrobes.event;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.dirtrobes.DirtRobes;
+import com.dirtrobes.combat.ChGauge;
 import com.dirtrobes.entity.SpectrobeEntity;
 import com.dirtrobes.krawl.KrawlEntity;
 import com.dirtrobes.krawl.KrawlManager;
@@ -32,6 +33,8 @@ import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 
 import javax.annotation.Nullable;
@@ -66,6 +69,8 @@ public final class CommonEvents {
         bus.addListener(CommonEvents::onIncomingDamage);
         bus.addListener(CommonEvents::onDeath);
         bus.addListener(CommonEvents::onCommands);
+        bus.addListener(CommonEvents::onPlayerTick);
+        bus.addListener(CommonEvents::onLogin);
     }
 
     private static void onReload(AddReloadListenerEvent event) {
@@ -86,11 +91,34 @@ public final class CommonEvents {
 
     /** Applique le cycle des propriétés aux dégâts (×1,5 avantage, ×0,67 désavantage). */
     private static void onIncomingDamage(LivingIncomingDamageEvent event) {
+        fillChGauge(event);
         Property attacker = propertyOf(event.getSource().getEntity());
         Property defender = propertyOf(event.getEntity());
         if (attacker == null || defender == null) return;
         float mult = attacker.multiplierAgainst(defender);
         if (mult != 1f) event.setAmount(event.getAmount() * mult);
+    }
+
+    /** Jauge CH : se remplit quand les Spectrobes du joueur frappent ou sont frappés, ou quand il frappe lui-même. */
+    private static void fillChGauge(LivingIncomingDamageEvent event) {
+        if (event.getEntity().level().isClientSide || event.getAmount() <= 0) return;
+        Entity source = event.getSource().getEntity();
+        if (source instanceof SpectrobeEntity s && s.getOwner() instanceof ServerPlayer owner) {
+            ChGauge.add(owner, ChGauge.GAIN_HIT);
+        } else if (source instanceof ServerPlayer player && !(event.getEntity() instanceof SpectrobeEntity)) {
+            ChGauge.add(player, ChGauge.GAIN_PLAYER_HIT);
+        }
+        if (event.getEntity() instanceof SpectrobeEntity s && s.getOwner() instanceof ServerPlayer owner) {
+            ChGauge.add(owner, ChGauge.GAIN_HURT);
+        }
+    }
+
+    private static void onPlayerTick(PlayerTickEvent.Post event) {
+        if (event.getEntity() instanceof ServerPlayer player && player.tickCount % 20 == 0) ChGauge.tickDecay(player);
+    }
+
+    private static void onLogin(PlayerEvent.PlayerLoggedInEvent event) {
+        if (event.getEntity() instanceof ServerPlayer player) ChGauge.sync(player);
     }
 
     private static void onDeath(LivingDeathEvent event) {

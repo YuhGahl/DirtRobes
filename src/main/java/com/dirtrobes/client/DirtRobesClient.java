@@ -2,6 +2,7 @@ package com.dirtrobes.client;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import com.dirtrobes.DirtRobes;
+import com.dirtrobes.client.hud.ChGaugeHud;
 import com.dirtrobes.client.model.ModelRepository;
 import com.dirtrobes.client.render.BedrockEntityRenderer;
 import com.dirtrobes.client.screen.IncubatorScreen;
@@ -15,7 +16,9 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent;
+import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
+import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -31,6 +34,7 @@ public class DirtRobesClient {
         modBus.addListener(DirtRobesClient::onReloadListeners);
         modBus.addListener(DirtRobesClient::onKeys);
         modBus.addListener(DirtRobesClient::onMenuScreens);
+        modBus.addListener(DirtRobesClient::onGuiLayers);
         NeoForge.EVENT_BUS.addListener(DirtRobesClient::onClientTick);
     }
 
@@ -41,6 +45,10 @@ public class DirtRobesClient {
 
     private static void onReloadListeners(RegisterClientReloadListenersEvent event) {
         event.registerReloadListener(new ModelRepository());
+    }
+
+    private static void onGuiLayers(RegisterGuiLayersEvent event) {
+        event.registerAbove(VanillaGuiLayers.HOTBAR, DirtRobes.id("ch_gauge"), ChGaugeHud::render);
     }
 
     private static void onMenuScreens(RegisterMenuScreensEvent event) {

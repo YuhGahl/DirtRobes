@@ -241,5 +241,6 @@
   "krawl.dirtrobes.orbux": "Orbux",
   "krawl.dirtrobes.gris": "Gris",
   "krawl.dirtrobes.xelles": "Xelles",
-  "krawl.dirtrobes.grisen": "Grisen"
+  "krawl.dirtrobes.grisen": "Grisen",
+  "message.dirtrobes.ch_low": "Not enough CH: %s / %s"
 }

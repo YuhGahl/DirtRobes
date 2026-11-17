@@ -2,6 +2,8 @@ package com.dirtrobes.gametest;
 
 import com.dirtrobes.DirtRobes;
 import com.dirtrobes.block.IncubatorBlockEntity;
+import com.dirtrobes.combat.ChGauge;
+import com.dirtrobes.network.ModNetwork;
 import com.dirtrobes.entity.SpectrobeEntity;
 import com.dirtrobes.entity.StatCalc;
 import com.dirtrobes.excavation.ExcavationGame;
@@ -161,6 +163,29 @@ public class DirtRobesGameTests {
             List<KrawlEntity> krawl = helper.getEntities(ModRegistry.KRAWL.get());
             helper.assertTrue(!krawl.isEmpty(), "Aucun Krawl n'est sorti du vortex");
             helper.assertTrue(krawl.get(0).getSpecies() != null, "Le Krawl du vortex devrait avoir une espèce");
+        });
+    }
+
+    /** Jauge CH : se remplit au combat, l'attaque spéciale la consomme, impossible si elle est trop basse. */
+    @GameTest(template = "platform", timeoutTicks = 400)
+    public static void chGaugeFillsAndPaysForSpecial(GameTestHelper helper) {
+        ServerPlayer player = placePlayer(helper, 2.5, 2.5);
+        Species adult = SpeciesManager.all().stream().filter(s -> s.stage() == Stage.ADULT).findFirst().orElseThrow();
+        SpectrobeEntity spectrobe = SpectrobeEntity.create(helper.getLevel(), adult, 30, player, helper.absoluteVec(new Vec3(8.5, 1, 10.5)));
+        KrawlEntity krawl = KrawlEntity.create(helper.getLevel(), KrawlManager.byName("otorso"), 40, helper.absoluteVec(new Vec3(11.5, 1, 10.5)));
+        ChGauge.set(player, 0);
+        helper.assertTrue(ModNetwork.triggerSpecialAttack(player, krawl) == 0, "L'attaque spéciale ne devrait pas partir avec une jauge vide");
+        krawl.setTarget(spectrobe);
+        helper.runAfterDelay(120, () -> {
+            int ch = ChGauge.get(player);
+            log("Jauge CH après 6 s de combat : {}", ch);
+            helper.assertTrue(ch > 0, "La jauge CH aurait dû se remplir pendant le combat");
+            ChGauge.set(player, 80);
+            int used = ModNetwork.triggerSpecialAttack(player, krawl);
+            helper.assertTrue(used == 1, "Le Spectrobe aurait dû lancer son attaque spéciale (" + used + ")");
+            helper.assertTrue(ChGauge.get(player) == 80 - ChGauge.SPECIAL_COST, "La jauge aurait dû baisser de " + ChGauge.SPECIAL_COST
+                    + ", valeur " + ChGauge.get(player));
+            helper.succeed();
         });
     }
 
