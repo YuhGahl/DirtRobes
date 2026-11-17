@@ -1,6 +1,7 @@
 package com.dirtrobes.block;
 
 import com.dirtrobes.entity.SpectrobeEntity;
+import com.dirtrobes.entity.StatCalc;
 import com.dirtrobes.item.FossilItem;
 import com.dirtrobes.menu.IncubatorMenu;
 import com.dirtrobes.registry.ModRegistry;
@@ -34,7 +35,8 @@ import java.util.UUID;
 /**
  * Incubateur : un emplacement pour un fossile. Le joueur dégage le fossile de sa gangue dans le
  * mini-jeu de fouille ; si le fossile survit, l'éveil démarre et un Spectrobe enfant apparaît
- * au bout de {@link #DURATION} ticks. Plus le fossile est intact, plus le Spectrobe est fort.
+ * au bout de {@link #DURATION} ticks. Plus le fossile est intact, meilleures sont ses stats
+ * (voir {@link StatCalc#qualityForIntegrity}).
  */
 public class IncubatorBlockEntity extends BlockEntity implements MenuProvider {
     public static final int DURATION = 400; // 20 secondes
@@ -93,13 +95,6 @@ public class IncubatorBlockEntity extends BlockEntity implements MenuProvider {
         return property != null;
     }
 
-    /** Niveau de départ du Spectrobe selon l'état du fossile dégagé. */
-    public static int levelForIntegrity(int integrity) {
-        if (integrity >= 90) return 3;
-        if (integrity >= 60) return 2;
-        return 1;
-    }
-
     /**
      * Résultat du mini-jeu de fouille, validé côté serveur.
      * @param integrity état du fossile (0 = brisé, 100 = intact)
@@ -146,12 +141,13 @@ public class IncubatorBlockEntity extends BlockEntity implements MenuProvider {
         Player player = owner == null ? null : server.getPlayerByUUID(owner);
         Species species = property == null ? null : SpeciesManager.randomFossilSpecies(property, server.random);
         if (species != null) {
-            SpectrobeEntity.create(server, species, levelForIntegrity(integrity), player, Vec3.atBottomCenterOf(worldPosition.above()));
+            SpectrobeEntity.create(server, species, 1, StatCalc.qualityForIntegrity(integrity), player, Vec3.atBottomCenterOf(worldPosition.above()));
             server.sendParticles(ParticleTypes.TOTEM_OF_UNDYING, worldPosition.getX() + 0.5, worldPosition.getY() + 1.2, worldPosition.getZ() + 0.5,
                     40, 0.4, 0.5, 0.4, 0.25);
             server.playSound(null, worldPosition, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.BLOCKS, 1.0f, 1.0f);
             if (player != null) {
-                player.sendSystemMessage(Component.translatable("message.dirtrobes.hatched", Component.translatable(species.translationKey()))
+                player.sendSystemMessage(Component.translatable("message.dirtrobes.hatched", Component.translatable(species.translationKey()),
+                            StatCalc.qualityForIntegrity(integrity))
                         .withStyle(ChatFormatting.AQUA));
             }
         } else if (player != null) {

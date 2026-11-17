@@ -21,6 +21,21 @@ public final class StatCalc {
         return (int) Math.floor((2.0 * base + ev / 4) * level / 100.0) + 5;
     }
 
+    /**
+     * Qualité des stats (en %) selon l'intégrité du fossile dégagé :
+     * 95 % d'intégrité ou plus → 100 % des stats, 10 % ou moins → 50 %, linéaire entre les deux.
+     */
+    public static int qualityForIntegrity(int integrity) {
+        if (integrity >= 95) return 100;
+        if (integrity <= 10) return 50;
+        return 50 + Math.round((integrity - 10) * 50f / 85f);
+    }
+
+    /** Applique la qualité à une stat. */
+    public static int applyQuality(int stat, int quality) {
+        return Math.max(1, Math.round(stat * quality / 100f));
+    }
+
     /** Expérience totale pour atteindre ce niveau (courbe « moyenne » : n³ / 4). */
     public static int xpForLevel(int level) {
         return level <= 1 ? 0 : (level * level * level) / 4;

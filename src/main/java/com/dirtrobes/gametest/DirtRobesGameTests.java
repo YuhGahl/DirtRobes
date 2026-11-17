@@ -3,6 +3,7 @@ package com.dirtrobes.gametest;
 import com.dirtrobes.DirtRobes;
 import com.dirtrobes.block.IncubatorBlockEntity;
 import com.dirtrobes.entity.SpectrobeEntity;
+import com.dirtrobes.entity.StatCalc;
 import com.dirtrobes.excavation.ExcavationGame;
 import com.dirtrobes.registry.ModRegistry;
 import com.dirtrobes.species.Property;
@@ -60,7 +61,7 @@ public class DirtRobesGameTests {
                     s.getSpeciesId(), s.getSpectrobeLevel(), String.format("%.1f", s.distanceTo(player)), s.isTame(),
                     s.getOwner() == player, s.isOrderedToSit(), s.isNoAi());
             helper.assertTrue(s.isOwnedBy(player), "Le Spectrobe éclos devrait appartenir au joueur");
-            helper.assertTrue(s.getSpectrobeLevel() == 3, "Intégrité 95 % : niveau 3 attendu, obtenu " + s.getSpectrobeLevel());
+            helper.assertTrue(s.getQuality() == 100, "Intégrité 95 % : stats à 100 % attendues, obtenu " + s.getQuality());
         });
         for (int t = 20; t <= 240; t += 20) {
             final int dt = t;
@@ -98,6 +99,25 @@ public class DirtRobesGameTests {
             helper.assertTrue(closest[0] > 2.5, "Le Spectrobe s'est trop approché : " + String.format("%.2f", closest[0]));
             helper.succeed();
         });
+    }
+
+    /** Échelle intégrité du fossile → qualité des stats, et effet sur les stats réelles. */
+    @GameTest(template = "platform")
+    public static void integrityScalesStats(GameTestHelper helper) {
+        int[][] expected = {{100, 100}, {95, 100}, {94, 99}, {52, 75}, {11, 51}, {10, 50}, {1, 50}};
+        for (int[] e : expected) {
+            int q = StatCalc.qualityForIntegrity(e[0]);
+            helper.assertTrue(q == e[1], "Intégrité " + e[0] + " % : qualité " + e[1] + " attendue, obtenue " + q);
+        }
+        ServerPlayer player = placePlayer(helper, 10.5, 10.5);
+        Species adult = SpeciesManager.all().stream().filter(s -> s.stage() == Stage.ADULT).findFirst().orElseThrow();
+        SpectrobeEntity perfect = SpectrobeEntity.create(helper.getLevel(), adult, 50, 100, player, helper.absoluteVec(new Vec3(4.5, 1, 4.5)));
+        SpectrobeEntity damaged = SpectrobeEntity.create(helper.getLevel(), adult, 50, 50, player, helper.absoluteVec(new Vec3(15.5, 1, 15.5)));
+        log("Stats à 100 % : PV {} ATQ {} DÉF {} · à 50 % : PV {} ATQ {} DÉF {}", perfect.hpStat(), perfect.attackStat(), perfect.defenseStat(),
+                damaged.hpStat(), damaged.attackStat(), damaged.defenseStat());
+        helper.assertTrue(Math.abs(damaged.attackStat() * 2 - perfect.attackStat()) <= 1, "L'ATQ à 50 % devrait être la moitié de l'ATQ à 100 %");
+        helper.assertTrue(damaged.getMaxHealth() < perfect.getMaxHealth(), "Les PV max devraient baisser avec la qualité");
+        helper.succeed();
     }
 
     /** Logique du mini-jeu de fouille. */

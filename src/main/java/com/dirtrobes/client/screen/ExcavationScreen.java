@@ -1,5 +1,6 @@
 package com.dirtrobes.client.screen;
 
+import com.dirtrobes.entity.StatCalc;
 import com.dirtrobes.excavation.ExcavationGame;
 import com.dirtrobes.network.ModNetwork;
 import com.dirtrobes.species.Property;
@@ -210,7 +211,8 @@ public class ExcavationScreen extends Screen {
 
         // En-tête : titre, intégrité, temps, avancement
         g.drawCenteredString(font, Component.translatable("gui.dirtrobes.excavation.header", fossilName), width / 2, gy - 26, 0xFFFFFFFF);
-        drawBar(g, gx, gy - 14, GRID_W / 2 - 4, game.integrity() / 100f, integrityColor(), Component.translatable("gui.dirtrobes.excavation.integrity", game.integrity()));
+        drawBar(g, gx, gy - 14, GRID_W / 2 - 4, game.integrity() / 100f, integrityColor(),
+                Component.translatable("gui.dirtrobes.excavation.integrity", game.integrity(), StatCalc.qualityForIntegrity(game.integrity())));
         float time = game.ticksLeft() / (float) ExcavationGame.TIME_LIMIT;
         drawBar(g, gx + GRID_W / 2 + 4, gy - 14, GRID_W / 2 - 4, time, time < 0.25f ? 0xFFE0533D : 0xFF6FB7E8,
                 Component.translatable("gui.dirtrobes.excavation.time", Mth.ceil(game.ticksLeft() / 20f)));
@@ -264,11 +266,11 @@ public class ExcavationScreen extends Screen {
             switch (game.state()) {
                 case SUCCESS -> {
                     title = Component.translatable("gui.dirtrobes.excavation.success");
-                    detail = Component.translatable("gui.dirtrobes.excavation.result", game.integrity());
+                    detail = Component.translatable("gui.dirtrobes.excavation.result", game.integrity(), StatCalc.qualityForIntegrity(game.integrity()));
                 }
                 case TIMEOUT -> {
                     title = Component.translatable("gui.dirtrobes.excavation.timeout");
-                    detail = Component.translatable("gui.dirtrobes.excavation.result", game.integrity());
+                    detail = Component.translatable("gui.dirtrobes.excavation.result", game.integrity(), StatCalc.qualityForIntegrity(game.integrity()));
                 }
                 default -> {
                     title = Component.translatable("gui.dirtrobes.excavation.broken");

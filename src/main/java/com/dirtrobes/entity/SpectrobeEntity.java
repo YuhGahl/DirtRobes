@@ -71,6 +71,8 @@ public class SpectrobeEntity extends TamableAnimal {
     private int evAtk;
     private int evDef;
     private int koTicks;
+    /** Qualité des stats en % (50 à 100), fixée à l'éclosion selon l'intégrité du fossile. */
+    private int quality = 100;
     private int specialCooldown;
     private int strikeTicks;
     @Nullable
@@ -227,17 +229,26 @@ public class SpectrobeEntity extends TamableAnimal {
 
     public int hpStat() {
         Species s = getSpecies();
-        return s == null ? 20 : StatCalc.hp(s.baseHp(), evHp, getSpectrobeLevel());
+        return s == null ? 20 : StatCalc.applyQuality(StatCalc.hp(s.baseHp(), evHp, getSpectrobeLevel()), quality);
     }
 
     public int attackStat() {
         Species s = getSpecies();
-        return s == null ? 10 : StatCalc.other(s.baseAttack(), evAtk, getSpectrobeLevel());
+        return s == null ? 10 : StatCalc.applyQuality(StatCalc.other(s.baseAttack(), evAtk, getSpectrobeLevel()), quality);
     }
 
     public int defenseStat() {
         Species s = getSpecies();
-        return s == null ? 10 : StatCalc.other(s.baseDefense(), evDef, getSpectrobeLevel());
+        return s == null ? 10 : StatCalc.applyQuality(StatCalc.other(s.baseDefense(), evDef, getSpectrobeLevel()), quality);
+    }
+
+    public int getQuality() {
+        return quality;
+    }
+
+    public void setQuality(int quality) {
+        this.quality = Math.max(50, Math.min(100, quality));
+        recomputeStats(true);
     }
 
     public void recomputeStats(boolean fullHeal) {
@@ -496,6 +507,9 @@ public class SpectrobeEntity extends TamableAnimal {
                 .append(Component.literal(")")));
         player.sendSystemMessage(Component.translatable("message.dirtrobes.card.stats",
                 Mth.ceil(getHealth() * hpStat() / Math.max(1f, getMaxHealth())), hpStat(), attackStat(), defenseStat()));
+        if (quality < 100) {
+            player.sendSystemMessage(Component.translatable("message.dirtrobes.card.quality", quality).withStyle(ChatFormatting.GRAY));
+        }
         player.sendSystemMessage(Component.translatable("message.dirtrobes.card.ev", evHp, evAtk, evDef, totalEv(), StatCalc.MAX_EV_TOTAL)
                 .withStyle(ChatFormatting.GRAY));
         int next = StatCalc.xpForLevel(getSpectrobeLevel() + 1);
@@ -547,6 +561,7 @@ public class SpectrobeEntity extends TamableAnimal {
         tag.putInt("EvAtk", evAtk);
         tag.putInt("EvDef", evDef);
         tag.putInt("KoTicks", isKnockedOut() ? koTicks : 0);
+        tag.putInt("Quality", quality);
     }
 
     @Override
@@ -558,6 +573,7 @@ public class SpectrobeEntity extends TamableAnimal {
         evAtk = tag.getInt("EvAtk");
         evDef = tag.getInt("EvDef");
         koTicks = tag.getInt("KoTicks");
+        quality = tag.contains("Quality") ? Math.max(50, Math.min(100, tag.getInt("Quality"))) : 100;
         setFlag(FLAG_KO, koTicks > 0);
         Species s = SpeciesManager.get(ResourceLocation.tryParse(tag.getString("Species")));
         if (s != null) {
@@ -584,8 +600,14 @@ public class SpectrobeEntity extends TamableAnimal {
 
     /** Crée un Spectrobe d'une espèce donnée (incubateur, commande). */
     public static SpectrobeEntity create(ServerLevel level, Species species, int spectrobeLevel, @Nullable Player owner, Vec3 pos) {
+        return create(level, species, spectrobeLevel, 100, owner, pos);
+    }
+
+    /** @param quality qualité des stats en % (50 à 100), voir {@link StatCalc#qualityForIntegrity}. */
+    public static SpectrobeEntity create(ServerLevel level, Species species, int spectrobeLevel, int quality, @Nullable Player owner, Vec3 pos) {
         SpectrobeEntity entity = new SpectrobeEntity(ModRegistry.SPECTROBE.get(), level);
         entity.moveTo(pos.x, pos.y, pos.z, level.random.nextFloat() * 360f, 0f);
+        entity.quality = Math.max(50, Math.min(100, quality));
         entity.setSpecies(species, true);
         entity.setSpectrobeLevel(spectrobeLevel);
         if (owner != null) entity.tame(owner);

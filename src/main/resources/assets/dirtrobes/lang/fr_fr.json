@@ -26,7 +26,7 @@
   "message.dirtrobes.fossil_found": "%s sent un fossile à %s blocs !",
   "message.dirtrobes.special_none": "Aucun Spectrobe prêt pour une attaque spéciale (cible, recharge ou stade).",
   "message.dirtrobes.incubator_start": "Fossile dégagé (intégrité %s %%) : l'éveil commence…",
-  "message.dirtrobes.hatched": "Un %s s'est éveillé !",
+  "message.dirtrobes.hatched": "Un %s s'est éveillé ! (stats à %s %%)",
   "message.dirtrobes.hatch_failed": "Le fossile ne s'est pas éveillé (aucune espèce compatible).",
   "message.dirtrobes.unknown_species": "Espèce inconnue : %s",
   "message.dirtrobes.card.level": "Niv. %s",
@@ -212,10 +212,10 @@
   "gui.dirtrobes.incubator.dig": "Fouiller",
   "gui.dirtrobes.incubator.insert": "Dépose un fossile",
   "gui.dirtrobes.incubator.ready": "Prêt à fouiller",
-  "gui.dirtrobes.incubator.awakening": "Éveil : %s %% · intégrité %s %%",
+  "gui.dirtrobes.incubator.awakening": "Éveil %s %% · stats %s %%",
   "gui.dirtrobes.excavation.title": "Fouille",
   "gui.dirtrobes.excavation.header": "Dégage le fossile : %s",
-  "gui.dirtrobes.excavation.integrity": "Intégrité %s %%",
+  "gui.dirtrobes.excavation.integrity": "Intégrité %s %% · stats %s %%",
   "gui.dirtrobes.excavation.time": "%s s",
   "gui.dirtrobes.excavation.exposed": "Fossile dégagé : %s %%",
   "gui.dirtrobes.excavation.drill": "[1] Foreuse",
@@ -226,6 +226,7 @@
   "gui.dirtrobes.excavation.timeout": "Temps écoulé : fossile arraché",
   "gui.dirtrobes.excavation.broken": "Le fossile s'est brisé…",
   "gui.dirtrobes.excavation.broken_detail": "Il faudra en trouver un autre.",
-  "gui.dirtrobes.excavation.result": "Intégrité finale : %s %%",
-  "gui.dirtrobes.excavation.done": "Terminer"
+  "gui.dirtrobes.excavation.result": "Intégrité %s %% → stats à %s %%",
+  "gui.dirtrobes.excavation.done": "Terminer",
+  "message.dirtrobes.card.quality": "Qualité du fossile : stats à %s %%"
 }

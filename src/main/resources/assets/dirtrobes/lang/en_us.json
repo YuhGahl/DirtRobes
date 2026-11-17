@@ -26,7 +26,7 @@
   "message.dirtrobes.fossil_found": "%s senses a fossil %s blocks away!",
   "message.dirtrobes.special_none": "No Spectrobe ready for a special attack (target, cooldown or stage).",
   "message.dirtrobes.incubator_start": "Fossil cleaned (integrity %s%%): the awakening begins…",
-  "message.dirtrobes.hatched": "A %s has awakened!",
+  "message.dirtrobes.hatched": "A %s has awakened! (stats at %s%%)",
   "message.dirtrobes.hatch_failed": "The fossil didn't awaken (no matching species).",
   "message.dirtrobes.unknown_species": "Unknown species: %s",
   "message.dirtrobes.card.level": "Lv. %s",
@@ -212,10 +212,10 @@
   "gui.dirtrobes.incubator.dig": "Excavate",
   "gui.dirtrobes.incubator.insert": "Insert a fossil",
   "gui.dirtrobes.incubator.ready": "Ready to excavate",
-  "gui.dirtrobes.incubator.awakening": "Awakening: %s%% · integrity %s%%",
+  "gui.dirtrobes.incubator.awakening": "Awakening %s%% · stats %s%%",
   "gui.dirtrobes.excavation.title": "Excavation",
   "gui.dirtrobes.excavation.header": "Dig out the fossil: %s",
-  "gui.dirtrobes.excavation.integrity": "Integrity %s%%",
+  "gui.dirtrobes.excavation.integrity": "Integrity %s%% · stats %s%%",
   "gui.dirtrobes.excavation.time": "%ss",
   "gui.dirtrobes.excavation.exposed": "Fossil exposed: %s%%",
   "gui.dirtrobes.excavation.drill": "[1] Drill",
@@ -226,6 +226,7 @@
   "gui.dirtrobes.excavation.timeout": "Time's up: fossil pried out",
   "gui.dirtrobes.excavation.broken": "The fossil shattered…",
   "gui.dirtrobes.excavation.broken_detail": "You'll have to find another one.",
-  "gui.dirtrobes.excavation.result": "Final integrity: %s%%",
-  "gui.dirtrobes.excavation.done": "Finish"
+  "gui.dirtrobes.excavation.result": "Integrity %s%% → stats at %s%%",
+  "gui.dirtrobes.excavation.done": "Finish",
+  "message.dirtrobes.card.quality": "Fossil quality: stats at %s%%"
 }
