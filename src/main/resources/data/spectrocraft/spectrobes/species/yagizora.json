@@ -1,0 +1,12 @@
+{
+  "name": "Yagizora",
+  "property": "halo",
+  "stage": "evolved",
+  "family": "zora",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 87,
+    "attack": 92,
+    "defense": 89
+  }
+}

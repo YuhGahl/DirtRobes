@@ -1,0 +1,12 @@
+{
+  "name": "Pegatinum",
+  "property": "prisma",
+  "stage": "special",
+  "family": "pegatinum",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 106,
+    "attack": 115,
+    "defense": 107
+  }
+}

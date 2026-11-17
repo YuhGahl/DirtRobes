@@ -1,0 +1,14 @@
+{
+  "name": "Gejigen",
+  "property": "aurora",
+  "stage": "adult",
+  "family": "gejio",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 104,
+    "attack": 58,
+    "defense": 76
+  },
+  "evolves_into": "spectrocraft:gejigage",
+  "evolution_level": 30
+}

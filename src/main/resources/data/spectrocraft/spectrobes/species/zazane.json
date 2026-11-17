@@ -1,0 +1,14 @@
+{
+  "name": "Zazane",
+  "property": "corona",
+  "stage": "adult",
+  "family": "zaza",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 69,
+    "attack": 70,
+    "defense": 72
+  },
+  "evolves_into": "spectrocraft:zazanero",
+  "evolution_level": 30
+}

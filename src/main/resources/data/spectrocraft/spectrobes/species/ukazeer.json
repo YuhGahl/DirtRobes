@@ -1,0 +1,12 @@
+{
+  "name": "Ukazeer",
+  "property": "flash",
+  "stage": "evolved",
+  "family": "ukabi",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 99,
+    "attack": 107,
+    "defense": 98
+  }
+}

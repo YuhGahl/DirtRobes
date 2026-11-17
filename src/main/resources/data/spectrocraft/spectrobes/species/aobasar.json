@@ -1,0 +1,12 @@
+{
+  "name": "Aobasar",
+  "property": "halo",
+  "stage": "evolved",
+  "family": "aoi",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 98,
+    "attack": 87,
+    "defense": 105
+  }
+}

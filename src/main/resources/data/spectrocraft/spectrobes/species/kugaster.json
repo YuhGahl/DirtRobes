@@ -1,0 +1,12 @@
+{
+  "name": "Kugaster",
+  "property": "aurora",
+  "stage": "evolved",
+  "family": "kubaku",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 95,
+    "attack": 102,
+    "defense": 91
+  }
+}

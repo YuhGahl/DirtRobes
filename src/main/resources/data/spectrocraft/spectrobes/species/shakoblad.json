@@ -1,0 +1,12 @@
+{
+  "name": "Shakoblad",
+  "property": "flash",
+  "stage": "evolved",
+  "family": "shakin",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 98,
+    "attack": 91,
+    "defense": 89
+  }
+}

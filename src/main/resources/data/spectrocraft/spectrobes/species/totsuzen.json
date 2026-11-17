@@ -1,0 +1,12 @@
+{
+  "name": "Totsuzen",
+  "property": "corona",
+  "stage": "evolved",
+  "family": "zen",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 102,
+    "attack": 128,
+    "defense": 98
+  }
+}

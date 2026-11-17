@@ -1,0 +1,12 @@
+{
+  "name": "Optoger",
+  "property": "halo",
+  "stage": "secret",
+  "family": "optoger",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 107,
+    "attack": 120,
+    "defense": 113
+  }
+}

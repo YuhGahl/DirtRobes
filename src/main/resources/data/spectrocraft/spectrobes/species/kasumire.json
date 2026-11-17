@@ -1,0 +1,12 @@
+{
+  "name": "Kasumire",
+  "property": "flash",
+  "stage": "evolved",
+  "family": "kasumi",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 75,
+    "attack": 103,
+    "defense": 81
+  }
+}

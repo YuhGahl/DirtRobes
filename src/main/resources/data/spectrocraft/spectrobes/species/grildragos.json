@@ -1,0 +1,12 @@
+{
+  "name": "Grildragos",
+  "property": "aurora",
+  "stage": "evolved",
+  "family": "grilda",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 77,
+    "attack": 114,
+    "defense": 138
+  }
+}

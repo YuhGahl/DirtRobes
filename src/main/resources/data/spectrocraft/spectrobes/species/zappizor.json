@@ -1,0 +1,12 @@
+{
+  "name": "Zappizor",
+  "property": "halo",
+  "stage": "evolved",
+  "family": "zappi",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 102,
+    "attack": 113,
+    "defense": 101
+  }
+}

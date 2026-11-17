@@ -1,0 +1,12 @@
+{
+  "name": "Masetosu",
+  "property": "aurora",
+  "stage": "evolved",
+  "family": "masetto",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 101,
+    "attack": 118,
+    "defense": 88
+  }
+}

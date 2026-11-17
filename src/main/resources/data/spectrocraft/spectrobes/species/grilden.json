@@ -1,0 +1,14 @@
+{
+  "name": "Grilden",
+  "property": "aurora",
+  "stage": "adult",
+  "family": "grilda",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 90,
+    "attack": 98,
+    "defense": 80
+  },
+  "evolves_into": "spectrocraft:grildragos",
+  "evolution_level": 30
+}

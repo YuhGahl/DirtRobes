@@ -1,0 +1,12 @@
+{
+  "name": "Daidongu",
+  "property": "aurora",
+  "stage": "evolved",
+  "family": "dongu",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 102,
+    "attack": 113,
+    "defense": 101
+  }
+}

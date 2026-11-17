@@ -1,0 +1,12 @@
+{
+  "name": "Florami",
+  "property": "aurora",
+  "stage": "evolved",
+  "family": "hananomi",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 88,
+    "attack": 97,
+    "defense": 89
+  }
+}

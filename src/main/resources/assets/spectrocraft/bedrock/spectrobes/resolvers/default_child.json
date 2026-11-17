@@ -1,0 +1,8 @@
+{
+  "species": "default:child",
+  "model": "spectrocraft:placeholder_child",
+  "texture": "spectrocraft:textures/spectrobes/placeholder_child.png",
+  "emissive": "spectrocraft:textures/spectrobes/placeholder_child_emissive.png",
+  "poser": "spectrocraft:placeholder_child",
+  "tint": true
+}

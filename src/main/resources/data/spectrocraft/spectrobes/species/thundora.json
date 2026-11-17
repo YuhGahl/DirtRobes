@@ -1,0 +1,12 @@
+{
+  "name": "Thundora",
+  "property": "corona",
+  "stage": "secret",
+  "family": "thundora",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 104,
+    "attack": 112,
+    "defense": 106
+  }
+}

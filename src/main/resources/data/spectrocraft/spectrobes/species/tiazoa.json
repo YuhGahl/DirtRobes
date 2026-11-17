@@ -1,0 +1,14 @@
+{
+  "name": "Tiazoa",
+  "property": "flash",
+  "stage": "adult",
+  "family": "tamazoa",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 76,
+    "attack": 75,
+    "defense": 69
+  },
+  "evolves_into": "spectrocraft:gokazoa",
+  "evolution_level": 30
+}

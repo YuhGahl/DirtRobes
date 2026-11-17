@@ -1,0 +1,14 @@
+{
+  "name": "Totemoon",
+  "property": "halo",
+  "stage": "adult",
+  "family": "totemo",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 80,
+    "attack": 87,
+    "defense": 78
+  },
+  "evolves_into": "spectrocraft:totegarda",
+  "evolution_level": 30
+}

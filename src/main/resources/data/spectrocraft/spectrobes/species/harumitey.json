@@ -1,0 +1,12 @@
+{
+  "name": "Harumitey",
+  "property": "flash",
+  "stage": "evolved",
+  "family": "harumi",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 110,
+    "attack": 80,
+    "defense": 90
+  }
+}

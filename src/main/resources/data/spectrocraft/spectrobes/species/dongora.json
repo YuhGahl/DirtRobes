@@ -1,0 +1,14 @@
+{
+  "name": "Dongora",
+  "property": "eclipse",
+  "stage": "adult",
+  "family": "dongor",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 75,
+    "attack": 89,
+    "defense": 85
+  },
+  "evolves_into": "spectrocraft:dongiga",
+  "evolution_level": 30
+}

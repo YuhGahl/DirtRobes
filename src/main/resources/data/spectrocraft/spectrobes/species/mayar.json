@@ -1,0 +1,14 @@
+{
+  "name": "Mayar",
+  "property": "eclipse",
+  "stage": "child",
+  "family": "mayar",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 55,
+    "attack": 57,
+    "defense": 55
+  },
+  "evolves_into": "spectrocraft:mayarex",
+  "evolution_level": 10
+}

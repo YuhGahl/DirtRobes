@@ -1,0 +1,12 @@
+{
+  "name": "Flamerax",
+  "property": "corona",
+  "stage": "secret",
+  "family": "flamerax",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 107,
+    "attack": 113,
+    "defense": 111
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "Segulara",
+  "property": "aurora",
+  "stage": "evolved",
+  "family": "segu",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 76,
+    "attack": 70,
+    "defense": 110
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "Zuwakrid",
+  "property": "flash",
+  "stage": "evolved",
+  "family": "zuwa",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 98,
+    "attack": 105,
+    "defense": 111
+  }
+}

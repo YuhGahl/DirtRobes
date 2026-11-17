@@ -1,0 +1,12 @@
+{
+  "name": "Tekkadorax",
+  "property": "corona",
+  "stage": "evolved",
+  "family": "tekka",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 101,
+    "attack": 117,
+    "defense": 115
+  }
+}

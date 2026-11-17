@@ -1,0 +1,14 @@
+{
+  "name": "Dongu",
+  "property": "aurora",
+  "stage": "child",
+  "family": "dongu",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 57,
+    "attack": 62,
+    "defense": 53
+  },
+  "evolves_into": "spectrocraft:rapagu",
+  "evolution_level": 10
+}

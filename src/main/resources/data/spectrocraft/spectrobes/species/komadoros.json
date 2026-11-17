@@ -1,0 +1,12 @@
+{
+  "name": "Komadoros",
+  "property": "corona",
+  "stage": "evolved",
+  "family": "komainu",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 110,
+    "attack": 123,
+    "defense": 65
+  }
+}

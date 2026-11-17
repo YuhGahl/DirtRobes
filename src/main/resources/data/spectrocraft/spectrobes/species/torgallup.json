@@ -1,0 +1,12 @@
+{
+  "name": "Torgallup",
+  "property": "corona",
+  "stage": "evolved",
+  "family": "torga",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 101,
+    "attack": 108,
+    "defense": 89
+  }
+}

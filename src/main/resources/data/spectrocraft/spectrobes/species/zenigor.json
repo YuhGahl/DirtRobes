@@ -1,0 +1,14 @@
+{
+  "name": "Zenigor",
+  "property": "flash",
+  "stage": "adult",
+  "family": "zeni",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 80,
+    "attack": 85,
+    "defense": 86
+  },
+  "evolves_into": "spectrocraft:zenipyra",
+  "evolution_level": 30
+}

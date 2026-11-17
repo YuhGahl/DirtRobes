@@ -1,0 +1,12 @@
+{
+  "name": "Pagadori",
+  "property": "flash",
+  "stage": "evolved",
+  "family": "paga",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 85,
+    "attack": 72,
+    "defense": 86
+  }
+}

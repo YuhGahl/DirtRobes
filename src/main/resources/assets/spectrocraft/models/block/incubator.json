@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "spectrocraft:block/incubator_top",
+    "bottom": "spectrocraft:block/incubator_top",
+    "side": "spectrocraft:block/incubator_side"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "Vilanox",
+  "property": "corona",
+  "stage": "evolved",
+  "family": "vilar",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 75,
+    "attack": 125,
+    "defense": 95
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "Tekkadon",
+  "property": "corona",
+  "stage": "adult",
+  "family": "tekka",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 80,
+    "attack": 96,
+    "defense": 92
+  },
+  "evolves_into": "spectrocraft:tekkadorax",
+  "evolution_level": 30
+}

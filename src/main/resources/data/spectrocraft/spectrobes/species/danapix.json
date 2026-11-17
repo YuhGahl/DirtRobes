@@ -1,0 +1,14 @@
+{
+  "name": "Danapix",
+  "property": "corona",
+  "stage": "adult",
+  "family": "danawa",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 112,
+    "attack": 62,
+    "defense": 83
+  },
+  "evolves_into": "spectrocraft:danaphant",
+  "evolution_level": 30
+}

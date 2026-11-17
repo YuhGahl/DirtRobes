@@ -1,0 +1,12 @@
+{
+  "name": "Spikanor",
+  "property": "aurora",
+  "stage": "evolved",
+  "family": "spiko",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 88,
+    "attack": 107,
+    "defense": 122
+  }
+}

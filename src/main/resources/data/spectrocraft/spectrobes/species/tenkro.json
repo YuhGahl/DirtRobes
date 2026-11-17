@@ -1,0 +1,14 @@
+{
+  "name": "Tenkro",
+  "property": "corona",
+  "stage": "child",
+  "family": "tenkro",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 55,
+    "attack": 30,
+    "defense": 38
+  },
+  "evolves_into": "spectrocraft:senkro",
+  "evolution_level": 10
+}

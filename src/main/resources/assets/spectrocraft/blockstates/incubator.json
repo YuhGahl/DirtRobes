@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "active=false": {
+      "model": "spectrocraft:block/incubator"
+    },
+    "active=true": {
+      "model": "spectrocraft:block/incubator_on"
+    }
+  }
+}

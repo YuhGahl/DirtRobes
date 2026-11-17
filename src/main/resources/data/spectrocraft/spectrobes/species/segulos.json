@@ -1,0 +1,14 @@
+{
+  "name": "Segulos",
+  "property": "aurora",
+  "stage": "adult",
+  "family": "segu",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 61,
+    "attack": 63,
+    "defense": 80
+  },
+  "evolves_into": "spectrocraft:segulara",
+  "evolution_level": 30
+}

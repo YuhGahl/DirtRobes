@@ -1,0 +1,12 @@
+{
+  "name": "Shimadoros",
+  "property": "eclipse",
+  "stage": "evolved",
+  "family": "shimainu",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 102,
+    "attack": 110,
+    "defense": 104
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "species": "default:evolved",
+  "model": "spectrocraft:placeholder_adult",
+  "texture": "spectrocraft:textures/spectrobes/placeholder_adult.png",
+  "emissive": "spectrocraft:textures/spectrobes/placeholder_adult_emissive.png",
+  "poser": "spectrocraft:placeholder_adult",
+  "tint": true
+}

@@ -1,0 +1,14 @@
+{
+  "name": "Aoba",
+  "property": "halo",
+  "stage": "adult",
+  "family": "aoi",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 68,
+    "attack": 67,
+    "defense": 55
+  },
+  "evolves_into": "spectrocraft:aobasar",
+  "evolution_level": 30
+}

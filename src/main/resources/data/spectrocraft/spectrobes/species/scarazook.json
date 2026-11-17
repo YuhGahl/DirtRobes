@@ -1,0 +1,12 @@
+{
+  "name": "Scarazook",
+  "property": "eclipse",
+  "stage": "secret",
+  "family": "scarazook",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 110,
+    "attack": 126,
+    "defense": 122
+  }
+}

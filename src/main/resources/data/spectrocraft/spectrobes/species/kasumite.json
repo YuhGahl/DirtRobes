@@ -1,0 +1,14 @@
+{
+  "name": "Kasumite",
+  "property": "flash",
+  "stage": "adult",
+  "family": "kasumi",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 49,
+    "attack": 81,
+    "defense": 62
+  },
+  "evolves_into": "spectrocraft:kasumire",
+  "evolution_level": 30
+}

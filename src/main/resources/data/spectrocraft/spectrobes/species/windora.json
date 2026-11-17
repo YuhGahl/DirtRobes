@@ -1,0 +1,12 @@
+{
+  "name": "Windora",
+  "property": "aurora",
+  "stage": "secret",
+  "family": "windora",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 104,
+    "attack": 112,
+    "defense": 106
+  }
+}

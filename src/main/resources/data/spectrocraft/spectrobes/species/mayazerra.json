@@ -1,0 +1,12 @@
+{
+  "name": "Mayazerra",
+  "property": "eclipse",
+  "stage": "evolved",
+  "family": "mayar",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 88,
+    "attack": 100,
+    "defense": 98
+  }
+}

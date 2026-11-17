@@ -1,0 +1,12 @@
+{
+  "name": "Zenipyra",
+  "property": "flash",
+  "stage": "evolved",
+  "family": "zeni",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 101,
+    "attack": 118,
+    "defense": 108
+  }
+}

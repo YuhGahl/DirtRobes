@@ -1,0 +1,14 @@
+{
+  "name": "Hikodrake",
+  "property": "corona",
+  "stage": "adult",
+  "family": "hiko",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 69,
+    "attack": 86,
+    "defense": 72
+  },
+  "evolves_into": "spectrocraft:hikolossa",
+  "evolution_level": 30
+}

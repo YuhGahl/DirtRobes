@@ -1,0 +1,12 @@
+{
+  "name": "Gekikro",
+  "property": "corona",
+  "stage": "evolved",
+  "family": "tenkro",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 96,
+    "attack": 101,
+    "defense": 88
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:husk",
+    "minecraft:silverfish",
+    "minecraft:ravager",
+    "minecraft:zombie",
+    "minecraft:iron_golem"
+  ]
+}
