@@ -4,6 +4,7 @@ import com.dirtrobes.entity.StatCalc;
 import com.dirtrobes.excavation.ExcavationGame;
 import com.dirtrobes.network.ModNetwork;
 import com.dirtrobes.species.Property;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
@@ -62,8 +63,8 @@ public class ExcavationScreen extends Screen {
     @Override
     protected void init() {
         left = (width - GRID_W) / 2;
-        top = (height - GRID_H) / 2 + 8;
-        int by = top + GRID_H + 8;
+        top = Math.max(34, (height - (GRID_H + 30 + 56)) / 2 + 30);
+        int by = top + GRID_H + 18;
         drillButton = addRenderableWidget(Button.builder(Component.translatable("gui.dirtrobes.excavation.drill"), b -> tool = ExcavationGame.Tool.DRILL)
                 .bounds(left, by, 92, 20).build());
         chiselButton = addRenderableWidget(Button.builder(Component.translatable("gui.dirtrobes.excavation.chisel"), b -> tool = ExcavationGame.Tool.CHISEL)
@@ -75,9 +76,17 @@ public class ExcavationScreen extends Screen {
     }
 
     private void updateButtons() {
-        drillButton.active = tool != ExcavationGame.Tool.DRILL && !game.isOver();
-        chiselButton.active = tool != ExcavationGame.Tool.CHISEL && !game.isOver();
+        boolean playing = !game.isOver();
+        drillButton.active = playing;
+        chiselButton.active = playing;
+        drillButton.setMessage(toolLabel("gui.dirtrobes.excavation.drill", tool == ExcavationGame.Tool.DRILL));
+        chiselButton.setMessage(toolLabel("gui.dirtrobes.excavation.chisel", tool == ExcavationGame.Tool.CHISEL));
         doneButton.visible = game.isOver();
+    }
+
+    private static Component toolLabel(String key, boolean selected) {
+        Component name = Component.translatable(key);
+        return selected ? Component.literal("» ").append(name).append(" «").withStyle(ChatFormatting.YELLOW) : name;
     }
 
     @Override
@@ -198,6 +207,14 @@ public class ExcavationScreen extends Screen {
     // ------------------------------------------------------------------ rendu
 
     @Override
+    public void renderBackground(GuiGraphics g, int mouseX, int mouseY, float partialTick) {
+        super.renderBackground(g, mouseX, mouseY, partialTick);
+        // Cadre, dessiné sous les boutons
+        g.fill(left - 6, top - 30, left + GRID_W + 6, top + GRID_H + 54, 0xFF1B1611);
+        g.renderOutline(left - 6, top - 30, GRID_W + 12, GRID_H + 84, 0xFF000000 | game.property().color());
+    }
+
+    @Override
     public void render(GuiGraphics g, int mouseX, int mouseY, float partialTick) {
         super.render(g, mouseX, mouseY, partialTick);
         int ox = shake > 0 ? random.nextInt(3) - 1 : 0;
@@ -205,9 +222,6 @@ public class ExcavationScreen extends Screen {
         int gx = left + ox, gy = top + oy;
         int accent = 0xFF000000 | game.property().color();
 
-        // Cadre
-        g.fill(gx - 6, gy - 30, gx + GRID_W + 6, gy + GRID_H + 4, 0xFF1B1611);
-        g.renderOutline(gx - 6, gy - 30, GRID_W + 12, GRID_H + 34, accent);
 
         // En-tête : titre, intégrité, temps, avancement
         g.drawCenteredString(font, Component.translatable("gui.dirtrobes.excavation.header", fossilName), width / 2, gy - 26, 0xFFFFFFFF);
@@ -254,9 +268,12 @@ public class ExcavationScreen extends Screen {
 
         // Aide / outil courant
         Component hint = Component.translatable(tool == ExcavationGame.Tool.DRILL ? "gui.dirtrobes.excavation.drill_hint" : "gui.dirtrobes.excavation.chisel_hint");
-        g.drawCenteredString(font, hint, width / 2, top + GRID_H + 34, 0xFFBFB6A8);
         g.drawCenteredString(font, Component.translatable("gui.dirtrobes.excavation.exposed", Math.round(game.exposed() * 100)),
-                width / 2, top + GRID_H + 14, 0xFFFFFFFF);
+                width / 2, top + GRID_H + 5, 0xFFFFFFFF);
+        // l'outil actif est encadré de la couleur de la propriété
+        Button selected = tool == ExcavationGame.Tool.DRILL ? drillButton : chiselButton;
+        if (!game.isOver()) g.renderOutline(selected.getX() - 1, selected.getY() - 1, selected.getWidth() + 2, selected.getHeight() + 2, accent);
+        g.drawCenteredString(font, hint, width / 2, top + GRID_H + 42, 0xFFBFB6A8);
 
         // Résultat
         if (game.isOver()) {
