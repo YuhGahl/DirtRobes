@@ -33,7 +33,6 @@ import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
-import net.minecraft.world.entity.ai.goal.FollowOwnerGoal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
@@ -123,8 +122,8 @@ public class SpectrobeEntity extends TamableAnimal {
                 return canFight() && super.canContinueToUse();
             }
         });
-        this.goalSelector.addGoal(6, new FollowOwnerGoal(this, 1.1, 8.0f, 2.5f));
-        this.goalSelector.addGoal(8, new WaterAvoidingRandomStrollGoal(this, 0.8));
+        this.goalSelector.addGoal(6, new SpectrobeFollowOwnerGoal(this));
+        this.goalSelector.addGoal(8, new WaterAvoidingRandomStrollGoal(this, 0.6));
         this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Player.class, 8.0f));
         this.goalSelector.addGoal(10, new RandomLookAroundGoal(this));
 
@@ -560,7 +559,7 @@ public class SpectrobeEntity extends TamableAnimal {
     }
 
     // =====================================================================
-    // Pas de reproduction en v0.1
+    // Pas de reproduction pour l'instant
     // =====================================================================
 
     @Override

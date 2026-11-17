@@ -4,6 +4,7 @@ import com.mojang.blaze3d.platform.InputConstants;
 import com.dirtrobes.DirtRobes;
 import com.dirtrobes.client.model.ModelRepository;
 import com.dirtrobes.client.render.SpectrobeRenderer;
+import com.dirtrobes.client.screen.IncubatorScreen;
 import com.dirtrobes.network.ModNetwork;
 import com.dirtrobes.registry.ModRegistry;
 import net.minecraft.client.KeyMapping;
@@ -15,6 +16,7 @@ import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.lwjgl.glfw.GLFW;
@@ -28,6 +30,7 @@ public class DirtRobesClient {
         modBus.addListener(DirtRobesClient::onRenderers);
         modBus.addListener(DirtRobesClient::onReloadListeners);
         modBus.addListener(DirtRobesClient::onKeys);
+        modBus.addListener(DirtRobesClient::onMenuScreens);
         NeoForge.EVENT_BUS.addListener(DirtRobesClient::onClientTick);
     }
 
@@ -37,6 +40,10 @@ public class DirtRobesClient {
 
     private static void onReloadListeners(RegisterClientReloadListenersEvent event) {
         event.registerReloadListener(new ModelRepository());
+    }
+
+    private static void onMenuScreens(RegisterMenuScreensEvent event) {
+        event.register(ModRegistry.INCUBATOR_MENU.get(), IncubatorScreen::new);
     }
 
     private static void onKeys(RegisterKeyMappingsEvent event) {

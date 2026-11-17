@@ -1,8 +1,11 @@
 package com.dirtrobes.network;
 
 import com.dirtrobes.DirtRobes;
+import com.dirtrobes.block.IncubatorBlockEntity;
 import com.dirtrobes.entity.SpectrobeEntity;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
@@ -31,8 +34,35 @@ public final class ModNetwork {
         }
     }
 
+    /** Fin du mini-jeu de fouille : intégrité du fossile dégagé (0 = brisé). */
+    public record ExcavationResultPayload(BlockPos pos, int integrity) implements CustomPacketPayload {
+        public static final Type<ExcavationResultPayload> TYPE = new Type<>(DirtRobes.id("excavation_result"));
+        public static final StreamCodec<ByteBuf, ExcavationResultPayload> STREAM_CODEC = StreamCodec.composite(
+                BlockPos.STREAM_CODEC, ExcavationResultPayload::pos,
+                ByteBufCodecs.VAR_INT, ExcavationResultPayload::integrity,
+                ExcavationResultPayload::new);
+
+        @Override
+        public Type<? extends CustomPacketPayload> type() {
+            return TYPE;
+        }
+    }
+
     public static void register(RegisterPayloadHandlersEvent event) {
-        event.registrar("1").playToServer(SpecialAttackPayload.TYPE, SpecialAttackPayload.STREAM_CODEC, ModNetwork::handleSpecialAttack);
+        event.registrar("2")
+                .playToServer(SpecialAttackPayload.TYPE, SpecialAttackPayload.STREAM_CODEC, ModNetwork::handleSpecialAttack)
+                .playToServer(ExcavationResultPayload.TYPE, ExcavationResultPayload.STREAM_CODEC, ModNetwork::handleExcavation);
+    }
+
+    private static void handleExcavation(ExcavationResultPayload payload, IPayloadContext context) {
+        context.enqueueWork(() -> {
+            if (!(context.player() instanceof ServerPlayer player)) return;
+            BlockPos pos = payload.pos();
+            if (player.distanceToSqr(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5) > 8 * 8) return;
+            if (player.level().getBlockEntity(pos) instanceof IncubatorBlockEntity incubator) {
+                incubator.finishExcavation(player, Math.max(0, Math.min(100, payload.integrity())));
+            }
+        });
     }
 
     private static void handleSpecialAttack(SpecialAttackPayload payload, IPayloadContext context) {

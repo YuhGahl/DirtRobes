@@ -33,6 +33,9 @@ jobs:
           name: dirtrobes-jar
           path: build/libs/*.jar
 
+      - name: Tests en jeu (GameTest)
+        run: ./gradlew runGameTestServer --console=plain 2>&1 | tee gametest.log; exit ${PIPESTATUS[0]}
+
       - name: Test - démarrage d'un serveur avec le mod
         run: .github/scripts/server-smoke.sh
 
@@ -41,7 +44,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: server-log
-          path: server.log
+          path: |
+            server.log
+            gametest.log
           if-no-files-found: ignore
 
       - name: Publier la dernière version (Release « latest »)

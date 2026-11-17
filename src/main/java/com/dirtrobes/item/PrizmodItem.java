@@ -16,7 +16,7 @@ import net.minecraft.world.level.Level;
 import java.util.List;
 
 /**
- * Prizmod v0.1 :
+ * Prizmod (0.0.1-alpha) :
  * - clic droit sur un de ses Spectrobes : affiche sa fiche ;
  * - sneak + clic droit dessus : assis / suit ;
  * - clic droit dans le vide : rappelle tous ses Spectrobes (64 blocs).

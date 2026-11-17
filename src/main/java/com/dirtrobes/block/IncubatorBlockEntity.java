@@ -1,6 +1,8 @@
 package com.dirtrobes.block;
 
 import com.dirtrobes.entity.SpectrobeEntity;
+import com.dirtrobes.item.FossilItem;
+import com.dirtrobes.menu.IncubatorMenu;
 import com.dirtrobes.registry.ModRegistry;
 import com.dirtrobes.species.Property;
 import com.dirtrobes.species.Species;
@@ -14,7 +16,13 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -23,27 +31,100 @@ import net.minecraft.world.phys.Vec3;
 import javax.annotation.Nullable;
 import java.util.UUID;
 
-public class IncubatorBlockEntity extends BlockEntity {
+/**
+ * Incubateur : un emplacement pour un fossile. Le joueur dégage le fossile de sa gangue dans le
+ * mini-jeu de fouille ; si le fossile survit, l'éveil démarre et un Spectrobe enfant apparaît
+ * au bout de {@link #DURATION} ticks. Plus le fossile est intact, plus le Spectrobe est fort.
+ */
+public class IncubatorBlockEntity extends BlockEntity implements MenuProvider {
     public static final int DURATION = 400; // 20 secondes
+
+    private final SimpleContainer inventory = new SimpleContainer(1) {
+        @Override
+        public void setChanged() {
+            super.setChanged();
+            IncubatorBlockEntity.this.setChanged();
+        }
+
+        @Override
+        public boolean canPlaceItem(int slot, ItemStack stack) {
+            return stack.getItem() instanceof FossilItem;
+        }
+    };
+
+    /** Données synchronisées avec l'écran : 0 = progression, 1 = durée, 2 = intégrité du fossile en cours. */
+    private final ContainerData data = new ContainerData() {
+        @Override
+        public int get(int index) {
+            return switch (index) {
+                case 0 -> progress;
+                case 1 -> property == null ? 0 : DURATION;
+                case 2 -> integrity;
+                default -> 0;
+            };
+        }
+
+        @Override
+        public void set(int index, int value) {
+        }
+
+        @Override
+        public int getCount() {
+            return 3;
+        }
+    };
 
     @Nullable
     private Property property;
     @Nullable
     private UUID owner;
     private int progress;
+    private int integrity;
 
     public IncubatorBlockEntity(BlockPos pos, BlockState state) {
         super(ModRegistry.INCUBATOR_BE.get(), pos, state);
+    }
+
+    public SimpleContainer inventory() {
+        return inventory;
     }
 
     public boolean isBusy() {
         return property != null;
     }
 
-    public void start(Property property, Player player) {
+    /** Niveau de départ du Spectrobe selon l'état du fossile dégagé. */
+    public static int levelForIntegrity(int integrity) {
+        if (integrity >= 90) return 3;
+        if (integrity >= 60) return 2;
+        return 1;
+    }
+
+    /**
+     * Résultat du mini-jeu de fouille, validé côté serveur.
+     * @param integrity état du fossile (0 = brisé, 100 = intact)
+     */
+    public void finishExcavation(Player player, int integrity) {
+        if (isBusy() || level == null) return;
+        ItemStack stack = inventory.getItem(0);
+        if (!(stack.getItem() instanceof FossilItem fossil)) return;
+        Property p = fossil.property();
+        stack.shrink(1);
+        inventory.setChanged();
+        if (integrity <= 0) {
+            level.playSound(null, worldPosition, SoundEvents.DECORATED_POT_SHATTER, SoundSource.BLOCKS, 1.0f, 0.8f);
+            player.displayClientMessage(Component.translatable("message.dirtrobes.fossil_broken").withStyle(ChatFormatting.RED), false);
+            return;
+        }
+        start(p, player, Math.min(100, integrity));
+        player.displayClientMessage(Component.translatable("message.dirtrobes.incubator_start", Math.min(100, integrity)), true);
+    }
+
+    public void start(Property property, Player player, int integrity) {
         this.property = property;
         this.owner = player.getUUID();
         this.progress = 0;
+        this.integrity = integrity;
         if (level != null) {
             level.setBlock(worldPosition, getBlockState().setValue(IncubatorBlock.ACTIVE, true), 3);
             level.playSound(null, worldPosition, SoundEvents.BEACON_ACTIVATE, SoundSource.BLOCKS, 0.6f, 1.6f);
@@ -65,7 +146,7 @@ public class IncubatorBlockEntity extends BlockEntity {
         Player player = owner == null ? null : server.getPlayerByUUID(owner);
         Species species = property == null ? null : SpeciesManager.randomFossilSpecies(property, server.random);
         if (species != null) {
-            SpectrobeEntity.create(server, species, 1, player, Vec3.atBottomCenterOf(worldPosition.above()));
+            SpectrobeEntity.create(server, species, levelForIntegrity(integrity), player, Vec3.atBottomCenterOf(worldPosition.above()));
             server.sendParticles(ParticleTypes.TOTEM_OF_UNDYING, worldPosition.getX() + 0.5, worldPosition.getY() + 1.2, worldPosition.getZ() + 0.5,
                     40, 0.4, 0.5, 0.4, 0.25);
             server.playSound(null, worldPosition, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.BLOCKS, 1.0f, 1.0f);
@@ -79,22 +160,42 @@ public class IncubatorBlockEntity extends BlockEntity {
         property = null;
         owner = null;
         progress = 0;
+        integrity = 0;
         server.setBlock(worldPosition, getBlockState().setValue(IncubatorBlock.ACTIVE, false), 3);
     }
+
+    // ----- Interface -----
+
+    @Override
+    public Component getDisplayName() {
+        return Component.translatable("block.dirtrobes.incubator");
+    }
+
+    @Nullable
+    @Override
+    public AbstractContainerMenu createMenu(int containerId, Inventory playerInventory, Player player) {
+        return new IncubatorMenu(containerId, playerInventory, inventory, data, worldPosition);
+    }
+
+    // ----- Sauvegarde -----
 
     @Override
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.saveAdditional(tag, registries);
+        tag.put("Inventory", inventory.createTag(registries));
         if (property != null) tag.putString("Property", property.id());
         if (owner != null) tag.putUUID("Owner", owner);
         tag.putInt("Progress", progress);
+        tag.putInt("Integrity", integrity);
     }
 
     @Override
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.loadAdditional(tag, registries);
+        inventory.fromTag(tag.getList("Inventory", 10), registries);
         property = tag.contains("Property") ? Property.byId(tag.getString("Property")) : null;
         owner = tag.hasUUID("Owner") ? tag.getUUID("Owner") : null;
         progress = tag.getInt("Progress");
+        integrity = tag.contains("Integrity") ? tag.getInt("Integrity") : 50;
     }
 }

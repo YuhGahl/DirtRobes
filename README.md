@@ -1,4 +1,4 @@
-# DirtRobes 0.1.0 (NeoForge 1.21.1)
+# DirtRobes 0.0.1-alpha (NeoForge 1.21.1)
 
 Mod fan inspiré de Spectrobes, construit sur le modèle de Cobblemon : les espèces sont des fichiers
 JSON (datapack), les modèles et les animations sont au format Bedrock / Blockbench (resource pack),
@@ -13,12 +13,12 @@ gradlew build          (Windows : gradlew.bat build)
 ```
 
 Le premier lancement télécharge Minecraft, NeoForge 21.1.266 et Gradle : ça prend quelques minutes.
-Le fichier du mod arrive dans `build/libs/dirtrobes-0.1.0.jar`. Il suffit de le copier dans le dossier
+Le fichier du mod arrive dans `build/libs/dirtrobes-0.0.1-alpha.jar`. Il suffit de le copier dans le dossier
 `mods` d'une instance NeoForge 1.21.1 (par exemple l'instance Cobblemon).
 
 Pour tester sans installer : `gradlew runClient`.
 
-## Contenu de la v0.1
+## Contenu de la 0.0.1-alpha
 
 - **144 Spectrobes** (jeu DS + Origins), avec les stats et propriétés du document de conception.
 - **6 propriétés** : Corona > Aurora > Eclipse > Halo > Flash > Corona, Prisma neutre (×1,5 / ×0,67).

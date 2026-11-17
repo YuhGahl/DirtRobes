@@ -1,14 +1,12 @@
 package com.dirtrobes.block;
 
 import com.mojang.serialization.MapCodec;
-import com.dirtrobes.item.FossilItem;
 import com.dirtrobes.registry.ModRegistry;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.Containers;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
@@ -23,7 +21,10 @@ import net.minecraft.world.phys.BlockHitResult;
 
 import javax.annotation.Nullable;
 
-/** Incubateur : on y dépose un fossile, il éclot après un délai et donne un Spectrobe enfant apprivoisé. */
+/**
+ * Incubateur : on y dépose un fossile, on le dégage dans le mini-jeu de fouille,
+ * puis il s'éveille en Spectrobe enfant.
+ */
 public class IncubatorBlock extends BaseEntityBlock {
     public static final MapCodec<IncubatorBlock> CODEC = simpleCodec(IncubatorBlock::new);
     public static final BooleanProperty ACTIVE = BooleanProperty.create("active");
@@ -55,20 +56,20 @@ public class IncubatorBlock extends BaseEntityBlock {
     }
 
     @Override
-    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player,
-                                              InteractionHand hand, BlockHitResult hit) {
-        if (!(stack.getItem() instanceof FossilItem fossil)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
-        if (level.isClientSide) return ItemInteractionResult.SUCCESS;
-        if (level.getBlockEntity(pos) instanceof IncubatorBlockEntity incubator) {
-            if (incubator.isBusy()) {
-                player.displayClientMessage(Component.translatable("message.dirtrobes.incubator_busy"), true);
-                return ItemInteractionResult.CONSUME;
-            }
-            incubator.start(fossil.property(), player);
-            if (!player.getAbilities().instabuild) stack.shrink(1);
-            player.displayClientMessage(Component.translatable("message.dirtrobes.incubator_start"), true);
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
+        if (level.isClientSide) return InteractionResult.SUCCESS;
+        if (player instanceof ServerPlayer serverPlayer && level.getBlockEntity(pos) instanceof IncubatorBlockEntity incubator) {
+            serverPlayer.openMenu(incubator, buf -> buf.writeBlockPos(pos));
         }
-        return ItemInteractionResult.CONSUME;
+        return InteractionResult.CONSUME;
+    }
+
+    @Override
+    protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
+        if (!state.is(newState.getBlock()) && level.getBlockEntity(pos) instanceof IncubatorBlockEntity incubator) {
+            Containers.dropContents(level, pos, incubator.inventory());
+        }
+        super.onRemove(state, level, pos, newState, movedByPiston);
     }
 
     @Nullable
