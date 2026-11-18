@@ -123,6 +123,8 @@ public class DirtRobesGameTests {
         Species adult = SpeciesManager.all().stream().filter(s -> s.stage() == Stage.ADULT).findFirst().orElseThrow();
         SpectrobeEntity perfect = SpectrobeEntity.create(helper.getLevel(), adult, 50, 100, player, helper.absoluteVec(new Vec3(4.5, 1, 4.5)));
         SpectrobeEntity damaged = SpectrobeEntity.create(helper.getLevel(), adult, 50, 50, player, helper.absoluteVec(new Vec3(15.5, 1, 15.5)));
+        perfect.setNature(Nature.BALANCED);
+        damaged.setNature(Nature.BALANCED);
         log("Stats à 100 % : PV {} ATQ {} DÉF {} · à 50 % : PV {} ATQ {} DÉF {}", perfect.hpStat(), perfect.attackStat(), perfect.defenseStat(),
                 damaged.hpStat(), damaged.attackStat(), damaged.defenseStat());
         helper.assertTrue(Math.abs(damaged.attackStat() * 2 - perfect.attackStat()) <= 1, "L'ATQ à 50 % devrait être la moitié de l'ATQ à 100 %");
