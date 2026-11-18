@@ -105,6 +105,49 @@
           "name": "dirtrobes:halo_fossil"
         }
       ]
+    },
+    {
+      "rolls": 1,
+      "conditions": [
+        {
+          "condition": "minecraft:random_chance",
+          "chance": 0.25
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "dirtrobes:ruby"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "dirtrobes:sapphire"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "dirtrobes:emerald"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "dirtrobes:topaz"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "dirtrobes:onyx"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "dirtrobes:opal"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "dirtrobes:pearl"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "dirtrobes:graphite"
+        }
+      ]
     }
   ]
 }

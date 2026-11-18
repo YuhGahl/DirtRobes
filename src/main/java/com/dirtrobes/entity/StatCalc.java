@@ -50,6 +50,16 @@ public final class StatCalc {
         return 1.0 + atkStat * 0.06;
     }
 
+    /** Vitesse de déplacement Minecraft (0,22 à 0,40 ; le loup est à 0,30). */
+    public static double toMovementSpeed(int spdStat) {
+        return Math.min(0.40, 0.22 + spdStat * 0.0006);
+    }
+
+    /** Applique la nature (+10 % / −10 %) à une stat. */
+    public static int applyNature(int stat, com.dirtrobes.species.Nature nature, com.dirtrobes.item.MineralItem.Stat which) {
+        return Math.max(1, (int) Math.floor(stat * nature.multiplier(which)));
+    }
+
     public static double toArmor(int defStat) {
         return Math.min(20.0, defStat * 0.08);
     }

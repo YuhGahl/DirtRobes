@@ -7,7 +7,8 @@
   "base_stats": {
     "hp": 41,
     "attack": 67,
-    "defense": 51
+    "defense": 51,
+    "speed": 78
   },
   "evolves_into": "dirtrobes:mossax",
   "evolution_level": 30

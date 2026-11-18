@@ -7,7 +7,8 @@
   "base_stats": {
     "hp": 58,
     "attack": 49,
-    "defense": 67
+    "defense": 67,
+    "speed": 61
   },
   "evolves_into": "dirtrobes:maserobo",
   "evolution_level": 10

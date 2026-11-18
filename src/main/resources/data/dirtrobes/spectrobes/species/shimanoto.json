@@ -7,7 +7,8 @@
   "base_stats": {
     "hp": 80,
     "attack": 86,
-    "defense": 79
+    "defense": 79,
+    "speed": 74
   },
   "evolves_into": "dirtrobes:shimadoros",
   "evolution_level": 30

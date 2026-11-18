@@ -7,7 +7,8 @@
   "base_stats": {
     "hp": 55,
     "attack": 30,
-    "defense": 38
+    "defense": 38,
+    "speed": 66
   },
   "evolves_into": "dirtrobes:senkro",
   "evolution_level": 10

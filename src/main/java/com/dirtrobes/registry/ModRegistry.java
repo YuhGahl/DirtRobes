@@ -5,6 +5,7 @@ import com.dirtrobes.block.IncubatorBlock;
 import com.dirtrobes.block.IncubatorBlockEntity;
 import com.dirtrobes.entity.SpectrobeEntity;
 import com.dirtrobes.item.FossilItem;
+import com.dirtrobes.item.GemItem;
 import com.dirtrobes.krawl.KrawlEntity;
 import com.dirtrobes.krawl.VortexBlock;
 import com.dirtrobes.krawl.VortexBlockEntity;
@@ -90,6 +91,24 @@ public final class ModRegistry {
     // ---------- Objets ----------
     public static final DeferredItem<BlockItem> FOSSIL_STONE_ITEM = ITEMS.registerSimpleBlockItem("fossil_stone", FOSSIL_STONE);
     public static final DeferredItem<BlockItem> DEEPSLATE_FOSSIL_STONE_ITEM = ITEMS.registerSimpleBlockItem("deepslate_fossil_stone", DEEPSLATE_FOSSIL_STONE);
+    public static final DeferredItem<GemItem> RUBY = ITEMS.registerItem("ruby",
+            props -> new GemItem(MineralItem.Stat.POWER, true, props), new Item.Properties());
+    public static final DeferredItem<GemItem> SAPPHIRE = ITEMS.registerItem("sapphire",
+            props -> new GemItem(MineralItem.Stat.DEFENCE, true, props), new Item.Properties());
+    public static final DeferredItem<GemItem> EMERALD = ITEMS.registerItem("emerald",
+            props -> new GemItem(MineralItem.Stat.HEALTH, true, props), new Item.Properties());
+    public static final DeferredItem<GemItem> TOPAZ = ITEMS.registerItem("topaz",
+            props -> new GemItem(MineralItem.Stat.SPEED, true, props), new Item.Properties());
+    public static final DeferredItem<GemItem> ONYX = ITEMS.registerItem("onyx",
+            props -> new GemItem(MineralItem.Stat.POWER, false, props), new Item.Properties());
+    public static final DeferredItem<GemItem> OPAL = ITEMS.registerItem("opal",
+            props -> new GemItem(MineralItem.Stat.DEFENCE, false, props), new Item.Properties());
+    public static final DeferredItem<GemItem> PEARL = ITEMS.registerItem("pearl",
+            props -> new GemItem(MineralItem.Stat.HEALTH, false, props), new Item.Properties());
+    public static final DeferredItem<GemItem> GRAPHITE = ITEMS.registerItem("graphite",
+            props -> new GemItem(MineralItem.Stat.SPEED, false, props), new Item.Properties());
+    public static final List<DeferredItem<GemItem>> GEMS = List.of(RUBY, SAPPHIRE, EMERALD, TOPAZ, ONYX, OPAL, PEARL, GRAPHITE);
+
     public static final DeferredItem<BlockItem> MINERAL_DEPOSIT_ITEM = ITEMS.registerSimpleBlockItem("mineral_deposit", MINERAL_DEPOSIT);
     public static final DeferredItem<BlockItem> DEEPSLATE_MINERAL_DEPOSIT_ITEM = ITEMS.registerSimpleBlockItem("deepslate_mineral_deposit", DEEPSLATE_MINERAL_DEPOSIT);
     public static final DeferredItem<BlockItem> INCUBATOR_ITEM = ITEMS.registerSimpleBlockItem("incubator", INCUBATOR);
@@ -128,6 +147,7 @@ public final class ModRegistry {
                 output.accept(MINERAL_DEPOSIT_ITEM.get());
                 output.accept(DEEPSLATE_MINERAL_DEPOSIT_ITEM.get());
                 output.accept(VORTEX_ITEM.get());
+                GEMS.forEach(g -> output.accept(g.get()));
                 output.accept(KRAWL_SPAWN_EGG.get());
                 FOSSILS.values().forEach(f -> output.accept(f.get()));
                 MINERALS.forEach(m -> output.accept(m.get()));

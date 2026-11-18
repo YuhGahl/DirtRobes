@@ -20,7 +20,7 @@ import java.util.Locale;
  */
 public class MineralItem extends Item {
     public enum Stat {
-        POWER, DEFENCE, HEALTH;
+        POWER, DEFENCE, HEALTH, SPEED;
 
         public String id() {
             return name().toLowerCase(Locale.ROOT);

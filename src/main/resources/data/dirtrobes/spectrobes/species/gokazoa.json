@@ -7,6 +7,7 @@
   "base_stats": {
     "hp": 93,
     "attack": 92,
-    "defense": 84
+    "defense": 84,
+    "speed": 74
   }
 }

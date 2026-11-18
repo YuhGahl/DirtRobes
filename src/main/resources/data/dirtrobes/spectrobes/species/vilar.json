@@ -7,7 +7,8 @@
   "base_stats": {
     "hp": 45,
     "attack": 70,
-    "defense": 55
+    "defense": 55,
+    "speed": 78
   },
   "evolves_into": "dirtrobes:vilamasta",
   "evolution_level": 10

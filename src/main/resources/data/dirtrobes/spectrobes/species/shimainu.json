@@ -7,7 +7,8 @@
   "base_stats": {
     "hp": 57,
     "attack": 62,
-    "defense": 55
+    "defense": 55,
+    "speed": 74
   },
   "evolves_into": "dirtrobes:shimanoto",
   "evolution_level": 10

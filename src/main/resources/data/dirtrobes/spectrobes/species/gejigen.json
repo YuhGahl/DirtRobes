@@ -7,7 +7,8 @@
   "base_stats": {
     "hp": 104,
     "attack": 58,
-    "defense": 76
+    "defense": 76,
+    "speed": 61
   },
   "evolves_into": "dirtrobes:gejigage",
   "evolution_level": 30

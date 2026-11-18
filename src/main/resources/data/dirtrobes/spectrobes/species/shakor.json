@@ -7,7 +7,8 @@
   "base_stats": {
     "hp": 75,
     "attack": 72,
-    "defense": 72
+    "defense": 72,
+    "speed": 70
   },
   "evolves_into": "dirtrobes:shakoblad",
   "evolution_level": 30

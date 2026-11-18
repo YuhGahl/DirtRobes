@@ -7,7 +7,8 @@
   "base_stats": {
     "hp": 69,
     "attack": 50,
-    "defense": 72
+    "defense": 72,
+    "speed": 59
   },
   "evolves_into": "dirtrobes:pagadori",
   "evolution_level": 30

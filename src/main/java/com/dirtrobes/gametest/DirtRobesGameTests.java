@@ -15,7 +15,10 @@ import com.dirtrobes.registry.ModRegistry;
 import com.dirtrobes.species.Property;
 import com.dirtrobes.species.Species;
 import com.dirtrobes.species.SpeciesManager;
+import com.dirtrobes.species.Nature;
 import com.dirtrobes.species.Stage;
+import com.dirtrobes.item.MineralItem;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
@@ -260,6 +263,44 @@ public class DirtRobesGameTests {
         helper.assertTrue(leader.isLeader(), "Otorso devrait être un chef");
         helper.assertTrue(!PrizmodTeam.toggle(player, 0), "Impossible de ranger un Spectrobe près d'un chef");
         helper.succeedWhen(() -> helper.assertTrue(minion.hasEffect(MobEffects.DAMAGE_BOOST), "Le Krawl proche du chef devrait être renforcé"));
+    }
+
+    /** Vitesse : la stat VIT règle la vitesse de déplacement ; une nature +VIT la monte de 10 %. */
+    @GameTest(template = "platform")
+    public static void speedAndNatures(GameTestHelper helper) {
+        ServerPlayer player = placePlayer(helper, 10.5, 10.5);
+        Species adult = SpeciesManager.all().stream().filter(s -> s.stage() == Stage.ADULT).findFirst().orElseThrow();
+        SpectrobeEntity neutral = SpectrobeEntity.create(helper.getLevel(), adult, 50, player, helper.absoluteVec(new Vec3(4.5, 1, 4.5)));
+        SpectrobeEntity nimble = SpectrobeEntity.create(helper.getLevel(), adult, 50, player, helper.absoluteVec(new Vec3(15.5, 1, 4.5)));
+        neutral.setNature(Nature.BALANCED);
+        nimble.setNature(Nature.NIMBLE);
+        log("{} niv. 50 : VIT {} (neutre) / {} (Agile), ATQ {} / {}, vitesse MC {} / {}", adult.name(), neutral.speedStat(), nimble.speedStat(),
+                neutral.attackStat(), nimble.attackStat(),
+                String.format("%.3f", neutral.getAttributeValue(Attributes.MOVEMENT_SPEED)), String.format("%.3f", nimble.getAttributeValue(Attributes.MOVEMENT_SPEED)));
+        helper.assertTrue(nimble.speedStat() == (int) Math.floor(neutral.speedStat() * 1.1), "Agile : VIT +10 % attendue");
+        helper.assertTrue(nimble.attackStat() == (int) Math.floor(neutral.attackStat() * 0.9), "Agile : ATQ −10 % attendue");
+        helper.assertTrue(nimble.getAttributeValue(Attributes.MOVEMENT_SPEED) > neutral.getAttributeValue(Attributes.MOVEMENT_SPEED),
+                "Plus de VIT devrait donner plus de vitesse de déplacement");
+        helper.succeed();
+    }
+
+    /** Gemmes : Topaze monte les EV de VIT, Graphite les baisse, sans passer sous 0. */
+    @GameTest(template = "platform")
+    public static void gemsRaiseAndLowerEvs(GameTestHelper helper) {
+        ServerPlayer player = placePlayer(helper, 10.5, 10.5);
+        Species adult = SpeciesManager.all().stream().filter(s -> s.stage() == Stage.ADULT).findFirst().orElseThrow();
+        SpectrobeEntity s = SpectrobeEntity.create(helper.getLevel(), adult, 30, player, helper.absoluteVec(new Vec3(4.5, 1, 4.5)));
+        int spd0 = s.speedStat();
+        s.feedGem(ModRegistry.TOPAZ.get(), player);
+        s.feedGem(ModRegistry.TOPAZ.get(), player);
+        helper.assertTrue(s.getEv(MineralItem.Stat.SPEED) == 40, "2 Topazes : 40 EV VIT attendus, " + s.getEv(MineralItem.Stat.SPEED));
+        helper.assertTrue(s.speedStat() > spd0, "La VIT aurait dû monter");
+        s.feedGem(ModRegistry.GRAPHITE.get(), player);
+        helper.assertTrue(s.getEv(MineralItem.Stat.SPEED) == 20, "Graphite : retour à 20 EV VIT, " + s.getEv(MineralItem.Stat.SPEED));
+        s.feedGem(ModRegistry.GRAPHITE.get(), player);
+        s.feedGem(ModRegistry.GRAPHITE.get(), player);
+        helper.assertTrue(s.getEv(MineralItem.Stat.SPEED) == 0, "Les EV ne passent pas sous 0");
+        helper.succeed();
     }
 
     /** Logique du mini-jeu de fouille. */

@@ -7,7 +7,8 @@
   "base_stats": {
     "hp": 38,
     "attack": 47,
-    "defense": 35
+    "defense": 35,
+    "speed": 76
   },
   "evolves_into": "dirtrobes:aoba",
   "evolution_level": 10

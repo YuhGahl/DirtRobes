@@ -22,6 +22,7 @@ public record Species(
         int baseHp,
         int baseAttack,
         int baseDefense,
+        int baseSpeed,
         float scale,
         boolean fromFossil
 ) {
@@ -41,9 +42,15 @@ public record Species(
                 GsonHelper.getAsInt(stats, "hp", 50),
                 GsonHelper.getAsInt(stats, "attack", 50),
                 GsonHelper.getAsInt(stats, "defense", 50),
+                GsonHelper.getAsInt(stats, "speed", defaultSpeed(GsonHelper.getAsInt(stats, "attack", 50), GsonHelper.getAsInt(stats, "defense", 50))),
                 GsonHelper.getAsFloat(json, "scale", stage.scale()),
                 GsonHelper.getAsBoolean(json, "from_fossil", stage == Stage.CHILD)
         );
+    }
+
+    /** Vitesse par défaut si la fiche n'en donne pas : les attaquants sont rapides, les blindés lents. */
+    public static int defaultSpeed(int attack, int defense) {
+        return Math.max(20, Math.round((attack + Math.max(20, 140 - defense)) / 2f));
     }
 
     public String translationKey() {
