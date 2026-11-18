@@ -50,9 +50,12 @@ public final class StatCalc {
         return 1.0 + atkStat * 0.06;
     }
 
-    /** Vitesse de déplacement Minecraft (0,22 à 0,40 ; le loup est à 0,30). */
+    /**
+     * Vitesse de déplacement Minecraft : 0,20 + VIT × 0,0012, plafonnée à 0,42 (le loup est à 0,30).
+     * Ex. VIT 40 → 0,25 ; VIT 90 → 0,31 ; VIT 150 → 0,38.
+     */
     public static double toMovementSpeed(int spdStat) {
-        return Math.min(0.40, 0.22 + spdStat * 0.0006);
+        return Math.min(0.42, 0.20 + spdStat * 0.0012);
     }
 
     /** Applique la nature (+10 % / −10 %) à une stat. */
