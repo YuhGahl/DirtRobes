@@ -125,7 +125,7 @@
         },
         {
           "type": "minecraft:item",
-          "name": "dirtrobes:emerald"
+          "name": "dirtrobes:peridot"
         },
         {
           "type": "minecraft:item",
@@ -160,11 +160,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "dirtrobes:quartz"
+          "name": "dirtrobes:selenite"
         },
         {
           "type": "minecraft:item",
-          "name": "dirtrobes:diamond"
+          "name": "dirtrobes:moissanite"
         },
         {
           "type": "minecraft:item",
@@ -184,7 +184,7 @@
         },
         {
           "type": "minecraft:item",
-          "name": "dirtrobes:coral"
+          "name": "dirtrobes:rhodonite"
         },
         {
           "type": "minecraft:item",
@@ -204,7 +204,7 @@
         },
         {
           "type": "minecraft:item",
-          "name": "dirtrobes:lazuli"
+          "name": "dirtrobes:sodalite"
         },
         {
           "type": "minecraft:item",

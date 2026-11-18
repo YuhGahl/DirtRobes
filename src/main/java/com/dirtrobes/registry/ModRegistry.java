@@ -97,7 +97,7 @@ public final class ModRegistry {
             props -> new GemItem(MineralItem.Stat.POWER, true, props), new Item.Properties());
     public static final DeferredItem<GemItem> SAPPHIRE = ITEMS.registerItem("sapphire",
             props -> new GemItem(MineralItem.Stat.DEFENCE, true, props), new Item.Properties());
-    public static final DeferredItem<GemItem> EMERALD = ITEMS.registerItem("emerald",
+    public static final DeferredItem<GemItem> PERIDOT = ITEMS.registerItem("peridot",
             props -> new GemItem(MineralItem.Stat.HEALTH, true, props), new Item.Properties());
     public static final DeferredItem<GemItem> TOPAZ = ITEMS.registerItem("topaz",
             props -> new GemItem(MineralItem.Stat.SPEED, true, props), new Item.Properties());
@@ -109,11 +109,11 @@ public final class ModRegistry {
             props -> new GemItem(MineralItem.Stat.HEALTH, false, props), new Item.Properties());
     public static final DeferredItem<GemItem> GRAPHITE = ITEMS.registerItem("graphite",
             props -> new GemItem(MineralItem.Stat.SPEED, false, props), new Item.Properties());
-    public static final List<DeferredItem<GemItem>> GEMS = List.of(RUBY, SAPPHIRE, EMERALD, TOPAZ, ONYX, OPAL, PEARL, GRAPHITE);
+    public static final List<DeferredItem<GemItem>> GEMS = List.of(RUBY, SAPPHIRE, PERIDOT, TOPAZ, ONYX, OPAL, PEARL, GRAPHITE);
 
-    public static final DeferredItem<NatureGemItem> QUARTZ = ITEMS.registerItem("quartz",
+    public static final DeferredItem<NatureGemItem> SELENITE = ITEMS.registerItem("selenite",
             props -> new NatureGemItem(Nature.BALANCED, props), new Item.Properties());
-    public static final DeferredItem<NatureGemItem> DIAMOND = ITEMS.registerItem("diamond",
+    public static final DeferredItem<NatureGemItem> MOISSANITE = ITEMS.registerItem("moissanite",
             props -> new NatureGemItem(Nature.STEADY, props), new Item.Properties());
     public static final DeferredItem<NatureGemItem> PLATINUM = ITEMS.registerItem("platinum",
             props -> new NatureGemItem(Nature.COMPOSED, props), new Item.Properties());
@@ -123,7 +123,7 @@ public final class ModRegistry {
             props -> new NatureGemItem(Nature.PEACEFUL, props), new Item.Properties());
     public static final DeferredItem<NatureGemItem> AMBER = ITEMS.registerItem("amber",
             props -> new NatureGemItem(Nature.ENDURING, props), new Item.Properties());
-    public static final DeferredItem<NatureGemItem> CORAL = ITEMS.registerItem("coral",
+    public static final DeferredItem<NatureGemItem> RHODONITE = ITEMS.registerItem("rhodonite",
             props -> new NatureGemItem(Nature.PLACID, props), new Item.Properties());
     public static final DeferredItem<NatureGemItem> GARNET = ITEMS.registerItem("garnet",
             props -> new NatureGemItem(Nature.RECKLESS, props), new Item.Properties());
@@ -133,7 +133,7 @@ public final class ModRegistry {
             props -> new NatureGemItem(Nature.HULKING, props), new Item.Properties());
     public static final DeferredItem<NatureGemItem> COBALT = ITEMS.registerItem("cobalt",
             props -> new NatureGemItem(Nature.WARY, props), new Item.Properties());
-    public static final DeferredItem<NatureGemItem> LAZULI = ITEMS.registerItem("lazuli",
+    public static final DeferredItem<NatureGemItem> SODALITE = ITEMS.registerItem("sodalite",
             props -> new NatureGemItem(Nature.RESERVED, props), new Item.Properties());
     public static final DeferredItem<NatureGemItem> AZURITE = ITEMS.registerItem("azurite",
             props -> new NatureGemItem(Nature.UNSHAKABLE, props), new Item.Properties());
@@ -143,7 +143,7 @@ public final class ModRegistry {
             props -> new NatureGemItem(Nature.NIMBLE, props), new Item.Properties());
     public static final DeferredItem<NatureGemItem> CITRINE = ITEMS.registerItem("citrine",
             props -> new NatureGemItem(Nature.LIVELY, props), new Item.Properties());
-    public static final List<DeferredItem<NatureGemItem>> NATURE_GEMS = List.of(QUARTZ, DIAMOND, PLATINUM, ZIRCON, JADE, AMBER, CORAL, GARNET, SPINAL, AGATE, COBALT, LAZULI, AZURITE, FLUORITE, SYLVITE, CITRINE);
+    public static final List<DeferredItem<NatureGemItem>> NATURE_GEMS = List.of(SELENITE, MOISSANITE, PLATINUM, ZIRCON, JADE, AMBER, RHODONITE, GARNET, SPINAL, AGATE, COBALT, SODALITE, AZURITE, FLUORITE, SYLVITE, CITRINE);
 
     public static final DeferredItem<BlockItem> MINERAL_DEPOSIT_ITEM = ITEMS.registerSimpleBlockItem("mineral_deposit", MINERAL_DEPOSIT);
     public static final DeferredItem<BlockItem> DEEPSLATE_MINERAL_DEPOSIT_ITEM = ITEMS.registerSimpleBlockItem("deepslate_mineral_deposit", DEEPSLATE_MINERAL_DEPOSIT);
