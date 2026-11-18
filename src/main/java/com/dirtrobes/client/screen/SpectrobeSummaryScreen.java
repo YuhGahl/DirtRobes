@@ -211,6 +211,10 @@ public class SpectrobeSummaryScreen extends Screen {
         g.drawString(font, Component.translatable("gui.dirtrobes.summary.xp_next", Math.max(0, m.xpNextLevel() - m.xp())), x + 70, y + 102, 0xFFB8C4D0, false);
     }
 
+    private static String pct(float f) {
+        return "+" + Math.round(f * 100) + "%";
+    }
+
     private MutableComponent natureText(Nature n) {
         MutableComponent c = Component.translatable(n.translationKey());
         if (n.raised == null) return c.append(Component.literal(" (")).append(Component.translatable("gui.dirtrobes.summary.neutral")).append(")");
@@ -257,6 +261,11 @@ public class SpectrobeSummaryScreen extends Screen {
             GuiDraw.bar(g, ex, yy + 10, 76, 5, evs[i] / (float) StatCalc.MAX_EV_PER_STAT, 0xFFE8E8F0, 0xFF0D1117);
         }
         g.drawString(font, Component.translatable("gui.dirtrobes.summary.legend"), x, y + H - 76, 0xFF6F8294, false);
+        com.dirtrobes.combat.Support sup = ClientTeam.support();
+        Component supText = !m.out() ? Component.translatable("gui.dirtrobes.summary.support_giver")
+                : sup.isEmpty() ? Component.translatable("gui.dirtrobes.summary.support_none")
+                : Component.translatable("gui.dirtrobes.summary.support", pct(sup.atk()), pct(sup.def()), pct(sup.spd()), pct(sup.hp()), pct(sup.ch()));
+        g.drawString(font, supText, x, y + H - 64, 0xFFB58CFF, false);
     }
 
     private void renderEvolution(GuiGraphics g, TeamSummary m, int x, int y) {

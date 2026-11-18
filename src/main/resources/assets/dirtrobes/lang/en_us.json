@@ -320,7 +320,7 @@
   "key.dirtrobes.team_down": "Team: next Spectrobe",
   "key.dirtrobes.team_toggle": "Team: send out / store",
   "key.dirtrobes.team_summary": "Team: open summary",
-  "gui.dirtrobes.hud.keys": "↑↓ select · V send · N summary · J move",
+  "gui.dirtrobes.hud.keys": "↑↓ select · V send · N summary · G combo · J move",
   "gui.dirtrobes.summary.title": "Spectrobe summary",
   "gui.dirtrobes.summary.tab.info": "Info",
   "gui.dirtrobes.summary.tab.stats": "Stats",
@@ -351,5 +351,12 @@
   "chroma.dirtrobes.2": "special 2",
   "tooltip.dirtrobes.chroma": "Gives the Spectrobe its %s colour",
   "message.dirtrobes.chroma_changed": "%s takes on its %s colour!",
-  "message.dirtrobes.chroma_same": "%s already has this colour."
+  "message.dirtrobes.chroma_same": "%s already has this colour.",
+  "key.dirtrobes.combo": "Combo attack (40 CH)",
+  "message.dirtrobes.combo_need_two": "You need 2 adult Spectrobes out for a combo.",
+  "message.dirtrobes.combo": "Combo: %s and %s strike together!",
+  "message.dirtrobes.combo_resonance": "Resonance combo: %s and %s!",
+  "gui.dirtrobes.summary.support": "Support: ATK %s · DEF %s · SPD %s · HP %s · CH %s",
+  "gui.dirtrobes.summary.support_none": "Support: none (store Spectrobes to get some)",
+  "gui.dirtrobes.summary.support_giver": "Stored: supports the Spectrobes that are out."
 }

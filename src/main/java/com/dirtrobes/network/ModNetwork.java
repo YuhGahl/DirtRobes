@@ -3,6 +3,8 @@ package com.dirtrobes.network;
 import com.dirtrobes.DirtRobes;
 import com.dirtrobes.block.IncubatorBlockEntity;
 import com.dirtrobes.combat.ChGauge;
+import com.dirtrobes.combat.ComboAttack;
+import com.dirtrobes.combat.Support;
 import com.dirtrobes.team.PrizmodTeam;
 import com.dirtrobes.team.TeamSummary;
 import net.minecraft.network.FriendlyByteBuf;
@@ -65,12 +67,24 @@ public final class ModNetwork {
     }
 
     /** Équipe du Prizmod envoyée au client (openScreen = ouvrir l'écran). */
-    public record TeamSyncPayload(List<TeamSummary> members, boolean openScreen) implements CustomPacketPayload {
+    public record TeamSyncPayload(List<TeamSummary> members, boolean openScreen, Support support) implements CustomPacketPayload {
         public static final Type<TeamSyncPayload> TYPE = new Type<>(DirtRobes.id("team_sync"));
         public static final StreamCodec<FriendlyByteBuf, TeamSyncPayload> STREAM_CODEC = StreamCodec.composite(
                 TeamSummary.STREAM_CODEC.apply(ByteBufCodecs.list(PrizmodTeam.MAX)), TeamSyncPayload::members,
                 ByteBufCodecs.BOOL, TeamSyncPayload::openScreen,
+                Support.STREAM_CODEC, TeamSyncPayload::support,
                 TeamSyncPayload::new);
+
+        @Override
+        public Type<? extends CustomPacketPayload> type() {
+            return TYPE;
+        }
+    }
+
+    /** Touche combo : les 2 Spectrobes dehors attaquent ensemble. */
+    public record ComboPayload() implements CustomPacketPayload {
+        public static final Type<ComboPayload> TYPE = new Type<>(DirtRobes.id("combo"));
+        public static final StreamCodec<ByteBuf, ComboPayload> STREAM_CODEC = StreamCodec.unit(new ComboPayload());
 
         @Override
         public Type<? extends CustomPacketPayload> type() {
@@ -94,17 +108,20 @@ public final class ModNetwork {
     public static volatile int clientCh;
 
     public static void register(RegisterPayloadHandlersEvent event) {
-        event.registrar("4")
+        event.registrar("5")
                 .playToClient(ChSyncPayload.TYPE, ChSyncPayload.STREAM_CODEC, (payload, context) -> clientCh = payload.ch())
                 .playToClient(TeamSyncPayload.TYPE, TeamSyncPayload.STREAM_CODEC, ModNetwork::handleTeamSync)
                 .playToServer(TeamActionPayload.TYPE, TeamActionPayload.STREAM_CODEC, ModNetwork::handleTeamAction)
+                .playToServer(ComboPayload.TYPE, ComboPayload.STREAM_CODEC, (payload, context) -> context.enqueueWork(() -> {
+                    if (context.player() instanceof ServerPlayer player) ComboAttack.trigger(player, lookedAtEntity(player, 24.0));
+                }))
                 .playToServer(SpecialAttackPayload.TYPE, SpecialAttackPayload.STREAM_CODEC, ModNetwork::handleSpecialAttack)
                 .playToServer(ExcavationResultPayload.TYPE, ExcavationResultPayload.STREAM_CODEC, ModNetwork::handleExcavation);
     }
 
     private static void handleTeamSync(TeamSyncPayload payload, IPayloadContext context) {
         // Classe client chargée seulement quand ce code s'exécute (donc jamais sur un serveur dédié).
-        context.enqueueWork(() -> com.dirtrobes.client.ClientTeam.onSync(payload.members(), payload.openScreen()));
+        context.enqueueWork(() -> com.dirtrobes.client.ClientTeam.onSync(payload.members(), payload.openScreen(), payload.support()));
     }
 
     private static void handleTeamAction(TeamActionPayload payload, IPayloadContext context) {

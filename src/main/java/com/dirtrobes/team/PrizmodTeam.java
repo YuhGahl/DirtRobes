@@ -194,6 +194,18 @@ public final class PrizmodTeam {
         return true;
     }
 
+    /** Applique les bonus de soutien aux Spectrobes dehors (appelé chaque seconde). */
+    public static com.dirtrobes.combat.Support applySupport(ServerPlayer player) {
+        com.dirtrobes.combat.Support support = com.dirtrobes.combat.Support.compute(player);
+        player.setData(com.dirtrobes.combat.ChGauge.GAIN_BONUS, support.ch());
+        for (Entry entry : team(player).entries) {
+            if (!entry.isOut()) continue;
+            SpectrobeEntity s = findLoaded(player, entry.uuid);
+            if (s != null) support.applyTo(s);
+        }
+        return support;
+    }
+
     /** Soigne les Spectrobes rangés (appelé régulièrement pour chaque joueur connecté). */
     public static void restStored(ServerPlayer player, int ticks) {
         Team team = team(player);
@@ -261,7 +273,8 @@ public final class PrizmodTeam {
 
     public static void sync(ServerPlayer player, boolean openScreen) {
         if (player.connection != null && player.connection.hasChannel(ModNetwork.TeamSyncPayload.TYPE)) {
-            PacketDistributor.sendToPlayer(player, new ModNetwork.TeamSyncPayload(summaries(player), openScreen));
+            PacketDistributor.sendToPlayer(player, new ModNetwork.TeamSyncPayload(summaries(player), openScreen,
+                    com.dirtrobes.combat.Support.compute(player)));
         }
     }
 }

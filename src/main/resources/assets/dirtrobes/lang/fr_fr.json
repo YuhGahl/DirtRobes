@@ -320,7 +320,7 @@
   "key.dirtrobes.team_down": "Équipe : Spectrobe suivant",
   "key.dirtrobes.team_toggle": "Équipe : sortir / ranger",
   "key.dirtrobes.team_summary": "Équipe : ouvrir la fiche",
-  "gui.dirtrobes.hud.keys": "↑↓ choisir · V sortir · N fiche · J déplacer",
+  "gui.dirtrobes.hud.keys": "↑↓ choisir · V sortir · N fiche · G combo · J déplacer",
   "gui.dirtrobes.summary.title": "Fiche du Spectrobe",
   "gui.dirtrobes.summary.tab.info": "Infos",
   "gui.dirtrobes.summary.tab.stats": "Stats",
@@ -351,5 +351,12 @@
   "chroma.dirtrobes.2": "spéciale 2",
   "tooltip.dirtrobes.chroma": "Donne au Spectrobe sa couleur %s",
   "message.dirtrobes.chroma_changed": "%s prend sa couleur %s !",
-  "message.dirtrobes.chroma_same": "%s a déjà cette couleur."
+  "message.dirtrobes.chroma_same": "%s a déjà cette couleur.",
+  "key.dirtrobes.combo": "Attaque combo (40 CH)",
+  "message.dirtrobes.combo_need_two": "Il faut 2 Spectrobes adultes dehors pour un combo.",
+  "message.dirtrobes.combo": "Combo : %s et %s frappent ensemble !",
+  "message.dirtrobes.combo_resonance": "Combo en résonance : %s et %s !",
+  "gui.dirtrobes.summary.support": "Soutien : ATQ %s · DÉF %s · VIT %s · PV %s · CH %s",
+  "gui.dirtrobes.summary.support_none": "Soutien : aucun (range des Spectrobes pour en avoir)",
+  "gui.dirtrobes.summary.support_giver": "Rangé : il soutient les Spectrobes dehors."
 }

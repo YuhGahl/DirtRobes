@@ -33,8 +33,15 @@ public final class ClientTeam {
         selected = Math.floorMod(selected() + delta, members.size());
     }
 
-    public static void onSync(List<TeamSummary> list, boolean open) {
+    private static com.dirtrobes.combat.Support support = com.dirtrobes.combat.Support.NONE;
+
+    public static com.dirtrobes.combat.Support support() {
+        return support;
+    }
+
+    public static void onSync(List<TeamSummary> list, boolean open, com.dirtrobes.combat.Support newSupport) {
         members = new ArrayList<>(list);
+        support = newSupport;
         Minecraft mc = Minecraft.getInstance();
         if (mc.screen instanceof PrizmodScreen screen) {
             screen.refresh();

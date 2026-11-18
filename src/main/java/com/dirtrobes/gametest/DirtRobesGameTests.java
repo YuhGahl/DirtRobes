@@ -3,6 +3,7 @@ package com.dirtrobes.gametest;
 import com.dirtrobes.DirtRobes;
 import com.dirtrobes.block.IncubatorBlockEntity;
 import com.dirtrobes.combat.ChGauge;
+import com.dirtrobes.combat.ComboAttack;
 import com.dirtrobes.network.ModNetwork;
 import com.dirtrobes.team.PrizmodTeam;
 import com.dirtrobes.entity.SpectrobeEntity;
@@ -337,6 +338,44 @@ public class DirtRobesGameTests {
         helper.assertTrue(back.feedChroma(0, player) && back.colorVariant() == 0, "Chroma 1 rend la couleur normale");
         helper.assertTrue(!back.feedChroma(0, player), "Pas de changement si c'est déjà la bonne couleur");
         helper.succeed();
+    }
+
+    /** Soutien : un Corona rangé donne +5 % d'ATQ aux Spectrobes dehors. */
+    @GameTest(template = "platform")
+    public static void storedSpectrobesSupportTheTeam(GameTestHelper helper) {
+        ServerPlayer player = placePlayer(helper, 10.5, 10.5);
+        Species adult = SpeciesManager.all().stream().filter(s -> s.stage() == Stage.ADULT).findFirst().orElseThrow();
+        Species corona = SpeciesManager.all().stream().filter(s -> s.property() == com.dirtrobes.species.Property.CORONA).findFirst().orElseThrow();
+        SpectrobeEntity fighter = SpectrobeEntity.create(helper.getLevel(), adult, 30, player, helper.absoluteVec(new Vec3(4.5, 1, 4.5)));
+        SpectrobeEntity.create(helper.getLevel(), corona, 30, player, helper.absoluteVec(new Vec3(6.5, 1, 4.5)));
+        double before = fighter.getAttributeValue(Attributes.ATTACK_DAMAGE);
+        helper.assertTrue(PrizmodTeam.toggle(player, 1), "Ranger le Corona");
+        com.dirtrobes.combat.Support sup = PrizmodTeam.applySupport(player);
+        double after = fighter.getAttributeValue(Attributes.ATTACK_DAMAGE);
+        log("Soutien {} : ATQ {} → {}", sup, String.format("%.2f", before), String.format("%.2f", after));
+        helper.assertTrue(sup.atk() > 0.04f, "Le Corona rangé devrait donner un bonus d'ATQ");
+        helper.assertTrue(after > before, "L'ATQ du Spectrobe dehors devrait monter");
+        helper.succeed();
+    }
+
+    /** Combo : avec 2 Spectrobes dehors et 40 CH, la cible prend de gros dégâts et la jauge baisse de 40. */
+    @GameTest(template = "platform", timeoutTicks = 100)
+    public static void comboAttackHitsHard(GameTestHelper helper) {
+        ServerPlayer player = placePlayer(helper, 2.5, 2.5);
+        Species adult = SpeciesManager.all().stream().filter(s -> s.stage() == Stage.ADULT).findFirst().orElseThrow();
+        SpectrobeEntity.create(helper.getLevel(), adult, 40, player, helper.absoluteVec(new Vec3(9.5, 1, 9.5)));
+        SpectrobeEntity.create(helper.getLevel(), adult, 40, player, helper.absoluteVec(new Vec3(11.5, 1, 9.5)));
+        KrawlEntity krawl = KrawlEntity.create(helper.getLevel(), KrawlManager.byName("otorso"), 60, helper.absoluteVec(new Vec3(10.5, 1, 12.5)));
+        float hp = krawl.getHealth();
+        ChGauge.set(player, 20);
+        helper.assertTrue(!ComboAttack.trigger(player, krawl), "Pas de combo avec 20 CH");
+        ChGauge.set(player, 50);
+        helper.assertTrue(ComboAttack.trigger(player, krawl), "Le combo devrait partir avec 50 CH");
+        helper.assertTrue(ChGauge.get(player) == 10, "La jauge devrait baisser de 40, valeur " + ChGauge.get(player));
+        helper.succeedWhen(() -> {
+            helper.assertTrue(krawl.getHealth() < hp - 1, "Le Krawl aurait dû prendre des dégâts");
+            log("Combo : PV du Krawl {} → {}", hp, krawl.getHealth());
+        });
     }
 
     /** Logique du mini-jeu de fouille. */

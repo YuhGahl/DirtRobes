@@ -662,6 +662,25 @@ public class SpectrobeEntity extends TamableAnimal implements BedrockPosable {
         return true;
     }
 
+    private float strikeMultiplier = 2.2f;
+    private boolean strikeCombo;
+
+    /** Partie d'une attaque combo : comme l'attaque spéciale, mais ignore le temps de recharge et frappe plus fort. */
+    public boolean startComboStrike(LivingEntity target, float multiplier) {
+        if (!canFight() || isOrderedToSit() || !target.isAlive()) return false;
+        int saved = specialCooldown;
+        specialCooldown = 0;
+        boolean ok = startSpecialAttack(target);
+        if (!ok) {
+            specialCooldown = saved;
+            return false;
+        }
+        strikeTarget = target;
+        strikeMultiplier = multiplier;
+        strikeCombo = true;
+        return true;
+    }
+
     private void tickStrike() {
         if (strikeTarget == null) return;
         strikeTicks--;
@@ -671,8 +690,9 @@ public class SpectrobeEntity extends TamableAnimal implements BedrockPosable {
         }
         if (distanceTo(strikeTarget) < 3.0 || strikeTicks <= 0) {
             if (distanceTo(strikeTarget) < 4.5) {
-                float damage = (float) getAttributeValue(Attributes.ATTACK_DAMAGE) * 2.2f;
+                float damage = (float) getAttributeValue(Attributes.ATTACK_DAMAGE) * strikeMultiplier;
                 strikeTarget.hurt(damageSources().mobAttack(this), damage);
+                if (strikeCombo) com.dirtrobes.combat.ComboAttack.splash(this, strikeTarget, damage);
                 if (level() instanceof ServerLevel server) {
                     server.sendParticles(getProperty().particle(), strikeTarget.getX(), strikeTarget.getY() + strikeTarget.getBbHeight() / 2,
                             strikeTarget.getZ(), 30, 0.4, 0.5, 0.4, 0.08);
@@ -680,6 +700,8 @@ public class SpectrobeEntity extends TamableAnimal implements BedrockPosable {
                 level().playSound(null, strikeTarget.blockPosition(), SoundEvents.PLAYER_ATTACK_CRIT, SoundSource.NEUTRAL, 1.0f, 0.8f);
             }
             strikeTarget = null;
+            strikeMultiplier = 2.2f;
+            strikeCombo = false;
         }
     }
 

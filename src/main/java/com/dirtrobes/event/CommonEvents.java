@@ -120,7 +120,10 @@ public final class CommonEvents {
             if (player.tickCount % 20 == 0) ChGauge.tickDecay(player);
             if (player.tickCount % 100 == 0) PrizmodTeam.restStored(player, 100);
             // Bandeau d'équipe : PV et XP à jour toutes les secondes
-            if (player.tickCount % 20 == 10 && !PrizmodTeam.team(player).entries.isEmpty()) PrizmodTeam.sync(player, false);
+            if (player.tickCount % 20 == 10 && !PrizmodTeam.team(player).entries.isEmpty()) {
+                PrizmodTeam.applySupport(player);
+                PrizmodTeam.sync(player, false);
+            }
         }
     }
 

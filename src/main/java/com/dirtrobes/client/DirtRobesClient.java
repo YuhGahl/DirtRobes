@@ -37,6 +37,8 @@ public class DirtRobesClient {
             InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_DOWN, "key.categories.dirtrobes");
     public static final KeyMapping TEAM_TOGGLE = new KeyMapping("key.dirtrobes.team_toggle",
             InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_V, "key.categories.dirtrobes");
+    public static final KeyMapping COMBO = new KeyMapping("key.dirtrobes.combo",
+            InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_G, "key.categories.dirtrobes");
     public static final KeyMapping HUD_LAYOUT = new KeyMapping("key.dirtrobes.hud_layout",
             InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_J, "key.categories.dirtrobes");
     public static final KeyMapping TEAM_SUMMARY = new KeyMapping("key.dirtrobes.team_summary",
@@ -76,6 +78,7 @@ public class DirtRobesClient {
         event.register(TEAM_TOGGLE);
         event.register(TEAM_SUMMARY);
         event.register(HUD_LAYOUT);
+        event.register(COMBO);
     }
 
     private static void onClientTick(ClientTickEvent.Post event) {
@@ -85,6 +88,7 @@ public class DirtRobesClient {
         while (SPECIAL_ATTACK.consumeClick()) {
             PacketDistributor.sendToServer(new ModNetwork.SpecialAttackPayload());
         }
+        while (COMBO.consumeClick()) PacketDistributor.sendToServer(new ModNetwork.ComboPayload());
         while (TEAM_UP.consumeClick()) ClientTeam.select(-1);
         while (TEAM_DOWN.consumeClick()) ClientTeam.select(1);
         while (TEAM_TOGGLE.consumeClick()) {

@@ -48,9 +48,13 @@ public final class ChGauge {
         }
     }
 
+    /** Bonus de gain CH (soutien Eclipse), mis à jour chaque seconde. */
+    public static final DeferredHolder<AttachmentType<?>, AttachmentType<Float>> GAIN_BONUS = ATTACHMENTS.register("ch_gain_bonus",
+            () -> AttachmentType.builder(() -> 0f).build());
+
     public static void add(ServerPlayer player, int amount) {
         player.setData(LAST_COMBAT, player.level().getGameTime());
-        set(player, get(player) + amount);
+        set(player, get(player) + Math.round(amount * (1f + player.getData(GAIN_BONUS))));
     }
 
     /** Retire le coût si la jauge est assez remplie. */
