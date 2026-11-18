@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "dirtrobes:health_c"
+    },
+    {
+      "item": "dirtrobes:health_c"
+    },
+    {
+      "item": "minecraft:glass_bottle"
+    }
+  ],
+  "result": {
+    "id": "dirtrobes:serum",
+    "count": 1
+  }
+}

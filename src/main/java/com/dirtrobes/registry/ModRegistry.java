@@ -6,6 +6,7 @@ import com.dirtrobes.block.IncubatorBlockEntity;
 import com.dirtrobes.entity.SpectrobeEntity;
 import com.dirtrobes.item.FossilItem;
 import com.dirtrobes.item.ChromaItem;
+import com.dirtrobes.item.CombatItem;
 import com.dirtrobes.item.GemItem;
 import com.dirtrobes.item.NatureGemItem;
 import com.dirtrobes.species.Nature;
@@ -150,6 +151,16 @@ public final class ModRegistry {
     public static final DeferredItem<ChromaItem> CHROMA_2 = ITEMS.registerItem("chroma_2", props -> new ChromaItem(1, props), new Item.Properties());
     public static final DeferredItem<ChromaItem> CHROMA_3 = ITEMS.registerItem("chroma_3", props -> new ChromaItem(2, props), new Item.Properties());
 
+    public static final DeferredItem<CombatItem> SERUM = ITEMS.registerItem("serum",
+            props -> new CombatItem(CombatItem.Kind.SERUM, props), new Item.Properties().stacksTo(16));
+    public static final DeferredItem<CombatItem> REVIVE = ITEMS.registerItem("revive",
+            props -> new CombatItem(CombatItem.Kind.REVIVE, props), new Item.Properties().stacksTo(16));
+    public static final DeferredItem<CombatItem> CH_RECHARGE = ITEMS.registerItem("ch_recharge",
+            props -> new CombatItem(CombatItem.Kind.CH_RECHARGE, props), new Item.Properties().stacksTo(16));
+    public static final DeferredItem<CombatItem> ANTIDOTE = ITEMS.registerItem("antidote",
+            props -> new CombatItem(CombatItem.Kind.ANTIDOTE, props), new Item.Properties().stacksTo(16));
+    public static final List<DeferredItem<CombatItem>> COMBAT_ITEMS = List.of(SERUM, REVIVE, CH_RECHARGE, ANTIDOTE);
+
     public static final DeferredItem<BlockItem> MINERAL_DEPOSIT_ITEM = ITEMS.registerSimpleBlockItem("mineral_deposit", MINERAL_DEPOSIT);
     public static final DeferredItem<BlockItem> DEEPSLATE_MINERAL_DEPOSIT_ITEM = ITEMS.registerSimpleBlockItem("deepslate_mineral_deposit", DEEPSLATE_MINERAL_DEPOSIT);
     public static final DeferredItem<BlockItem> INCUBATOR_ITEM = ITEMS.registerSimpleBlockItem("incubator", INCUBATOR);
@@ -190,6 +201,7 @@ public final class ModRegistry {
                 output.accept(VORTEX_ITEM.get());
                 GEMS.forEach(g -> output.accept(g.get()));
                 NATURE_GEMS.forEach(g -> output.accept(g.get()));
+                COMBAT_ITEMS.forEach(i -> output.accept(i.get()));
                 output.accept(CHROMA_1.get());
                 output.accept(CHROMA_2.get());
                 output.accept(CHROMA_3.get());

@@ -410,6 +410,40 @@ public class SpectrobeEntity extends TamableAnimal implements BedrockPosable {
         return after - before;
     }
 
+    /** Objet de combat sur ce Spectrobe. Renvoie false (objet non consommé) s'il n'a aucun effet. */
+    public boolean useCombatItem(com.dirtrobes.item.CombatItem.Kind kind, Player player) {
+        boolean ok = switch (kind) {
+            case SERUM -> {
+                if (isKnockedOut() || getHealth() >= getMaxHealth()) yield false;
+                heal(getMaxHealth() * 0.5f);
+                yield true;
+            }
+            case REVIVE -> {
+                if (!isKnockedOut()) yield false;
+                koTicks = 0;
+                setFlag(FLAG_KO, false);
+                setHealth(Math.max(1f, getMaxHealth() * 0.3f));
+                yield true;
+            }
+            case ANTIDOTE -> {
+                var bad = getActiveEffects().stream().filter(e -> !e.getEffect().value().isBeneficial()).map(e -> e.getEffect()).toList();
+                bad.forEach(this::removeEffect);
+                yield !bad.isEmpty();
+            }
+            default -> false;
+        };
+        if (!ok) {
+            player.displayClientMessage(Component.translatable("message.dirtrobes.item_no_effect", getDisplayName()), true);
+            return false;
+        }
+        player.displayClientMessage(Component.translatable("message.dirtrobes.item_used." + kind.id(), getDisplayName()).withStyle(ChatFormatting.GREEN), true);
+        if (level() instanceof ServerLevel server) {
+            server.sendParticles(ParticleTypes.HEART, getX(), getY() + getBbHeight(), getZ(), 5, 0.4, 0.3, 0.4, 0.0);
+        }
+        level().playSound(null, blockPosition(), SoundEvents.BREWING_STAND_BREW, SoundSource.NEUTRAL, 0.8f, 1.4f);
+        return true;
+    }
+
     /** Gemme de nature : remplace la nature. Renvoie false (gemme non consommée) si c'est déjà la sienne. */
     public boolean feedNatureGem(com.dirtrobes.item.NatureGemItem gem, Player player) {
         if (gem.nature() == nature) {

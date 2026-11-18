@@ -358,5 +358,19 @@
   "message.dirtrobes.combo_resonance": "Resonance combo: %s and %s!",
   "gui.dirtrobes.summary.support": "Support: ATK %s · DEF %s · SPD %s · HP %s · CH %s",
   "gui.dirtrobes.summary.support_none": "Support: none (store Spectrobes to get some)",
-  "gui.dirtrobes.summary.support_giver": "Stored: supports the Spectrobes that are out."
+  "gui.dirtrobes.summary.support_giver": "Stored: supports the Spectrobes that are out.",
+  "item.dirtrobes.serum": "Serum",
+  "item.dirtrobes.revive": "Revive",
+  "item.dirtrobes.ch_recharge": "CH Recharge",
+  "item.dirtrobes.antidote": "Antidote",
+  "tooltip.dirtrobes.serum": "Heals 50% of one of your Spectrobes' HP",
+  "tooltip.dirtrobes.revive": "Brings one of your Spectrobes back from KO (30% HP)",
+  "tooltip.dirtrobes.ch_recharge": "+30 CH (right-click the air)",
+  "tooltip.dirtrobes.antidote": "Removes negative effects from one of your Spectrobes",
+  "tooltip.dirtrobes.combat_item": "One item per fight: %ss shared cooldown",
+  "message.dirtrobes.item_no_effect": "It would have no effect on %s.",
+  "message.dirtrobes.ch_full": "Your CH gauge is already full.",
+  "message.dirtrobes.item_used.serum": "%s recovers.",
+  "message.dirtrobes.item_used.revive": "%s gets back up!",
+  "message.dirtrobes.item_used.antidote": "%s is cured."
 }

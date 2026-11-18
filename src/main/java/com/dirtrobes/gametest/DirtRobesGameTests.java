@@ -378,6 +378,25 @@ public class DirtRobesGameTests {
         });
     }
 
+    /** Objets de combat : Sérum soigne, Réveil sort du K.O., inutile = non consommé, recharge partagée. */
+    @GameTest(template = "platform")
+    public static void combatItemsWork(GameTestHelper helper) {
+        ServerPlayer player = placePlayer(helper, 10.5, 10.5);
+        Species adult = SpeciesManager.all().stream().filter(s -> s.stage() == Stage.ADULT).findFirst().orElseThrow();
+        SpectrobeEntity s = SpectrobeEntity.create(helper.getLevel(), adult, 30, player, helper.absoluteVec(new Vec3(4.5, 1, 4.5)));
+        helper.assertTrue(!s.useCombatItem(com.dirtrobes.item.CombatItem.Kind.SERUM, player), "Sérum inutile si PV pleins");
+        s.setHealth(s.getMaxHealth() * 0.2f);
+        helper.assertTrue(s.useCombatItem(com.dirtrobes.item.CombatItem.Kind.SERUM, player), "Le sérum devrait soigner");
+        helper.assertTrue(s.getHealth() >= s.getMaxHealth() * 0.69f, "PV attendus vers 70 %, " + s.getHealth() / s.getMaxHealth());
+        helper.assertTrue(!s.useCombatItem(com.dirtrobes.item.CombatItem.Kind.REVIVE, player), "Réveil inutile s'il n'est pas K.O.");
+        s.hurt(s.damageSources().generic(), 1000f);
+        helper.assertTrue(s.isKnockedOut(), "Le Spectrobe devrait être K.O.");
+        helper.assertTrue(s.useCombatItem(com.dirtrobes.item.CombatItem.Kind.REVIVE, player) && !s.isKnockedOut(), "Le Réveil devrait le relever");
+        com.dirtrobes.item.CombatItem.startSharedCooldown(player);
+        helper.assertTrue(player.getCooldowns().isOnCooldown(ModRegistry.ANTIDOTE.get()), "La recharge doit être partagée par tous les objets");
+        helper.succeed();
+    }
+
     /** Logique du mini-jeu de fouille. */
     @GameTest(template = "platform")
     public static void excavationLogic(GameTestHelper helper) {

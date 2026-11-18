@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "dirtrobes:power_c"
+    },
+    {
+      "item": "dirtrobes:defence_c"
+    },
+    {
+      "item": "minecraft:amethyst_shard"
+    }
+  ],
+  "result": {
+    "id": "dirtrobes:ch_recharge",
+    "count": 1
+  }
+}
