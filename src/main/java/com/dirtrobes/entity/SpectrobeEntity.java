@@ -169,6 +169,15 @@ public class SpectrobeEntity extends TamableAnimal implements BedrockPosable {
     // Espèce, propriété, stade
     // =====================================================================
 
+    /** Mannequin côté client pour afficher le modèle d'une espèce dans une interface (pas ajouté au monde). */
+    public static SpectrobeEntity preview(Level level, String speciesId, int property, int stage) {
+        SpectrobeEntity e = new SpectrobeEntity(ModRegistry.SPECTROBE.get(), level);
+        e.entityData.set(DATA_SPECIES, speciesId);
+        e.entityData.set(DATA_PROPERTY, (byte) property);
+        e.entityData.set(DATA_STAGE, (byte) stage);
+        return e;
+    }
+
     // ----- BedrockPosable (rendu) -----
     @Override
     public String resolverStage() {

@@ -1,5 +1,7 @@
 package com.dirtrobes.client.screen;
 
+import com.dirtrobes.client.ClientTeam;
+import com.dirtrobes.entity.SpectrobeEntity;
 import com.dirtrobes.network.ModNetwork;
 import com.dirtrobes.species.Property;
 import com.dirtrobes.species.Stage;
@@ -22,8 +24,6 @@ public class PrizmodScreen extends Screen {
     private static final int CARD_H = 44;
     private static final int GAP = 6;
 
-    private static List<TeamSummary> members = new ArrayList<>();
-
     private final List<Button> buttons = new ArrayList<>();
     private int left;
     private int top;
@@ -32,15 +32,25 @@ public class PrizmodScreen extends Screen {
         super(Component.translatable("gui.dirtrobes.prizmod.title"));
     }
 
-    /** Réception de l'équipe envoyée par le serveur. */
-    public static void onSync(List<TeamSummary> list, boolean open) {
-        members = new ArrayList<>(list);
-        Minecraft mc = Minecraft.getInstance();
-        if (mc.screen instanceof PrizmodScreen screen) {
-            screen.rebuildWidgets();
-        } else if (open) {
-            mc.setScreen(new PrizmodScreen());
+    public void refresh() {
+        rebuildWidgets();
+    }
+
+    private static List<TeamSummary> members() {
+        return ClientTeam.members();
+    }
+
+    @Override
+    public boolean mouseClicked(double mx, double my, int button) {
+        if (super.mouseClicked(mx, my, button)) return true;
+        for (int i = 0; i < members().size(); i++) {
+            int x = cardX(i), y = cardY(i);
+            if (mx >= x && mx < x + CARD_W && my >= y && my < y + CARD_H && minecraft != null) {
+                minecraft.setScreen(new SpectrobeSummaryScreen(this, i));
+                return true;
+            }
         }
+        return false;
     }
 
     @Override
@@ -51,8 +61,8 @@ public class PrizmodScreen extends Screen {
         top = (height - h) / 2 + 6;
         buttons.clear();
         for (int i = 0; i < PrizmodTeam.MAX; i++) {
-            if (i >= members.size()) continue;
-            TeamSummary m = members.get(i);
+            if (i >= members().size()) continue;
+            TeamSummary m = members().get(i);
             int x = cardX(i), y = cardY(i);
             final int slot = i;
             Component label = Component.translatable(m.out() ? "gui.dirtrobes.prizmod.recall" : "gui.dirtrobes.prizmod.send");
@@ -72,7 +82,7 @@ public class PrizmodScreen extends Screen {
     }
 
     private static int outCount() {
-        return (int) members.stream().filter(TeamSummary::out).count();
+        return (int) members().stream().filter(TeamSummary::out).count();
     }
 
     @Override
@@ -89,12 +99,12 @@ public class PrizmodScreen extends Screen {
         g.renderOutline(left - 8, top - 26, w + 16, h + 46, 0xFF5FD3F3);
         for (int i = 0; i < PrizmodTeam.MAX; i++) {
             int x = cardX(i), y = cardY(i);
-            if (i >= members.size()) {
+            if (i >= members().size()) {
                 g.fill(x, y, x + CARD_W, y + CARD_H, 0xFF1C232C);
                 g.renderOutline(x, y, CARD_W, CARD_H, 0xFF2C3846);
                 continue;
             }
-            TeamSummary m = members.get(i);
+            TeamSummary m = members().get(i);
             int color = 0xFF000000 | Property.byOrdinal(m.property()).color();
             g.fill(x, y, x + CARD_W, y + CARD_H, m.out() ? 0xFF243241 : 0xFF1E2731);
             g.fill(x, y, x + 4, y + CARD_H, color);
@@ -108,19 +118,25 @@ public class PrizmodScreen extends Screen {
         g.drawCenteredString(font, title, width / 2, top - 20, 0xFFFFFFFF);
         for (int i = 0; i < PrizmodTeam.MAX; i++) {
             int x = cardX(i), y = cardY(i);
-            if (i >= members.size()) {
+            if (i >= members().size()) {
                 g.drawCenteredString(font, Component.translatable("gui.dirtrobes.prizmod.empty"), x + CARD_W / 2, y + CARD_H / 2 - 4, 0xFF5C6B7C);
                 continue;
             }
-            TeamSummary m = members.get(i);
+            TeamSummary m = members().get(i);
             Property p = Property.byOrdinal(m.property());
-            g.drawString(font, Component.translatable(m.nameKey()), x + 9, y + 5, 0xFFFFFFFF, true);
+            SpectrobeEntity preview = ClientTeam.preview(m.speciesId(), m.property(), m.stage());
+            if (preview != null) {
+                g.enableScissor(x + 5, y + 2, x + 37, y + CARD_H - 2);
+                GuiDraw.entity(g, preview, x + 21, y + CARD_H - 6, m.stage() == 0 ? 20f : 15f, 30f, -5f);
+                g.disableScissor();
+            }
+            g.drawString(font, Component.translatable(m.nameKey()), x + 40, y + 5, 0xFFFFFFFF, true);
             Component sub = Component.translatable("message.dirtrobes.card.level", m.level()).append(" · ")
                     .append(Component.translatable(p.translationKey())).append(" · ")
                     .append(Component.translatable(Stage.byOrdinal(m.stage()).translationKey()));
-            g.drawString(font, sub, x + 9, y + 16, 0xFFB8C4D0, false);
+            g.drawString(font, Component.translatable("message.dirtrobes.card.level", m.level()), x + 40, y + 16, 0xFFB8C4D0, false);
             // Barre de PV
-            int bx = x + 9, by = y + CARD_H - 12, bw = CARD_W - 66;
+            int bx = x + 40, by = y + CARD_H - 12, bw = CARD_W - 96;
             float frac = m.maxHealth() <= 0 ? 0 : Mth.clamp(m.health() / m.maxHealth(), 0f, 1f);
             g.fill(bx, by, bx + bw, by + 5, 0xFF0D1117);
             int hpColor = m.knockedOut() ? 0xFF7A7A7A : frac > 0.5f ? 0xFF5BD46A : frac > 0.2f ? 0xFFE8C84A : 0xFFE0533D;

@@ -104,7 +104,7 @@ public final class ModNetwork {
 
     private static void handleTeamSync(TeamSyncPayload payload, IPayloadContext context) {
         // Classe client chargée seulement quand ce code s'exécute (donc jamais sur un serveur dédié).
-        context.enqueueWork(() -> com.dirtrobes.client.screen.PrizmodScreen.onSync(payload.members(), payload.openScreen()));
+        context.enqueueWork(() -> com.dirtrobes.client.ClientTeam.onSync(payload.members(), payload.openScreen()));
     }
 
     private static void handleTeamAction(TeamActionPayload payload, IPayloadContext context) {

@@ -94,6 +94,7 @@ public final class PrizmodTeam {
 
     private static void changed(ServerPlayer player) {
         player.setData(TEAM, team(player));
+        sync(player, false);
     }
 
     @Nullable

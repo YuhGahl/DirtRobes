@@ -119,11 +119,16 @@ public final class CommonEvents {
         if (event.getEntity() instanceof ServerPlayer player) {
             if (player.tickCount % 20 == 0) ChGauge.tickDecay(player);
             if (player.tickCount % 100 == 0) PrizmodTeam.restStored(player, 100);
+            // Bandeau d'équipe : PV et XP à jour toutes les secondes
+            if (player.tickCount % 20 == 10 && !PrizmodTeam.team(player).entries.isEmpty()) PrizmodTeam.sync(player, false);
         }
     }
 
     private static void onLogin(PlayerEvent.PlayerLoggedInEvent event) {
-        if (event.getEntity() instanceof ServerPlayer player) ChGauge.sync(player);
+        if (event.getEntity() instanceof ServerPlayer player) {
+            ChGauge.sync(player);
+            PrizmodTeam.sync(player, false);
+        }
     }
 
     private static void onLogout(PlayerEvent.PlayerLoggedOutEvent event) {
