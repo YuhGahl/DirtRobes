@@ -48,12 +48,17 @@ public final class ClientTeam {
     /** Mannequin (non ajouté au monde) pour dessiner le modèle d'une espèce dans l'interface. */
     @Nullable
     public static SpectrobeEntity preview(String speciesId, int property, int stage) {
+        return preview(speciesId, property, stage, 0);
+    }
+
+    @Nullable
+    public static SpectrobeEntity preview(String speciesId, int property, int stage, int color) {
         Minecraft mc = Minecraft.getInstance();
         if (mc.level == null || speciesId.isEmpty()) return null;
-        String key = speciesId + "|" + property + "|" + stage;
+        String key = speciesId + "|" + property + "|" + stage + "|" + color;
         SpectrobeEntity e = PREVIEWS.get(key);
         if (e == null || e.level() != mc.level) {
-            e = SpectrobeEntity.preview(mc.level, speciesId, property, stage);
+            e = SpectrobeEntity.preview(mc.level, speciesId, property, stage, color);
             PREVIEWS.put(key, e);
         }
         return e;

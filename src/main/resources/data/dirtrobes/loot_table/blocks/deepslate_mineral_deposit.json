@@ -236,6 +236,29 @@
           "name": "dirtrobes:citrine"
         }
       ]
+    },
+    {
+      "rolls": 1,
+      "conditions": [
+        {
+          "condition": "minecraft:random_chance",
+          "chance": 0.01
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "dirtrobes:chroma_1"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "dirtrobes:chroma_2"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "dirtrobes:chroma_3"
+        }
+      ]
     }
   ]
 }

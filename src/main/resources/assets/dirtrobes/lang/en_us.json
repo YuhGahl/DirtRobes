@@ -342,5 +342,14 @@
   "key.dirtrobes.hud_layout": "Move the team bar",
   "gui.dirtrobes.hud_layout.title": "Team bar placement",
   "gui.dirtrobes.hud_layout.hint": "Drag the bar where you want it, then press Done.",
-  "gui.dirtrobes.hud_layout.reset": "Default"
+  "gui.dirtrobes.hud_layout.reset": "Default",
+  "item.dirtrobes.chroma_1": "Chroma 1",
+  "item.dirtrobes.chroma_2": "Chroma 2",
+  "item.dirtrobes.chroma_3": "Chroma 3",
+  "chroma.dirtrobes.0": "normal",
+  "chroma.dirtrobes.1": "special 1",
+  "chroma.dirtrobes.2": "special 2",
+  "tooltip.dirtrobes.chroma": "Gives the Spectrobe its %s colour",
+  "message.dirtrobes.chroma_changed": "%s takes on its %s colour!",
+  "message.dirtrobes.chroma_same": "%s already has this colour."
 }

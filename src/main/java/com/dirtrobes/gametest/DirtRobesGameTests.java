@@ -323,6 +323,22 @@ public class DirtRobesGameTests {
         helper.succeed();
     }
 
+    /** Chroma : change la couleur, la garde après rangement au Prizmod, Chroma 1 rend la couleur normale. */
+    @GameTest(template = "platform")
+    public static void chromaChangesColour(GameTestHelper helper) {
+        ServerPlayer player = placePlayer(helper, 10.5, 10.5);
+        Species adult = SpeciesManager.all().stream().filter(s -> s.stage() == Stage.ADULT).findFirst().orElseThrow();
+        SpectrobeEntity s = SpectrobeEntity.create(helper.getLevel(), adult, 20, player, helper.absoluteVec(new Vec3(4.5, 1, 4.5)));
+        helper.assertTrue(s.colorVariant() == 0, "Couleur normale au départ");
+        helper.assertTrue(s.feedChroma(2, player), "Chroma 3 devrait changer la couleur");
+        helper.assertTrue(PrizmodTeam.toggle(player, 0) && PrizmodTeam.toggle(player, 0), "Ranger puis ressortir");
+        SpectrobeEntity back = helper.getEntities(ModRegistry.SPECTROBE.get()).get(0);
+        helper.assertTrue(back.colorVariant() == 2, "La couleur devrait être conservée au Prizmod, " + back.colorVariant());
+        helper.assertTrue(back.feedChroma(0, player) && back.colorVariant() == 0, "Chroma 1 rend la couleur normale");
+        helper.assertTrue(!back.feedChroma(0, player), "Pas de changement si c'est déjà la bonne couleur");
+        helper.succeed();
+    }
+
     /** Logique du mini-jeu de fouille. */
     @GameTest(template = "platform")
     public static void excavationLogic(GameTestHelper helper) {

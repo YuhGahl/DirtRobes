@@ -15,7 +15,7 @@ public record TeamSummary(
         int hp, int atk, int def, int spd,
         int evHp, int evAtk, int evDef, int evSpd,
         int nature, int xp, int xpLevelStart, int xpNextLevel,
-        String evoSpeciesId, String evoNameKey, int evoLevel) {
+        String evoSpeciesId, String evoNameKey, int evoLevel, int color) {
 
     public static TeamSummary of(SpectrobeEntity s, boolean out, boolean found) {
         Species sp = s.getSpecies();
@@ -28,12 +28,13 @@ public record TeamSummary(
                 s.hpStat(), s.attackStat(), s.defenseStat(), s.speedStat(),
                 s.getEv(MineralItem.Stat.HEALTH), s.getEv(MineralItem.Stat.POWER), s.getEv(MineralItem.Stat.DEFENCE), s.getEv(MineralItem.Stat.SPEED),
                 s.getNature().ordinal(), s.getXp(), StatCalc.xpForLevel(lvl), StatCalc.xpForLevel(Math.min(StatCalc.MAX_LEVEL, lvl + 1)),
-                evo == null ? "" : evo.id().toString(), evo == null ? "" : evo.translationKey(), sp == null ? 0 : sp.evolutionLevel());
+                evo == null ? "" : evo.id().toString(), evo == null ? "" : evo.translationKey(), sp == null ? 0 : sp.evolutionLevel(),
+                s.colorVariant());
     }
 
     public static TeamSummary missing() {
         return new TeamSummary("", "entity.dirtrobes.spectrobe", 1, 0, 0, 0, 1, false, 100, true, false,
-                1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, "", "", 0);
+                1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, "", "", 0, 0);
     }
 
     public int totalEv() {
@@ -68,11 +69,12 @@ public record TeamSummary(
                 buf.writeUtf(s.evoSpeciesId);
                 buf.writeUtf(s.evoNameKey);
                 buf.writeVarInt(s.evoLevel);
+                buf.writeVarInt(s.color);
             },
             buf -> new TeamSummary(buf.readUtf(), buf.readUtf(), buf.readVarInt(), buf.readVarInt(), buf.readVarInt(),
                     buf.readFloat(), buf.readFloat(), buf.readBoolean(), buf.readVarInt(), buf.readBoolean(), buf.readBoolean(),
                     buf.readVarInt(), buf.readVarInt(), buf.readVarInt(), buf.readVarInt(),
                     buf.readVarInt(), buf.readVarInt(), buf.readVarInt(), buf.readVarInt(),
                     buf.readVarInt(), buf.readVarInt(), buf.readVarInt(), buf.readVarInt(),
-                    buf.readUtf(), buf.readUtf(), buf.readVarInt()));
+                    buf.readUtf(), buf.readUtf(), buf.readVarInt(), buf.readVarInt()));
 }

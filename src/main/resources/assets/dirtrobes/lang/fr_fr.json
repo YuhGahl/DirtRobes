@@ -342,5 +342,14 @@
   "key.dirtrobes.hud_layout": "Déplacer le bandeau d'équipe",
   "gui.dirtrobes.hud_layout.title": "Placement du bandeau d'équipe",
   "gui.dirtrobes.hud_layout.hint": "Fais glisser le bandeau où tu veux, puis « Terminé ».",
-  "gui.dirtrobes.hud_layout.reset": "Par défaut"
+  "gui.dirtrobes.hud_layout.reset": "Par défaut",
+  "item.dirtrobes.chroma_1": "Chroma 1",
+  "item.dirtrobes.chroma_2": "Chroma 2",
+  "item.dirtrobes.chroma_3": "Chroma 3",
+  "chroma.dirtrobes.0": "normale",
+  "chroma.dirtrobes.1": "spéciale 1",
+  "chroma.dirtrobes.2": "spéciale 2",
+  "tooltip.dirtrobes.chroma": "Donne au Spectrobe sa couleur %s",
+  "message.dirtrobes.chroma_changed": "%s prend sa couleur %s !",
+  "message.dirtrobes.chroma_same": "%s a déjà cette couleur."
 }

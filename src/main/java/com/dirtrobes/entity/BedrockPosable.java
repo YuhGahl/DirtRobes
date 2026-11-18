@@ -31,5 +31,10 @@ public interface BedrockPosable {
     @Nullable
     Object clientAnimState();
 
+    /** Couleur Chroma : 0 = normale, 1 = spéciale 1, 2 = spéciale 2. */
+    default int colorVariant() {
+        return 0;
+    }
+
     void setClientAnimState(Object state);
 }

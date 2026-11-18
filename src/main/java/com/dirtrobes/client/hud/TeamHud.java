@@ -66,7 +66,7 @@ public final class TeamHud {
             g.fill(x, ry, x + 3, ry + ROW_H, m.out() ? accent : GuiDraw.withAlpha(accent, 0x60));
             if (sel) g.renderOutline(x - 1, ry - 1, ROW_W + 2, ROW_H + 2, 0xFFFFFFFF);
 
-            SpectrobeEntity preview = ClientTeam.preview(m.speciesId(), m.property(), m.stage());
+            SpectrobeEntity preview = ClientTeam.preview(m.speciesId(), m.property(), m.stage(), m.color());
             if (preview != null) {
                 g.enableScissor(x + 3, ry + 1, x + 27, ry + ROW_H - 1);
                 GuiDraw.entity(g, preview, x + 15, ry + ROW_H - 3, m.stage() == 0 ? 14f : 10f, 30f, -5f);

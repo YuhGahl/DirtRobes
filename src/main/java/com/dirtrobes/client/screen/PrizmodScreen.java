@@ -124,7 +124,7 @@ public class PrizmodScreen extends Screen {
             }
             TeamSummary m = members().get(i);
             Property p = Property.byOrdinal(m.property());
-            SpectrobeEntity preview = ClientTeam.preview(m.speciesId(), m.property(), m.stage());
+            SpectrobeEntity preview = ClientTeam.preview(m.speciesId(), m.property(), m.stage(), m.color());
             if (preview != null) {
                 g.enableScissor(x + 5, y + 2, x + 37, y + CARD_H - 2);
                 GuiDraw.entity(g, preview, x + 21, y + CARD_H - 6, m.stage() == 0 ? 20f : 15f, 30f, -5f);

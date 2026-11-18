@@ -64,12 +64,16 @@ public class BedrockEntityRenderer<T extends LivingEntity & BedrockPosable> exte
             poseStack.scale(scale, scale, scale);
 
             int overlay = LivingEntityRenderer.getOverlayCoords(entity, 0f);
-            int color = resolver.tint() ? tint(entity.tintColor(), 0.45f) : 0xFFFFFFFF;
-            VertexConsumer base = buffers.getBuffer(RenderType.entityCutoutNoCull(resolver.texture()));
+            int variant = entity.colorVariant();
+            ResourceLocation tex = resolver.variantTexture(variant);
+            int color = resolver.tint() ? tint(chromaShift(entity.tintColor(), tex == null ? variant : 0), 0.45f)
+                    : (tex == null ? chromaFallback(variant) : 0xFFFFFFFF);
+            VertexConsumer base = buffers.getBuffer(RenderType.entityCutoutNoCull(tex != null ? tex : resolver.texture()));
             for (BedrockModel.Bone bone : model.roots) renderBone(bone, pose, poseStack, base, packedLight, overlay, color);
-            if (resolver.emissive() != null) {
-                int glow = resolver.tint() ? (0xFF000000 | entity.tintColor()) : 0xFFFFFFFF;
-                VertexConsumer emissive = buffers.getBuffer(RenderType.eyes(resolver.emissive()));
+            ResourceLocation glowTex = resolver.variantEmissive(variant) != null ? resolver.variantEmissive(variant) : resolver.emissive();
+            if (glowTex != null) {
+                int glow = resolver.tint() ? (0xFF000000 | chromaShift(entity.tintColor(), tex == null ? variant : 0)) : 0xFFFFFFFF;
+                VertexConsumer emissive = buffers.getBuffer(RenderType.eyes(glowTex));
                 for (BedrockModel.Bone bone : model.roots) renderBone(bone, pose, poseStack, emissive, LightTexture.FULL_BRIGHT, overlay, glow);
             }
             poseStack.popPose();
@@ -78,6 +82,22 @@ public class BedrockEntityRenderer<T extends LivingEntity & BedrockPosable> exte
     }
 
     /** Mélange la couleur de la propriété avec du blanc (amount = part de blanc). */
+    /** Couleur Chroma de secours sur un modèle provisoire teinté : décale la teinte de 120° ou 240°. */
+    private static int chromaShift(int rgb, int variant) {
+        if (variant <= 0) return rgb;
+        float[] hsb = java.awt.Color.RGBtoHSB((rgb >> 16) & 0xFF, (rgb >> 8) & 0xFF, rgb & 0xFF, null);
+        return java.awt.Color.HSBtoRGB((hsb[0] + variant / 3f) % 1f, hsb[1], hsb[2]) & 0xFFFFFF;
+    }
+
+    /** Couleur Chroma de secours sur une vraie texture sans variante : légère teinte dorée ou bleutée. */
+    private static int chromaFallback(int variant) {
+        return switch (variant) {
+            case 1 -> 0xFFFFD98A;
+            case 2 -> 0xFFA9C4FF;
+            default -> 0xFFFFFFFF;
+        };
+    }
+
     private static int tint(int rgb, float amount) {
         int r = (rgb >> 16) & 0xFF, g = (rgb >> 8) & 0xFF, b = rgb & 0xFF;
         r = (int) (r + (255 - r) * amount);

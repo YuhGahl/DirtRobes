@@ -165,7 +165,7 @@ public class SpectrobeSummaryScreen extends Screen {
         // ---- Colonne de gauche : nom, niveau, modèle
         g.drawString(font, Component.translatable(m.nameKey()).withStyle(ChatFormatting.BOLD), left + 6, top + 6, 0xFFFFFFFF, true);
         g.drawString(font, Component.translatable("message.dirtrobes.card.level", m.level()), left + 6, top + 17, 0xFFD8E2EC, false);
-        SpectrobeEntity preview = ClientTeam.preview(m.speciesId(), m.property(), m.stage());
+        SpectrobeEntity preview = ClientTeam.preview(m.speciesId(), m.property(), m.stage(), m.color());
         if (preview != null) {
             float scale = m.stage() == Stage.CHILD.ordinal() ? 52f : m.stage() == Stage.ADULT.ordinal() ? 42f : 34f;
             g.enableScissor(left + 2, top + 28, left + MODEL_W, top + H - 26);
@@ -272,7 +272,7 @@ public class SpectrobeSummaryScreen extends Screen {
         float frac = Mth.clamp(m.level() / (float) Math.max(1, m.evoLevel()), 0f, 1f);
         GuiDraw.bar(g, x, y + 28, 170, 5, frac, 0xFFB58CFF, 0xFF0D1117);
         int nextStage = Math.min(m.stage() + 1, Stage.values().length - 1);
-        SpectrobeEntity preview = ClientTeam.preview(m.evoSpeciesId(), m.property(), nextStage);
+        SpectrobeEntity preview = ClientTeam.preview(m.evoSpeciesId(), m.property(), nextStage, m.color());
         if (preview != null) {
             int bx = x + 40, by = y + 132;
             g.fill(bx - 34, by - 2, bx + 34, by + 1, 0x60FFFFFF);

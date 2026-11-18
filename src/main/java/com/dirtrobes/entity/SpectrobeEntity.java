@@ -62,6 +62,7 @@ public class SpectrobeEntity extends TamableAnimal implements BedrockPosable {
     private static final EntityDataAccessor<Integer> DATA_LEVEL = SynchedEntityData.defineId(SpectrobeEntity.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Byte> DATA_PROPERTY = SynchedEntityData.defineId(SpectrobeEntity.class, EntityDataSerializers.BYTE);
     private static final EntityDataAccessor<Byte> DATA_STAGE = SynchedEntityData.defineId(SpectrobeEntity.class, EntityDataSerializers.BYTE);
+    private static final EntityDataAccessor<Byte> DATA_COLOR = SynchedEntityData.defineId(SpectrobeEntity.class, EntityDataSerializers.BYTE);
     private static final EntityDataAccessor<Byte> DATA_FLAGS = SynchedEntityData.defineId(SpectrobeEntity.class, EntityDataSerializers.BYTE);
 
     private static final int FLAG_SLEEPING = 1;
@@ -112,6 +113,7 @@ public class SpectrobeEntity extends TamableAnimal implements BedrockPosable {
         builder.define(DATA_LEVEL, 1);
         builder.define(DATA_PROPERTY, (byte) Property.PRISMA.ordinal());
         builder.define(DATA_STAGE, (byte) Stage.CHILD.ordinal());
+        builder.define(DATA_COLOR, (byte) 0);
         builder.define(DATA_FLAGS, (byte) 0);
     }
 
@@ -170,8 +172,9 @@ public class SpectrobeEntity extends TamableAnimal implements BedrockPosable {
     // =====================================================================
 
     /** Mannequin côté client pour afficher le modèle d'une espèce dans une interface (pas ajouté au monde). */
-    public static SpectrobeEntity preview(Level level, String speciesId, int property, int stage) {
+    public static SpectrobeEntity preview(Level level, String speciesId, int property, int stage, int color) {
         SpectrobeEntity e = new SpectrobeEntity(ModRegistry.SPECTROBE.get(), level);
+        e.entityData.set(DATA_COLOR, (byte) color);
         e.entityData.set(DATA_SPECIES, speciesId);
         e.entityData.set(DATA_PROPERTY, (byte) property);
         e.entityData.set(DATA_STAGE, (byte) stage);
@@ -179,6 +182,27 @@ public class SpectrobeEntity extends TamableAnimal implements BedrockPosable {
     }
 
     // ----- BedrockPosable (rendu) -----
+    @Override
+    public int colorVariant() {
+        return this.entityData.get(DATA_COLOR);
+    }
+
+    /** Minéral Chroma : 0 = couleur normale, 1 et 2 = couleurs spéciales. Renvoie false si rien ne change. */
+    public boolean feedChroma(int color, Player player) {
+        if (colorVariant() == color) {
+            player.displayClientMessage(Component.translatable("message.dirtrobes.chroma_same", getDisplayName()), true);
+            return false;
+        }
+        this.entityData.set(DATA_COLOR, (byte) color);
+        player.displayClientMessage(Component.translatable("message.dirtrobes.chroma_changed", getDisplayName(),
+                Component.translatable("chroma.dirtrobes." + color)).withStyle(ChatFormatting.LIGHT_PURPLE), true);
+        if (level() instanceof ServerLevel server) {
+            server.sendParticles(ParticleTypes.END_ROD, getX(), getY() + getBbHeight() / 2, getZ(), 40, 0.4, 0.6, 0.4, 0.1);
+        }
+        level().playSound(null, blockPosition(), SoundEvents.AMETHYST_BLOCK_RESONATE, SoundSource.NEUTRAL, 1.0f, 1.6f);
+        return true;
+    }
+
     @Override
     public String resolverStage() {
         return getStage().id();
@@ -741,6 +765,7 @@ public class SpectrobeEntity extends TamableAnimal implements BedrockPosable {
         tag.putString("Nature", nature.id());
         tag.putInt("KoTicks", isKnockedOut() ? koTicks : 0);
         tag.putInt("Quality", quality);
+        tag.putInt("Color", colorVariant());
     }
 
     @Override
@@ -755,6 +780,7 @@ public class SpectrobeEntity extends TamableAnimal implements BedrockPosable {
         nature = tag.contains("Nature") ? Nature.byId(tag.getString("Nature")) : Nature.random(random);
         koTicks = tag.getInt("KoTicks");
         quality = tag.contains("Quality") ? Math.max(50, Math.min(100, tag.getInt("Quality"))) : 100;
+        this.entityData.set(DATA_COLOR, (byte) Math.max(0, Math.min(2, tag.getInt("Color"))));
         setFlag(FLAG_KO, koTicks > 0);
         Species s = SpeciesManager.get(ResourceLocation.tryParse(tag.getString("Species")));
         if (s != null) {

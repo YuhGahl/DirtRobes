@@ -5,6 +5,7 @@ import com.dirtrobes.block.IncubatorBlock;
 import com.dirtrobes.block.IncubatorBlockEntity;
 import com.dirtrobes.entity.SpectrobeEntity;
 import com.dirtrobes.item.FossilItem;
+import com.dirtrobes.item.ChromaItem;
 import com.dirtrobes.item.GemItem;
 import com.dirtrobes.item.NatureGemItem;
 import com.dirtrobes.species.Nature;
@@ -145,6 +146,10 @@ public final class ModRegistry {
             props -> new NatureGemItem(Nature.LIVELY, props), new Item.Properties());
     public static final List<DeferredItem<NatureGemItem>> NATURE_GEMS = List.of(SELENITE, MOISSANITE, PLATINUM, ZIRCON, JADE, AMBER, RHODONITE, GARNET, SPINAL, AGATE, COBALT, SODALITE, AZURITE, FLUORITE, SYLVITE, CITRINE);
 
+    public static final DeferredItem<ChromaItem> CHROMA_1 = ITEMS.registerItem("chroma_1", props -> new ChromaItem(0, props), new Item.Properties());
+    public static final DeferredItem<ChromaItem> CHROMA_2 = ITEMS.registerItem("chroma_2", props -> new ChromaItem(1, props), new Item.Properties());
+    public static final DeferredItem<ChromaItem> CHROMA_3 = ITEMS.registerItem("chroma_3", props -> new ChromaItem(2, props), new Item.Properties());
+
     public static final DeferredItem<BlockItem> MINERAL_DEPOSIT_ITEM = ITEMS.registerSimpleBlockItem("mineral_deposit", MINERAL_DEPOSIT);
     public static final DeferredItem<BlockItem> DEEPSLATE_MINERAL_DEPOSIT_ITEM = ITEMS.registerSimpleBlockItem("deepslate_mineral_deposit", DEEPSLATE_MINERAL_DEPOSIT);
     public static final DeferredItem<BlockItem> INCUBATOR_ITEM = ITEMS.registerSimpleBlockItem("incubator", INCUBATOR);
@@ -185,6 +190,9 @@ public final class ModRegistry {
                 output.accept(VORTEX_ITEM.get());
                 GEMS.forEach(g -> output.accept(g.get()));
                 NATURE_GEMS.forEach(g -> output.accept(g.get()));
+                output.accept(CHROMA_1.get());
+                output.accept(CHROMA_2.get());
+                output.accept(CHROMA_3.get());
                 output.accept(KRAWL_SPAWN_EGG.get());
                 FOSSILS.values().forEach(f -> output.accept(f.get()));
                 MINERALS.forEach(m -> output.accept(m.get()));
