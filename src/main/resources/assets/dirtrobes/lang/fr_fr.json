@@ -263,7 +263,7 @@
   "direction.dirtrobes.above": "au-dessus",
   "direction.dirtrobes.below": "en dessous",
   "direction.dirtrobes.level": "à ta hauteur",
-  "message.dirtrobes.team_leader_block": "Un Krawl chef est tout proche : impossible de ranger tes Spectrobes !",
+  "message.dirtrobes.team_leader_block": "Un Krawl chef te combat : impossible de ranger tes Spectrobes !",
   "message.dirtrobes.krawl_leader": "%s, chef Krawl · niv. %s",
   "stat.dirtrobes.speed": "VIT",
   "message.dirtrobes.card.nature": "Nature : %s (+10 %% %s, −10 %% %s)",

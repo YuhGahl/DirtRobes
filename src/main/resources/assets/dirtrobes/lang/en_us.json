@@ -263,7 +263,7 @@
   "direction.dirtrobes.above": "above",
   "direction.dirtrobes.below": "below",
   "direction.dirtrobes.level": "at your level",
-  "message.dirtrobes.team_leader_block": "A Krawl leader is nearby: you can't store your Spectrobes!",
+  "message.dirtrobes.team_leader_block": "A Krawl leader is fighting you: you can't store your Spectrobes!",
   "message.dirtrobes.krawl_leader": "%s, Krawl leader · lv. %s",
   "stat.dirtrobes.speed": "SPD",
   "message.dirtrobes.card.nature": "Nature: %s (+10%% %s, −10%% %s)",

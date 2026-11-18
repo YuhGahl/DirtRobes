@@ -225,10 +225,11 @@ public final class PrizmodTeam {
         if (any) changed(player);
     }
 
-    /** Un Krawl chef à proximité empêche de ranger ses Spectrobes (on ne fuit pas un chef). */
+    /** Un Krawl chef qui combat le joueur ou ses Spectrobes empêche de les ranger (on ne fuit pas un chef). */
     public static boolean blockedByLeader(ServerPlayer player) {
         return !player.level().getEntitiesOfClass(com.dirtrobes.krawl.KrawlEntity.class, player.getBoundingBox().inflate(24),
-                k -> k.isAlive() && k.isLeader()).isEmpty();
+                k -> k.isAlive() && k.isLeader() && k.getTarget() != null
+                        && (k.getTarget() == player || k.getTarget() instanceof SpectrobeEntity s && s.isOwnedBy(player))).isEmpty();
     }
 
     /** À la déconnexion : range tous les Spectrobes dehors pour ne pas les perdre. */

@@ -264,6 +264,8 @@ public class DirtRobesGameTests {
         KrawlEntity leader = KrawlEntity.create(helper.getLevel(), KrawlManager.byName("otorso"), 30, helper.absoluteVec(new Vec3(15.5, 1, 15.5)));
         KrawlEntity minion = KrawlEntity.create(helper.getLevel(), KrawlManager.byName("swar"), 5, helper.absoluteVec(new Vec3(13.5, 1, 15.5)));
         helper.assertTrue(leader.isLeader(), "Otorso devrait être un chef");
+        helper.assertTrue(PrizmodTeam.toggle(player, 0) && PrizmodTeam.toggle(player, 0), "Un chef qui ne combat pas ne bloque rien");
+        leader.setTarget(player);
         helper.assertTrue(!PrizmodTeam.toggle(player, 0), "Impossible de ranger un Spectrobe près d'un chef");
         helper.succeedWhen(() -> helper.assertTrue(minion.hasEffect(MobEffects.DAMAGE_BOOST), "Le Krawl proche du chef devrait être renforcé"));
     }
