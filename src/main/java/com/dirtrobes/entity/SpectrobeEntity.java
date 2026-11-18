@@ -377,6 +377,23 @@ public class SpectrobeEntity extends TamableAnimal implements BedrockPosable {
         return after - before;
     }
 
+    /** Gemme de nature : remplace la nature. Renvoie false (gemme non consommée) si c'est déjà la sienne. */
+    public boolean feedNatureGem(com.dirtrobes.item.NatureGemItem gem, Player player) {
+        if (gem.nature() == nature) {
+            player.displayClientMessage(Component.translatable("message.dirtrobes.nature_same", getDisplayName(),
+                    Component.translatable(nature.translationKey())), true);
+            return false;
+        }
+        setNature(gem.nature());
+        player.displayClientMessage(Component.translatable("message.dirtrobes.nature_changed", getDisplayName(),
+                Component.translatable(nature.translationKey())).withStyle(ChatFormatting.AQUA), true);
+        if (level() instanceof ServerLevel server) {
+            server.sendParticles(ParticleTypes.ENCHANT, getX(), getY() + getBbHeight(), getZ(), 30, 0.4, 0.4, 0.4, 0.5);
+        }
+        level().playSound(null, blockPosition(), SoundEvents.AMETHYST_BLOCK_RESONATE, SoundSource.NEUTRAL, 1.0f, 1.2f);
+        return true;
+    }
+
     /** Gemme : monte ou baisse les EV d'une stat, plus un peu d'XP. */
     public void feedGem(com.dirtrobes.item.GemItem gem, Player player) {
         int changed = addEv(gem.stat(), gem.evChange());

@@ -305,6 +305,24 @@ public class DirtRobesGameTests {
         helper.succeed();
     }
 
+    /** Gemmes de nature : 16 gemmes, une par nature ; donner la gemme change la nature et les stats. */
+    @GameTest(template = "platform")
+    public static void natureGemsChangeNature(GameTestHelper helper) {
+        helper.assertTrue(ModRegistry.NATURE_GEMS.size() == Nature.values().length, "Une gemme par nature attendue");
+        helper.assertTrue(ModRegistry.NATURE_GEMS.stream().map(g -> g.get().nature()).distinct().count() == Nature.values().length,
+                "Chaque nature doit avoir sa propre gemme");
+        ServerPlayer player = placePlayer(helper, 10.5, 10.5);
+        Species adult = SpeciesManager.all().stream().filter(s -> s.stage() == Stage.ADULT).findFirst().orElseThrow();
+        SpectrobeEntity s = SpectrobeEntity.create(helper.getLevel(), adult, 40, player, helper.absoluteVec(new Vec3(4.5, 1, 4.5)));
+        s.setNature(Nature.BALANCED);
+        int spd = s.speedStat();
+        helper.assertTrue(s.feedNatureGem(ModRegistry.SYLVITE.get(), player), "La Sylvite devrait changer la nature");
+        helper.assertTrue(s.getNature() == Nature.NIMBLE, "Nature Agile attendue après la Sylvite, " + s.getNature());
+        helper.assertTrue(s.speedStat() > spd, "La VIT devrait monter avec la nature Agile");
+        helper.assertTrue(!s.feedNatureGem(ModRegistry.SYLVITE.get(), player), "Une 2e Sylvite ne devrait pas être consommée");
+        helper.succeed();
+    }
+
     /** Logique du mini-jeu de fouille. */
     @GameTest(template = "platform")
     public static void excavationLogic(GameTestHelper helper) {

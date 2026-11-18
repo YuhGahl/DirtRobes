@@ -6,6 +6,8 @@ import com.dirtrobes.block.IncubatorBlockEntity;
 import com.dirtrobes.entity.SpectrobeEntity;
 import com.dirtrobes.item.FossilItem;
 import com.dirtrobes.item.GemItem;
+import com.dirtrobes.item.NatureGemItem;
+import com.dirtrobes.species.Nature;
 import com.dirtrobes.krawl.KrawlEntity;
 import com.dirtrobes.krawl.VortexBlock;
 import com.dirtrobes.krawl.VortexBlockEntity;
@@ -109,6 +111,40 @@ public final class ModRegistry {
             props -> new GemItem(MineralItem.Stat.SPEED, false, props), new Item.Properties());
     public static final List<DeferredItem<GemItem>> GEMS = List.of(RUBY, SAPPHIRE, EMERALD, TOPAZ, ONYX, OPAL, PEARL, GRAPHITE);
 
+    public static final DeferredItem<NatureGemItem> QUARTZ = ITEMS.registerItem("quartz",
+            props -> new NatureGemItem(Nature.BALANCED, props), new Item.Properties());
+    public static final DeferredItem<NatureGemItem> DIAMOND = ITEMS.registerItem("diamond",
+            props -> new NatureGemItem(Nature.STEADY, props), new Item.Properties());
+    public static final DeferredItem<NatureGemItem> PLATINUM = ITEMS.registerItem("platinum",
+            props -> new NatureGemItem(Nature.COMPOSED, props), new Item.Properties());
+    public static final DeferredItem<NatureGemItem> ZIRCON = ITEMS.registerItem("zircon",
+            props -> new NatureGemItem(Nature.CONSTANT, props), new Item.Properties());
+    public static final DeferredItem<NatureGemItem> JADE = ITEMS.registerItem("jade",
+            props -> new NatureGemItem(Nature.PEACEFUL, props), new Item.Properties());
+    public static final DeferredItem<NatureGemItem> AMBER = ITEMS.registerItem("amber",
+            props -> new NatureGemItem(Nature.ENDURING, props), new Item.Properties());
+    public static final DeferredItem<NatureGemItem> CORAL = ITEMS.registerItem("coral",
+            props -> new NatureGemItem(Nature.PLACID, props), new Item.Properties());
+    public static final DeferredItem<NatureGemItem> GARNET = ITEMS.registerItem("garnet",
+            props -> new NatureGemItem(Nature.RECKLESS, props), new Item.Properties());
+    public static final DeferredItem<NatureGemItem> SPINAL = ITEMS.registerItem("spinal",
+            props -> new NatureGemItem(Nature.FIERY, props), new Item.Properties());
+    public static final DeferredItem<NatureGemItem> AGATE = ITEMS.registerItem("agate",
+            props -> new NatureGemItem(Nature.HULKING, props), new Item.Properties());
+    public static final DeferredItem<NatureGemItem> COBALT = ITEMS.registerItem("cobalt",
+            props -> new NatureGemItem(Nature.WARY, props), new Item.Properties());
+    public static final DeferredItem<NatureGemItem> LAZULI = ITEMS.registerItem("lazuli",
+            props -> new NatureGemItem(Nature.RESERVED, props), new Item.Properties());
+    public static final DeferredItem<NatureGemItem> AZURITE = ITEMS.registerItem("azurite",
+            props -> new NatureGemItem(Nature.UNSHAKABLE, props), new Item.Properties());
+    public static final DeferredItem<NatureGemItem> FLUORITE = ITEMS.registerItem("fluorite",
+            props -> new NatureGemItem(Nature.JITTERY, props), new Item.Properties());
+    public static final DeferredItem<NatureGemItem> SYLVITE = ITEMS.registerItem("sylvite",
+            props -> new NatureGemItem(Nature.NIMBLE, props), new Item.Properties());
+    public static final DeferredItem<NatureGemItem> CITRINE = ITEMS.registerItem("citrine",
+            props -> new NatureGemItem(Nature.LIVELY, props), new Item.Properties());
+    public static final List<DeferredItem<NatureGemItem>> NATURE_GEMS = List.of(QUARTZ, DIAMOND, PLATINUM, ZIRCON, JADE, AMBER, CORAL, GARNET, SPINAL, AGATE, COBALT, LAZULI, AZURITE, FLUORITE, SYLVITE, CITRINE);
+
     public static final DeferredItem<BlockItem> MINERAL_DEPOSIT_ITEM = ITEMS.registerSimpleBlockItem("mineral_deposit", MINERAL_DEPOSIT);
     public static final DeferredItem<BlockItem> DEEPSLATE_MINERAL_DEPOSIT_ITEM = ITEMS.registerSimpleBlockItem("deepslate_mineral_deposit", DEEPSLATE_MINERAL_DEPOSIT);
     public static final DeferredItem<BlockItem> INCUBATOR_ITEM = ITEMS.registerSimpleBlockItem("incubator", INCUBATOR);
@@ -148,6 +184,7 @@ public final class ModRegistry {
                 output.accept(DEEPSLATE_MINERAL_DEPOSIT_ITEM.get());
                 output.accept(VORTEX_ITEM.get());
                 GEMS.forEach(g -> output.accept(g.get()));
+                NATURE_GEMS.forEach(g -> output.accept(g.get()));
                 output.accept(KRAWL_SPAWN_EGG.get());
                 FOSSILS.values().forEach(f -> output.accept(f.get()));
                 MINERALS.forEach(m -> output.accept(m.get()));

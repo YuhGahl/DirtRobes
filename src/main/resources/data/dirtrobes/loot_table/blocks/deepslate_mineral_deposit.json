@@ -161,6 +161,81 @@
           "name": "dirtrobes:graphite"
         }
       ]
+    },
+    {
+      "rolls": 1,
+      "conditions": [
+        {
+          "condition": "minecraft:random_chance",
+          "chance": 0.04
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "dirtrobes:quartz"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "dirtrobes:diamond"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "dirtrobes:platinum"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "dirtrobes:zircon"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "dirtrobes:jade"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "dirtrobes:amber"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "dirtrobes:coral"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "dirtrobes:garnet"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "dirtrobes:spinal"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "dirtrobes:agate"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "dirtrobes:cobalt"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "dirtrobes:lazuli"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "dirtrobes:azurite"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "dirtrobes:fluorite"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "dirtrobes:sylvite"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "dirtrobes:citrine"
+        }
+      ]
     }
   ]
 }
