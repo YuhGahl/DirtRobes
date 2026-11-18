@@ -320,7 +320,7 @@
   "key.dirtrobes.team_down": "Équipe : Spectrobe suivant",
   "key.dirtrobes.team_toggle": "Équipe : sortir / ranger",
   "key.dirtrobes.team_summary": "Équipe : ouvrir la fiche",
-  "gui.dirtrobes.hud.keys": "↑↓ choisir · V sortir · N fiche",
+  "gui.dirtrobes.hud.keys": "↑↓ choisir · V sortir · N fiche · J déplacer",
   "gui.dirtrobes.summary.title": "Fiche du Spectrobe",
   "gui.dirtrobes.summary.tab.info": "Infos",
   "gui.dirtrobes.summary.tab.stats": "Stats",
@@ -338,5 +338,9 @@
   "gui.dirtrobes.summary.evolves_into": "Évolue en %s",
   "gui.dirtrobes.summary.evolves_at": "au niveau %s",
   "gui.dirtrobes.summary.evo_ready": "Prêt à évoluer !",
-  "gui.dirtrobes.summary.evo_locked": "Pas encore…"
+  "gui.dirtrobes.summary.evo_locked": "Pas encore…",
+  "key.dirtrobes.hud_layout": "Déplacer le bandeau d'équipe",
+  "gui.dirtrobes.hud_layout.title": "Placement du bandeau d'équipe",
+  "gui.dirtrobes.hud_layout.hint": "Fais glisser le bandeau où tu veux, puis « Terminé ».",
+  "gui.dirtrobes.hud_layout.reset": "Par défaut"
 }

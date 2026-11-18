@@ -14,7 +14,7 @@ import net.minecraft.network.chat.Component;
 import java.util.List;
 
 /**
- * Bandeau d'équipe à gauche de l'écran : une ligne par Spectrobe, avec son modèle en miniature,
+ * Bandeau d'équipe (à droite par défaut, déplaçable avec la touche J) : une ligne par Spectrobe, avec son modèle en miniature,
  * son niveau et ses PV. Le Spectrobe sélectionné (flèches ↑/↓) est encadré ; ceux qui sont dehors sont éclairés.
  */
 public final class TeamHud {
@@ -23,14 +23,39 @@ public final class TeamHud {
     private static final int ROW_W = 92;
     private static final int ROW_H = 26;
 
+    /** Rectangle occupé par le bandeau : {x, y, largeur, hauteur}. */
+    public static int[] bounds(int screenW, int screenH) {
+        int rows = Math.max(1, ClientTeam.members().isEmpty() ? 3 : ClientTeam.members().size());
+        int h = rows * (ROW_H + 2) + 10;
+        int x = Math.round((screenW - ROW_W - 8) * HudLayout.teamX()) + 4;
+        int y = Math.round((screenH - h - 8) * HudLayout.teamY()) + 4;
+        return new int[]{x, y, ROW_W, h};
+    }
+
     public static void render(GuiGraphics g, DeltaTracker delta) {
         Minecraft mc = Minecraft.getInstance();
-        if (mc.player == null || mc.options.hideGui || mc.screen != null && !(mc.screen instanceof net.minecraft.client.gui.screens.ChatScreen)) return;
+        if (mc.player == null || mc.options.hideGui) return;
+        if (mc.screen != null && !(mc.screen instanceof net.minecraft.client.gui.screens.ChatScreen)) return;
+        if (ClientTeam.members().isEmpty()) return;
+        draw(g, false);
+    }
+
+    /** Dessine le bandeau à sa position ; en mode « placement », montre des emplacements vides si l'équipe est vide. */
+    public static void draw(GuiGraphics g, boolean placing) {
+        Minecraft mc = Minecraft.getInstance();
         List<TeamSummary> members = ClientTeam.members();
-        if (members.isEmpty()) return;
         Font font = mc.font;
-        int x = 4;
-        int y = g.guiHeight() / 2 - members.size() * (ROW_H + 2) / 2;
+        int[] box = bounds(g.guiWidth(), g.guiHeight());
+        int x = box[0];
+        int y = box[1];
+        if (members.isEmpty() && placing) {
+            for (int i = 0; i < 3; i++) {
+                int ry = y + i * (ROW_H + 2);
+                g.fill(x, ry, x + ROW_W, ry + ROW_H, 0x90141A22);
+                g.drawString(font, Component.translatable("gui.dirtrobes.prizmod.empty"), x + 8, ry + 9, 0xFF6F8294, false);
+            }
+            return;
+        }
         int selected = ClientTeam.selected();
         for (int i = 0; i < members.size(); i++) {
             TeamSummary m = members.get(i);
@@ -56,6 +81,8 @@ public final class TeamHud {
             GuiDraw.bar(g, x + 30, ry + ROW_H - 4, ROW_W - 34, 2, frac, GuiDraw.hpColor(frac, m.knockedOut()), 0xFF0D1117);
             if (m.knockedOut()) g.drawString(font, "K.O.", x + ROW_W - 22, ry + 13, 0xFFFF8A7A, true);
         }
-        g.drawString(font, Component.translatable("gui.dirtrobes.hud.keys"), x, y + members.size() * (ROW_H + 2) + 2, 0x99D8E2EC, true);
+        Component keys = Component.translatable("gui.dirtrobes.hud.keys");
+        int kx = HudLayout.teamX() > 0.5f ? x + ROW_W - font.width(keys) : x;
+        g.drawString(font, keys, kx, y + members.size() * (ROW_H + 2) + 1, 0x99D8E2EC, true);
     }
 }

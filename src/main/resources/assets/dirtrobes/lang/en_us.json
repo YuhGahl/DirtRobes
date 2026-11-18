@@ -320,7 +320,7 @@
   "key.dirtrobes.team_down": "Team: next Spectrobe",
   "key.dirtrobes.team_toggle": "Team: send out / store",
   "key.dirtrobes.team_summary": "Team: open summary",
-  "gui.dirtrobes.hud.keys": "↑↓ select · V send · N summary",
+  "gui.dirtrobes.hud.keys": "↑↓ select · V send · N summary · J move",
   "gui.dirtrobes.summary.title": "Spectrobe summary",
   "gui.dirtrobes.summary.tab.info": "Info",
   "gui.dirtrobes.summary.tab.stats": "Stats",
@@ -338,5 +338,9 @@
   "gui.dirtrobes.summary.evolves_into": "Evolves into %s",
   "gui.dirtrobes.summary.evolves_at": "at level %s",
   "gui.dirtrobes.summary.evo_ready": "Ready to evolve!",
-  "gui.dirtrobes.summary.evo_locked": "Not yet…"
+  "gui.dirtrobes.summary.evo_locked": "Not yet…",
+  "key.dirtrobes.hud_layout": "Move the team bar",
+  "gui.dirtrobes.hud_layout.title": "Team bar placement",
+  "gui.dirtrobes.hud_layout.hint": "Drag the bar where you want it, then press Done.",
+  "gui.dirtrobes.hud_layout.reset": "Default"
 }

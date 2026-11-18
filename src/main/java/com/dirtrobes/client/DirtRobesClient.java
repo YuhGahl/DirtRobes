@@ -4,6 +4,7 @@ import com.mojang.blaze3d.platform.InputConstants;
 import com.dirtrobes.DirtRobes;
 import com.dirtrobes.client.hud.ChGaugeHud;
 import com.dirtrobes.client.hud.TeamHud;
+import com.dirtrobes.client.screen.HudLayoutScreen;
 import com.dirtrobes.client.screen.SpectrobeSummaryScreen;
 import com.dirtrobes.client.model.ModelRepository;
 import com.dirtrobes.client.render.BedrockEntityRenderer;
@@ -36,6 +37,8 @@ public class DirtRobesClient {
             InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_DOWN, "key.categories.dirtrobes");
     public static final KeyMapping TEAM_TOGGLE = new KeyMapping("key.dirtrobes.team_toggle",
             InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_V, "key.categories.dirtrobes");
+    public static final KeyMapping HUD_LAYOUT = new KeyMapping("key.dirtrobes.hud_layout",
+            InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_J, "key.categories.dirtrobes");
     public static final KeyMapping TEAM_SUMMARY = new KeyMapping("key.dirtrobes.team_summary",
             InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_N, "key.categories.dirtrobes");
 
@@ -72,6 +75,7 @@ public class DirtRobesClient {
         event.register(TEAM_DOWN);
         event.register(TEAM_TOGGLE);
         event.register(TEAM_SUMMARY);
+        event.register(HUD_LAYOUT);
     }
 
     private static void onClientTick(ClientTickEvent.Post event) {
@@ -86,6 +90,7 @@ public class DirtRobesClient {
         while (TEAM_TOGGLE.consumeClick()) {
             if (!ClientTeam.members().isEmpty()) PacketDistributor.sendToServer(new ModNetwork.TeamActionPayload(ClientTeam.selected()));
         }
+        while (HUD_LAYOUT.consumeClick()) mc.setScreen(new HudLayoutScreen());
         while (TEAM_SUMMARY.consumeClick()) {
             if (!ClientTeam.members().isEmpty()) mc.setScreen(new SpectrobeSummaryScreen(null, ClientTeam.selected()));
         }
