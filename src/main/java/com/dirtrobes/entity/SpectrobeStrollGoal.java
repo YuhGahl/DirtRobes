@@ -26,6 +26,20 @@ public class SpectrobeStrollGoal extends WaterAvoidingRandomStrollGoal {
     @Nullable
     @Override
     protected Vec3 getPosition() {
+        if (spectrobe.isFlyer()) {
+            // vol : un point en l'air ou au sol, à portée d'ailes
+            for (int i = 0; i < 10; i++) {
+                Vec3 look = spectrobe.getViewVector(0f);
+                Vec3 pos = net.minecraft.world.entity.ai.util.HoverRandomPos.getPos(mob, 8, 5, look.x, look.z, (float) (Math.PI / 2), 3, 1);
+                if (pos == null) pos = net.minecraft.world.entity.ai.util.AirAndWaterRandomPos.getPos(mob, 8, 4, -2, look.x, look.z, Math.PI / 2);
+                if (pos == null) continue;
+                if (spectrobe.isPenResident() && spectrobe.pen() != null && !spectrobe.pen().contains(pos)) continue;
+                LivingEntity o = spectrobe.getOwner();
+                if (!spectrobe.isPenResident() && o != null && pos.distanceToSqr(o.position()) < OWNER_CLEARANCE * OWNER_CLEARANCE) continue;
+                return pos;
+            }
+            return null;
+        }
         if (spectrobe.isPenResident() && spectrobe.pen() != null) {
             // Points à pied depuis là où il est, et dans l'enclos : jamais de téléportation dans une grotte.
             for (int i = 0; i < 10; i++) {

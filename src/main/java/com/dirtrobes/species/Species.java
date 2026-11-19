@@ -24,8 +24,15 @@ public record Species(
         int baseDefense,
         int baseSpeed,
         float scale,
-        boolean fromFossil
+        boolean fromFossil,
+        boolean flying
 ) {
+    /** Copie avec un autre mode de déplacement (tests, commandes). */
+    public Species withFlying(boolean value) {
+        return new Species(id, name, property, stage, family, evolvesInto, evolutionLevel, searchRange,
+                baseHp, baseAttack, baseDefense, baseSpeed, scale, fromFossil, value);
+    }
+
     public static Species fromJson(ResourceLocation id, JsonObject json) {
         JsonObject stats = GsonHelper.getAsJsonObject(json, "base_stats", new JsonObject());
         Stage stage = Stage.byId(GsonHelper.getAsString(json, "stage", "child"));
@@ -44,7 +51,8 @@ public record Species(
                 GsonHelper.getAsInt(stats, "defense", 50),
                 GsonHelper.getAsInt(stats, "speed", defaultSpeed(GsonHelper.getAsInt(stats, "attack", 50), GsonHelper.getAsInt(stats, "defense", 50))),
                 GsonHelper.getAsFloat(json, "scale", stage.scale()),
-                GsonHelper.getAsBoolean(json, "from_fossil", stage == Stage.CHILD)
+                GsonHelper.getAsBoolean(json, "from_fossil", stage == Stage.CHILD),
+                GsonHelper.getAsBoolean(json, "flying", false)
         );
     }
 

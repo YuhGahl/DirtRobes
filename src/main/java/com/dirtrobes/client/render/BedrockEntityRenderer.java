@@ -170,6 +170,7 @@ public class BedrockEntityRenderer<T extends LivingEntity & BedrockPosable> exte
 
         Poser.PoseType type;
         if (entity.isPoseSleeping()) type = Poser.PoseType.SLEEP;
+        else if (entity.isFlyingNow()) type = entity.getDeltaMovement().horizontalDistanceSqr() > 0.0004 ? Poser.PoseType.FLY : Poser.PoseType.HOVER;
         else if (entity.walkAnimation.speed(pt) > 0.05f) type = Poser.PoseType.WALK;
         else type = Poser.PoseType.STAND;
 

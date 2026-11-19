@@ -442,6 +442,28 @@ public class DirtRobesGameTests {
         });
     }
 
+    /** Vol : une espèce « flying » utilise la navigation aérienne, ne prend pas de dégâts de chute et rejoint son dresseur. */
+    @GameTest(template = "platform", timeoutTicks = 300)
+    public static void flyingSpectrobesFly(GameTestHelper helper) {
+        ServerPlayer player = placePlayer(helper, 16.5, 16.5);
+        Species base = SpeciesManager.all().stream().filter(s -> s.stage() == Stage.ADULT).findFirst().orElseThrow();
+        SpectrobeEntity flyer = SpectrobeEntity.create(helper.getLevel(), base, 20, player, helper.absoluteVec(new Vec3(3.5, 4, 3.5)));
+        flyer.setSpecies(base.withFlying(true), true);
+        helper.assertTrue(flyer.isFlyer(), "Le Spectrobe devrait être volant");
+        helper.assertTrue(flyer.getNavigation() instanceof net.minecraft.world.entity.ai.navigation.FlyingPathNavigation,
+                "Navigation aérienne attendue, " + flyer.getNavigation().getClass().getSimpleName());
+        float hp = flyer.getHealth();
+        helper.runAfterDelay(250, () -> {
+            log("Volant : PV {} → {}, distance au dresseur {}", hp, flyer.getHealth(), String.format("%.1f", flyer.distanceTo(player)));
+            helper.assertTrue(flyer.getHealth() >= hp, "Un volant ne doit pas prendre de dégâts de chute");
+            helper.assertTrue(flyer.distanceTo(player) < 8, "Le volant aurait dû rejoindre son dresseur");
+            flyer.setSpecies(base.withFlying(false), true);
+            helper.assertTrue(!flyer.isFlyer() && !(flyer.getNavigation() instanceof net.minecraft.world.entity.ai.navigation.FlyingPathNavigation),
+                    "Revenu au sol, il doit marcher à nouveau");
+            helper.succeed();
+        });
+    }
+
     /** Logique du mini-jeu de fouille. */
     @GameTest(template = "platform")
     public static void excavationLogic(GameTestHelper helper) {

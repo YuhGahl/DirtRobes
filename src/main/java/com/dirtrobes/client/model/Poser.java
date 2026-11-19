@@ -20,7 +20,7 @@ import java.util.regex.Pattern;
  * q.quadruped_walk(période, amplitude, 'patte_av_g', 'patte_av_d', 'patte_ar_g', 'patte_ar_d').
  */
 public final class Poser {
-    public enum PoseType { STAND, WALK, SLEEP, NONE }
+    public enum PoseType { STAND, WALK, SLEEP, FLY, HOVER, NONE }
 
     public static final class PoseDef {
         public final String name;
@@ -115,6 +115,8 @@ public final class Poser {
         }
         if (fallback != null) return fallback;
         if (type == PoseType.WALK) return select(PoseType.STAND, battle);
+        if (type == PoseType.FLY) return select(PoseType.HOVER, battle);
+        if (type == PoseType.HOVER) return select(PoseType.WALK, battle);
         return poses.isEmpty() ? null : poses.values().iterator().next();
     }
 }

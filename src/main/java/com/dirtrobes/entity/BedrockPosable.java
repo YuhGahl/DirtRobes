@@ -31,6 +31,11 @@ public interface BedrockPosable {
     @Nullable
     Object clientAnimState();
 
+    /** En vol (espèce volante, pas au sol) : le moteur cherche les poses « FLY » puis « HOVER ». */
+    default boolean isFlyingNow() {
+        return false;
+    }
+
     /** Couleur Chroma : 0 = normale, 1 = spéciale 1, 2 = spéciale 2. */
     default int colorVariant() {
         return 0;

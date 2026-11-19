@@ -68,6 +68,7 @@ public class SpectrobeEntity extends TamableAnimal implements BedrockPosable {
     private static final int FLAG_SLEEPING = 1;
     private static final int FLAG_BATTLE = 2;
     private static final int FLAG_KO = 4;
+    private static final int FLAG_FLYER = 8;
 
     public static final byte EVENT_CRY = 110;
     public static final byte EVENT_SPECIAL = 111;
@@ -93,8 +94,57 @@ public class SpectrobeEntity extends TamableAnimal implements BedrockPosable {
     /** Tick client du dernier cri / attaque spéciale reçu (pour les animations ponctuelles). */
     public int lastCryTick = -1000;
 
+    private final net.minecraft.world.entity.ai.navigation.PathNavigation groundNavigation;
+    private final net.minecraft.world.entity.ai.control.MoveControl groundMoveControl;
+    @Nullable
+    private net.minecraft.world.entity.ai.navigation.FlyingPathNavigation flyingNavigation;
+    @Nullable
+    private net.minecraft.world.entity.ai.control.FlyingMoveControl flyingMoveControl;
+
     public SpectrobeEntity(EntityType<? extends TamableAnimal> type, Level level) {
         super(type, level);
+        this.groundNavigation = this.navigation;
+        this.groundMoveControl = this.moveControl;
+    }
+
+    /** Espèce volante : vole pour se déplacer (navigation aérienne), se pose quand il ne fait rien, pas de dégâts de chute. */
+    public boolean isFlyer() {
+        return getFlag(FLAG_FLYER);
+    }
+
+    private void applyMovementMode(boolean flyer) {
+        setFlag(FLAG_FLYER, flyer);
+        if (flyer) {
+            if (flyingNavigation == null) {
+                flyingNavigation = new net.minecraft.world.entity.ai.navigation.FlyingPathNavigation(this, level());
+                flyingNavigation.setCanOpenDoors(false);
+                flyingNavigation.setCanFloat(true);
+                flyingNavigation.setCanPassDoors(true);
+                flyingMoveControl = new net.minecraft.world.entity.ai.control.FlyingMoveControl(this, 20, false);
+            }
+            this.navigation = flyingNavigation;
+            this.moveControl = flyingMoveControl;
+        } else {
+            if (this.navigation != groundNavigation) this.navigation.stop();
+            this.navigation = groundNavigation;
+            this.moveControl = groundMoveControl;
+            setNoGravity(false);
+        }
+    }
+
+    @Override
+    public boolean isFlyingNow() {
+        return isFlyer() && !onGround() && !isInWater();
+    }
+
+    @Override
+    public boolean causeFallDamage(float distance, float multiplier, DamageSource source) {
+        return !isFlyer() && super.causeFallDamage(distance, multiplier, source);
+    }
+
+    @Override
+    protected void checkFallDamage(double y, boolean onGround, BlockState state, BlockPos pos) {
+        if (!isFlyer()) super.checkFallDamage(y, onGround, state, pos);
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -103,7 +153,8 @@ public class SpectrobeEntity extends TamableAnimal implements BedrockPosable {
                 .add(Attributes.MOVEMENT_SPEED, 0.3)
                 .add(Attributes.ATTACK_DAMAGE, 2.0)
                 .add(Attributes.ARMOR, 0.0)
-                .add(Attributes.FOLLOW_RANGE, 24.0);
+                .add(Attributes.FOLLOW_RANGE, 24.0)
+                .add(Attributes.FLYING_SPEED, 0.4);
     }
 
     @Override
@@ -314,6 +365,7 @@ public class SpectrobeEntity extends TamableAnimal implements BedrockPosable {
         this.entityData.set(DATA_SPECIES, species.id().toString());
         this.entityData.set(DATA_PROPERTY, (byte) species.property().ordinal());
         this.entityData.set(DATA_STAGE, (byte) species.stage().ordinal());
+        applyMovementMode(species.flying());
         recomputeStats(fullHeal);
     }
 
@@ -428,6 +480,7 @@ public class SpectrobeEntity extends TamableAnimal implements BedrockPosable {
         setBase(Attributes.ATTACK_DAMAGE, StatCalc.toAttackDamage(attackStat()));
         setBase(Attributes.ARMOR, StatCalc.toArmor(defenseStat()));
         setBase(Attributes.MOVEMENT_SPEED, StatCalc.toMovementSpeed(speedStat()));
+        setBase(Attributes.FLYING_SPEED, StatCalc.toMovementSpeed(speedStat()) * 1.6);
         setBase(Attributes.SCALE, s.scale());
         if (fullHeal) setHealth(getMaxHealth());
         else setHealth(Math.min(getHealth(), getMaxHealth()));
