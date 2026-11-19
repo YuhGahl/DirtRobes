@@ -50,7 +50,9 @@ public class PcScreen extends Screen {
         data = payload;
         ClientTeam.onSync(payload.team(), false, ClientTeam.support());
         Minecraft mc = Minecraft.getInstance();
-        if (mc.screen instanceof PcScreen screen) {
+        if (mc.screen instanceof PenScreen pen) {
+            pen.onServerPen(payload.pen());
+        } else if (mc.screen instanceof PcScreen screen) {
             screen.rebuildWidgets();
         } else if (payload.open()) {
             mc.setScreen(new PcScreen());
@@ -65,6 +67,9 @@ public class PcScreen extends Screen {
         int gx = gridX();
         addRenderableWidget(Button.builder(Component.literal("◀"), b -> changeBox(-1)).bounds(gx, top + 6, 18, 14).build());
         addRenderableWidget(Button.builder(Component.literal("▶"), b -> changeBox(1)).bounds(gx + COLS * CELL - 18, top + 6, 18, 14).build());
+        addRenderableWidget(Button.builder(Component.translatable("gui.dirtrobes.pc.pen_button"), b -> {
+            if (minecraft != null && data != null) minecraft.setScreen(new PenScreen(this, data.pos(), data.pen()));
+        }).bounds(left + W - 78, top + 6, 70, 14).build());
     }
 
     private void changeBox(int delta) {
@@ -206,6 +211,7 @@ public class PcScreen extends Screen {
         // bas de l'écran : état de l'enclos et aide
         Component pen = data.hasPen() ? Component.translatable("gui.dirtrobes.pc.pen_on", data.stored())
                 : Component.translatable("gui.dirtrobes.pc.pen_off");
+        if (minecraft != null && minecraft.screen instanceof PenScreen) return;
         g.drawString(font, pen, gridX(), top + H - 26, data.hasPen() ? 0xFF7FE08A : 0xFFE8C84A, false);
         g.drawString(font, Component.translatable(heldArea >= 0 ? "gui.dirtrobes.pc.hint_place" : "gui.dirtrobes.pc.hint_pick"),
                 gridX(), top + H - 14, 0xFF8FA6B8, false);
@@ -258,6 +264,11 @@ public class PcScreen extends Screen {
     public void removed() {
         heldArea = -1;
         super.removed();
+    }
+
+    @Nullable
+    public static LabNetwork.PcSyncPayload data() {
+        return data;
     }
 
     @Nullable

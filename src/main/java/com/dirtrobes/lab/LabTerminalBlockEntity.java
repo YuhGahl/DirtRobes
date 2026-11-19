@@ -164,7 +164,7 @@ public class LabTerminalBlockEntity extends BlockEntity {
         SpectrobeEntity s = ModRegistry.SPECTROBE.get().create(server);
         if (s == null || pen == null) return;
         s.load(tag);
-        Vec3 spot = pen.randomGroundSpot(server, s, server.random);
+        Vec3 spot = pen.spawnSpot(server, s, server.random);
         if (spot == null) return;
         s.moveTo(spot.x, spot.y, spot.z, server.random.nextFloat() * 360f, 0f);
         s.setPenResident(worldPosition, pen);

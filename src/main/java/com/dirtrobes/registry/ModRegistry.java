@@ -8,7 +8,6 @@ import com.dirtrobes.item.FossilItem;
 import com.dirtrobes.item.ChromaItem;
 import com.dirtrobes.lab.LabTerminalBlock;
 import com.dirtrobes.lab.LabTerminalBlockEntity;
-import com.dirtrobes.lab.PenMarkerItem;
 import com.dirtrobes.item.CombatItem;
 import com.dirtrobes.item.GemItem;
 import com.dirtrobes.item.NatureGemItem;
@@ -173,7 +172,6 @@ public final class ModRegistry {
     public static final DeferredItem<BlockItem> MINERAL_DEPOSIT_ITEM = ITEMS.registerSimpleBlockItem("mineral_deposit", MINERAL_DEPOSIT);
     public static final DeferredItem<BlockItem> DEEPSLATE_MINERAL_DEPOSIT_ITEM = ITEMS.registerSimpleBlockItem("deepslate_mineral_deposit", DEEPSLATE_MINERAL_DEPOSIT);
     public static final DeferredItem<BlockItem> LAB_TERMINAL_ITEM = ITEMS.registerSimpleBlockItem("lab_terminal", LAB_TERMINAL);
-    public static final DeferredItem<PenMarkerItem> PEN_MARKER = ITEMS.registerItem("pen_marker", PenMarkerItem::new, new Item.Properties().stacksTo(1));
     public static final DeferredItem<BlockItem> INCUBATOR_ITEM = ITEMS.registerSimpleBlockItem("incubator", INCUBATOR);
     public static final DeferredItem<BlockItem> VORTEX_ITEM = ITEMS.registerSimpleBlockItem("krawl_vortex", VORTEX);
     public static final DeferredItem<DeferredSpawnEggItem> KRAWL_SPAWN_EGG = ITEMS.registerItem("krawl_spawn_egg",
@@ -211,7 +209,6 @@ public final class ModRegistry {
                 output.accept(DEEPSLATE_MINERAL_DEPOSIT_ITEM.get());
                 output.accept(VORTEX_ITEM.get());
                 output.accept(LAB_TERMINAL_ITEM.get());
-                output.accept(PEN_MARKER.get());
                 GEMS.forEach(g -> output.accept(g.get()));
                 NATURE_GEMS.forEach(g -> output.accept(g.get()));
                 COMBAT_ITEMS.forEach(i -> output.accept(i.get()));

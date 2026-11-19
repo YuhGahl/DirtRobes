@@ -406,7 +406,13 @@ public class DirtRobesGameTests {
         BlockPos terminalPos = new BlockPos(1, 1, 1);
         helper.setBlock(terminalPos, ModRegistry.LAB_TERMINAL.get());
         com.dirtrobes.lab.LabTerminalBlockEntity terminal = helper.getBlockEntity(terminalPos);
-        com.dirtrobes.lab.Pen pen = com.dirtrobes.lab.Pen.of(helper.absolutePos(new BlockPos(8, 1, 8)), helper.absolutePos(new BlockPos(15, 3, 15)));
+        // Enclos réglé comme dans l'interface : coin à (+7, 0, +7) du terminal, 8 × 3 × 8, spawn au milieu du sol
+        com.dirtrobes.lab.Pen pen = com.dirtrobes.lab.Pen.fromRelative(helper.absolutePos(terminalPos), 7, 0, 7, 8, 3, 8, 4, 0, 4);
+        helper.assertTrue(pen.min().equals(helper.absolutePos(new BlockPos(8, 1, 8))) && pen.sizeX() == 8 && pen.sizeY() == 3,
+                "Enclos mal calculé depuis les réglages : " + pen);
+        com.dirtrobes.lab.Pen tooBig = com.dirtrobes.lab.Pen.fromRelative(helper.absolutePos(terminalPos), 0, 0, 0, 500, 1, 500, 900, 0, 900);
+        helper.assertTrue(tooBig.sizeX() == com.dirtrobes.lab.Pen.MAX_XZ && tooBig.sizeY() == com.dirtrobes.lab.Pen.MIN_Y
+                && tooBig.containsBlock(tooBig.spawn()), "Les réglages hors limites doivent être ramenés dans les limites");
         terminal.setPen(pen);
         Species adult = SpeciesManager.all().stream().filter(s -> s.stage() == Stage.ADULT).findFirst().orElseThrow();
         SpectrobeEntity s = SpectrobeEntity.create(helper.getLevel(), adult, 25, player, helper.absoluteVec(new Vec3(4.5, 1, 4.5)));
@@ -419,6 +425,7 @@ public class DirtRobesGameTests {
             List<SpectrobeEntity> shown = helper.getLevel().getEntitiesOfClass(SpectrobeEntity.class, pen.box().inflate(1), SpectrobeEntity::isPenResident);
             log("Pensionnaires visibles : {}", shown.size());
             helper.assertTrue(shown.size() == 1 && shown.get(0).getUUID().equals(id), "Le Spectrobe rangé devrait se promener dans l'enclos");
+            log("Pensionnaire apparu à {} (spawn {})", shown.get(0).blockPosition(), pen.spawn());
             helper.assertTrue(!shown.get(0).shouldBeSaved(), "La copie de l'enclos ne doit pas être sauvegardée avec le monde");
             helper.assertTrue(!shown.get(0).hurt(shown.get(0).damageSources().generic(), 5f), "Les pensionnaires sont invulnérables");
         });

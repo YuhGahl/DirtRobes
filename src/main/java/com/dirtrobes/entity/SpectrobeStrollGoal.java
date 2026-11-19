@@ -26,8 +26,13 @@ public class SpectrobeStrollGoal extends WaterAvoidingRandomStrollGoal {
     @Nullable
     @Override
     protected Vec3 getPosition() {
-        if (spectrobe.isPenResident() && spectrobe.pen() != null && spectrobe.level() instanceof net.minecraft.server.level.ServerLevel server) {
-            return spectrobe.pen().randomGroundSpot(server, spectrobe, spectrobe.getRandom());
+        if (spectrobe.isPenResident() && spectrobe.pen() != null) {
+            // Points à pied depuis là où il est, et dans l'enclos : jamais de téléportation dans une grotte.
+            for (int i = 0; i < 10; i++) {
+                Vec3 pos = net.minecraft.world.entity.ai.util.DefaultRandomPos.getPos(mob, 8, 3);
+                if (pos != null && spectrobe.pen().contains(pos)) return pos;
+            }
+            return null;
         }
         LivingEntity owner = spectrobe.getOwner();
         for (int i = 0; i < 5; i++) {

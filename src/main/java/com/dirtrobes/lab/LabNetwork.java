@@ -26,7 +26,11 @@ public final class LabNetwork {
 
     /** Contenu affiché par l'écran du PC. Les cases vides ont un speciesId vide. */
     public record PcSyncPayload(BlockPos pos, int box, List<TeamSummary> team, List<TeamSummary> boxSlots,
-                                boolean hasPen, int stored, boolean open) implements CustomPacketPayload {
+                                @javax.annotation.Nullable Pen pen, int stored, boolean open) implements CustomPacketPayload {
+        public boolean hasPen() {
+            return pen != null;
+        }
+
         public static final Type<PcSyncPayload> TYPE = new Type<>(DirtRobes.id("pc_sync"));
         public static final StreamCodec<FriendlyByteBuf, PcSyncPayload> STREAM_CODEC = StreamCodec.of(
                 (buf, p) -> {
@@ -36,7 +40,8 @@ public final class LabNetwork {
                     for (TeamSummary s : p.team) TeamSummary.STREAM_CODEC.encode(buf, s);
                     buf.writeVarInt(p.boxSlots.size());
                     for (TeamSummary s : p.boxSlots) TeamSummary.STREAM_CODEC.encode(buf, s);
-                    buf.writeBoolean(p.hasPen);
+                    buf.writeBoolean(p.pen != null);
+                    if (p.pen != null) p.pen.write(buf);
                     buf.writeVarInt(p.stored);
                     buf.writeBoolean(p.open);
                 },
@@ -47,7 +52,8 @@ public final class LabNetwork {
                     for (int i = buf.readVarInt(); i > 0; i--) team.add(TeamSummary.STREAM_CODEC.decode(buf));
                     List<TeamSummary> slots = new ArrayList<>();
                     for (int i = buf.readVarInt(); i > 0; i--) slots.add(TeamSummary.STREAM_CODEC.decode(buf));
-                    return new PcSyncPayload(pos, box, team, slots, buf.readBoolean(), buf.readVarInt(), buf.readBoolean());
+                    Pen pen = buf.readBoolean() ? Pen.read(buf) : null;
+                    return new PcSyncPayload(pos, box, team, slots, pen, buf.readVarInt(), buf.readBoolean());
                 });
 
         @Override
@@ -86,8 +92,37 @@ public final class LabNetwork {
         }
     }
 
+    /**
+     * Réglage de l'enclos depuis l'interface : activé ou non, position du coin (par rapport au terminal),
+     * taille, et point de spawn (par rapport au coin).
+     */
+    public record PenEditPayload(BlockPos pos, boolean enabled, int ox, int oy, int oz, int sx, int sy, int sz,
+                                 int px, int py, int pz) implements CustomPacketPayload {
+        public static final Type<PenEditPayload> TYPE = new Type<>(DirtRobes.id("pen_edit"));
+        public static final StreamCodec<FriendlyByteBuf, PenEditPayload> STREAM_CODEC = StreamCodec.of(
+                (buf, p) -> {
+                    buf.writeBlockPos(p.pos);
+                    buf.writeBoolean(p.enabled);
+                    for (int v : new int[]{p.ox, p.oy, p.oz, p.sx, p.sy, p.sz, p.px, p.py, p.pz}) buf.writeVarInt(v);
+                },
+                buf -> new PenEditPayload(buf.readBlockPos(), buf.readBoolean(), buf.readVarInt(), buf.readVarInt(), buf.readVarInt(),
+                        buf.readVarInt(), buf.readVarInt(), buf.readVarInt(), buf.readVarInt(), buf.readVarInt(), buf.readVarInt()));
+
+        @Override
+        public Type<? extends CustomPacketPayload> type() {
+            return TYPE;
+        }
+    }
+
     public static void register(RegisterPayloadHandlersEvent event) {
-        event.registrar("lab1")
+        event.registrar("lab2")
+                .playToServer(PenEditPayload.TYPE, PenEditPayload.STREAM_CODEC, (p, ctx) -> ctx.enqueueWork(() -> {
+                    if (!(ctx.player() instanceof ServerPlayer player) || !near(player, p.pos())) return;
+                    if (player.level().getBlockEntity(p.pos()) instanceof LabTerminalBlockEntity terminal) {
+                        terminal.setPen(p.enabled() ? Pen.fromRelative(p.pos(), p.ox(), p.oy(), p.oz(), p.sx(), p.sy(), p.sz(), p.px(), p.py(), p.pz()) : null);
+                    }
+                    sendPc(player, p.pos(), 0, false);
+                }))
                 .playToClient(PcSyncPayload.TYPE, PcSyncPayload.STREAM_CODEC, LabNetwork::handleSync)
                 .playToServer(PcBoxPayload.TYPE, PcBoxPayload.STREAM_CODEC, (p, ctx) -> ctx.enqueueWork(() -> {
                     if (ctx.player() instanceof ServerPlayer player && near(player, p.pos())) sendPc(player, p.pos(), p.box(), false);
@@ -121,7 +156,7 @@ public final class LabNetwork {
             slots.add(tag == null ? empty() : summary(player, tag));
         }
         PacketDistributor.sendToPlayer(player, new PcSyncPayload(pos, b, PrizmodTeam.summaries(player), slots,
-                terminal.pen() != null, terminal.count(player.getUUID()), open));
+                terminal.pen(), terminal.count(player.getUUID()), open));
     }
 
     private static TeamSummary summary(ServerPlayer player, CompoundTag tag) {
