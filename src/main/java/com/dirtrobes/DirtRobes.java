@@ -32,6 +32,7 @@ public class DirtRobes {
         modBus.addListener(CommonEvents::onAttributes);
         modBus.addListener(CommonEvents::onSpawnPlacements);
         modBus.addListener(ModNetwork::register);
+        modBus.addListener(com.dirtrobes.lab.LabNetwork::register);
         modBus.addListener((RegisterGameTestsEvent event) -> event.register(DirtRobesGameTests.class));
         CommonEvents.registerGameEvents(NeoForge.EVENT_BUS);
     }

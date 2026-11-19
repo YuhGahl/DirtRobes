@@ -61,7 +61,7 @@ public class CombatItem extends Item {
 
     @Override
     public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity target, InteractionHand hand) {
-        if (kind == Kind.CH_RECHARGE || !(target instanceof SpectrobeEntity spectrobe) || !spectrobe.isOwnedBy(player)) return InteractionResult.PASS;
+        if (kind == Kind.CH_RECHARGE || !(target instanceof SpectrobeEntity spectrobe) || !spectrobe.isOwnedBy(player) || spectrobe.isPenResident()) return InteractionResult.PASS;
         if (!player.level().isClientSide && spectrobe.useCombatItem(kind, player)) {
             startSharedCooldown(player);
             if (!player.getAbilities().instabuild) stack.shrink(1);

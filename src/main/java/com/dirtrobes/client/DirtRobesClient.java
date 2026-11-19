@@ -51,6 +51,7 @@ public class DirtRobesClient {
         modBus.addListener(DirtRobesClient::onMenuScreens);
         modBus.addListener(DirtRobesClient::onGuiLayers);
         NeoForge.EVENT_BUS.addListener(DirtRobesClient::onClientTick);
+        NeoForge.EVENT_BUS.addListener(PenOutlineRenderer::onRender);
     }
 
     private static void onRenderers(EntityRenderersEvent.RegisterRenderers event) {

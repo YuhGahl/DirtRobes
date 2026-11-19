@@ -372,5 +372,22 @@
   "message.dirtrobes.ch_full": "Ta jauge CH est déjà pleine.",
   "message.dirtrobes.item_used.serum": "%s reprend des forces.",
   "message.dirtrobes.item_used.revive": "%s se relève !",
-  "message.dirtrobes.item_used.antidote": "%s est soigné de ses maux."
+  "message.dirtrobes.item_used.antidote": "%s est soigné de ses maux.",
+  "block.dirtrobes.lab_terminal": "Terminal du laboratoire",
+  "item.dirtrobes.pen_marker": "Délimiteur d'enclos",
+  "gui.dirtrobes.pc.title": "PC du laboratoire",
+  "gui.dirtrobes.pc.box": "Boîte %s / %s",
+  "gui.dirtrobes.pc.team": "Équipe",
+  "gui.dirtrobes.pc.pen_on": "Enclos actif : %s Spectrobes rangés s'y promènent",
+  "gui.dirtrobes.pc.pen_off": "Pas d'enclos : délimite-le avec le Délimiteur d'enclos",
+  "gui.dirtrobes.pc.hint_pick": "Clique sur un Spectrobe pour le prendre",
+  "gui.dirtrobes.pc.hint_place": "Clique sur une case pour le poser (ou échanger)",
+  "gui.dirtrobes.pc.details_empty": "Survole un Spectrobe",
+  "tooltip.dirtrobes.pen_marker.1": "Clic droit sur un terminal : le choisir",
+  "tooltip.dirtrobes.pen_marker.2": "Clic droit sur un bloc : 1er coin",
+  "tooltip.dirtrobes.pen_marker.3": "Accroupi + clic droit : 2e coin",
+  "message.dirtrobes.pen_terminal": "Terminal choisi : place maintenant les deux coins de l'enclos.",
+  "message.dirtrobes.pen_corner": "Coin %s : %s",
+  "message.dirtrobes.pen_set": "Enclos enregistré (%s × %s × %s) : les Spectrobes du PC vont s'y promener.",
+  "message.dirtrobes.pen_bad_size": "Enclos de %s × %s × %s : il faut entre 3 × 2 × 3 et %s × %s × %s."
 }

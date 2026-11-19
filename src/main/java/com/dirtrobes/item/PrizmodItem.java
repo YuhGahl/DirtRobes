@@ -33,7 +33,9 @@ public class PrizmodItem extends Item {
     public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity target, InteractionHand hand) {
         if (!(target instanceof SpectrobeEntity spectrobe)) return InteractionResult.PASS;
         if (!player.level().isClientSide) {
-            if (!spectrobe.isOwnedBy(player)) {
+            if (spectrobe.isPenResident()) {
+                spectrobe.describeTo(player);
+            } else if (!spectrobe.isOwnedBy(player)) {
                 player.displayClientMessage(Component.translatable("message.dirtrobes.not_yours"), true);
             } else if (player.isShiftKeyDown()) {
                 spectrobe.toggleSit(player);
@@ -54,7 +56,7 @@ public class PrizmodItem extends Item {
             PrizmodTeam.sync(sp, true);
         } else if (!level.isClientSide) {
             List<SpectrobeEntity> mine = level.getEntitiesOfClass(SpectrobeEntity.class, player.getBoundingBox().inflate(64),
-                    s -> s.isOwnedBy(player) && !s.isKnockedOut());
+                    s -> s.isOwnedBy(player) && !s.isKnockedOut() && !s.isPenResident());
             for (SpectrobeEntity s : mine) {
                 s.setOrderedToSit(false);
                 s.setInSittingPose(false);

@@ -157,6 +157,53 @@ public class SpectrobeEntity extends TamableAnimal implements BedrockPosable {
         });
     }
 
+    // ----- Pensionnaire de l'enclos du laboratoire (copie visible d'un Spectrobe rangé au PC) -----
+    @Nullable
+    private BlockPos penTerminal;
+    @Nullable
+    private com.dirtrobes.lab.Pen pen;
+
+    public void setPenResident(BlockPos terminal, com.dirtrobes.lab.Pen pen) {
+        this.penTerminal = terminal;
+        this.pen = pen;
+        setOrderedToSit(false);
+        setInSittingPose(false);
+        setTarget(null);
+    }
+
+    public boolean isPenResident() {
+        return penTerminal != null;
+    }
+
+    @Nullable
+    public com.dirtrobes.lab.Pen pen() {
+        return pen;
+    }
+
+    /** Les pensionnaires ne sont pas sauvegardés avec le monde : le terminal les recrée depuis le PC. */
+    @Override
+    public boolean shouldBeSaved() {
+        return !isPenResident() && super.shouldBeSaved();
+    }
+
+    private void tickPenResident(ServerLevel server) {
+        if (pen == null || penTerminal == null) return;
+        if (tickCount % 40 == 0 && !(server.isLoaded(penTerminal)
+                && server.getBlockEntity(penTerminal) instanceof com.dirtrobes.lab.LabTerminalBlockEntity t && t.holds(getUUID()) && pen.equals(t.pen()))) {
+            discard();
+            return;
+        }
+        if (!pen.contains(position())) {
+            Vec3 c = pen.center();
+            if (!pen.box().inflate(6).contains(position())) {
+                Vec3 spot = pen.randomGroundSpot(server, this, random);
+                if (spot != null) moveTo(spot.x, spot.y, spot.z, getYRot(), getXRot());
+            } else if (getNavigation().isDone()) {
+                getNavigation().moveTo(c.x, c.y, c.z, 0.8);
+            }
+        }
+    }
+
     /** Pour les tests : comportements (goals) en cours d'exécution. */
     public String debugRunningGoals() {
         StringBuilder sb = new StringBuilder();
@@ -298,6 +345,7 @@ public class SpectrobeEntity extends TamableAnimal implements BedrockPosable {
     }
 
     public boolean canFight() {
+        if (isPenResident()) return false;
         return getStage().fights() && !isKnockedOut() && !isInSittingPose();
     }
 
@@ -545,6 +593,10 @@ public class SpectrobeEntity extends TamableAnimal implements BedrockPosable {
             Species fallback = SpeciesManager.all().stream().findFirst().orElse(null);
             if (fallback != null) setSpecies(fallback, true);
         }
+        if (isPenResident()) {
+            tickPenResident((ServerLevel) level());
+            return;
+        }
         if (specialCooldown > 0) specialCooldown--;
         if (isKnockedOut()) {
             getNavigation().stop();
@@ -566,6 +618,7 @@ public class SpectrobeEntity extends TamableAnimal implements BedrockPosable {
 
     @Override
     public boolean hurt(DamageSource source, float amount) {
+        if (isPenResident() && !source.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) return false;
         if (isKnockedOut() && !source.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) return false;
         if (!level().isClientSide && isTame() && !source.is(DamageTypeTags.BYPASSES_INVULNERABILITY) && amount >= getHealth()) {
             boolean result = super.hurt(source, Math.max(0f, getHealth() - 1f));
@@ -595,6 +648,10 @@ public class SpectrobeEntity extends TamableAnimal implements BedrockPosable {
     @Override
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
+        if (isPenResident()) {
+            if (!level().isClientSide && hand == InteractionHand.MAIN_HAND) describeTo(player);
+            return InteractionResult.sidedSuccess(level().isClientSide);
+        }
         if (isOwnedBy(player) && stack.isEmpty() && player.isShiftKeyDown()) {
             if (!level().isClientSide) toggleSit(player);
             return InteractionResult.sidedSuccess(level().isClientSide);

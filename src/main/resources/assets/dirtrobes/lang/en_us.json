@@ -372,5 +372,22 @@
   "message.dirtrobes.ch_full": "Your CH gauge is already full.",
   "message.dirtrobes.item_used.serum": "%s recovers.",
   "message.dirtrobes.item_used.revive": "%s gets back up!",
-  "message.dirtrobes.item_used.antidote": "%s is cured."
+  "message.dirtrobes.item_used.antidote": "%s is cured.",
+  "block.dirtrobes.lab_terminal": "Lab Terminal",
+  "item.dirtrobes.pen_marker": "Pen Marker",
+  "gui.dirtrobes.pc.title": "Lab PC",
+  "gui.dirtrobes.pc.box": "Box %s / %s",
+  "gui.dirtrobes.pc.team": "Team",
+  "gui.dirtrobes.pc.pen_on": "Pen active: %s stored Spectrobes roam in it",
+  "gui.dirtrobes.pc.pen_off": "No pen: mark one out with the Pen Marker",
+  "gui.dirtrobes.pc.hint_pick": "Click a Spectrobe to pick it up",
+  "gui.dirtrobes.pc.hint_place": "Click a slot to place it (or swap)",
+  "gui.dirtrobes.pc.details_empty": "Hover a Spectrobe",
+  "tooltip.dirtrobes.pen_marker.1": "Right-click a terminal: select it",
+  "tooltip.dirtrobes.pen_marker.2": "Right-click a block: corner 1",
+  "tooltip.dirtrobes.pen_marker.3": "Sneak + right-click: corner 2",
+  "message.dirtrobes.pen_terminal": "Terminal selected: now set the two corners of the pen.",
+  "message.dirtrobes.pen_corner": "Corner %s: %s",
+  "message.dirtrobes.pen_set": "Pen saved (%s × %s × %s): the PC's Spectrobes will roam in it.",
+  "message.dirtrobes.pen_bad_size": "Pen of %s × %s × %s: it must be between 3 × 2 × 3 and %s × %s × %s."
 }

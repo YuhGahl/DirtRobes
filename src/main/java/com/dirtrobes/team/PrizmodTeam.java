@@ -194,6 +194,35 @@ public final class PrizmodTeam {
         return true;
     }
 
+    // ----- Échanges avec le PC -----
+
+    /** Sauvegarde du membre n°index (le range d'abord s'il est dehors). Null si impossible (trop loin, index invalide). */
+    @Nullable
+    public static CompoundTag peekRecord(ServerPlayer player, int index) {
+        Team team = team(player);
+        if (index < 0 || index >= team.entries.size()) return null;
+        Entry entry = team.entries.get(index);
+        if (entry.isOut()) {
+            SpectrobeEntity s = findLoaded(player, entry.uuid);
+            if (s == null) return null;
+            store(player, entry, s);
+        }
+        return entry.data;
+    }
+
+    /** Remplace le membre n°index par cette sauvegarde (rangée), ou l'ajoute à la fin ; null = retirer. */
+    public static void putRecord(ServerPlayer player, int index, @Nullable CompoundTag tag) {
+        Team team = team(player);
+        if (tag == null) {
+            if (index >= 0 && index < team.entries.size()) team.entries.remove(index);
+        } else {
+            Entry entry = new Entry(tag.getUUID("UUID"), Optional.of(tag));
+            if (index >= 0 && index < team.entries.size()) team.entries.set(index, entry);
+            else team.entries.add(entry);
+        }
+        changed(player);
+    }
+
     /** Applique les bonus de soutien aux Spectrobes dehors (appelé chaque seconde). */
     public static com.dirtrobes.combat.Support applySupport(ServerPlayer player) {
         com.dirtrobes.combat.Support support = com.dirtrobes.combat.Support.compute(player);

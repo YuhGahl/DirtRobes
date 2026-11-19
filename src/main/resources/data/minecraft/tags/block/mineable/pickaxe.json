@@ -5,6 +5,7 @@
     "dirtrobes:incubator",
     "dirtrobes:krawl_vortex",
     "dirtrobes:mineral_deposit",
-    "dirtrobes:deepslate_mineral_deposit"
+    "dirtrobes:deepslate_mineral_deposit",
+    "dirtrobes:lab_terminal"
   ]
 }

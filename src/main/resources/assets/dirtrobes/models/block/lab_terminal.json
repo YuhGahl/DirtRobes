@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "front": "dirtrobes:block/lab_terminal_front",
+    "side": "dirtrobes:block/lab_terminal_side",
+    "top": "dirtrobes:block/lab_terminal_top"
+  }
+}

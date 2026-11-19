@@ -399,6 +399,42 @@ public class DirtRobesGameTests {
         helper.succeed();
     }
 
+    /** PC + enclos : ranger un Spectrobe au PC le fait apparaître dans l'enclos, le reprendre le retire. */
+    @GameTest(template = "platform", timeoutTicks = 200)
+    public static void pcStorageShowsSpectrobesInPen(GameTestHelper helper) {
+        ServerPlayer player = placePlayer(helper, 2.5, 2.5);
+        BlockPos terminalPos = new BlockPos(1, 1, 1);
+        helper.setBlock(terminalPos, ModRegistry.LAB_TERMINAL.get());
+        com.dirtrobes.lab.LabTerminalBlockEntity terminal = helper.getBlockEntity(terminalPos);
+        com.dirtrobes.lab.Pen pen = com.dirtrobes.lab.Pen.of(helper.absolutePos(new BlockPos(8, 1, 8)), helper.absolutePos(new BlockPos(15, 3, 15)));
+        terminal.setPen(pen);
+        Species adult = SpeciesManager.all().stream().filter(s -> s.stage() == Stage.ADULT).findFirst().orElseThrow();
+        SpectrobeEntity s = SpectrobeEntity.create(helper.getLevel(), adult, 25, player, helper.absoluteVec(new Vec3(4.5, 1, 4.5)));
+        java.util.UUID id = s.getUUID();
+        helper.assertTrue(terminal.move(player, com.dirtrobes.lab.LabTerminalBlockEntity.AREA_TEAM, 0, com.dirtrobes.lab.LabTerminalBlockEntity.AREA_BOX, 0),
+                "Ranger au PC devrait marcher");
+        helper.assertTrue(PrizmodTeam.team(player).entries.isEmpty(), "L'équipe devrait être vide");
+        helper.assertTrue(terminal.holds(id), "Le PC devrait contenir le Spectrobe");
+        helper.runAfterDelay(60, () -> {
+            List<SpectrobeEntity> shown = helper.getLevel().getEntitiesOfClass(SpectrobeEntity.class, pen.box().inflate(1), SpectrobeEntity::isPenResident);
+            log("Pensionnaires visibles : {}", shown.size());
+            helper.assertTrue(shown.size() == 1 && shown.get(0).getUUID().equals(id), "Le Spectrobe rangé devrait se promener dans l'enclos");
+            helper.assertTrue(!shown.get(0).shouldBeSaved(), "La copie de l'enclos ne doit pas être sauvegardée avec le monde");
+            helper.assertTrue(!shown.get(0).hurt(shown.get(0).damageSources().generic(), 5f), "Les pensionnaires sont invulnérables");
+        });
+        helper.runAfterDelay(160, () -> {
+            for (SpectrobeEntity e : helper.getLevel().getEntitiesOfClass(SpectrobeEntity.class, pen.box().inflate(8), SpectrobeEntity::isPenResident)) {
+                helper.assertTrue(pen.contains(e.position()), "Le pensionnaire est sorti de l'enclos : " + e.position());
+            }
+            helper.assertTrue(terminal.move(player, com.dirtrobes.lab.LabTerminalBlockEntity.AREA_BOX, 0, com.dirtrobes.lab.LabTerminalBlockEntity.AREA_TEAM, 0),
+                    "Reprendre depuis le PC devrait marcher");
+            helper.assertTrue(PrizmodTeam.team(player).entries.size() == 1, "Le Spectrobe devrait être revenu dans l'équipe");
+            helper.assertTrue(helper.getLevel().getEntitiesOfClass(SpectrobeEntity.class, pen.box().inflate(8), SpectrobeEntity::isPenResident).isEmpty(),
+                    "La copie de l'enclos aurait dû disparaître");
+            helper.succeed();
+        });
+    }
+
     /** Logique du mini-jeu de fouille. */
     @GameTest(template = "platform")
     public static void excavationLogic(GameTestHelper helper) {

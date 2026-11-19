@@ -32,7 +32,7 @@ public class SpectrobeFollowOwnerGoal extends Goal {
     }
 
     private boolean blocked() {
-        return mob.isOrderedToSit() || mob.isPassenger() || mob.isLeashed() || mob.isKnockedOut();
+        return mob.isOrderedToSit() || mob.isPassenger() || mob.isLeashed() || mob.isKnockedOut() || mob.isPenResident();
     }
 
     @Override

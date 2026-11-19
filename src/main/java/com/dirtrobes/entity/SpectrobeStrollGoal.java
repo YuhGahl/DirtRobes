@@ -26,6 +26,9 @@ public class SpectrobeStrollGoal extends WaterAvoidingRandomStrollGoal {
     @Nullable
     @Override
     protected Vec3 getPosition() {
+        if (spectrobe.isPenResident() && spectrobe.pen() != null && spectrobe.level() instanceof net.minecraft.server.level.ServerLevel server) {
+            return spectrobe.pen().randomGroundSpot(server, spectrobe, spectrobe.getRandom());
+        }
         LivingEntity owner = spectrobe.getOwner();
         for (int i = 0; i < 5; i++) {
             Vec3 pos = super.getPosition();
@@ -53,6 +56,7 @@ public class SpectrobeStrollGoal extends WaterAvoidingRandomStrollGoal {
     @Override
     public boolean canContinueToUse() {
         if (++runningTicks > MAX_TICKS) return false;
+        if (spectrobe.isPenResident()) return super.canContinueToUse();
         LivingEntity owner = spectrobe.getOwner();
         if (owner != null && spectrobe.distanceToSqr(owner) < 2.5 * 2.5) return false;
         return super.canContinueToUse();

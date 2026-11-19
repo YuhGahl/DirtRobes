@@ -29,7 +29,7 @@ public class NatureGemItem extends Item {
 
     @Override
     public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity target, InteractionHand hand) {
-        if (target instanceof SpectrobeEntity spectrobe && spectrobe.isOwnedBy(player)) {
+        if (target instanceof SpectrobeEntity spectrobe && spectrobe.isOwnedBy(player) && !spectrobe.isPenResident()) {
             if (!player.level().isClientSide && spectrobe.feedNatureGem(this, player) && !player.getAbilities().instabuild) {
                 stack.shrink(1);
             }
