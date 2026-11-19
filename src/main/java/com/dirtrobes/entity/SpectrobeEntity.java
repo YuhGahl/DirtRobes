@@ -194,7 +194,7 @@ public class SpectrobeEntity extends TamableAnimal implements BedrockPosable {
             return;
         }
         if (!pen.contains(position())) {
-            Vec3 c = pen.center();
+            Vec3 c = Vec3.atBottomCenterOf(pen.spawn());
             if (!pen.box().inflate(6).contains(position())) {
                 Vec3 spot = pen.spawnSpot(server, this, random);
                 if (spot != null) moveTo(spot.x, spot.y, spot.z, getYRot(), getXRot());
