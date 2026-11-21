@@ -1,0 +1,15 @@
+{
+  "name": "Karakuri",
+  "property": "aurora",
+  "stage": "child",
+  "family": "karakuri",
+  "rarity": "rare",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 78,
+    "attack": 44,
+    "defense": 36
+  },
+  "evolves_into": "dirtrobes:kamakuri",
+  "evolution_level": 10
+}

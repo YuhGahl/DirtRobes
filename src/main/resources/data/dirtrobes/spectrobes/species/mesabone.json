@@ -6,10 +6,9 @@
   "rarity": "common",
   "search_range": 3,
   "base_stats": {
-    "hp": 77,
-    "attack": 88,
-    "defense": 76,
-    "speed": 76
+    "hp": 117,
+    "attack": 55,
+    "defense": 63
   },
   "evolves_into": "dirtrobes:mesathorn",
   "evolution_level": 30

@@ -1,14 +1,14 @@
 {
   "name": "Thundora",
   "property": "corona",
-  "stage": "secret",
-  "family": "thundora",
+  "stage": "evolved",
+  "family": "thunba",
   "rarity": "secret",
   "search_range": 3,
   "base_stats": {
-    "hp": 104,
-    "attack": 112,
-    "defense": 106,
-    "speed": 73
-  }
+    "hp": 132,
+    "attack": 64,
+    "defense": 69
+  },
+  "from_fossil": false
 }

@@ -1,14 +1,14 @@
 {
   "name": "Vilakroma",
   "property": "corona",
-  "stage": "secret",
-  "family": "vilakroma",
+  "stage": "evolved",
+  "family": "vilar",
   "rarity": "secret",
   "search_range": 3,
   "base_stats": {
-    "hp": 101,
-    "attack": 87,
-    "defense": 134,
-    "speed": 54
-  }
+    "hp": 114,
+    "attack": 57,
+    "defense": 97
+  },
+  "from_fossil": false
 }

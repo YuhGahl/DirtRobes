@@ -6,10 +6,9 @@
   "rarity": "rare",
   "search_range": 3,
   "base_stats": {
-    "hp": 64,
-    "attack": 78,
-    "defense": 95,
-    "speed": 62
+    "hp": 100,
+    "attack": 52,
+    "defense": 52
   },
   "evolves_into": "dirtrobes:spikanor",
   "evolution_level": 30

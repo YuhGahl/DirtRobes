@@ -1,0 +1,15 @@
+{
+  "name": "Pahacha",
+  "property": "aurora",
+  "stage": "child",
+  "family": "pahacha",
+  "rarity": "rare",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 67,
+    "attack": 47,
+    "defense": 41
+  },
+  "evolves_into": "dirtrobes:pahazoa",
+  "evolution_level": 10
+}

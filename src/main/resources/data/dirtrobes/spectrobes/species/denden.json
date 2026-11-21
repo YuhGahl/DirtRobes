@@ -1,0 +1,15 @@
+{
+  "name": "Denden",
+  "property": "aurora",
+  "stage": "child",
+  "family": "denden",
+  "rarity": "rare",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 80,
+    "attack": 56,
+    "defense": 38
+  },
+  "evolves_into": "dirtrobes:dendama",
+  "evolution_level": 10
+}

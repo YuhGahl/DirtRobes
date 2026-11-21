@@ -568,10 +568,17 @@ public class DirtRobesGameTests {
     /** Rareté : répartition des stats (total gardé, 200 max), paliers des lignées, tirage des fossiles, incubateur à l'électricité. */
     @GameTest(template = "platform")
     public static void rarityAndPoweredIncubator(GameTestHelper helper) {
-        int[] r = com.dirtrobes.species.Rarity.RARE.redistribute(new int[]{100, 80, 60, 40});
-        helper.assertTrue(r[0] == 107 && r[1] == 83 && r[2] == 54 && r[3] == 36, "Rare : 100/80/60/40 → 107/83/54/36, obtenu " + java.util.Arrays.toString(r));
-        int[] capped = com.dirtrobes.species.Rarity.SECRET.redistribute(new int[]{190, 150, 100, 100});
-        helper.assertTrue(capped[0] == 200 && capped[0] + capped[1] + capped[2] + capped[3] == 540, "Plafond 200, total gardé : " + java.util.Arrays.toString(capped));
+        // bonus de rareté : +0 / +5 / +10 / +15 %, arrondi comme le tableur
+        helper.assertTrue(com.dirtrobes.species.Rarity.COMMON.applyBonus(100) == 100 && com.dirtrobes.species.Rarity.RARE.applyBonus(110) == 116
+                && com.dirtrobes.species.Rarity.EPIC.applyBonus(140) == 154 && com.dirtrobes.species.Rarity.SECRET.applyBonus(135) == 155, "Bonus de rareté");
+        var spikan = com.dirtrobes.species.SpeciesManager.get(DirtRobes.id("spikan"));
+        helper.assertTrue(spikan.baseHp() == 105 && spikan.baseAttack() == 55 && spikan.baseDefense() == 55 && spikan.baseSpeed() == 70,
+                "Spikan (rare) : 105/55/55/70 comme le document, obtenu " + spikan.baseHp() + "/" + spikan.baseAttack() + "/" + spikan.baseDefense() + "/" + spikan.baseSpeed());
+        // lignées complètes : Winba → Winbus → Windora, Vilamasta → Vilakroma (rare), espèces d'Au-delà des portails
+        helper.assertTrue(DirtRobes.id("windora").equals(com.dirtrobes.species.SpeciesManager.get(DirtRobes.id("winbus")).evolvesInto()), "Winbus évolue en Windora");
+        var vilamasta = com.dirtrobes.species.SpeciesManager.get(DirtRobes.id("vilamasta"));
+        helper.assertTrue(DirtRobes.id("vilakroma").equals(vilamasta.rareEvolution()) && vilamasta.rareEvolutionChance() > 0f, "Vilamasta peut évoluer en Vilakroma");
+        helper.assertTrue(com.dirtrobes.species.SpeciesManager.get(DirtRobes.id("doma_boma")) != null && com.dirtrobes.species.SpeciesManager.get(DirtRobes.id("makadoros")) != null, "Espèces d'Au-delà des portails");
         helper.assertTrue(com.dirtrobes.species.SpeciesManager.get(DirtRobes.id("nagu")).rarity() == com.dirtrobes.species.Rarity.EPIC, "Nagu est épique");
         // rareté lue sur le disque d'Origins : 30 = Commun, 60 = Rare, 90 = Épique
         helper.assertTrue(com.dirtrobes.species.SpeciesManager.get(DirtRobes.id("zappi")).rarity() == com.dirtrobes.species.Rarity.EPIC, "Zappi : 90 → Épique");
@@ -583,7 +590,8 @@ public class DirtRobesGameTests {
                 && DirtRobes.id("komanoto_flamerax").equals(sk.evolvesInto()), "Komainu de la lignée Flamerax");
         helper.assertTrue(!com.dirtrobes.species.SpeciesManager.get(DirtRobes.id("flamerax")).fromFossil(), "Flamerax ne sort plus d'un fossile");
         helper.assertTrue(com.dirtrobes.species.SpeciesManager.get(DirtRobes.id("windora")).rarity() == com.dirtrobes.species.Rarity.SECRET, "Windora est secret");
-        helper.assertTrue(com.dirtrobes.species.SpeciesManager.get(DirtRobes.id("windora")).fromFossil(), "Les secrets sortent (rarement) des fossiles");
+        helper.assertTrue(com.dirtrobes.species.SpeciesManager.get(DirtRobes.id("winba")).fromFossil() && !com.dirtrobes.species.SpeciesManager.get(DirtRobes.id("windora")).fromFossil(),
+                "Winba sort (rarement) des fossiles, Windora s'obtient en évoluant");
         // fossile : espèce tirée à l'extraction, de la bonne propriété
         ItemStack fossil = new ItemStack(ModRegistry.FOSSILS.get(Property.AURORA).get());
         com.dirtrobes.item.FossilItem.assignSpecies(fossil, RandomSource.create(5));

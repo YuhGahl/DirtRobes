@@ -6,10 +6,9 @@
   "rarity": "common",
   "search_range": 4,
   "base_stats": {
-    "hp": 45,
-    "attack": 70,
-    "defense": 55,
-    "speed": 78
+    "hp": 75,
+    "attack": 34,
+    "defense": 73
   },
   "evolves_into": "dirtrobes:vilamasta",
   "evolution_level": 10

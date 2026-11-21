@@ -1,0 +1,13 @@
+{
+  "name": "Mantrados",
+  "property": "flash",
+  "stage": "evolved",
+  "family": "mantrador",
+  "rarity": "rare",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 133,
+    "attack": 51,
+    "defense": 72
+  }
+}

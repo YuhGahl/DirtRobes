@@ -1,0 +1,13 @@
+{
+  "name": "Gekimugon",
+  "property": "flash",
+  "stage": "evolved",
+  "family": "mugon",
+  "rarity": "common",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 145,
+    "attack": 45,
+    "defense": 58
+  }
+}

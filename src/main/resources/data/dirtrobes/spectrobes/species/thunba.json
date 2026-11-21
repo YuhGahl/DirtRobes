@@ -1,0 +1,15 @@
+{
+  "name": "Thunba",
+  "property": "corona",
+  "stage": "child",
+  "family": "thunba",
+  "rarity": "secret",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 87,
+    "attack": 42,
+    "defense": 46
+  },
+  "evolves_into": "dirtrobes:thundor",
+  "evolution_level": 10
+}

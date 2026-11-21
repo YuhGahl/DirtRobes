@@ -6,10 +6,9 @@
   "rarity": "epic",
   "search_range": 4,
   "base_stats": {
-    "hp": 55,
-    "attack": 68,
-    "defense": 64,
-    "speed": 72
+    "hp": 90,
+    "attack": 45,
+    "defense": 47
   },
   "evolves_into": "dirtrobes:dongora",
   "evolution_level": 10

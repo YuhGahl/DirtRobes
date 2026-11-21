@@ -6,10 +6,9 @@
   "rarity": "common",
   "search_range": 7,
   "base_stats": {
-    "hp": 95,
-    "attack": 48,
-    "defense": 58,
-    "speed": 65
+    "hp": 118,
+    "attack": 28,
+    "defense": 48
   },
   "evolves_into": "dirtrobes:gejigen",
   "evolution_level": 10

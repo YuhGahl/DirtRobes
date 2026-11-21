@@ -6,10 +6,9 @@
   "rarity": "common",
   "search_range": 3,
   "base_stats": {
-    "hp": 61,
-    "attack": 63,
-    "defense": 80,
-    "speed": 62
+    "hp": 74,
+    "attack": 37,
+    "defense": 86
   },
   "evolves_into": "dirtrobes:segulara",
   "evolution_level": 30

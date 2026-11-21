@@ -1,0 +1,15 @@
+{
+  "name": "Dendama",
+  "property": "aurora",
+  "stage": "adult",
+  "family": "denden",
+  "rarity": "rare",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 106,
+    "attack": 75,
+    "defense": 50
+  },
+  "evolves_into": "dirtrobes:denpachi",
+  "evolution_level": 30
+}

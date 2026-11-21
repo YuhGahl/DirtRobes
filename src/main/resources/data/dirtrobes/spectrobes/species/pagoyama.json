@@ -1,0 +1,13 @@
+{
+  "name": "Pagoyama",
+  "property": "flash",
+  "stage": "evolved",
+  "family": "pago",
+  "rarity": "epic",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 118,
+    "attack": 88,
+    "defense": 65
+  }
+}

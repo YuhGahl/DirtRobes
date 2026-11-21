@@ -1,0 +1,15 @@
+{
+  "name": "Musarite",
+  "property": "flash",
+  "stage": "adult",
+  "family": "musakabu",
+  "rarity": "rare",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 86,
+    "attack": 61,
+    "defense": 66
+  },
+  "evolves_into": "dirtrobes:musageki",
+  "evolution_level": 30
+}

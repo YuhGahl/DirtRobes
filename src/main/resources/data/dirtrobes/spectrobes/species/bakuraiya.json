@@ -1,0 +1,14 @@
+{
+  "name": "Bakuraiya",
+  "property": "aurora",
+  "stage": "evolved",
+  "family": "bakuraiya",
+  "rarity": "secret",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 129,
+    "attack": 76,
+    "defense": 65
+  },
+  "from_fossil": true
+}

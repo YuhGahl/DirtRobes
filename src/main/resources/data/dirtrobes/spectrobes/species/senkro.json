@@ -6,10 +6,9 @@
   "rarity": "common",
   "search_range": 3,
   "base_stats": {
-    "hp": 59,
-    "attack": 76,
-    "defense": 69,
-    "speed": 74
+    "hp": 89,
+    "attack": 49,
+    "defense": 58
   },
   "evolves_into": "dirtrobes:gekikro",
   "evolution_level": 30

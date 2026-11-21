@@ -6,10 +6,9 @@
   "rarity": "common",
   "search_range": 3,
   "base_stats": {
-    "hp": 55,
-    "attack": 57,
-    "defense": 55,
-    "speed": 71
+    "hp": 80,
+    "attack": 40,
+    "defense": 41
   },
   "evolves_into": "dirtrobes:mayarex",
   "evolution_level": 10

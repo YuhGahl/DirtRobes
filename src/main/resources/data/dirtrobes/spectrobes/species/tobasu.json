@@ -6,10 +6,9 @@
   "rarity": "common",
   "search_range": 3,
   "base_stats": {
-    "hp": 54,
-    "attack": 55,
-    "defense": 50,
-    "speed": 73
+    "hp": 75,
+    "attack": 37,
+    "defense": 38
   },
   "evolves_into": "dirtrobes:ketobasu",
   "evolution_level": 10

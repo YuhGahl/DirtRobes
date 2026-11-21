@@ -6,10 +6,9 @@
   "rarity": "rare",
   "search_range": 3,
   "base_stats": {
-    "hp": 72,
-    "attack": 76,
-    "defense": 75,
-    "speed": 71
+    "hp": 105,
+    "attack": 51,
+    "defense": 52
   },
   "evolves_into": "dirtrobes:pepethraz",
   "evolution_level": 30

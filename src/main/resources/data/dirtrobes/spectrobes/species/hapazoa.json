@@ -1,0 +1,15 @@
+{
+  "name": "Hapazoa",
+  "property": "aurora",
+  "stage": "adult",
+  "family": "hapacha",
+  "rarity": "epic",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 113,
+    "attack": 56,
+    "defense": 59
+  },
+  "evolves_into": "dirtrobes:hapaxion",
+  "evolution_level": 30
+}

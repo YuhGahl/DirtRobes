@@ -1,0 +1,13 @@
+{
+  "name": "Darutake",
+  "property": "corona",
+  "stage": "evolved",
+  "family": "darucho",
+  "rarity": "common",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 85,
+    "attack": 56,
+    "defense": 80
+  }
+}

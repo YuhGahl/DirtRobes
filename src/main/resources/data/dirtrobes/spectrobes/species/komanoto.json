@@ -6,10 +6,9 @@
   "rarity": "rare",
   "search_range": 3,
   "base_stats": {
-    "hp": 90,
-    "attack": 93,
-    "defense": 55,
-    "speed": 89
+    "hp": 110,
+    "attack": 54,
+    "defense": 52
   },
   "evolves_into": "dirtrobes:komadoros",
   "evolution_level": 30

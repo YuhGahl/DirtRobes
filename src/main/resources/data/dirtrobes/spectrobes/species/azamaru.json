@@ -1,0 +1,15 @@
+{
+  "name": "Azamaru",
+  "property": "flash",
+  "stage": "adult",
+  "family": "azapi",
+  "rarity": "rare",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 83,
+    "attack": 102,
+    "defense": 52
+  },
+  "evolves_into": "dirtrobes:azamaros",
+  "evolution_level": 30
+}

@@ -1,0 +1,15 @@
+{
+  "name": "Ojidono",
+  "property": "corona",
+  "stage": "adult",
+  "family": "ojimaru",
+  "rarity": "rare",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 97,
+    "attack": 63,
+    "defense": 57
+  },
+  "evolves_into": "dirtrobes:ojizama",
+  "evolution_level": 30
+}

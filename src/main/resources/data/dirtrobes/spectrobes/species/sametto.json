@@ -1,0 +1,15 @@
+{
+  "name": "Sametto",
+  "property": "aurora",
+  "stage": "child",
+  "family": "sametto",
+  "rarity": "rare",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 45,
+    "attack": 46,
+    "defense": 55
+  },
+  "evolves_into": "dirtrobes:samerobo",
+  "evolution_level": 10
+}

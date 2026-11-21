@@ -6,10 +6,9 @@
   "rarity": "common",
   "search_range": 3,
   "base_stats": {
-    "hp": 112,
-    "attack": 62,
-    "defense": 83,
-    "speed": 60
+    "hp": 168,
+    "attack": 39,
+    "defense": 70
   },
   "evolves_into": "dirtrobes:danaphant",
   "evolution_level": 30

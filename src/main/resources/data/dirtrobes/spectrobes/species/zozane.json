@@ -6,10 +6,9 @@
   "rarity": "common",
   "search_range": 3,
   "base_stats": {
-    "hp": 67,
-    "attack": 82,
-    "defense": 64,
-    "speed": 79
+    "hp": 104,
+    "attack": 51,
+    "defense": 54
   },
   "evolves_into": "dirtrobes:zozanero",
   "evolution_level": 30

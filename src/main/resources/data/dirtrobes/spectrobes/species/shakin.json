@@ -6,10 +6,9 @@
   "rarity": "common",
   "search_range": 3,
   "base_stats": {
-    "hp": 56,
-    "attack": 52,
-    "defense": 50,
-    "speed": 71
+    "hp": 83,
+    "attack": 36,
+    "defense": 38
   },
   "evolves_into": "dirtrobes:shakor",
   "evolution_level": 10

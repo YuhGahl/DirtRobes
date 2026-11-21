@@ -1,0 +1,15 @@
+{
+  "name": "Pagoni",
+  "property": "flash",
+  "stage": "adult",
+  "family": "pago",
+  "rarity": "epic",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 120,
+    "attack": 46,
+    "defense": 71
+  },
+  "evolves_into": "dirtrobes:pagoyama",
+  "evolution_level": 30
+}

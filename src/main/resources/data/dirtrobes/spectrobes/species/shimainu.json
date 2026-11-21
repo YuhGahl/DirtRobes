@@ -6,10 +6,9 @@
   "rarity": "epic",
   "search_range": 3,
   "base_stats": {
-    "hp": 57,
-    "attack": 62,
-    "defense": 55,
-    "speed": 74
+    "hp": 90,
+    "attack": 44,
+    "defense": 41
   },
   "evolves_into": "dirtrobes:shimanoto",
   "evolution_level": 10

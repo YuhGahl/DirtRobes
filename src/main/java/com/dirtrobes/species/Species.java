@@ -26,12 +26,14 @@ public record Species(
         float scale,
         boolean fromFossil,
         boolean flying,
-        Rarity rarity
+        Rarity rarity,
+        @Nullable ResourceLocation rareEvolution,
+        float rareEvolutionChance
 ) {
     /** Copie avec un autre mode de déplacement (tests, commandes). */
     public Species withFlying(boolean value) {
         return new Species(id, name, property, stage, family, evolvesInto, evolutionLevel, searchRange,
-                baseHp, baseAttack, baseDefense, baseSpeed, scale, fromFossil, value, rarity);
+                baseHp, baseAttack, baseDefense, baseSpeed, scale, fromFossil, value, rarity, rareEvolution, rareEvolutionChance);
     }
 
     public static Species fromJson(ResourceLocation id, JsonObject json) {
@@ -41,11 +43,20 @@ public record Species(
         int hp = GsonHelper.getAsInt(stats, "hp", 50);
         int atk = GsonHelper.getAsInt(stats, "attack", 50);
         int def = GsonHelper.getAsInt(stats, "defense", 50);
-        int spd = GsonHelper.getAsInt(stats, "speed", defaultSpeed(atk, def));
         boolean secret = stage == Stage.SECRET || stage == Stage.SPECIAL;
         Rarity rarity = Rarity.byId(GsonHelper.getAsString(json, "rarity", secret ? "secret" : "common"));
-        // stats du wiki (fiche) → répartition selon la rareté
-        int[] s = rarity.redistribute(new int[]{hp, atk, def, spd});
+        // stats de base (document de conception) + bonus de rareté ; la VIT découle de l'ATQ et de la DÉF finales
+        hp = rarity.applyBonus(hp);
+        atk = rarity.applyBonus(atk);
+        def = rarity.applyBonus(def);
+        int spd = GsonHelper.getAsInt(stats, "speed", defaultSpeed(atk, def));
+        ResourceLocation rareEvo = null;
+        float rareChance = 0f;
+        if (json.has("rare_evolution")) {
+            JsonObject rare = GsonHelper.getAsJsonObject(json, "rare_evolution");
+            rareEvo = ResourceLocation.parse(GsonHelper.getAsString(rare, "species"));
+            rareChance = GsonHelper.getAsFloat(rare, "chance", 0.05f);
+        }
         return new Species(
                 id,
                 GsonHelper.getAsString(json, "name", id.getPath()),
@@ -55,11 +66,13 @@ public record Species(
                 evo.isEmpty() ? null : ResourceLocation.parse(evo),
                 GsonHelper.getAsInt(json, "evolution_level", stage == Stage.CHILD ? 10 : 30),
                 GsonHelper.getAsInt(json, "search_range", 3),
-                s[0], s[1], s[2], s[3],
+                hp, atk, def, spd,
                 GsonHelper.getAsFloat(json, "scale", stage.scale()),
                 GsonHelper.getAsBoolean(json, "from_fossil", stage == Stage.CHILD || secret),
                 GsonHelper.getAsBoolean(json, "flying", false),
-                rarity
+                rarity,
+                rareEvo,
+                rareChance
         );
     }
 

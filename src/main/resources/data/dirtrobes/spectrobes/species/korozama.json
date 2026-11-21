@@ -1,0 +1,13 @@
+{
+  "name": "Korozama",
+  "property": "corona",
+  "stage": "evolved",
+  "family": "koroko",
+  "rarity": "rare",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 157,
+    "attack": 51,
+    "defense": 62
+  }
+}

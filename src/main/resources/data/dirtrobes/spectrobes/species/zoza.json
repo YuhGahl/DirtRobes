@@ -6,10 +6,9 @@
   "rarity": "common",
   "search_range": 3,
   "base_stats": {
-    "hp": 43,
-    "attack": 64,
-    "defense": 42,
-    "speed": 81
+    "hp": 78,
+    "attack": 38,
+    "defense": 41
   },
   "evolves_into": "dirtrobes:zozane",
   "evolution_level": 10

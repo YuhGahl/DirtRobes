@@ -1,0 +1,13 @@
+{
+  "name": "Azewana",
+  "property": "corona",
+  "stage": "evolved",
+  "family": "azeko",
+  "rarity": "epic",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 126,
+    "attack": 77,
+    "defense": 67
+  }
+}

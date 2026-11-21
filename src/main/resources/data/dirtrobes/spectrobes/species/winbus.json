@@ -1,0 +1,15 @@
+{
+  "name": "Winbus",
+  "property": "aurora",
+  "stage": "adult",
+  "family": "winba",
+  "rarity": "secret",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 114,
+    "attack": 55,
+    "defense": 62
+  },
+  "evolves_into": "dirtrobes:windora",
+  "evolution_level": 30
+}

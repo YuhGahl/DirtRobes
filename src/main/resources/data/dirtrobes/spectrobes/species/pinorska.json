@@ -1,0 +1,13 @@
+{
+  "name": "Pinorska",
+  "property": "aurora",
+  "stage": "evolved",
+  "family": "pikos",
+  "rarity": "rare",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 132,
+    "attack": 59,
+    "defense": 55
+  }
+}

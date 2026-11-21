@@ -1,0 +1,15 @@
+{
+  "name": "Zaamaru",
+  "property": "flash",
+  "stage": "adult",
+  "family": "zaapi",
+  "rarity": "rare",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 66,
+    "attack": 115,
+    "defense": 47
+  },
+  "evolves_into": "dirtrobes:zaamaros",
+  "evolution_level": 30
+}

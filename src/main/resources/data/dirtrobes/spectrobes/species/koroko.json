@@ -1,0 +1,15 @@
+{
+  "name": "Koroko",
+  "property": "corona",
+  "stage": "child",
+  "family": "koroko",
+  "rarity": "rare",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 55,
+    "attack": 50,
+    "defense": 41
+  },
+  "evolves_into": "dirtrobes:korogeki",
+  "evolution_level": 10
+}

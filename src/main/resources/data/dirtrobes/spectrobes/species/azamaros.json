@@ -1,0 +1,13 @@
+{
+  "name": "Azamaros",
+  "property": "flash",
+  "stage": "evolved",
+  "family": "azapi",
+  "rarity": "rare",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 119,
+    "attack": 83,
+    "defense": 63
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "name": "Azapi",
+  "property": "flash",
+  "stage": "child",
+  "family": "azapi",
+  "rarity": "rare",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 62,
+    "attack": 77,
+    "defense": 39
+  },
+  "evolves_into": "dirtrobes:azamaru",
+  "evolution_level": 10
+}

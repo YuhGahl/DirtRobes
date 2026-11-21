@@ -6,10 +6,9 @@
   "rarity": "common",
   "search_range": 3,
   "base_stats": {
-    "hp": 68,
-    "attack": 67,
-    "defense": 55,
-    "speed": 76
+    "hp": 102,
+    "attack": 52,
+    "defense": 50
   },
   "evolves_into": "dirtrobes:aobasar",
   "evolution_level": 30

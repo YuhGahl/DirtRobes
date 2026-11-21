@@ -6,10 +6,9 @@
   "rarity": "rare",
   "search_range": 3,
   "base_stats": {
-    "hp": 70,
-    "attack": 85,
-    "defense": 70,
-    "speed": 78
+    "hp": 71,
+    "attack": 51,
+    "defense": 69
   },
   "evolves_into": "dirtrobes:bartolosa",
   "evolution_level": 30

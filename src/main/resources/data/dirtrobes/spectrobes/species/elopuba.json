@@ -1,0 +1,15 @@
+{
+  "name": "Elopuba",
+  "property": "corona",
+  "stage": "adult",
+  "family": "elo",
+  "rarity": "rare",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 84,
+    "attack": 70,
+    "defense": 46
+  },
+  "evolves_into": "dirtrobes:elozar",
+  "evolution_level": 30
+}

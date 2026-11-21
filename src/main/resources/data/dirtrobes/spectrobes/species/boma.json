@@ -1,0 +1,15 @@
+{
+  "name": "Boma",
+  "property": "aurora",
+  "stage": "child",
+  "family": "boma",
+  "rarity": "rare",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 47,
+    "attack": 53,
+    "defense": 47
+  },
+  "evolves_into": "dirtrobes:boma_boma",
+  "evolution_level": 10
+}

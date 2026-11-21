@@ -1,0 +1,13 @@
+{
+  "name": "Trogallup",
+  "property": "corona",
+  "stage": "evolved",
+  "family": "troga",
+  "rarity": "rare",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 105,
+    "attack": 80,
+    "defense": 63
+  }
+}

@@ -6,10 +6,9 @@
   "rarity": "common",
   "search_range": 2,
   "base_stats": {
-    "hp": 58,
-    "attack": 49,
-    "defense": 67,
-    "speed": 61
+    "hp": 88,
+    "attack": 41,
+    "defense": 50
   },
   "evolves_into": "dirtrobes:maserobo",
   "evolution_level": 10

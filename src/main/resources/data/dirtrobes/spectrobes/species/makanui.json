@@ -1,0 +1,15 @@
+{
+  "name": "Makanui",
+  "property": "corona",
+  "stage": "child",
+  "family": "makanui",
+  "rarity": "rare",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 63,
+    "attack": 56,
+    "defense": 42
+  },
+  "evolves_into": "dirtrobes:makanoto",
+  "evolution_level": 10
+}

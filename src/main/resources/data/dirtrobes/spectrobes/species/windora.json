@@ -1,14 +1,14 @@
 {
   "name": "Windora",
   "property": "aurora",
-  "stage": "secret",
-  "family": "windora",
+  "stage": "evolved",
+  "family": "winba",
   "rarity": "secret",
   "search_range": 3,
   "base_stats": {
-    "hp": 104,
-    "attack": 112,
-    "defense": 106,
-    "speed": 73
-  }
+    "hp": 129,
+    "attack": 62,
+    "defense": 71
+  },
+  "from_fossil": false
 }

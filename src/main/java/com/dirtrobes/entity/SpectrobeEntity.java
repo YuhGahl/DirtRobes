@@ -606,6 +606,11 @@ public class SpectrobeEntity extends TamableAnimal implements BedrockPosable {
         Species s = getSpecies();
         if (s == null || s.evolvesInto() == null || (!force && getSpectrobeLevel() < s.evolutionLevel())) return false;
         Species next = SpeciesManager.get(s.evolvesInto());
+        // évolution rare (ex. Vilamasta → Vilakroma au lieu de Vilanox)
+        if (s.rareEvolution() != null && getRandom().nextFloat() < s.rareEvolutionChance()) {
+            Species rare = SpeciesManager.get(s.rareEvolution());
+            if (rare != null) next = rare;
+        }
         if (next == null) return false;
         Component oldName = getDisplayName();
         setSpecies(next, true);

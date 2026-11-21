@@ -1,0 +1,14 @@
+{
+  "name": "Isadora",
+  "property": "flash",
+  "stage": "evolved",
+  "family": "isadora",
+  "rarity": "secret",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 123,
+    "attack": 90,
+    "defense": 57
+  },
+  "from_fossil": true
+}

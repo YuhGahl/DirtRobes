@@ -6,10 +6,9 @@
   "rarity": "common",
   "search_range": 3,
   "base_stats": {
-    "hp": 76,
-    "attack": 87,
-    "defense": 80,
-    "speed": 74
+    "hp": 117,
+    "attack": 55,
+    "defense": 67
   },
   "evolves_into": "dirtrobes:masetosu",
   "evolution_level": 30

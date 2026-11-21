@@ -6,10 +6,9 @@
   "rarity": "rare",
   "search_range": 3,
   "base_stats": {
-    "hp": 50,
-    "attack": 65,
-    "defense": 50,
-    "speed": 78
+    "hp": 53,
+    "attack": 38,
+    "defense": 52
   },
   "evolves_into": "dirtrobes:bartolor",
   "evolution_level": 10

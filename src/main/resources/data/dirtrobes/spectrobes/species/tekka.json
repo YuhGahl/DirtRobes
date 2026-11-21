@@ -6,10 +6,9 @@
   "rarity": "epic",
   "search_range": 3,
   "base_stats": {
-    "hp": 57,
-    "attack": 69,
-    "defense": 63,
-    "speed": 73
+    "hp": 90,
+    "attack": 49,
+    "defense": 49
   },
   "evolves_into": "dirtrobes:tekkadon",
   "evolution_level": 10

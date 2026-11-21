@@ -6,10 +6,9 @@
   "rarity": "common",
   "search_range": 3,
   "base_stats": {
-    "hp": 72,
-    "attack": 79,
-    "defense": 78,
-    "speed": 71
+    "hp": 106,
+    "attack": 53,
+    "defense": 54
   },
   "evolves_into": "dirtrobes:mayazerra",
   "evolution_level": 30

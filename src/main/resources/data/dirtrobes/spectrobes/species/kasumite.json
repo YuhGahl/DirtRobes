@@ -6,10 +6,9 @@
   "rarity": "common",
   "search_range": 3,
   "base_stats": {
-    "hp": 49,
-    "attack": 81,
-    "defense": 62,
-    "speed": 80
+    "hp": 74,
+    "attack": 51,
+    "defense": 53
   },
   "evolves_into": "dirtrobes:kasumire",
   "evolution_level": 30

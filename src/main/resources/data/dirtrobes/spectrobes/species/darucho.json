@@ -1,0 +1,15 @@
+{
+  "name": "Darucho",
+  "property": "corona",
+  "stage": "child",
+  "family": "darucho",
+  "rarity": "common",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 49,
+    "attack": 36,
+    "defense": 61
+  },
+  "evolves_into": "dirtrobes:darutori",
+  "evolution_level": 10
+}

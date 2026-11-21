@@ -6,10 +6,9 @@
   "rarity": "common",
   "search_range": 3,
   "base_stats": {
-    "hp": 66,
-    "attack": 96,
-    "defense": 71,
-    "speed": 83
+    "hp": 101,
+    "attack": 61,
+    "defense": 59
   },
   "evolves_into": "dirtrobes:kugaster",
   "evolution_level": 30

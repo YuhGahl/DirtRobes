@@ -1,0 +1,15 @@
+{
+  "name": "Hanegaku",
+  "property": "flash",
+  "stage": "adult",
+  "family": "haneoto",
+  "rarity": "rare",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 104,
+    "attack": 80,
+    "defense": 51
+  },
+  "evolves_into": "dirtrobes:hanebakuon",
+  "evolution_level": 30
+}

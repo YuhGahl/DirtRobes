@@ -6,10 +6,9 @@
   "rarity": "rare",
   "search_range": 3,
   "base_stats": {
-    "hp": 84,
-    "attack": 80,
-    "defense": 122,
-    "speed": 50
+    "hp": 130,
+    "attack": 51,
+    "defense": 101
   },
   "evolves_into": "dirtrobes:samugeki",
   "evolution_level": 30

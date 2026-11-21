@@ -1,0 +1,13 @@
+{
+  "name": "Zaamaros",
+  "property": "flash",
+  "stage": "evolved",
+  "family": "zaapi",
+  "rarity": "rare",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 98,
+    "attack": 98,
+    "defense": 60
+  }
+}

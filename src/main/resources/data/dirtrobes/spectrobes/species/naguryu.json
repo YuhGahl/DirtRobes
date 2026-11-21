@@ -6,10 +6,9 @@
   "rarity": "epic",
   "search_range": 3,
   "base_stats": {
-    "hp": 85,
-    "attack": 105,
-    "defense": 85,
-    "speed": 80
+    "hp": 94,
+    "attack": 58,
+    "defense": 66
   },
   "evolves_into": "dirtrobes:naguzoro",
   "evolution_level": 30

@@ -1,0 +1,15 @@
+{
+  "name": "Nokogiro",
+  "property": "aurora",
+  "stage": "adult",
+  "family": "nokoko",
+  "rarity": "epic",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 105,
+    "attack": 81,
+    "defense": 48
+  },
+  "evolves_into": "dirtrobes:nokogilla",
+  "evolution_level": 30
+}

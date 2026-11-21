@@ -1,0 +1,15 @@
+{
+  "name": "Mantradora",
+  "property": "flash",
+  "stage": "adult",
+  "family": "mantrador",
+  "rarity": "rare",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 101,
+    "attack": 51,
+    "defense": 59
+  },
+  "evolves_into": "dirtrobes:mantrados",
+  "evolution_level": 30
+}
