@@ -24,25 +24,27 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- * Terminal du laboratoire : le PC de stockage. Chaque joueur y range jusqu'à {@link #BOXES} × {@link #BOX_SIZE}
+ * Terminal du laboratoire : rangement relié à un enclos. Chaque joueur y range jusqu'à {@link #BOXES} × {@link #BOX_SIZE}
  * Spectrobes. Si un enclos est délimité, les Spectrobes rangés y apparaissent et s'y promènent : ce sont des
  * copies vivantes (non sauvegardées avec le monde) de ce que le PC contient, recréées au chargement.
  */
-public class LabTerminalBlockEntity extends BlockEntity {
-    public static final int BOXES = 4;
+public class LabTerminalBlockEntity extends BlockEntity implements com.dirtrobes.storage.SpectrobeStorage {
+    public static final int BOXES = 1;
     public static final int BOX_SIZE = 30;
     public static final int CAPACITY = BOXES * BOX_SIZE;
     /** Nombre maximum de Spectrobes visibles dans l'enclos (pour ménager les performances). */
     public static final int MAX_SHOWN = 60;
 
     /** Zones de l'interface. */
-    public static final int AREA_TEAM = 0;
-    public static final int AREA_BOX = 1;
+    public static final int AREA_TEAM = com.dirtrobes.storage.StorageOps.AREA_TEAM;
+    public static final int AREA_BOX = com.dirtrobes.storage.StorageOps.AREA_BOX;
 
     private final Map<UUID, CompoundTag[]> storage = new HashMap<>();
     @Nullable
     private Pen pen;
     private int refreshTimer;
+    /** Spectrobes en trop (anciens terminaux à 4 boîtes) : envoyés au PC au premier tick. */
+    private final Map<UUID, List<CompoundTag>> overflow = new HashMap<>();
 
     public LabTerminalBlockEntity(BlockPos pos, BlockState state) {
         super(ModRegistry.LAB_TERMINAL_BE.get(), pos, state);
@@ -65,12 +67,14 @@ public class LabTerminalBlockEntity extends BlockEntity {
     }
 
     @Nullable
+    @Override
     public CompoundTag get(UUID owner, int index) {
         if (index < 0 || index >= CAPACITY) return null;
         CompoundTag[] s = storage.get(owner);
         return s == null ? null : s[index];
     }
 
+    @Override
     public int count(UUID owner) {
         CompoundTag[] s = storage.get(owner);
         if (s == null) return 0;
@@ -87,7 +91,9 @@ public class LabTerminalBlockEntity extends BlockEntity {
         return false;
     }
 
-    private void set(UUID owner, int index, @Nullable CompoundTag tag) {
+    @Override
+    public void set(UUID owner, int index, @Nullable CompoundTag tag) {
+        if (index < 0 || index >= CAPACITY) return;
         CompoundTag[] s = slots(owner);
         CompoundTag old = s[index];
         s[index] = tag;
@@ -96,53 +102,49 @@ public class LabTerminalBlockEntity extends BlockEntity {
         refreshTimer = 0;
     }
 
-    /**
-     * Déplace (ou échange) un Spectrobe entre l'équipe et les boîtes du PC.
-     * @return true si quelque chose a bougé
-     */
+    /** Déplace (ou échange) un Spectrobe entre l'équipe et les boîtes de ce terminal. */
     public boolean move(ServerPlayer player, int fromArea, int fromIndex, int toArea, int toIndex) {
-        if (fromArea == toArea && fromIndex == toIndex) return false;
-        UUID owner = player.getUUID();
-        int teamSize = PrizmodTeam.team(player).entries.size();
-        CompoundTag a = read(player, fromArea, fromIndex);
-        if (a == null) return false;
-        CompoundTag b = toArea == AREA_TEAM && toIndex >= teamSize ? null : read(player, toArea, toIndex);
-        if (toArea == AREA_TEAM && b == null && toIndex >= teamSize && teamSize >= PrizmodTeam.MAX) return false;
-        if (toArea == AREA_BOX && (toIndex < 0 || toIndex >= CAPACITY)) return false;
-
-        if (fromArea == AREA_TEAM && toArea == AREA_TEAM) {
-            // échange dans l'équipe
-            if (b == null) return false;
-            PrizmodTeam.putRecord(player, fromIndex, b);
-            PrizmodTeam.putRecord(player, toIndex, a);
-            return true;
-        }
-        if (fromArea == AREA_BOX && toArea == AREA_BOX) {
-            set(owner, fromIndex, b);
-            set(owner, toIndex, a);
-            return true;
-        }
-        if (fromArea == AREA_TEAM) {
-            // équipe → boîte
-            set(owner, toIndex, a);
-            PrizmodTeam.putRecord(player, fromIndex, b);
-            return true;
-        }
-        // boîte → équipe
-        set(owner, fromIndex, b);
-        PrizmodTeam.putRecord(player, toArea == AREA_TEAM && toIndex < teamSize ? toIndex : teamSize, a);
-        return true;
+        return com.dirtrobes.storage.StorageOps.move(player, this, fromArea, fromIndex, toArea, toIndex);
     }
 
-    @Nullable
-    private CompoundTag read(ServerPlayer player, int area, int index) {
-        return area == AREA_TEAM ? PrizmodTeam.peekRecord(player, index) : get(player.getUUID(), index);
+    @Override
+    public int capacity(UUID owner) {
+        return CAPACITY;
+    }
+
+    /** Terminal détruit : tous les Spectrobes rangés ici partent dans le PC de leur dresseur. */
+    public void transferAllToPc(ServerLevel server) {
+        com.dirtrobes.storage.GlobalPc pc = com.dirtrobes.storage.GlobalPc.get(server.getServer());
+        removeAllShown();
+        for (Map.Entry<UUID, CompoundTag[]> e : storage.entrySet()) {
+            int moved = 0;
+            for (int i = 0; i < e.getValue().length; i++) {
+                if (e.getValue()[i] == null) continue;
+                pc.add(e.getKey(), e.getValue()[i]);
+                e.getValue()[i] = null;
+                moved++;
+            }
+            ServerPlayer owner = server.getServer().getPlayerList().getPlayer(e.getKey());
+            if (owner != null && moved > 0) {
+                owner.displayClientMessage(net.minecraft.network.chat.Component.translatable("message.dirtrobes.terminal_to_pc", moved)
+                        .withStyle(net.minecraft.ChatFormatting.AQUA), false);
+            }
+        }
+        storage.clear();
+        setChanged();
     }
 
     // ------------------------------------------------------------------ Spectrobes visibles dans l'enclos
 
     public static void serverTick(Level level, BlockPos pos, BlockState state, LabTerminalBlockEntity be) {
-        if (!(level instanceof ServerLevel server) || --be.refreshTimer > 0) return;
+        if (!(level instanceof ServerLevel server)) return;
+        if (!be.overflow.isEmpty()) {
+            com.dirtrobes.storage.GlobalPc pc = com.dirtrobes.storage.GlobalPc.get(server.getServer());
+            be.overflow.forEach((owner, list) -> list.forEach(t -> pc.add(owner, t)));
+            be.overflow.clear();
+            be.setChanged();
+        }
+        if (--be.refreshTimer > 0) return;
         be.refreshTimer = 40;
         be.refreshShown(server);
     }
@@ -238,6 +240,7 @@ public class LabTerminalBlockEntity extends BlockEntity {
                 CompoundTag entry = (CompoundTag) st;
                 int i = entry.getInt("Slot");
                 if (i >= 0 && i < CAPACITY) slots[i] = entry.getCompound("Data");
+                else overflow.computeIfAbsent(o.getUUID("Owner"), k -> new ArrayList<>()).add(entry.getCompound("Data"));
             }
             storage.put(o.getUUID("Owner"), slots);
         }

@@ -81,8 +81,6 @@ public final class TeamHud {
             GuiDraw.bar(g, x + 30, ry + ROW_H - 4, ROW_W - 34, 2, frac, GuiDraw.hpColor(frac, m.knockedOut()), 0xFF0D1117);
             if (m.knockedOut()) g.drawString(font, "K.O.", x + ROW_W - 22, ry + 13, 0xFFFF8A7A, true);
         }
-        Component keys = Component.translatable("gui.dirtrobes.hud.keys");
-        int kx = HudLayout.teamX() > 0.5f ? x + ROW_W - font.width(keys) : x;
-        g.drawString(font, keys, kx, y + members.size() * (ROW_H + 2) + 1, 0x99D8E2EC, true);
+
     }
 }

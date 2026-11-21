@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "dirtrobes:block/spectrobe_pc",
+      "y": 0
+    },
+    "facing=east": {
+      "model": "dirtrobes:block/spectrobe_pc",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "dirtrobes:block/spectrobe_pc",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "dirtrobes:block/spectrobe_pc",
+      "y": 270
+    }
+  }
+}

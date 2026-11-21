@@ -18,7 +18,8 @@ import javax.annotation.Nullable;
  */
 public class PenScreen extends Screen {
     private static final int W = 196;
-    private static final int ROW = 16;
+    private static final int ROW = 15;
+    private static final int H = 262;
 
     /** Enclos en cours de réglage (lu par le rendu du contour). */
     @Nullable
@@ -105,25 +106,25 @@ public class PenScreen extends Screen {
         y = row(y, "X", () -> sx, v -> sx = v);
         y = row(y, "Y", () -> sy, v -> sy = v);
         y = row(y, "Z", () -> sz, v -> sz = v);
-        y = section(y + 4, "gui.dirtrobes.pen.offset");
+        y = section(y + 2, "gui.dirtrobes.pen.offset");
         y = row(y, "X", () -> ox, v -> ox = v);
         y = row(y, "Y", () -> oy, v -> oy = v);
         y = row(y, "Z", () -> oz, v -> oz = v);
-        y = section(y + 4, "gui.dirtrobes.pen.spawn");
+        y = section(y + 2, "gui.dirtrobes.pen.spawn");
         y = row(y, "X", () -> px, v -> px = v);
         y = row(y, "Y", () -> py, v -> py = v);
         y = row(y, "Z", () -> pz, v -> pz = v);
         addRenderableWidget(Button.builder(Component.translatable("gui.dirtrobes.pen.spawn_here"), b -> spawnHere())
-                .bounds(left + 8, y + 4, W - 16, 18).build()).active = enabled;
+                .bounds(left + 8, y + 2, W - 16, 18).build()).active = enabled;
         addRenderableWidget(Button.builder(Component.translatable("gui.done"), b -> onClose())
-                .bounds(left + 8, y + 26, W - 16, 18).build());
+                .bounds(left + 8, y + 22, W - 16, 18).build());
         panelH = y + 26 + 18 + 8 - top;
     }
 
     private int section(int y, String key) {
         int yy = y;
         addRenderableOnly((g, mx, my, pt) -> g.drawString(font, Component.translatable(key), left + 8, yy + 2, 0xFF8FA6B8, false));
-        return y + 12;
+        return y + 11;
     }
 
     private interface Getter {
@@ -139,11 +140,11 @@ public class PenScreen extends Screen {
         addRenderableWidget(Button.builder(Component.literal("−"), b -> {
             set.set(get.get() - (hasShiftDown() ? 5 : 1));
             send();
-        }).bounds(left + 70, y, 20, 14).build()).active = enabled;
+        }).bounds(left + 70, y, 20, 13).build()).active = enabled;
         addRenderableWidget(Button.builder(Component.literal("+"), b -> {
             set.set(get.get() + (hasShiftDown() ? 5 : 1));
             send();
-        }).bounds(bx, y, 20, 14).build()).active = enabled;
+        }).bounds(bx, y, 20, 13).build()).active = enabled;
         int yy = y;
         addRenderableOnly((g, mx, my, pt) -> {
             g.drawString(font, axis, left + 20, yy + 3, 0xFFD8E2EC, false);
@@ -186,6 +187,34 @@ public class PenScreen extends Screen {
         return false;
     }
 
+    // ------------------------------------------------------------------ se déplacer pendant le réglage
+
+    /** Touches de déplacement transmises au jeu pendant que l'écran est ouvert (avancer, reculer, côtés, sauter, s'accroupir, sprinter). */
+    private boolean movementKey(int keyCode, int scanCode, boolean down) {
+        if (minecraft == null) return false;
+        var o = minecraft.options;
+        for (net.minecraft.client.KeyMapping k : new net.minecraft.client.KeyMapping[]{o.keyUp, o.keyDown, o.keyLeft, o.keyRight,
+                o.keyJump, o.keyShift, o.keySprint}) {
+            if (k.matches(keyCode, scanCode)) {
+                k.setDown(down);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
+        if (keyCode != org.lwjgl.glfw.GLFW.GLFW_KEY_ESCAPE && movementKey(keyCode, scanCode, true)) return true;
+        return super.keyPressed(keyCode, scanCode, modifiers);
+    }
+
+    @Override
+    public boolean keyReleased(int keyCode, int scanCode, int modifiers) {
+        if (movementKey(keyCode, scanCode, false)) return true;
+        return super.keyReleased(keyCode, scanCode, modifiers);
+    }
+
     @Override
     public void onClose() {
         editing = null;
@@ -195,6 +224,7 @@ public class PenScreen extends Screen {
     @Override
     public void removed() {
         editing = null;
+        net.minecraft.client.KeyMapping.releaseAll();
         super.removed();
     }
 }

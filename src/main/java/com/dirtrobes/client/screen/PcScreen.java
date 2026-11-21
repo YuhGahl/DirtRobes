@@ -67,15 +67,17 @@ public class PcScreen extends Screen {
         int gx = gridX();
         addRenderableWidget(Button.builder(Component.literal("◀"), b -> changeBox(-1)).bounds(gx, top + 6, 18, 14).build());
         addRenderableWidget(Button.builder(Component.literal("▶"), b -> changeBox(1)).bounds(gx + COLS * CELL - 18, top + 6, 18, 14).build());
-        addRenderableWidget(Button.builder(Component.translatable("gui.dirtrobes.pc.pen_button"), b -> {
-            if (minecraft != null && data != null) minecraft.setScreen(new PenScreen(this, data.pos(), data.pen()));
-        }).bounds(left + W - 78, top + 6, 70, 14).build());
+        if (data.kind() == LabNetwork.KIND_TERMINAL) {
+            addRenderableWidget(Button.builder(Component.translatable("gui.dirtrobes.pc.pen_button"), b -> {
+                if (minecraft != null && data != null) minecraft.setScreen(new PenScreen(this, data.pos(), data.pen()));
+            }).bounds(left + W - 78, top + 6, 70, 14).build());
+        }
     }
 
     private void changeBox(int delta) {
         if (data == null) return;
         heldArea = -1;
-        PacketDistributor.sendToServer(new LabNetwork.PcBoxPayload(data.pos(), data.box() + delta));
+        PacketDistributor.sendToServer(new LabNetwork.PcBoxPayload(data.kind(), data.pos(), data.box() + delta));
     }
 
     private int teamX() {
@@ -138,7 +140,7 @@ public class PcScreen extends Screen {
                 heldIndex = cell[1];
             }
         } else {
-            PacketDistributor.sendToServer(new LabNetwork.PcMovePayload(data.pos(), heldArea, heldIndex, cell[0], cell[1], data.box()));
+            PacketDistributor.sendToServer(new LabNetwork.PcMovePayload(data.kind(), data.pos(), heldArea, heldIndex, cell[0], cell[1], data.box()));
             heldArea = -1;
         }
         return true;
@@ -180,8 +182,9 @@ public class PcScreen extends Screen {
     public void render(GuiGraphics g, int mouseX, int mouseY, float partialTick) {
         super.render(g, mouseX, mouseY, partialTick);
         if (data == null) return;
-        g.drawString(font, title, left + 8, top + 8, 0xFFFFFFFF, true);
-        g.drawCenteredString(font, Component.translatable("gui.dirtrobes.pc.box", data.box() + 1, LabTerminalBlockEntity.BOXES),
+        g.drawString(font, Component.translatable(data.kind() == LabNetwork.KIND_PC ? "gui.dirtrobes.pc.title_pc" : "gui.dirtrobes.pc.title"),
+                left + 8, top + 8, 0xFFFFFFFF, true);
+        g.drawCenteredString(font, Component.translatable("gui.dirtrobes.pc.box", data.box() + 1, data.boxes()),
                 gridX() + COLS * CELL / 2, top + 9, 0xFFD8E2EC);
         g.drawString(font, Component.translatable("gui.dirtrobes.pc.team"), teamX(), gridY() + 3 * CELL + 6, 0xFF8FA6B8, false);
 
@@ -209,10 +212,11 @@ public class PcScreen extends Screen {
         renderDetails(g, cell != null ? at(cell[0], cell[1]) : heldArea >= 0 ? at(heldArea, heldIndex) : null);
 
         // bas de l'écran : état de l'enclos et aide
-        Component pen = data.hasPen() ? Component.translatable("gui.dirtrobes.pc.pen_on", data.stored())
+        Component pen = data.kind() == LabNetwork.KIND_PC ? Component.translatable("gui.dirtrobes.pc.pc_info", data.stored())
+                : data.hasPen() ? Component.translatable("gui.dirtrobes.pc.pen_on", data.stored())
                 : Component.translatable("gui.dirtrobes.pc.pen_off");
         if (minecraft != null && minecraft.screen instanceof PenScreen) return;
-        g.drawString(font, pen, gridX(), top + H - 26, data.hasPen() ? 0xFF7FE08A : 0xFFE8C84A, false);
+        g.drawString(font, pen, gridX(), top + H - 26, data.kind() == LabNetwork.KIND_PC || data.hasPen() ? 0xFF7FE08A : 0xFFE8C84A, false);
         g.drawString(font, Component.translatable(heldArea >= 0 ? "gui.dirtrobes.pc.hint_place" : "gui.dirtrobes.pc.hint_pick"),
                 gridX(), top + H - 14, 0xFF8FA6B8, false);
     }

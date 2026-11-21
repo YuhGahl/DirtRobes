@@ -70,6 +70,11 @@ public class PrizmodScreen extends Screen {
                     .bounds(x + CARD_W - 50, y + CARD_H - 18, 46, 14).build());
             b.active = m.out() ? m.found() : outCount() < PrizmodTeam.MAX_OUT;
             buttons.add(b);
+            Button pc = addRenderableWidget(Button.builder(Component.literal("PC"),
+                            btn -> PacketDistributor.sendToServer(new com.dirtrobes.lab.LabNetwork.TeamToPcPayload(slot)))
+                    .bounds(x + CARD_W - 50 - 24, y + CARD_H - 18, 22, 14)
+                    .tooltip(net.minecraft.client.gui.components.Tooltip.create(Component.translatable("gui.dirtrobes.prizmod.to_pc"))).build());
+            pc.active = m.found();
         }
     }
 
@@ -136,7 +141,7 @@ public class PrizmodScreen extends Screen {
                     .append(Component.translatable(Stage.byOrdinal(m.stage()).translationKey()));
             g.drawString(font, Component.translatable("message.dirtrobes.card.level", m.level()), x + 40, y + 16, 0xFFB8C4D0, false);
             // Barre de PV
-            int bx = x + 40, by = y + CARD_H - 12, bw = CARD_W - 96;
+            int bx = x + 40, by = y + CARD_H - 12, bw = CARD_W - 120;
             float frac = m.maxHealth() <= 0 ? 0 : Mth.clamp(m.health() / m.maxHealth(), 0f, 1f);
             g.fill(bx, by, bx + bw, by + 5, 0xFF0D1117);
             int hpColor = m.knockedOut() ? 0xFF7A7A7A : frac > 0.5f ? 0xFF5BD46A : frac > 0.2f ? 0xFFE8C84A : 0xFFE0533D;

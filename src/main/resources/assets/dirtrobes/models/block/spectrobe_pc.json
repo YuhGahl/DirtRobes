@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "front": "dirtrobes:block/spectrobe_pc_front",
+    "side": "dirtrobes:block/spectrobe_pc_side",
+    "top": "dirtrobes:block/spectrobe_pc_top"
+  }
+}

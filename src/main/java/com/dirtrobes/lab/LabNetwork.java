@@ -25,7 +25,7 @@ public final class LabNetwork {
     private LabNetwork() {}
 
     /** Contenu affiché par l'écran du PC. Les cases vides ont un speciesId vide. */
-    public record PcSyncPayload(BlockPos pos, int box, List<TeamSummary> team, List<TeamSummary> boxSlots,
+    public record PcSyncPayload(int kind, BlockPos pos, int box, int boxes, List<TeamSummary> team, List<TeamSummary> boxSlots,
                                 @javax.annotation.Nullable Pen pen, int stored, boolean open) implements CustomPacketPayload {
         public boolean hasPen() {
             return pen != null;
@@ -34,8 +34,10 @@ public final class LabNetwork {
         public static final Type<PcSyncPayload> TYPE = new Type<>(DirtRobes.id("pc_sync"));
         public static final StreamCodec<FriendlyByteBuf, PcSyncPayload> STREAM_CODEC = StreamCodec.of(
                 (buf, p) -> {
+                    buf.writeVarInt(p.kind);
                     buf.writeBlockPos(p.pos);
                     buf.writeVarInt(p.box);
+                    buf.writeVarInt(p.boxes);
                     buf.writeVarInt(p.team.size());
                     for (TeamSummary s : p.team) TeamSummary.STREAM_CODEC.encode(buf, s);
                     buf.writeVarInt(p.boxSlots.size());
@@ -46,14 +48,16 @@ public final class LabNetwork {
                     buf.writeBoolean(p.open);
                 },
                 buf -> {
+                    int kind = buf.readVarInt();
                     BlockPos pos = buf.readBlockPos();
                     int box = buf.readVarInt();
+                    int boxes = buf.readVarInt();
                     List<TeamSummary> team = new ArrayList<>();
                     for (int i = buf.readVarInt(); i > 0; i--) team.add(TeamSummary.STREAM_CODEC.decode(buf));
                     List<TeamSummary> slots = new ArrayList<>();
                     for (int i = buf.readVarInt(); i > 0; i--) slots.add(TeamSummary.STREAM_CODEC.decode(buf));
                     Pen pen = buf.readBoolean() ? Pen.read(buf) : null;
-                    return new PcSyncPayload(pos, box, team, slots, pen, buf.readVarInt(), buf.readBoolean());
+                    return new PcSyncPayload(kind, pos, box, boxes, team, slots, pen, buf.readVarInt(), buf.readBoolean());
                 });
 
         @Override
@@ -63,10 +67,11 @@ public final class LabNetwork {
     }
 
     /** Demande d'affichage d'une boîte. */
-    public record PcBoxPayload(BlockPos pos, int box) implements CustomPacketPayload {
+    public record PcBoxPayload(int kind, BlockPos pos, int box) implements CustomPacketPayload {
         public static final Type<PcBoxPayload> TYPE = new Type<>(DirtRobes.id("pc_box"));
         public static final StreamCodec<ByteBuf, PcBoxPayload> STREAM_CODEC = StreamCodec.composite(
-                BlockPos.STREAM_CODEC, PcBoxPayload::pos, ByteBufCodecs.VAR_INT, PcBoxPayload::box, PcBoxPayload::new);
+                ByteBufCodecs.VAR_INT, PcBoxPayload::kind, BlockPos.STREAM_CODEC, PcBoxPayload::pos, ByteBufCodecs.VAR_INT, PcBoxPayload::box,
+                PcBoxPayload::new);
 
         @Override
         public Type<? extends CustomPacketPayload> type() {
@@ -75,16 +80,27 @@ public final class LabNetwork {
     }
 
     /** Déplacement d'un Spectrobe : (zone, case) → (zone, case). Zones : 0 = équipe, 1 = boîtes (index absolu). */
-    public record PcMovePayload(BlockPos pos, int fromArea, int fromIndex, int toArea, int toIndex, int box) implements CustomPacketPayload {
+    public record PcMovePayload(int kind, BlockPos pos, int fromArea, int fromIndex, int toArea, int toIndex, int box) implements CustomPacketPayload {
         public static final Type<PcMovePayload> TYPE = new Type<>(DirtRobes.id("pc_move"));
-        public static final StreamCodec<ByteBuf, PcMovePayload> STREAM_CODEC = StreamCodec.composite(
-                BlockPos.STREAM_CODEC, PcMovePayload::pos,
-                ByteBufCodecs.VAR_INT, PcMovePayload::fromArea,
-                ByteBufCodecs.VAR_INT, PcMovePayload::fromIndex,
-                ByteBufCodecs.VAR_INT, PcMovePayload::toArea,
-                ByteBufCodecs.VAR_INT, PcMovePayload::toIndex,
-                ByteBufCodecs.VAR_INT, PcMovePayload::box,
-                PcMovePayload::new);
+        public static final StreamCodec<FriendlyByteBuf, PcMovePayload> STREAM_CODEC = StreamCodec.of(
+                (buf, p) -> {
+                    buf.writeVarInt(p.kind);
+                    buf.writeBlockPos(p.pos);
+                    for (int v : new int[]{p.fromArea, p.fromIndex, p.toArea, p.toIndex, p.box}) buf.writeVarInt(v);
+                },
+                buf -> new PcMovePayload(buf.readVarInt(), buf.readBlockPos(), buf.readVarInt(), buf.readVarInt(), buf.readVarInt(),
+                        buf.readVarInt(), buf.readVarInt()));
+        @Override
+        public Type<? extends CustomPacketPayload> type() {
+            return TYPE;
+        }
+    }
+
+    /** Envoie directement le membre n°slot de l'équipe dans le PC des Spectrobes (depuis le Prizmod). */
+    public record TeamToPcPayload(int slot) implements CustomPacketPayload {
+        public static final Type<TeamToPcPayload> TYPE = new Type<>(DirtRobes.id("team_to_pc"));
+        public static final StreamCodec<ByteBuf, TeamToPcPayload> STREAM_CODEC = StreamCodec.composite(
+                ByteBufCodecs.VAR_INT, TeamToPcPayload::slot, TeamToPcPayload::new);
 
         @Override
         public Type<? extends CustomPacketPayload> type() {
@@ -115,25 +131,58 @@ public final class LabNetwork {
     }
 
     public static void register(RegisterPayloadHandlersEvent event) {
-        event.registrar("lab2")
+        event.registrar("lab3")
                 .playToServer(PenEditPayload.TYPE, PenEditPayload.STREAM_CODEC, (p, ctx) -> ctx.enqueueWork(() -> {
                     if (!(ctx.player() instanceof ServerPlayer player) || !near(player, p.pos())) return;
                     if (player.level().getBlockEntity(p.pos()) instanceof LabTerminalBlockEntity terminal) {
                         terminal.setPen(p.enabled() ? Pen.fromRelative(p.pos(), p.ox(), p.oy(), p.oz(), p.sx(), p.sy(), p.sz(), p.px(), p.py(), p.pz()) : null);
                     }
-                    sendPc(player, p.pos(), 0, false);
+                    sendStorage(player, KIND_TERMINAL, p.pos(), 0, false);
                 }))
                 .playToClient(PcSyncPayload.TYPE, PcSyncPayload.STREAM_CODEC, LabNetwork::handleSync)
                 .playToServer(PcBoxPayload.TYPE, PcBoxPayload.STREAM_CODEC, (p, ctx) -> ctx.enqueueWork(() -> {
-                    if (ctx.player() instanceof ServerPlayer player && near(player, p.pos())) sendPc(player, p.pos(), p.box(), false);
+                    if (ctx.player() instanceof ServerPlayer player && near(player, p.pos())) sendStorage(player, p.kind(), p.pos(), p.box(), false);
                 }))
                 .playToServer(PcMovePayload.TYPE, PcMovePayload.STREAM_CODEC, (p, ctx) -> ctx.enqueueWork(() -> {
                     if (!(ctx.player() instanceof ServerPlayer player) || !near(player, p.pos())) return;
-                    if (player.level().getBlockEntity(p.pos()) instanceof LabTerminalBlockEntity terminal) {
-                        terminal.move(player, p.fromArea(), p.fromIndex(), p.toArea(), p.toIndex());
-                    }
-                    sendPc(player, p.pos(), p.box(), false);
+                    com.dirtrobes.storage.SpectrobeStorage storage = storage(player, p.kind(), p.pos());
+                    if (storage != null) com.dirtrobes.storage.StorageOps.move(player, storage, p.fromArea(), p.fromIndex(), p.toArea(), p.toIndex());
+                    sendStorage(player, p.kind(), p.pos(), p.box(), false);
+                }))
+                .playToServer(TeamToPcPayload.TYPE, TeamToPcPayload.STREAM_CODEC, (p, ctx) -> ctx.enqueueWork(() -> {
+                    if (ctx.player() instanceof ServerPlayer player) teamToPc(player, p.slot());
                 }));
+    }
+
+    public static final int KIND_TERMINAL = 0;
+    public static final int KIND_PC = 1;
+
+    @javax.annotation.Nullable
+    private static com.dirtrobes.storage.SpectrobeStorage storage(ServerPlayer player, int kind, BlockPos pos) {
+        if (kind == KIND_PC) {
+            return player.level().getBlockState(pos).is(ModRegistry.SPECTROBE_PC.get())
+                    ? com.dirtrobes.storage.GlobalPc.get(player.server) : null;
+        }
+        return player.level().getBlockEntity(pos) instanceof LabTerminalBlockEntity t ? t : null;
+    }
+
+    /** Envoie directement un membre de l'équipe au PC (bouton du Prizmod). */
+    public static boolean teamToPc(ServerPlayer player, int slot) {
+        if (PrizmodTeam.blockedByLeader(player)) {
+            player.displayClientMessage(net.minecraft.network.chat.Component.translatable("message.dirtrobes.team_leader_block")
+                    .withStyle(net.minecraft.ChatFormatting.RED), true);
+            return false;
+        }
+        CompoundTag tag = PrizmodTeam.peekRecord(player, slot);
+        if (tag == null) {
+            player.displayClientMessage(net.minecraft.network.chat.Component.translatable("message.dirtrobes.team_not_found"), true);
+            return false;
+        }
+        int index = com.dirtrobes.storage.GlobalPc.get(player.server).add(player.getUUID(), tag);
+        PrizmodTeam.putRecord(player, slot, null);
+        player.displayClientMessage(net.minecraft.network.chat.Component.translatable("message.dirtrobes.sent_to_pc",
+                index / com.dirtrobes.storage.SpectrobeStorage.BOX_SIZE + 1), true);
+        return true;
     }
 
     private static void handleSync(PcSyncPayload payload, IPayloadContext context) {
@@ -145,18 +194,21 @@ public final class LabNetwork {
         return player.distanceToSqr(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5) <= 8 * 8;
     }
 
-    /** Envoie au joueur le contenu du PC (équipe + une boîte). */
-    public static void sendPc(ServerPlayer player, BlockPos pos, int box, boolean open) {
-        if (!(player.level().getBlockEntity(pos) instanceof LabTerminalBlockEntity terminal)) return;
+    /** Envoie au joueur le contenu d'un rangement (équipe + une boîte). */
+    public static void sendStorage(ServerPlayer player, int kind, BlockPos pos, int box, boolean open) {
+        com.dirtrobes.storage.SpectrobeStorage storage = storage(player, kind, pos);
+        if (storage == null) return;
         if (player.connection == null || !player.connection.hasChannel(PcSyncPayload.TYPE)) return;
-        int b = Math.floorMod(box, LabTerminalBlockEntity.BOXES);
+        int boxes = storage.boxes(player.getUUID());
+        int b = Math.floorMod(box, boxes);
         List<TeamSummary> slots = new ArrayList<>();
-        for (int i = 0; i < LabTerminalBlockEntity.BOX_SIZE; i++) {
-            CompoundTag tag = terminal.get(player.getUUID(), b * LabTerminalBlockEntity.BOX_SIZE + i);
+        for (int i = 0; i < com.dirtrobes.storage.SpectrobeStorage.BOX_SIZE; i++) {
+            CompoundTag tag = storage.get(player.getUUID(), b * com.dirtrobes.storage.SpectrobeStorage.BOX_SIZE + i);
             slots.add(tag == null ? empty() : summary(player, tag));
         }
-        PacketDistributor.sendToPlayer(player, new PcSyncPayload(pos, b, PrizmodTeam.summaries(player), slots,
-                terminal.pen(), terminal.count(player.getUUID()), open));
+        Pen pen = storage instanceof LabTerminalBlockEntity t ? t.pen() : null;
+        PacketDistributor.sendToPlayer(player, new PcSyncPayload(kind, pos, b, boxes, PrizmodTeam.summaries(player), slots,
+                pen, storage.count(player.getUUID()), open));
     }
 
     private static TeamSummary summary(ServerPlayer player, CompoundTag tag) {

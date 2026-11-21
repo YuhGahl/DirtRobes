@@ -114,7 +114,13 @@ public final class PrizmodTeam {
         Team team = team(player);
         if (team.find(spectrobe.getUUID()) != null) return;
         if (team.entries.size() >= MAX) {
-            player.displayClientMessage(Component.translatable("message.dirtrobes.team_full").withStyle(ChatFormatting.GOLD), false);
+            // équipe pleine : directement au PC des Spectrobes
+            CompoundTag tag = new CompoundTag();
+            spectrobe.saveWithoutId(tag);
+            int index = com.dirtrobes.storage.GlobalPc.get(player.server).add(player.getUUID(), tag);
+            spectrobe.discard();
+            player.displayClientMessage(Component.translatable("message.dirtrobes.team_full_to_pc", spectrobe.getDisplayName(),
+                    index / com.dirtrobes.storage.SpectrobeStorage.BOX_SIZE + 1).withStyle(ChatFormatting.GOLD), false);
             return;
         }
         Entry entry = new Entry(spectrobe.getUUID(), Optional.empty());

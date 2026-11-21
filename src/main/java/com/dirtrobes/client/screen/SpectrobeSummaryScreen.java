@@ -229,7 +229,7 @@ public class SpectrobeSummaryScreen extends Screen {
         int[] stats = {m.hp(), m.atk(), m.def(), m.spd()};
         int[] evs = {m.evHp(), m.evAtk(), m.evDef(), m.evSpd()};
         MineralItem.Stat[] order = {MineralItem.Stat.HEALTH, MineralItem.Stat.POWER, MineralItem.Stat.DEFENCE, MineralItem.Stat.SPEED};
-        // Radar normalisé sur la meilleure stat, pour que la forme reste lisible même au niveau 1
+        int areaW = W - MODEL_W - 20;
         int max = 1;
         for (int st : stats) max = Math.max(max, st);
         float ref = max * 1.15f;
@@ -239,54 +239,45 @@ public class SpectrobeSummaryScreen extends Screen {
             values[i] = stats[i] / ref;
             evValues[i] = evs[i] / (float) StatCalc.MAX_EV_PER_STAT;
         }
-        // Radar à gauche (PV en haut, ATQ à droite, DÉF en bas, VIT à gauche), libellés courts aux pointes
-        float cx = x + 52, cy = y + 50, r = 30;
+        // Radar centré : PV en haut, ATQ à droite, DÉF en bas, VIT à gauche
+        float cx = x + areaW / 2f, cy = y + 40, r = 28;
         GuiDraw.radarGrid(g, cx, cy, r, 4, 0x553A4A5C);
         GuiDraw.radar(g, cx, cy, r, values, GuiDraw.withAlpha(accent, 0x90), accent);
         GuiDraw.radar(g, cx, cy, r, evValues, 0x40FFFFFF, 0xC0FFFFFF);
         for (int i = 0; i < 4; i++) {
-            Component lbl = Component.translatable("stat.dirtrobes." + order[i].id());
+            MineralItem.Stat st = order[i];
+            int color = st == n.raised ? 0xFFFF8A7A : st == n.lowered ? 0xFF7FB2FF : 0xFFD8E2EC;
+            Component lbl = Component.translatable("stat.dirtrobes." + st.id()).append(" " + stats[i]);
             int w = font.width(lbl);
             int lx, ly;
             switch (i) {
                 case 0 -> { lx = Math.round(cx - w / 2f); ly = Math.round(cy - r - 11); }
-                case 1 -> { lx = Math.round(cx + r + 3); ly = Math.round(cy - 4); }
+                case 1 -> { lx = Math.round(cx + r + 5); ly = Math.round(cy - 4); }
                 case 2 -> { lx = Math.round(cx - w / 2f); ly = Math.round(cy + r + 3); }
-                default -> { lx = Math.round(cx - r - 3 - w); ly = Math.round(cy - 4); }
+                default -> { lx = Math.round(cx - r - 5 - w); ly = Math.round(cy - 4); }
             }
-            g.drawString(font, lbl, lx, ly, natureColor(n, order[i]), true);
+            g.drawString(font, lbl, lx, ly, color, true);
         }
-        // Colonne de droite : valeur de chaque stat + barre de ses EV
-        int ex = x + 110, ey = y + 2, bw = 72;
-        g.drawString(font, Component.translatable("gui.dirtrobes.summary.ev", m.totalEv(), StatCalc.MAX_EV_TOTAL), ex, ey, 0xFF8FA6B8, false);
+        // EV : 2 colonnes × 2 lignes
+        int ey = y + 84;
+        g.drawString(font, Component.translatable("gui.dirtrobes.summary.ev", m.totalEv(), StatCalc.MAX_EV_TOTAL), x, ey, 0xFF8FA6B8, false);
+        int colW = (areaW - 8) / 2;
         for (int i = 0; i < 4; i++) {
-            int yy = ey + 13 + i * 22;
-            g.drawString(font, Component.translatable("stat.dirtrobes." + order[i].id()), ex, yy, natureColor(n, order[i]), false);
-            String val = String.valueOf(stats[i]);
-            g.drawString(font, val, ex + bw - font.width(val), yy, 0xFFFFFFFF, true);
-            GuiDraw.bar(g, ex, yy + 10, bw, 3, evs[i] / (float) StatCalc.MAX_EV_PER_STAT, 0xFFE8E8F0, 0xFF0D1117);
-            g.drawString(font, "EV " + evs[i], ex, yy + 14, 0xFF6F8294, false);
+            int ex = x + (i % 2) * (colW + 8), yy = ey + 11 + (i / 2) * 17;
+            g.drawString(font, Component.translatable("stat.dirtrobes." + order[i].id()).append(" " + evs[i]), ex, yy, 0xFFD8E2EC, false);
+            GuiDraw.bar(g, ex, yy + 10, colW, 3, evs[i] / (float) StatCalc.MAX_EV_PER_STAT, 0xFFE8E8F0, 0xFF0D1117);
         }
-        // Bas : légende puis soutien, coupés à la largeur du panneau
-        int ty = y + 104;
-        int width = left + W - 6 - x;
-        for (var line : font.split(Component.translatable("gui.dirtrobes.summary.legend"), width)) {
-            g.drawString(font, line, x, ty, 0xFF6F8294, false);
-            ty += 10;
-        }
+        // Soutien (sur 2 lignes au maximum, dans le cadre)
         com.dirtrobes.combat.Support sup = ClientTeam.support();
         Component supText = !m.out() ? Component.translatable("gui.dirtrobes.summary.support_giver")
                 : sup.isEmpty() ? Component.translatable("gui.dirtrobes.summary.support_none")
                 : Component.translatable("gui.dirtrobes.summary.support", pct(sup.atk()), pct(sup.def()), pct(sup.spd()), pct(sup.hp()), pct(sup.ch()));
-        for (var line : font.split(supText, width)) {
-            g.drawString(font, line, x, ty + 2, 0xFFB58CFF, false);
-            ty += 10;
+        int sy = ey + 48;
+        for (var line : font.split(supText, areaW)) {
+            if (sy > top + H - 12) break;
+            g.drawString(font, line, x, sy, 0xFFB58CFF, false);
+            sy += 10;
         }
-    }
-
-    /** Rouge = stat montée par la nature, bleu = baissée. */
-    private static int natureColor(Nature n, MineralItem.Stat st) {
-        return st == n.raised ? 0xFFFF8A7A : st == n.lowered ? 0xFF7FB2FF : 0xFFD8E2EC;
     }
 
     private void renderEvolution(GuiGraphics g, TeamSummary m, int x, int y) {

@@ -88,6 +88,9 @@ public final class ModRegistry {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<VortexBlockEntity>> VORTEX_BE = BLOCK_ENTITIES.register("krawl_vortex",
             () -> BlockEntityType.Builder.of(VortexBlockEntity::new, VORTEX.get()).build(null));
 
+    public static final DeferredBlock<com.dirtrobes.storage.SpectrobePcBlock> SPECTROBE_PC = BLOCKS.registerBlock("spectrobe_pc",
+            com.dirtrobes.storage.SpectrobePcBlock::new,
+            BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(3.5f, 6.0f).sound(SoundType.METAL).lightLevel(state -> 5));
     public static final DeferredBlock<LabTerminalBlock> LAB_TERMINAL = BLOCKS.registerBlock("lab_terminal", LabTerminalBlock::new,
             BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(3.5f, 6.0f).sound(SoundType.METAL)
                     .lightLevel(state -> 6).noOcclusion());
@@ -171,6 +174,7 @@ public final class ModRegistry {
 
     public static final DeferredItem<BlockItem> MINERAL_DEPOSIT_ITEM = ITEMS.registerSimpleBlockItem("mineral_deposit", MINERAL_DEPOSIT);
     public static final DeferredItem<BlockItem> DEEPSLATE_MINERAL_DEPOSIT_ITEM = ITEMS.registerSimpleBlockItem("deepslate_mineral_deposit", DEEPSLATE_MINERAL_DEPOSIT);
+    public static final DeferredItem<BlockItem> SPECTROBE_PC_ITEM = ITEMS.registerSimpleBlockItem("spectrobe_pc", SPECTROBE_PC);
     public static final DeferredItem<BlockItem> LAB_TERMINAL_ITEM = ITEMS.registerSimpleBlockItem("lab_terminal", LAB_TERMINAL);
     public static final DeferredItem<BlockItem> INCUBATOR_ITEM = ITEMS.registerSimpleBlockItem("incubator", INCUBATOR);
     public static final DeferredItem<BlockItem> VORTEX_ITEM = ITEMS.registerSimpleBlockItem("krawl_vortex", VORTEX);
@@ -208,6 +212,7 @@ public final class ModRegistry {
                 output.accept(MINERAL_DEPOSIT_ITEM.get());
                 output.accept(DEEPSLATE_MINERAL_DEPOSIT_ITEM.get());
                 output.accept(VORTEX_ITEM.get());
+                output.accept(SPECTROBE_PC_ITEM.get());
                 output.accept(LAB_TERMINAL_ITEM.get());
                 GEMS.forEach(g -> output.accept(g.get()));
                 NATURE_GEMS.forEach(g -> output.accept(g.get()));

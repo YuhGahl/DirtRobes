@@ -464,6 +464,37 @@ public class DirtRobesGameTests {
         });
     }
 
+    /** PC des Spectrobes : envoi direct depuis l'équipe, équipe pleine → PC, terminal cassé → PC. */
+    @GameTest(template = "platform", timeoutTicks = 60)
+    public static void spectrobePcReceivesSpectrobes(GameTestHelper helper) {
+        ServerPlayer player = placePlayer(helper, 10.5, 10.5);
+        com.dirtrobes.storage.GlobalPc pc = com.dirtrobes.storage.GlobalPc.get(helper.getLevel().getServer());
+        java.util.UUID me = player.getUUID();
+        Species adult = SpeciesManager.all().stream().filter(s -> s.stage() == Stage.ADULT).findFirst().orElseThrow();
+        // envoi direct depuis l'équipe
+        SpectrobeEntity first = SpectrobeEntity.create(helper.getLevel(), adult, 10, player, helper.absoluteVec(new Vec3(4.5, 1, 4.5)));
+        helper.assertTrue(com.dirtrobes.lab.LabNetwork.teamToPc(player, 0), "Envoi direct au PC");
+        helper.assertTrue(first.isRemoved() && PrizmodTeam.team(player).entries.isEmpty() && pc.count(me) == 1, "Le Spectrobe devrait être au PC");
+        // équipe pleine → PC
+        for (int i = 0; i < PrizmodTeam.MAX; i++) {
+            SpectrobeEntity.create(helper.getLevel(), adult, 5 + i, player, helper.absoluteVec(new Vec3(2.5 + i * 2, 1, 8.5)));
+        }
+        SpectrobeEntity extra = SpectrobeEntity.create(helper.getLevel(), adult, 30, player, helper.absoluteVec(new Vec3(10.5, 1, 14.5)));
+        helper.assertTrue(extra.isRemoved() && PrizmodTeam.team(player).entries.size() == PrizmodTeam.MAX && pc.count(me) == 2,
+                "Le 7e Spectrobe devrait partir au PC (PC : " + pc.count(me) + ")");
+        // terminal cassé → PC
+        BlockPos terminalPos = new BlockPos(1, 1, 1);
+        helper.setBlock(terminalPos, ModRegistry.LAB_TERMINAL.get());
+        com.dirtrobes.lab.LabTerminalBlockEntity terminal = helper.getBlockEntity(terminalPos);
+        helper.assertTrue(terminal.capacity(me) == 30, "Un terminal = 1 boîte de 30");
+        helper.assertTrue(terminal.move(player, com.dirtrobes.lab.LabTerminalBlockEntity.AREA_TEAM, 0, com.dirtrobes.lab.LabTerminalBlockEntity.AREA_BOX, 3),
+                "Ranger au terminal");
+        helper.setBlock(terminalPos, net.minecraft.world.level.block.Blocks.AIR);
+        log("PC après destruction du terminal : {} Spectrobes", pc.count(me));
+        helper.assertTrue(pc.count(me) == 3, "Le contenu du terminal détruit devrait être au PC, " + pc.count(me));
+        helper.succeed();
+    }
+
     /** Logique du mini-jeu de fouille. */
     @GameTest(template = "platform")
     public static void excavationLogic(GameTestHelper helper) {

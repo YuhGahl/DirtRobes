@@ -24,7 +24,7 @@ import net.minecraft.world.phys.BlockHitResult;
 
 import javax.annotation.Nullable;
 
-/** Terminal du laboratoire (le PC) : clic droit pour ouvrir le stockage. Incassable tant qu'il contient des Spectrobes. */
+/** Terminal du laboratoire : rangement relié à un enclos. Si on le casse, son contenu part dans le PC des Spectrobes. */
 public class LabTerminalBlock extends BaseEntityBlock {
     public static final MapCodec<LabTerminalBlock> CODEC = simpleCodec(LabTerminalBlock::new);
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
@@ -70,14 +70,18 @@ public class LabTerminalBlock extends BaseEntityBlock {
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
         if (level.isClientSide) return InteractionResult.SUCCESS;
         if (player instanceof ServerPlayer sp && level.getBlockEntity(pos) instanceof LabTerminalBlockEntity) {
-            LabNetwork.sendPc(sp, pos, 0, true);
+            LabNetwork.sendStorage(sp, LabNetwork.KIND_TERMINAL, pos, 0, true);
         }
         return InteractionResult.CONSUME;
     }
 
+    /** Terminal cassé ou remplacé : les Spectrobes qu'il contenait partent dans le PC de leur dresseur. */
     @Override
-    protected float getDestroyProgress(BlockState state, Player player, BlockGetter level, BlockPos pos) {
-        if (level.getBlockEntity(pos) instanceof LabTerminalBlockEntity be && !be.isEmpty()) return 0f;
-        return super.getDestroyProgress(state, player, level, pos);
+    protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
+        if (!state.is(newState.getBlock()) && level instanceof net.minecraft.server.level.ServerLevel server
+                && level.getBlockEntity(pos) instanceof LabTerminalBlockEntity be) {
+            be.transferAllToPc(server);
+        }
+        super.onRemove(state, level, pos, newState, movedByPiston);
     }
 }
