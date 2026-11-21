@@ -38,6 +38,9 @@ public class DirtRobes {
                 event.registerBlockEntity(net.neoforged.neoforge.capabilities.Capabilities.EnergyStorage.BLOCK, ModRegistry.INCUBATOR_BE.get(),
                         (be, side) -> be.energy()));
         modBus.addListener(com.dirtrobes.lab.LabNetwork::register);
+        // Cobblemon (optionnel) : les Spectrobes peuvent passer dans l'équipe Cobblemon et revenir
+        modBus.addListener(com.dirtrobes.compat.cobblemon.CobblemonNetwork::register);
+        if (net.neoforged.fml.ModList.get().isLoaded("cobblemon")) com.dirtrobes.compat.cobblemon.CobblemonCompat.register(NeoForge.EVENT_BUS);
         modBus.addListener((RegisterGameTestsEvent event) -> event.register(DirtRobesGameTests.class));
         CommonEvents.registerGameEvents(NeoForge.EVENT_BUS);
     }

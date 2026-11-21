@@ -1,0 +1,94 @@
+{
+  "implemented": true,
+  "name": "Butobasu",
+  "nationalPokedexNumber": 21,
+  "primaryType": "ground",
+  "secondaryType": "bug",
+  "abilities": [
+    "sandveil",
+    "sturdy",
+    "h:swarm"
+  ],
+  "baseStats": {
+    "hp": 123,
+    "attack": 54,
+    "defence": 56,
+    "special_attack": 43,
+    "special_defence": 50,
+    "speed": 69
+  },
+  "evYield": {
+    "hp": 3,
+    "attack": 0,
+    "defence": 0,
+    "special_attack": 0,
+    "special_defence": 0,
+    "speed": 0
+  },
+  "baseExperienceYield": 236,
+  "experienceGroup": "medium_fast",
+  "catchRate": 45,
+  "baseFriendship": 70,
+  "maleRatio": -1,
+  "eggCycles": 40,
+  "eggGroups": [
+    "undiscovered"
+  ],
+  "moves": [
+    "1:tackle",
+    "1:leer",
+    "1:mudslap",
+    "8:bugbite",
+    "12:protect",
+    "17:sandattack",
+    "21:strugglebug",
+    "24:rest",
+    "30:bulldoze",
+    "34:furycutter",
+    "36:endure",
+    "44:dig",
+    "46:xscissor",
+    "57:earthpower",
+    "59:bugbuzz",
+    "70:earthquake",
+    "72:megahorn",
+    "tm:bugbite",
+    "tm:bugbuzz",
+    "tm:bulldoze",
+    "tm:dig",
+    "tm:earthpower",
+    "tm:earthquake",
+    "tm:facade",
+    "tm:furycutter",
+    "tm:megahorn",
+    "tm:mudslap",
+    "tm:protect",
+    "tm:rest",
+    "tm:sandattack",
+    "tm:strugglebug",
+    "tm:substitute",
+    "tm:xscissor"
+  ],
+  "labels": [
+    "dirtrobes",
+    "spectrobe",
+    "evolved"
+  ],
+  "aspects": [],
+  "pokedex": [],
+  "evolutions": [],
+  "baseScale": 1.0,
+  "hitbox": {
+    "width": 1.4,
+    "height": 1.8,
+    "fixed": false
+  },
+  "height": 18,
+  "weight": 1200,
+  "behaviour": {
+    "resting": {
+      "canSleep": true,
+      "willSleepOnBed": true
+    }
+  }
+}

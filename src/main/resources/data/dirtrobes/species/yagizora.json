@@ -1,0 +1,94 @@
+{
+  "implemented": true,
+  "name": "Yagizora",
+  "nationalPokedexNumber": 221,
+  "primaryType": "flying",
+  "secondaryType": "dark",
+  "abilities": [
+    "keeneye",
+    "pressure",
+    "h:intimidate"
+  ],
+  "baseStats": {
+    "hp": 118,
+    "attack": 53,
+    "defence": 54,
+    "special_attack": 61,
+    "special_defence": 57,
+    "speed": 70
+  },
+  "evYield": {
+    "hp": 3,
+    "attack": 0,
+    "defence": 0,
+    "special_attack": 0,
+    "special_defence": 0,
+    "speed": 0
+  },
+  "baseExperienceYield": 236,
+  "experienceGroup": "medium_fast",
+  "catchRate": 45,
+  "baseFriendship": 70,
+  "maleRatio": -1,
+  "eggCycles": 40,
+  "eggGroups": [
+    "undiscovered"
+  ],
+  "moves": [
+    "1:tackle",
+    "1:leer",
+    "1:gust",
+    "8:bite",
+    "12:protect",
+    "15:peck",
+    "24:snarl",
+    "24:rest",
+    "26:wingattack",
+    "36:endure",
+    "37:aerialace",
+    "40:crunch",
+    "48:airslash",
+    "56:nightslash",
+    "59:drillpeck",
+    "70:hurricane",
+    "72:darkpulse",
+    "tm:aerialace",
+    "tm:airslash",
+    "tm:bite",
+    "tm:crunch",
+    "tm:darkpulse",
+    "tm:drillpeck",
+    "tm:facade",
+    "tm:gust",
+    "tm:hurricane",
+    "tm:nightslash",
+    "tm:peck",
+    "tm:protect",
+    "tm:rest",
+    "tm:snarl",
+    "tm:substitute",
+    "tm:wingattack"
+  ],
+  "labels": [
+    "dirtrobes",
+    "spectrobe",
+    "evolved"
+  ],
+  "aspects": [],
+  "pokedex": [],
+  "evolutions": [],
+  "baseScale": 1.0,
+  "hitbox": {
+    "width": 1.4,
+    "height": 1.8,
+    "fixed": false
+  },
+  "height": 18,
+  "weight": 1200,
+  "behaviour": {
+    "resting": {
+      "canSleep": true,
+      "willSleepOnBed": true
+    }
+  }
+}

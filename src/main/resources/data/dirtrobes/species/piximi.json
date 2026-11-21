@@ -1,0 +1,110 @@
+{
+  "implemented": true,
+  "name": "Piximi",
+  "nationalPokedexNumber": 156,
+  "primaryType": "grass",
+  "secondaryType": "fairy",
+  "abilities": [
+    "overgrow",
+    "chlorophyll",
+    "h:cutecharm"
+  ],
+  "baseStats": {
+    "hp": 105,
+    "attack": 53,
+    "defence": 53,
+    "special_attack": 53,
+    "special_defence": 53,
+    "speed": 70
+  },
+  "evYield": {
+    "hp": 2,
+    "attack": 0,
+    "defence": 0,
+    "special_attack": 0,
+    "special_defence": 0,
+    "speed": 0
+  },
+  "baseExperienceYield": 147,
+  "experienceGroup": "medium_slow",
+  "catchRate": 45,
+  "baseFriendship": 70,
+  "maleRatio": -1,
+  "eggCycles": 40,
+  "eggGroups": [
+    "undiscovered"
+  ],
+  "moves": [
+    "1:tackle",
+    "1:leer",
+    "1:absorb",
+    "8:fairywind",
+    "11:vinewhip",
+    "12:protect",
+    "18:razorleaf",
+    "20:drainingkiss",
+    "24:rest",
+    "25:megadrain",
+    "31:seedbomb",
+    "31:dazzlinggleam",
+    "36:endure",
+    "38:energyball",
+    "42:playrough",
+    "45:leafblade",
+    "52:solarbeam",
+    "54:moonblast",
+    "tm:absorb",
+    "tm:dazzlinggleam",
+    "tm:drainingkiss",
+    "tm:energyball",
+    "tm:facade",
+    "tm:fairywind",
+    "tm:leafblade",
+    "tm:megadrain",
+    "tm:moonblast",
+    "tm:playrough",
+    "tm:protect",
+    "tm:razorleaf",
+    "tm:rest",
+    "tm:seedbomb",
+    "tm:solarbeam",
+    "tm:substitute",
+    "tm:vinewhip"
+  ],
+  "labels": [
+    "dirtrobes",
+    "spectrobe",
+    "adult"
+  ],
+  "aspects": [],
+  "pokedex": [],
+  "evolutions": [
+    {
+      "id": "piximi_florami",
+      "variant": "level_up",
+      "result": "dirtrobes:florami",
+      "consumeHeldItem": false,
+      "learnableMoves": [],
+      "requirements": [
+        {
+          "variant": "level",
+          "minLevel": 30
+        }
+      ]
+    }
+  ],
+  "baseScale": 1.0,
+  "hitbox": {
+    "width": 1.0,
+    "height": 1.2,
+    "fixed": false
+  },
+  "height": 12,
+  "weight": 450,
+  "behaviour": {
+    "resting": {
+      "canSleep": true,
+      "willSleepOnBed": true
+    }
+  }
+}

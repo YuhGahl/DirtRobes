@@ -166,6 +166,12 @@ public final class LabNetwork {
         return player.level().getBlockEntity(pos) instanceof LabTerminalBlockEntity t ? t : null;
     }
 
+    /** Rangement ouvert par le joueur (PC ou terminal à portée), ou null. */
+    @javax.annotation.Nullable
+    public static com.dirtrobes.storage.SpectrobeStorage storageFor(ServerPlayer player, int kind, BlockPos pos) {
+        return near(player, pos) ? storage(player, kind, pos) : null;
+    }
+
     /** Envoie directement un membre de l'équipe au PC (bouton du Prizmod). */
     public static boolean teamToPc(ServerPlayer player, int slot) {
         if (PrizmodTeam.blockedByLeader(player)) {

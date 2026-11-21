@@ -41,6 +41,9 @@ public class PcScreen extends Screen {
     /** Spectrobe tenu : zone (0 équipe / 1 boîte) et index, ou -1. */
     private int heldArea = -1;
     private int heldIndex = -1;
+    /** Boutons du pont Cobblemon (seulement si Cobblemon est installé). */
+    @Nullable
+    private Button toCobblemon;
 
     public PcScreen() {
         super(Component.translatable("gui.dirtrobes.pc.title"));
@@ -67,11 +70,32 @@ public class PcScreen extends Screen {
         int gx = gridX();
         addRenderableWidget(Button.builder(Component.literal("◀"), b -> changeBox(-1)).bounds(gx, top + 6, 18, 14).build());
         addRenderableWidget(Button.builder(Component.literal("▶"), b -> changeBox(1)).bounds(gx + COLS * CELL - 18, top + 6, 18, 14).build());
+        toCobblemon = null;
+        if (com.dirtrobes.compat.cobblemon.CobblemonNetwork.cobblemonLoaded()) {
+            int bx = teamX() - 2, by = gridY() + 3 * CELL + 18;
+            toCobblemon = addRenderableWidget(Button.builder(Component.translatable("gui.dirtrobes.pc.to_cobblemon"), b -> bridge(
+                            com.dirtrobes.compat.cobblemon.CobblemonNetwork.ACTION_SEND))
+                    .bounds(bx, by, 64, 14).tooltip(net.minecraft.client.gui.components.Tooltip.create(
+                            Component.translatable("gui.dirtrobes.pc.to_cobblemon.tooltip"))).build());
+            toCobblemon.active = heldArea >= 0;
+            addRenderableWidget(Button.builder(Component.translatable("gui.dirtrobes.pc.from_cobblemon"), b -> bridge(
+                            com.dirtrobes.compat.cobblemon.CobblemonNetwork.ACTION_TAKE_BACK))
+                    .bounds(bx, by + 17, 64, 14).tooltip(net.minecraft.client.gui.components.Tooltip.create(
+                            Component.translatable("gui.dirtrobes.pc.from_cobblemon.tooltip"))).build());
+        }
         if (data.kind() == LabNetwork.KIND_TERMINAL) {
             addRenderableWidget(Button.builder(Component.translatable("gui.dirtrobes.pc.pen_button"), b -> {
                 if (minecraft != null && data != null) minecraft.setScreen(new PenScreen(this, data.pos(), data.pen()));
             }).bounds(left + W - 78, top + 6, 70, 14).build());
         }
+    }
+
+    private void bridge(int action) {
+        if (data == null) return;
+        if (action == com.dirtrobes.compat.cobblemon.CobblemonNetwork.ACTION_SEND && heldArea < 0) return;
+        PacketDistributor.sendToServer(new com.dirtrobes.compat.cobblemon.CobblemonNetwork.BridgePayload(
+                data.kind(), data.pos(), action, heldArea, heldIndex, data.box()));
+        heldArea = -1;
     }
 
     private void changeBox(int delta) {
@@ -180,6 +204,7 @@ public class PcScreen extends Screen {
 
     @Override
     public void render(GuiGraphics g, int mouseX, int mouseY, float partialTick) {
+        if (toCobblemon != null) toCobblemon.active = heldArea >= 0;
         super.render(g, mouseX, mouseY, partialTick);
         if (data == null) return;
         g.drawString(font, Component.translatable(data.kind() == LabNetwork.KIND_PC ? "gui.dirtrobes.pc.title_pc" : "gui.dirtrobes.pc.title"),

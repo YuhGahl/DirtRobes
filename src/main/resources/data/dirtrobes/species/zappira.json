@@ -1,0 +1,110 @@
+{
+  "implemented": true,
+  "name": "Zappira",
+  "nationalPokedexNumber": 226,
+  "primaryType": "flying",
+  "secondaryType": "electric",
+  "abilities": [
+    "keeneye",
+    "pressure",
+    "h:static"
+  ],
+  "baseStats": {
+    "hp": 138,
+    "attack": 66,
+    "defence": 57,
+    "special_attack": 76,
+    "special_defence": 60,
+    "speed": 75
+  },
+  "evYield": {
+    "hp": 2,
+    "attack": 0,
+    "defence": 0,
+    "special_attack": 0,
+    "special_defence": 0,
+    "speed": 0
+  },
+  "baseExperienceYield": 147,
+  "experienceGroup": "slow",
+  "catchRate": 45,
+  "baseFriendship": 70,
+  "maleRatio": -1,
+  "eggCycles": 40,
+  "eggGroups": [
+    "undiscovered"
+  ],
+  "moves": [
+    "1:tackle",
+    "1:leer",
+    "1:gust",
+    "8:thundershock",
+    "12:peck",
+    "12:protect",
+    "17:spark",
+    "20:wingattack",
+    "24:rest",
+    "26:shockwave",
+    "28:aerialace",
+    "36:airslash",
+    "36:thunderbolt",
+    "36:endure",
+    "44:drillpeck",
+    "45:wildcharge",
+    "52:hurricane",
+    "54:thunder",
+    "tm:aerialace",
+    "tm:airslash",
+    "tm:drillpeck",
+    "tm:facade",
+    "tm:gust",
+    "tm:hurricane",
+    "tm:peck",
+    "tm:protect",
+    "tm:rest",
+    "tm:shockwave",
+    "tm:spark",
+    "tm:substitute",
+    "tm:thunder",
+    "tm:thunderbolt",
+    "tm:thundershock",
+    "tm:wildcharge",
+    "tm:wingattack"
+  ],
+  "labels": [
+    "dirtrobes",
+    "spectrobe",
+    "adult"
+  ],
+  "aspects": [],
+  "pokedex": [],
+  "evolutions": [
+    {
+      "id": "zappira_zappizor",
+      "variant": "level_up",
+      "result": "dirtrobes:zappizor",
+      "consumeHeldItem": false,
+      "learnableMoves": [],
+      "requirements": [
+        {
+          "variant": "level",
+          "minLevel": 30
+        }
+      ]
+    }
+  ],
+  "baseScale": 1.0,
+  "hitbox": {
+    "width": 1.0,
+    "height": 1.2,
+    "fixed": false
+  },
+  "height": 12,
+  "weight": 450,
+  "behaviour": {
+    "resting": {
+      "canSleep": true,
+      "willSleepOnBed": true
+    }
+  }
+}

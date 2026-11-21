@@ -1,0 +1,113 @@
+{
+  "implemented": true,
+  "name": "Shogyo",
+  "nationalPokedexNumber": 187,
+  "primaryType": "grass",
+  "secondaryType": "water",
+  "abilities": [
+    "overgrow",
+    "chlorophyll",
+    "h:hydration"
+  ],
+  "baseStats": {
+    "hp": 91,
+    "attack": 64,
+    "defence": 42,
+    "special_attack": 64,
+    "special_defence": 42,
+    "speed": 81
+  },
+  "evYield": {
+    "hp": 1,
+    "attack": 0,
+    "defence": 0,
+    "special_attack": 0,
+    "special_defence": 0,
+    "speed": 0
+  },
+  "baseExperienceYield": 62,
+  "experienceGroup": "slow",
+  "catchRate": 45,
+  "baseFriendship": 70,
+  "maleRatio": -1,
+  "eggCycles": 40,
+  "eggGroups": [
+    "undiscovered"
+  ],
+  "moves": [
+    "1:tackle",
+    "1:leer",
+    "1:absorb",
+    "8:vinewhip",
+    "8:watergun",
+    "12:protect",
+    "13:razorleaf",
+    "13:aquajet",
+    "17:megadrain",
+    "17:bubblebeam",
+    "21:seedbomb",
+    "22:waterpulse",
+    "24:rest",
+    "25:energyball",
+    "27:aquatail",
+    "30:leafblade",
+    "31:surf",
+    "34:solarbeam",
+    "36:hydropump",
+    "tm:absorb",
+    "tm:aquajet",
+    "tm:aquatail",
+    "tm:bubblebeam",
+    "tm:energyball",
+    "tm:facade",
+    "tm:hydropump",
+    "tm:leafblade",
+    "tm:megadrain",
+    "tm:protect",
+    "tm:razorleaf",
+    "tm:rest",
+    "tm:seedbomb",
+    "tm:solarbeam",
+    "tm:substitute",
+    "tm:surf",
+    "tm:vinewhip",
+    "tm:watergun",
+    "tm:waterpulse"
+  ],
+  "labels": [
+    "dirtrobes",
+    "spectrobe",
+    "child"
+  ],
+  "aspects": [],
+  "pokedex": [],
+  "evolutions": [
+    {
+      "id": "shogyo_chugyo",
+      "variant": "level_up",
+      "result": "dirtrobes:chugyo",
+      "consumeHeldItem": false,
+      "learnableMoves": [],
+      "requirements": [
+        {
+          "variant": "level",
+          "minLevel": 10
+        }
+      ]
+    }
+  ],
+  "baseScale": 1.0,
+  "hitbox": {
+    "width": 0.6,
+    "height": 0.6,
+    "fixed": false
+  },
+  "height": 6,
+  "weight": 120,
+  "behaviour": {
+    "resting": {
+      "canSleep": true,
+      "willSleepOnBed": true
+    }
+  }
+}

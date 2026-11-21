@@ -153,6 +153,10 @@ dependencies {
     // Create : accélérateur cinétique de l'incubateur (optionnel)
     compileOnly("maven.modrinth:LNytGWDc:${create_version}") { transitive = false }
     createJar("maven.modrinth:LNytGWDc:${create_version}") { transitive = false }
+    // Cobblemon : pont optionnel (les Spectrobes peuvent passer dans l'équipe Cobblemon). Kotlin for Forge
+    // fournit la bibliothèque standard Kotlin utilisée par les signatures de Cobblemon.
+    compileOnly("maven.modrinth:MdwFAVRL:${cobblemon_version}") { transitive = false }
+    compileOnly("maven.modrinth:ordsPcFz:${kotlinforforge_version}") { transitive = false }
     // bibliothèques embarquées dans le jar de Create (Ponder, Flywheel, Registrate…), nécessaires à la compilation
     compileOnly fileTree(dir: layout.buildDirectory.dir('create-nested'), include: '*.jar').builtBy(extractCreateNested)
 

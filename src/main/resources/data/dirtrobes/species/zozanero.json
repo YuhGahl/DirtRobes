@@ -1,0 +1,94 @@
+{
+  "implemented": true,
+  "name": "Zozanero",
+  "nationalPokedexNumber": 239,
+  "primaryType": "fire",
+  "secondaryType": "poison",
+  "abilities": [
+    "blaze",
+    "flashfire",
+    "h:poisonpoint"
+  ],
+  "baseStats": {
+    "hp": 121,
+    "attack": 57,
+    "defence": 60,
+    "special_attack": 48,
+    "special_defence": 54,
+    "speed": 69
+  },
+  "evYield": {
+    "hp": 3,
+    "attack": 0,
+    "defence": 0,
+    "special_attack": 0,
+    "special_defence": 0,
+    "speed": 0
+  },
+  "baseExperienceYield": 236,
+  "experienceGroup": "medium_fast",
+  "catchRate": 45,
+  "baseFriendship": 70,
+  "maleRatio": -1,
+  "eggCycles": 40,
+  "eggGroups": [
+    "undiscovered"
+  ],
+  "moves": [
+    "1:tackle",
+    "1:leer",
+    "1:ember",
+    "8:poisonsting",
+    "12:protect",
+    "15:flamecharge",
+    "24:acid",
+    "24:rest",
+    "26:firefang",
+    "36:endure",
+    "37:incinerate",
+    "40:poisonfang",
+    "48:flamethrower",
+    "56:sludgebomb",
+    "59:fireblast",
+    "70:flareblitz",
+    "72:gunkshot",
+    "tm:acid",
+    "tm:ember",
+    "tm:facade",
+    "tm:fireblast",
+    "tm:firefang",
+    "tm:flamecharge",
+    "tm:flamethrower",
+    "tm:flareblitz",
+    "tm:gunkshot",
+    "tm:incinerate",
+    "tm:poisonfang",
+    "tm:poisonsting",
+    "tm:protect",
+    "tm:rest",
+    "tm:sludgebomb",
+    "tm:substitute"
+  ],
+  "labels": [
+    "dirtrobes",
+    "spectrobe",
+    "evolved"
+  ],
+  "aspects": [],
+  "pokedex": [],
+  "evolutions": [],
+  "baseScale": 1.0,
+  "hitbox": {
+    "width": 1.4,
+    "height": 1.8,
+    "fixed": false
+  },
+  "height": 18,
+  "weight": 1200,
+  "behaviour": {
+    "resting": {
+      "canSleep": true,
+      "willSleepOnBed": true
+    }
+  }
+}

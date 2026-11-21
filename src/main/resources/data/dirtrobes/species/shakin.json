@@ -1,0 +1,107 @@
+{
+  "implemented": true,
+  "name": "Shakin",
+  "nationalPokedexNumber": 181,
+  "primaryType": "water",
+  "secondaryType": "steel",
+  "abilities": [
+    "torrent",
+    "swiftswim",
+    "h:clearbody"
+  ],
+  "baseStats": {
+    "hp": 83,
+    "attack": 36,
+    "defence": 38,
+    "special_attack": 41,
+    "special_defence": 42,
+    "speed": 69
+  },
+  "evYield": {
+    "hp": 1,
+    "attack": 0,
+    "defence": 0,
+    "special_attack": 0,
+    "special_defence": 0,
+    "speed": 0
+  },
+  "baseExperienceYield": 62,
+  "experienceGroup": "medium_fast",
+  "catchRate": 45,
+  "baseFriendship": 70,
+  "maleRatio": -1,
+  "eggCycles": 40,
+  "eggGroups": [
+    "undiscovered"
+  ],
+  "moves": [
+    "1:tackle",
+    "1:leer",
+    "1:watergun",
+    "8:metalclaw",
+    "9:aquajet",
+    "12:protect",
+    "14:bubblebeam",
+    "15:irondefense",
+    "19:waterpulse",
+    "22:ironhead",
+    "24:aquatail",
+    "24:rest",
+    "29:surf",
+    "29:flashcannon",
+    "34:hydropump",
+    "36:meteormash",
+    "tm:aquajet",
+    "tm:aquatail",
+    "tm:bubblebeam",
+    "tm:facade",
+    "tm:flashcannon",
+    "tm:hydropump",
+    "tm:irondefense",
+    "tm:ironhead",
+    "tm:metalclaw",
+    "tm:meteormash",
+    "tm:protect",
+    "tm:rest",
+    "tm:substitute",
+    "tm:surf",
+    "tm:watergun",
+    "tm:waterpulse"
+  ],
+  "labels": [
+    "dirtrobes",
+    "spectrobe",
+    "child"
+  ],
+  "aspects": [],
+  "pokedex": [],
+  "evolutions": [
+    {
+      "id": "shakin_shakor",
+      "variant": "level_up",
+      "result": "dirtrobes:shakor",
+      "consumeHeldItem": false,
+      "learnableMoves": [],
+      "requirements": [
+        {
+          "variant": "level",
+          "minLevel": 10
+        }
+      ]
+    }
+  ],
+  "baseScale": 1.0,
+  "hitbox": {
+    "width": 0.6,
+    "height": 0.6,
+    "fixed": false
+  },
+  "height": 6,
+  "weight": 120,
+  "behaviour": {
+    "resting": {
+      "canSleep": true,
+      "willSleepOnBed": true
+    }
+  }
+}

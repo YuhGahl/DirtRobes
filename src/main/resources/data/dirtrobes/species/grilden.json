@@ -1,0 +1,110 @@
+{
+  "implemented": true,
+  "name": "Grilden",
+  "nationalPokedexNumber": 59,
+  "primaryType": "grass",
+  "secondaryType": "dragon",
+  "abilities": [
+    "overgrow",
+    "chlorophyll",
+    "h:roughskin"
+  ],
+  "baseStats": {
+    "hp": 151,
+    "attack": 68,
+    "defence": 74,
+    "special_attack": 68,
+    "special_defence": 74,
+    "speed": 67
+  },
+  "evYield": {
+    "hp": 2,
+    "attack": 0,
+    "defence": 0,
+    "special_attack": 0,
+    "special_defence": 0,
+    "speed": 0
+  },
+  "baseExperienceYield": 147,
+  "experienceGroup": "slow",
+  "catchRate": 45,
+  "baseFriendship": 70,
+  "maleRatio": -1,
+  "eggCycles": 40,
+  "eggGroups": [
+    "undiscovered"
+  ],
+  "moves": [
+    "1:tackle",
+    "1:leer",
+    "1:absorb",
+    "8:dragonbreath",
+    "11:vinewhip",
+    "12:protect",
+    "18:razorleaf",
+    "20:twister",
+    "24:rest",
+    "25:megadrain",
+    "31:seedbomb",
+    "31:dragonclaw",
+    "36:endure",
+    "38:energyball",
+    "42:dragonpulse",
+    "45:leafblade",
+    "52:solarbeam",
+    "54:outrage",
+    "tm:absorb",
+    "tm:dragonbreath",
+    "tm:dragonclaw",
+    "tm:dragonpulse",
+    "tm:energyball",
+    "tm:facade",
+    "tm:leafblade",
+    "tm:megadrain",
+    "tm:outrage",
+    "tm:protect",
+    "tm:razorleaf",
+    "tm:rest",
+    "tm:seedbomb",
+    "tm:solarbeam",
+    "tm:substitute",
+    "tm:twister",
+    "tm:vinewhip"
+  ],
+  "labels": [
+    "dirtrobes",
+    "spectrobe",
+    "adult"
+  ],
+  "aspects": [],
+  "pokedex": [],
+  "evolutions": [
+    {
+      "id": "grilden_grildragos",
+      "variant": "level_up",
+      "result": "dirtrobes:grildragos",
+      "consumeHeldItem": false,
+      "learnableMoves": [],
+      "requirements": [
+        {
+          "variant": "level",
+          "minLevel": 30
+        }
+      ]
+    }
+  ],
+  "baseScale": 1.0,
+  "hitbox": {
+    "width": 1.0,
+    "height": 1.2,
+    "fixed": false
+  },
+  "height": 12,
+  "weight": 450,
+  "behaviour": {
+    "resting": {
+      "canSleep": true,
+      "willSleepOnBed": true
+    }
+  }
+}

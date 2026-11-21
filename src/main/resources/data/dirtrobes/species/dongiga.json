@@ -1,0 +1,92 @@
+{
+  "implemented": true,
+  "name": "Dongiga",
+  "nationalPokedexNumber": 36,
+  "primaryType": "ground",
+  "secondaryType": "rock",
+  "abilities": [
+    "sandveil",
+    "sturdy",
+    "h:rockhead"
+  ],
+  "baseStats": {
+    "hp": 154,
+    "attack": 73,
+    "defence": 80,
+    "special_attack": 58,
+    "special_defence": 72,
+    "speed": 67
+  },
+  "evYield": {
+    "hp": 3,
+    "attack": 0,
+    "defence": 0,
+    "special_attack": 0,
+    "special_defence": 0,
+    "speed": 0
+  },
+  "baseExperienceYield": 236,
+  "experienceGroup": "slow",
+  "catchRate": 45,
+  "baseFriendship": 70,
+  "maleRatio": -1,
+  "eggCycles": 40,
+  "eggGroups": [
+    "undiscovered"
+  ],
+  "moves": [
+    "1:tackle",
+    "1:leer",
+    "1:mudslap",
+    "8:rockthrow",
+    "12:protect",
+    "17:sandattack",
+    "24:rocktomb",
+    "24:rest",
+    "30:bulldoze",
+    "36:endure",
+    "40:rockslide",
+    "44:dig",
+    "56:ancientpower",
+    "57:earthpower",
+    "70:earthquake",
+    "72:stoneedge",
+    "tm:ancientpower",
+    "tm:bulldoze",
+    "tm:dig",
+    "tm:earthpower",
+    "tm:earthquake",
+    "tm:facade",
+    "tm:mudslap",
+    "tm:protect",
+    "tm:rest",
+    "tm:rockslide",
+    "tm:rockthrow",
+    "tm:rocktomb",
+    "tm:sandattack",
+    "tm:stoneedge",
+    "tm:substitute"
+  ],
+  "labels": [
+    "dirtrobes",
+    "spectrobe",
+    "evolved"
+  ],
+  "aspects": [],
+  "pokedex": [],
+  "evolutions": [],
+  "baseScale": 1.0,
+  "hitbox": {
+    "width": 1.4,
+    "height": 1.8,
+    "fixed": false
+  },
+  "height": 18,
+  "weight": 1200,
+  "behaviour": {
+    "resting": {
+      "canSleep": true,
+      "willSleepOnBed": true
+    }
+  }
+}

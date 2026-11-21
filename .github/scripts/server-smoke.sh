@@ -21,6 +21,8 @@ done
 if [ "$ready" = 1 ]; then
   echo "summon dirtrobes:spectrobe 0 100 0" >&3
   sleep 5
+  # pont Cobblemon : toutes les espèces chargées côté Cobblemon + aller-retour Spectrobe → Pokémon → Spectrobe
+  if ls run/mods | grep -qi cobblemon; then echo "dirtrobes cobblemon check" >&3; sleep 5; fi
   echo "stop" >&3
   for i in $(seq 1 90); do kill -0 "$PID" 2>/dev/null || break; sleep 1; done
 fi
@@ -38,4 +40,7 @@ if [ "$ready" != 1 ]; then
   echo "Le serveur n'a pas démarré."; tail -120 "$LOG"; exit 1
 fi
 [ -z "$ERRS" ] || exit 1
+if ls run/mods | grep -qi cobblemon && ! grep -q "Intégration Cobblemon : .* aller-retour OK" "$LOG"; then
+  echo "Le pont Cobblemon n'a pas été validé."; grep -n "Cobblemon" "$LOG" | tail -30; exit 1
+fi
 echo "Serveur démarré sans erreur liée au mod."

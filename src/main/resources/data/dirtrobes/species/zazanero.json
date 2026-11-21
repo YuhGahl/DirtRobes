@@ -1,0 +1,96 @@
+{
+  "implemented": true,
+  "name": "Zazanero",
+  "nationalPokedexNumber": 230,
+  "primaryType": "fire",
+  "secondaryType": "bug",
+  "abilities": [
+    "blaze",
+    "flashfire",
+    "h:swarm"
+  ],
+  "baseStats": {
+    "hp": 120,
+    "attack": 50,
+    "defence": 53,
+    "special_attack": 42,
+    "special_defence": 48,
+    "speed": 69
+  },
+  "evYield": {
+    "hp": 3,
+    "attack": 0,
+    "defence": 0,
+    "special_attack": 0,
+    "special_defence": 0,
+    "speed": 0
+  },
+  "baseExperienceYield": 236,
+  "experienceGroup": "medium_fast",
+  "catchRate": 45,
+  "baseFriendship": 70,
+  "maleRatio": -1,
+  "eggCycles": 40,
+  "eggGroups": [
+    "undiscovered"
+  ],
+  "moves": [
+    "1:tackle",
+    "1:leer",
+    "1:ember",
+    "8:bugbite",
+    "12:protect",
+    "15:flamecharge",
+    "21:strugglebug",
+    "24:rest",
+    "26:firefang",
+    "34:furycutter",
+    "36:endure",
+    "37:incinerate",
+    "46:xscissor",
+    "48:flamethrower",
+    "59:fireblast",
+    "59:bugbuzz",
+    "70:flareblitz",
+    "72:megahorn",
+    "tm:bugbite",
+    "tm:bugbuzz",
+    "tm:ember",
+    "tm:facade",
+    "tm:fireblast",
+    "tm:firefang",
+    "tm:flamecharge",
+    "tm:flamethrower",
+    "tm:flareblitz",
+    "tm:furycutter",
+    "tm:incinerate",
+    "tm:megahorn",
+    "tm:protect",
+    "tm:rest",
+    "tm:strugglebug",
+    "tm:substitute",
+    "tm:xscissor"
+  ],
+  "labels": [
+    "dirtrobes",
+    "spectrobe",
+    "evolved"
+  ],
+  "aspects": [],
+  "pokedex": [],
+  "evolutions": [],
+  "baseScale": 1.0,
+  "hitbox": {
+    "width": 1.4,
+    "height": 1.8,
+    "fixed": false
+  },
+  "height": 18,
+  "weight": 1200,
+  "behaviour": {
+    "resting": {
+      "canSleep": true,
+      "willSleepOnBed": true
+    }
+  }
+}

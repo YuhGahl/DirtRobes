@@ -1,0 +1,107 @@
+{
+  "implemented": true,
+  "name": "Aoi",
+  "nationalPokedexNumber": 6,
+  "primaryType": "flying",
+  "secondaryType": "dragon",
+  "abilities": [
+    "keeneye",
+    "pressure",
+    "h:roughskin"
+  ],
+  "baseStats": {
+    "hp": 77,
+    "attack": 39,
+    "defence": 38,
+    "special_attack": 45,
+    "special_defence": 40,
+    "speed": 71
+  },
+  "evYield": {
+    "hp": 1,
+    "attack": 0,
+    "defence": 0,
+    "special_attack": 0,
+    "special_defence": 0,
+    "speed": 0
+  },
+  "baseExperienceYield": 62,
+  "experienceGroup": "medium_fast",
+  "catchRate": 45,
+  "baseFriendship": 70,
+  "maleRatio": -1,
+  "eggCycles": 40,
+  "eggGroups": [
+    "undiscovered"
+  ],
+  "moves": [
+    "1:tackle",
+    "1:leer",
+    "1:gust",
+    "8:dragonbreath",
+    "9:peck",
+    "12:protect",
+    "14:wingattack",
+    "15:twister",
+    "19:aerialace",
+    "22:dragonclaw",
+    "24:airslash",
+    "24:rest",
+    "29:drillpeck",
+    "29:dragonpulse",
+    "34:hurricane",
+    "36:outrage",
+    "tm:aerialace",
+    "tm:airslash",
+    "tm:dragonbreath",
+    "tm:dragonclaw",
+    "tm:dragonpulse",
+    "tm:drillpeck",
+    "tm:facade",
+    "tm:gust",
+    "tm:hurricane",
+    "tm:outrage",
+    "tm:peck",
+    "tm:protect",
+    "tm:rest",
+    "tm:substitute",
+    "tm:twister",
+    "tm:wingattack"
+  ],
+  "labels": [
+    "dirtrobes",
+    "spectrobe",
+    "child"
+  ],
+  "aspects": [],
+  "pokedex": [],
+  "evolutions": [
+    {
+      "id": "aoi_aoba",
+      "variant": "level_up",
+      "result": "dirtrobes:aoba",
+      "consumeHeldItem": false,
+      "learnableMoves": [],
+      "requirements": [
+        {
+          "variant": "level",
+          "minLevel": 10
+        }
+      ]
+    }
+  ],
+  "baseScale": 1.0,
+  "hitbox": {
+    "width": 0.6,
+    "height": 0.6,
+    "fixed": false
+  },
+  "height": 6,
+  "weight": 120,
+  "behaviour": {
+    "resting": {
+      "canSleep": true,
+      "willSleepOnBed": true
+    }
+  }
+}

@@ -1,0 +1,108 @@
+{
+  "implemented": true,
+  "name": "Ketobasu",
+  "nationalPokedexNumber": 83,
+  "primaryType": "ground",
+  "secondaryType": "bug",
+  "abilities": [
+    "sandveil",
+    "sturdy",
+    "h:swarm"
+  ],
+  "baseStats": {
+    "hp": 100,
+    "attack": 49,
+    "defence": 50,
+    "special_attack": 39,
+    "special_defence": 45,
+    "speed": 70
+  },
+  "evYield": {
+    "hp": 2,
+    "attack": 0,
+    "defence": 0,
+    "special_attack": 0,
+    "special_defence": 0,
+    "speed": 0
+  },
+  "baseExperienceYield": 147,
+  "experienceGroup": "medium_fast",
+  "catchRate": 45,
+  "baseFriendship": 70,
+  "maleRatio": -1,
+  "eggCycles": 40,
+  "eggGroups": [
+    "undiscovered"
+  ],
+  "moves": [
+    "1:tackle",
+    "1:leer",
+    "1:mudslap",
+    "8:bugbite",
+    "12:protect",
+    "14:sandattack",
+    "17:strugglebug",
+    "23:bulldoze",
+    "24:rest",
+    "26:furycutter",
+    "33:dig",
+    "36:xscissor",
+    "36:endure",
+    "42:earthpower",
+    "45:bugbuzz",
+    "52:earthquake",
+    "54:megahorn",
+    "tm:bugbite",
+    "tm:bugbuzz",
+    "tm:bulldoze",
+    "tm:dig",
+    "tm:earthpower",
+    "tm:earthquake",
+    "tm:facade",
+    "tm:furycutter",
+    "tm:megahorn",
+    "tm:mudslap",
+    "tm:protect",
+    "tm:rest",
+    "tm:sandattack",
+    "tm:strugglebug",
+    "tm:substitute",
+    "tm:xscissor"
+  ],
+  "labels": [
+    "dirtrobes",
+    "spectrobe",
+    "adult"
+  ],
+  "aspects": [],
+  "pokedex": [],
+  "evolutions": [
+    {
+      "id": "ketobasu_butobasu",
+      "variant": "level_up",
+      "result": "dirtrobes:butobasu",
+      "consumeHeldItem": false,
+      "learnableMoves": [],
+      "requirements": [
+        {
+          "variant": "level",
+          "minLevel": 30
+        }
+      ]
+    }
+  ],
+  "baseScale": 1.0,
+  "hitbox": {
+    "width": 1.0,
+    "height": 1.2,
+    "fixed": false
+  },
+  "height": 12,
+  "weight": 450,
+  "behaviour": {
+    "resting": {
+      "canSleep": true,
+      "willSleepOnBed": true
+    }
+  }
+}

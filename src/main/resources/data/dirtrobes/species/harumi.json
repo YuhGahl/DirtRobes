@@ -1,0 +1,107 @@
+{
+  "implemented": true,
+  "name": "Harumi",
+  "nationalPokedexNumber": 68,
+  "primaryType": "water",
+  "secondaryType": "fairy",
+  "abilities": [
+    "torrent",
+    "swiftswim",
+    "h:cutecharm"
+  ],
+  "baseStats": {
+    "hp": 53,
+    "attack": 26,
+    "defence": 80,
+    "special_attack": 30,
+    "special_defence": 88,
+    "speed": 43
+  },
+  "evYield": {
+    "hp": 0,
+    "attack": 0,
+    "defence": 1,
+    "special_attack": 0,
+    "special_defence": 0,
+    "speed": 0
+  },
+  "baseExperienceYield": 62,
+  "experienceGroup": "medium_fast",
+  "catchRate": 45,
+  "baseFriendship": 70,
+  "maleRatio": -1,
+  "eggCycles": 40,
+  "eggGroups": [
+    "undiscovered"
+  ],
+  "moves": [
+    "1:tackle",
+    "1:leer",
+    "1:watergun",
+    "8:fairywind",
+    "9:aquajet",
+    "12:protect",
+    "14:bubblebeam",
+    "15:drainingkiss",
+    "19:waterpulse",
+    "22:dazzlinggleam",
+    "24:aquatail",
+    "24:rest",
+    "29:surf",
+    "29:playrough",
+    "34:hydropump",
+    "36:moonblast",
+    "tm:aquajet",
+    "tm:aquatail",
+    "tm:bubblebeam",
+    "tm:dazzlinggleam",
+    "tm:drainingkiss",
+    "tm:facade",
+    "tm:fairywind",
+    "tm:hydropump",
+    "tm:moonblast",
+    "tm:playrough",
+    "tm:protect",
+    "tm:rest",
+    "tm:substitute",
+    "tm:surf",
+    "tm:watergun",
+    "tm:waterpulse"
+  ],
+  "labels": [
+    "dirtrobes",
+    "spectrobe",
+    "child"
+  ],
+  "aspects": [],
+  "pokedex": [],
+  "evolutions": [
+    {
+      "id": "harumi_harumite",
+      "variant": "level_up",
+      "result": "dirtrobes:harumite",
+      "consumeHeldItem": false,
+      "learnableMoves": [],
+      "requirements": [
+        {
+          "variant": "level",
+          "minLevel": 10
+        }
+      ]
+    }
+  ],
+  "baseScale": 1.0,
+  "hitbox": {
+    "width": 0.6,
+    "height": 0.6,
+    "fixed": false
+  },
+  "height": 6,
+  "weight": 120,
+  "behaviour": {
+    "resting": {
+      "canSleep": true,
+      "willSleepOnBed": true
+    }
+  }
+}

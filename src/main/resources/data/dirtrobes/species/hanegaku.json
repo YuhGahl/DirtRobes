@@ -1,0 +1,112 @@
+{
+  "implemented": true,
+  "name": "Hanegaku",
+  "nationalPokedexNumber": 63,
+  "primaryType": "water",
+  "secondaryType": "flying",
+  "abilities": [
+    "torrent",
+    "swiftswim",
+    "h:bigpecks"
+  ],
+  "baseStats": {
+    "hp": 109,
+    "attack": 84,
+    "defence": 54,
+    "special_attack": 97,
+    "special_defence": 59,
+    "speed": 85
+  },
+  "evYield": {
+    "hp": 2,
+    "attack": 0,
+    "defence": 0,
+    "special_attack": 0,
+    "special_defence": 0,
+    "speed": 0
+  },
+  "baseExperienceYield": 147,
+  "experienceGroup": "medium_slow",
+  "catchRate": 45,
+  "baseFriendship": 70,
+  "maleRatio": -1,
+  "eggCycles": 40,
+  "eggGroups": [
+    "undiscovered"
+  ],
+  "moves": [
+    "1:tackle",
+    "1:leer",
+    "1:watergun",
+    "8:gust",
+    "12:aquajet",
+    "12:protect",
+    "16:peck",
+    "20:bubblebeam",
+    "23:wingattack",
+    "24:rest",
+    "28:waterpulse",
+    "31:aerialace",
+    "36:aquatail",
+    "36:endure",
+    "39:airslash",
+    "44:surf",
+    "46:drillpeck",
+    "52:hydropump",
+    "54:hurricane",
+    "tm:aerialace",
+    "tm:airslash",
+    "tm:aquajet",
+    "tm:aquatail",
+    "tm:bubblebeam",
+    "tm:drillpeck",
+    "tm:facade",
+    "tm:gust",
+    "tm:hurricane",
+    "tm:hydropump",
+    "tm:peck",
+    "tm:protect",
+    "tm:rest",
+    "tm:substitute",
+    "tm:surf",
+    "tm:watergun",
+    "tm:waterpulse",
+    "tm:wingattack"
+  ],
+  "labels": [
+    "dirtrobes",
+    "spectrobe",
+    "adult"
+  ],
+  "aspects": [],
+  "pokedex": [],
+  "evolutions": [
+    {
+      "id": "hanegaku_hanebakuon",
+      "variant": "level_up",
+      "result": "dirtrobes:hanebakuon",
+      "consumeHeldItem": false,
+      "learnableMoves": [],
+      "requirements": [
+        {
+          "variant": "level",
+          "minLevel": 30
+        }
+      ]
+    }
+  ],
+  "baseScale": 1.0,
+  "hitbox": {
+    "width": 1.0,
+    "height": 1.2,
+    "fixed": false
+  },
+  "height": 12,
+  "weight": 450,
+  "behaviour": {
+    "resting": {
+      "canSleep": true,
+      "willSleepOnBed": true
+    }
+  }
+}

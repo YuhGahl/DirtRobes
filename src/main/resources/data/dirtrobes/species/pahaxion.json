@@ -1,0 +1,96 @@
+{
+  "implemented": true,
+  "name": "Pahaxion",
+  "nationalPokedexNumber": 147,
+  "primaryType": "grass",
+  "secondaryType": "dark",
+  "abilities": [
+    "overgrow",
+    "chlorophyll",
+    "h:intimidate"
+  ],
+  "baseStats": {
+    "hp": 121,
+    "attack": 63,
+    "defence": 75,
+    "special_attack": 63,
+    "special_defence": 75,
+    "speed": 64
+  },
+  "evYield": {
+    "hp": 3,
+    "attack": 0,
+    "defence": 0,
+    "special_attack": 0,
+    "special_defence": 0,
+    "speed": 0
+  },
+  "baseExperienceYield": 236,
+  "experienceGroup": "medium_slow",
+  "catchRate": 45,
+  "baseFriendship": 70,
+  "maleRatio": -1,
+  "eggCycles": 40,
+  "eggGroups": [
+    "undiscovered"
+  ],
+  "moves": [
+    "1:tackle",
+    "1:leer",
+    "1:absorb",
+    "8:bite",
+    "12:protect",
+    "13:vinewhip",
+    "23:razorleaf",
+    "24:snarl",
+    "24:rest",
+    "32:megadrain",
+    "36:endure",
+    "40:crunch",
+    "42:seedbomb",
+    "51:energyball",
+    "56:nightslash",
+    "61:leafblade",
+    "70:solarbeam",
+    "72:darkpulse",
+    "tm:absorb",
+    "tm:bite",
+    "tm:crunch",
+    "tm:darkpulse",
+    "tm:energyball",
+    "tm:facade",
+    "tm:leafblade",
+    "tm:megadrain",
+    "tm:nightslash",
+    "tm:protect",
+    "tm:razorleaf",
+    "tm:rest",
+    "tm:seedbomb",
+    "tm:snarl",
+    "tm:solarbeam",
+    "tm:substitute",
+    "tm:vinewhip"
+  ],
+  "labels": [
+    "dirtrobes",
+    "spectrobe",
+    "evolved"
+  ],
+  "aspects": [],
+  "pokedex": [],
+  "evolutions": [],
+  "baseScale": 1.0,
+  "hitbox": {
+    "width": 1.4,
+    "height": 1.8,
+    "fixed": false
+  },
+  "height": 18,
+  "weight": 1200,
+  "behaviour": {
+    "resting": {
+      "canSleep": true,
+      "willSleepOnBed": true
+    }
+  }
+}

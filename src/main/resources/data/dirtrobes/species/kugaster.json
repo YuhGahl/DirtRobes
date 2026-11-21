@@ -1,0 +1,96 @@
+{
+  "implemented": true,
+  "name": "Kugaster",
+  "nationalPokedexNumber": 103,
+  "primaryType": "grass",
+  "secondaryType": "rock",
+  "abilities": [
+    "overgrow",
+    "chlorophyll",
+    "h:rockhead"
+  ],
+  "baseStats": {
+    "hp": 127,
+    "attack": 57,
+    "defence": 65,
+    "special_attack": 57,
+    "special_defence": 65,
+    "speed": 66
+  },
+  "evYield": {
+    "hp": 3,
+    "attack": 0,
+    "defence": 0,
+    "special_attack": 0,
+    "special_defence": 0,
+    "speed": 0
+  },
+  "baseExperienceYield": 236,
+  "experienceGroup": "medium_fast",
+  "catchRate": 45,
+  "baseFriendship": 70,
+  "maleRatio": -1,
+  "eggCycles": 40,
+  "eggGroups": [
+    "undiscovered"
+  ],
+  "moves": [
+    "1:tackle",
+    "1:leer",
+    "1:absorb",
+    "8:rockthrow",
+    "12:protect",
+    "13:vinewhip",
+    "23:razorleaf",
+    "24:rocktomb",
+    "24:rest",
+    "32:megadrain",
+    "36:endure",
+    "40:rockslide",
+    "42:seedbomb",
+    "51:energyball",
+    "56:ancientpower",
+    "61:leafblade",
+    "70:solarbeam",
+    "72:stoneedge",
+    "tm:absorb",
+    "tm:ancientpower",
+    "tm:energyball",
+    "tm:facade",
+    "tm:leafblade",
+    "tm:megadrain",
+    "tm:protect",
+    "tm:razorleaf",
+    "tm:rest",
+    "tm:rockslide",
+    "tm:rockthrow",
+    "tm:rocktomb",
+    "tm:seedbomb",
+    "tm:solarbeam",
+    "tm:stoneedge",
+    "tm:substitute",
+    "tm:vinewhip"
+  ],
+  "labels": [
+    "dirtrobes",
+    "spectrobe",
+    "evolved"
+  ],
+  "aspects": [],
+  "pokedex": [],
+  "evolutions": [],
+  "baseScale": 1.0,
+  "hitbox": {
+    "width": 1.4,
+    "height": 1.8,
+    "fixed": false
+  },
+  "height": 18,
+  "weight": 1200,
+  "behaviour": {
+    "resting": {
+      "canSleep": true,
+      "willSleepOnBed": true
+    }
+  }
+}

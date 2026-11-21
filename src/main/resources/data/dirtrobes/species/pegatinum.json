@@ -1,0 +1,94 @@
+{
+  "implemented": true,
+  "name": "Pegatinum",
+  "nationalPokedexNumber": 149,
+  "primaryType": "normal",
+  "secondaryType": "fairy",
+  "abilities": [
+    "adaptability",
+    "pressure",
+    "h:cutecharm"
+  ],
+  "baseStats": {
+    "hp": 253,
+    "attack": 69,
+    "defence": 115,
+    "special_attack": 69,
+    "special_defence": 115,
+    "speed": 47
+  },
+  "evYield": {
+    "hp": 3,
+    "attack": 0,
+    "defence": 0,
+    "special_attack": 0,
+    "special_defence": 0,
+    "speed": 0
+  },
+  "baseExperienceYield": 270,
+  "experienceGroup": "slow",
+  "catchRate": 45,
+  "baseFriendship": 70,
+  "maleRatio": -1,
+  "eggCycles": 40,
+  "eggGroups": [
+    "undiscovered"
+  ],
+  "moves": [
+    "1:tackle",
+    "1:leer",
+    "1:tackle",
+    "8:fairywind",
+    "12:protect",
+    "15:quickattack",
+    "24:drainingkiss",
+    "24:rest",
+    "26:headbutt",
+    "36:endure",
+    "37:bodyslam",
+    "40:dazzlinggleam",
+    "48:hypervoice",
+    "56:playrough",
+    "59:doubleedge",
+    "70:gigaimpact",
+    "72:moonblast",
+    "tm:bodyslam",
+    "tm:dazzlinggleam",
+    "tm:doubleedge",
+    "tm:drainingkiss",
+    "tm:facade",
+    "tm:fairywind",
+    "tm:gigaimpact",
+    "tm:headbutt",
+    "tm:hypervoice",
+    "tm:moonblast",
+    "tm:playrough",
+    "tm:protect",
+    "tm:quickattack",
+    "tm:rest",
+    "tm:substitute",
+    "tm:tackle"
+  ],
+  "labels": [
+    "dirtrobes",
+    "spectrobe",
+    "special"
+  ],
+  "aspects": [],
+  "pokedex": [],
+  "evolutions": [],
+  "baseScale": 1.0,
+  "hitbox": {
+    "width": 1.4,
+    "height": 1.8,
+    "fixed": false
+  },
+  "height": 18,
+  "weight": 1300,
+  "behaviour": {
+    "resting": {
+      "canSleep": true,
+      "willSleepOnBed": true
+    }
+  }
+}

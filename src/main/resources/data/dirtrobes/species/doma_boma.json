@@ -1,0 +1,94 @@
+{
+  "implemented": true,
+  "name": "Doma-Boma",
+  "nationalPokedexNumber": 35,
+  "primaryType": "grass",
+  "secondaryType": "fighting",
+  "abilities": [
+    "overgrow",
+    "chlorophyll",
+    "h:guts"
+  ],
+  "baseStats": {
+    "hp": 152,
+    "attack": 71,
+    "defence": 61,
+    "special_attack": 71,
+    "special_defence": 61,
+    "speed": 75
+  },
+  "evYield": {
+    "hp": 3,
+    "attack": 0,
+    "defence": 0,
+    "special_attack": 0,
+    "special_defence": 0,
+    "speed": 0
+  },
+  "baseExperienceYield": 236,
+  "experienceGroup": "medium_slow",
+  "catchRate": 45,
+  "baseFriendship": 70,
+  "maleRatio": -1,
+  "eggCycles": 40,
+  "eggGroups": [
+    "undiscovered"
+  ],
+  "moves": [
+    "1:tackle",
+    "1:leer",
+    "1:absorb",
+    "8:lowkick",
+    "12:protect",
+    "13:vinewhip",
+    "23:razorleaf",
+    "24:rest",
+    "29:brickbreak",
+    "32:megadrain",
+    "36:endure",
+    "42:seedbomb",
+    "51:energyball",
+    "51:drainpunch",
+    "61:leafblade",
+    "70:solarbeam",
+    "72:closecombat",
+    "tm:absorb",
+    "tm:brickbreak",
+    "tm:closecombat",
+    "tm:drainpunch",
+    "tm:energyball",
+    "tm:facade",
+    "tm:leafblade",
+    "tm:lowkick",
+    "tm:megadrain",
+    "tm:protect",
+    "tm:razorleaf",
+    "tm:rest",
+    "tm:seedbomb",
+    "tm:solarbeam",
+    "tm:substitute",
+    "tm:vinewhip"
+  ],
+  "labels": [
+    "dirtrobes",
+    "spectrobe",
+    "evolved"
+  ],
+  "aspects": [],
+  "pokedex": [],
+  "evolutions": [],
+  "baseScale": 1.0,
+  "hitbox": {
+    "width": 1.4,
+    "height": 1.8,
+    "fixed": false
+  },
+  "height": 18,
+  "weight": 1200,
+  "behaviour": {
+    "resting": {
+      "canSleep": true,
+      "willSleepOnBed": true
+    }
+  }
+}

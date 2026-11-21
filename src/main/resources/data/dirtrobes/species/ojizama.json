@@ -1,0 +1,94 @@
+{
+  "implemented": true,
+  "name": "Ojizama",
+  "nationalPokedexNumber": 138,
+  "primaryType": "fire",
+  "secondaryType": "psychic",
+  "abilities": [
+    "blaze",
+    "flashfire",
+    "h:synchronize"
+  ],
+  "baseStats": {
+    "hp": 144,
+    "attack": 47,
+    "defence": 64,
+    "special_attack": 40,
+    "special_defence": 58,
+    "speed": 62
+  },
+  "evYield": {
+    "hp": 3,
+    "attack": 0,
+    "defence": 0,
+    "special_attack": 0,
+    "special_defence": 0,
+    "speed": 0
+  },
+  "baseExperienceYield": 236,
+  "experienceGroup": "medium_slow",
+  "catchRate": 45,
+  "baseFriendship": 70,
+  "maleRatio": -1,
+  "eggCycles": 40,
+  "eggGroups": [
+    "undiscovered"
+  ],
+  "moves": [
+    "1:tackle",
+    "1:leer",
+    "1:ember",
+    "8:confusion",
+    "12:protect",
+    "15:flamecharge",
+    "24:psybeam",
+    "24:rest",
+    "26:firefang",
+    "36:endure",
+    "37:incinerate",
+    "40:zenheadbutt",
+    "48:flamethrower",
+    "56:psychic",
+    "59:fireblast",
+    "70:flareblitz",
+    "72:futuresight",
+    "tm:confusion",
+    "tm:ember",
+    "tm:facade",
+    "tm:fireblast",
+    "tm:firefang",
+    "tm:flamecharge",
+    "tm:flamethrower",
+    "tm:flareblitz",
+    "tm:futuresight",
+    "tm:incinerate",
+    "tm:protect",
+    "tm:psybeam",
+    "tm:psychic",
+    "tm:rest",
+    "tm:substitute",
+    "tm:zenheadbutt"
+  ],
+  "labels": [
+    "dirtrobes",
+    "spectrobe",
+    "evolved"
+  ],
+  "aspects": [],
+  "pokedex": [],
+  "evolutions": [],
+  "baseScale": 1.0,
+  "hitbox": {
+    "width": 1.4,
+    "height": 1.8,
+    "fixed": false
+  },
+  "height": 18,
+  "weight": 1200,
+  "behaviour": {
+    "resting": {
+      "canSleep": true,
+      "willSleepOnBed": true
+    }
+  }
+}

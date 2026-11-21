@@ -1,0 +1,108 @@
+{
+  "implemented": true,
+  "name": "Zozane",
+  "nationalPokedexNumber": 238,
+  "primaryType": "fire",
+  "secondaryType": "poison",
+  "abilities": [
+    "blaze",
+    "flashfire",
+    "h:poisonpoint"
+  ],
+  "baseStats": {
+    "hp": 104,
+    "attack": 51,
+    "defence": 54,
+    "special_attack": 43,
+    "special_defence": 49,
+    "speed": 69
+  },
+  "evYield": {
+    "hp": 2,
+    "attack": 0,
+    "defence": 0,
+    "special_attack": 0,
+    "special_defence": 0,
+    "speed": 0
+  },
+  "baseExperienceYield": 147,
+  "experienceGroup": "medium_fast",
+  "catchRate": 45,
+  "baseFriendship": 70,
+  "maleRatio": -1,
+  "eggCycles": 40,
+  "eggGroups": [
+    "undiscovered"
+  ],
+  "moves": [
+    "1:tackle",
+    "1:leer",
+    "1:ember",
+    "8:poisonsting",
+    "12:flamecharge",
+    "12:protect",
+    "20:firefang",
+    "20:acid",
+    "24:rest",
+    "28:incinerate",
+    "31:poisonfang",
+    "36:flamethrower",
+    "36:endure",
+    "42:sludgebomb",
+    "44:fireblast",
+    "52:flareblitz",
+    "54:gunkshot",
+    "tm:acid",
+    "tm:ember",
+    "tm:facade",
+    "tm:fireblast",
+    "tm:firefang",
+    "tm:flamecharge",
+    "tm:flamethrower",
+    "tm:flareblitz",
+    "tm:gunkshot",
+    "tm:incinerate",
+    "tm:poisonfang",
+    "tm:poisonsting",
+    "tm:protect",
+    "tm:rest",
+    "tm:sludgebomb",
+    "tm:substitute"
+  ],
+  "labels": [
+    "dirtrobes",
+    "spectrobe",
+    "adult"
+  ],
+  "aspects": [],
+  "pokedex": [],
+  "evolutions": [
+    {
+      "id": "zozane_zozanero",
+      "variant": "level_up",
+      "result": "dirtrobes:zozanero",
+      "consumeHeldItem": false,
+      "learnableMoves": [],
+      "requirements": [
+        {
+          "variant": "level",
+          "minLevel": 30
+        }
+      ]
+    }
+  ],
+  "baseScale": 1.0,
+  "hitbox": {
+    "width": 1.0,
+    "height": 1.2,
+    "fixed": false
+  },
+  "height": 12,
+  "weight": 450,
+  "behaviour": {
+    "resting": {
+      "canSleep": true,
+      "willSleepOnBed": true
+    }
+  }
+}

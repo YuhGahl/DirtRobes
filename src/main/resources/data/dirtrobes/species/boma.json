@@ -1,0 +1,107 @@
+{
+  "implemented": true,
+  "name": "Boma",
+  "nationalPokedexNumber": 18,
+  "primaryType": "grass",
+  "secondaryType": "fighting",
+  "abilities": [
+    "overgrow",
+    "chlorophyll",
+    "h:guts"
+  ],
+  "baseStats": {
+    "hp": 49,
+    "attack": 56,
+    "defence": 49,
+    "special_attack": 56,
+    "special_defence": 49,
+    "speed": 74
+  },
+  "evYield": {
+    "hp": 0,
+    "attack": 0,
+    "defence": 0,
+    "special_attack": 0,
+    "special_defence": 0,
+    "speed": 1
+  },
+  "baseExperienceYield": 62,
+  "experienceGroup": "medium_slow",
+  "catchRate": 45,
+  "baseFriendship": 70,
+  "maleRatio": -1,
+  "eggCycles": 40,
+  "eggGroups": [
+    "undiscovered"
+  ],
+  "moves": [
+    "1:tackle",
+    "1:leer",
+    "1:absorb",
+    "8:vinewhip",
+    "8:lowkick",
+    "12:protect",
+    "13:razorleaf",
+    "17:megadrain",
+    "17:brickbreak",
+    "21:seedbomb",
+    "24:rest",
+    "25:energyball",
+    "27:drainpunch",
+    "30:leafblade",
+    "34:solarbeam",
+    "36:closecombat",
+    "tm:absorb",
+    "tm:brickbreak",
+    "tm:closecombat",
+    "tm:drainpunch",
+    "tm:energyball",
+    "tm:facade",
+    "tm:leafblade",
+    "tm:lowkick",
+    "tm:megadrain",
+    "tm:protect",
+    "tm:razorleaf",
+    "tm:rest",
+    "tm:seedbomb",
+    "tm:solarbeam",
+    "tm:substitute",
+    "tm:vinewhip"
+  ],
+  "labels": [
+    "dirtrobes",
+    "spectrobe",
+    "child"
+  ],
+  "aspects": [],
+  "pokedex": [],
+  "evolutions": [
+    {
+      "id": "boma_boma_boma",
+      "variant": "level_up",
+      "result": "dirtrobes:boma_boma",
+      "consumeHeldItem": false,
+      "learnableMoves": [],
+      "requirements": [
+        {
+          "variant": "level",
+          "minLevel": 10
+        }
+      ]
+    }
+  ],
+  "baseScale": 1.0,
+  "hitbox": {
+    "width": 0.6,
+    "height": 0.6,
+    "fixed": false
+  },
+  "height": 6,
+  "weight": 120,
+  "behaviour": {
+    "resting": {
+      "canSleep": true,
+      "willSleepOnBed": true
+    }
+  }
+}

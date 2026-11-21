@@ -131,6 +131,14 @@ config="${mod_id}.mixins.json"
     ordering="NONE"
     side="BOTH"
 
+# Cobblemon : les Spectrobes peuvent rejoindre l'équipe Cobblemon depuis le PC des Spectrobes (optionnel)
+[[dependencies.${mod_id}]]
+    modId="cobblemon"
+    type="optional"
+    versionRange="[1.8,)"
+    ordering="NONE"
+    side="BOTH"
+
 # Create : accélérateur cinétique pour l'incubateur (optionnel)
 [[dependencies.${mod_id}]]
     modId="create"

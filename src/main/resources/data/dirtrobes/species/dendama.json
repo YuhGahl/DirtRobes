@@ -1,0 +1,112 @@
+{
+  "implemented": true,
+  "name": "Dendama",
+  "nationalPokedexNumber": 32,
+  "primaryType": "grass",
+  "secondaryType": "electric",
+  "abilities": [
+    "overgrow",
+    "chlorophyll",
+    "h:static"
+  ],
+  "baseStats": {
+    "hp": 111,
+    "attack": 79,
+    "defence": 53,
+    "special_attack": 79,
+    "special_defence": 53,
+    "speed": 83
+  },
+  "evYield": {
+    "hp": 2,
+    "attack": 0,
+    "defence": 0,
+    "special_attack": 0,
+    "special_defence": 0,
+    "speed": 0
+  },
+  "baseExperienceYield": 147,
+  "experienceGroup": "medium_slow",
+  "catchRate": 45,
+  "baseFriendship": 70,
+  "maleRatio": -1,
+  "eggCycles": 40,
+  "eggGroups": [
+    "undiscovered"
+  ],
+  "moves": [
+    "1:tackle",
+    "1:leer",
+    "1:absorb",
+    "8:thundershock",
+    "11:vinewhip",
+    "12:protect",
+    "17:spark",
+    "18:razorleaf",
+    "24:rest",
+    "25:megadrain",
+    "26:shockwave",
+    "31:seedbomb",
+    "36:thunderbolt",
+    "36:endure",
+    "38:energyball",
+    "45:leafblade",
+    "45:wildcharge",
+    "52:solarbeam",
+    "54:thunder",
+    "tm:absorb",
+    "tm:energyball",
+    "tm:facade",
+    "tm:leafblade",
+    "tm:megadrain",
+    "tm:protect",
+    "tm:razorleaf",
+    "tm:rest",
+    "tm:seedbomb",
+    "tm:shockwave",
+    "tm:solarbeam",
+    "tm:spark",
+    "tm:substitute",
+    "tm:thunder",
+    "tm:thunderbolt",
+    "tm:thundershock",
+    "tm:vinewhip",
+    "tm:wildcharge"
+  ],
+  "labels": [
+    "dirtrobes",
+    "spectrobe",
+    "adult"
+  ],
+  "aspects": [],
+  "pokedex": [],
+  "evolutions": [
+    {
+      "id": "dendama_denpachi",
+      "variant": "level_up",
+      "result": "dirtrobes:denpachi",
+      "consumeHeldItem": false,
+      "learnableMoves": [],
+      "requirements": [
+        {
+          "variant": "level",
+          "minLevel": 30
+        }
+      ]
+    }
+  ],
+  "baseScale": 1.0,
+  "hitbox": {
+    "width": 1.0,
+    "height": 1.2,
+    "fixed": false
+  },
+  "height": 12,
+  "weight": 450,
+  "behaviour": {
+    "resting": {
+      "canSleep": true,
+      "willSleepOnBed": true
+    }
+  }
+}

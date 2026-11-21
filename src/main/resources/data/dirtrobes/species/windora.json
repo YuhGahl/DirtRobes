@@ -1,0 +1,100 @@
+{
+  "implemented": true,
+  "name": "Windora",
+  "nationalPokedexNumber": 220,
+  "primaryType": "grass",
+  "secondaryType": "flying",
+  "abilities": [
+    "overgrow",
+    "chlorophyll",
+    "h:bigpecks"
+  ],
+  "baseStats": {
+    "hp": 148,
+    "attack": 71,
+    "defence": 82,
+    "special_attack": 71,
+    "special_defence": 82,
+    "speed": 65
+  },
+  "evYield": {
+    "hp": 3,
+    "attack": 0,
+    "defence": 0,
+    "special_attack": 0,
+    "special_defence": 0,
+    "speed": 0
+  },
+  "baseExperienceYield": 236,
+  "experienceGroup": "slow",
+  "catchRate": 45,
+  "baseFriendship": 70,
+  "maleRatio": -1,
+  "eggCycles": 40,
+  "eggGroups": [
+    "undiscovered"
+  ],
+  "moves": [
+    "1:tackle",
+    "1:leer",
+    "1:absorb",
+    "8:gust",
+    "12:protect",
+    "13:vinewhip",
+    "19:peck",
+    "23:razorleaf",
+    "24:rest",
+    "29:wingattack",
+    "32:megadrain",
+    "36:endure",
+    "40:aerialace",
+    "42:seedbomb",
+    "51:energyball",
+    "51:airslash",
+    "61:leafblade",
+    "61:drillpeck",
+    "70:solarbeam",
+    "72:hurricane",
+    "tm:absorb",
+    "tm:aerialace",
+    "tm:airslash",
+    "tm:drillpeck",
+    "tm:energyball",
+    "tm:facade",
+    "tm:gust",
+    "tm:hurricane",
+    "tm:leafblade",
+    "tm:megadrain",
+    "tm:peck",
+    "tm:protect",
+    "tm:razorleaf",
+    "tm:rest",
+    "tm:seedbomb",
+    "tm:solarbeam",
+    "tm:substitute",
+    "tm:vinewhip",
+    "tm:wingattack"
+  ],
+  "labels": [
+    "dirtrobes",
+    "spectrobe",
+    "evolved"
+  ],
+  "aspects": [],
+  "pokedex": [],
+  "evolutions": [],
+  "baseScale": 1.0,
+  "hitbox": {
+    "width": 1.4,
+    "height": 1.8,
+    "fixed": false
+  },
+  "height": 18,
+  "weight": 1200,
+  "behaviour": {
+    "resting": {
+      "canSleep": true,
+      "willSleepOnBed": true
+    }
+  }
+}

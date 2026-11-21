@@ -1,0 +1,94 @@
+{
+  "implemented": true,
+  "name": "Totegarda",
+  "nationalPokedexNumber": 204,
+  "primaryType": "flying",
+  "secondaryType": "psychic",
+  "abilities": [
+    "keeneye",
+    "pressure",
+    "h:synchronize"
+  ],
+  "baseStats": {
+    "hp": 154,
+    "attack": 70,
+    "defence": 68,
+    "special_attack": 80,
+    "special_defence": 71,
+    "speed": 71
+  },
+  "evYield": {
+    "hp": 3,
+    "attack": 0,
+    "defence": 0,
+    "special_attack": 0,
+    "special_defence": 0,
+    "speed": 0
+  },
+  "baseExperienceYield": 236,
+  "experienceGroup": "slow",
+  "catchRate": 45,
+  "baseFriendship": 70,
+  "maleRatio": -1,
+  "eggCycles": 40,
+  "eggGroups": [
+    "undiscovered"
+  ],
+  "moves": [
+    "1:tackle",
+    "1:leer",
+    "1:gust",
+    "8:confusion",
+    "12:protect",
+    "15:peck",
+    "24:psybeam",
+    "24:rest",
+    "26:wingattack",
+    "36:endure",
+    "37:aerialace",
+    "40:zenheadbutt",
+    "48:airslash",
+    "56:psychic",
+    "59:drillpeck",
+    "70:hurricane",
+    "72:futuresight",
+    "tm:aerialace",
+    "tm:airslash",
+    "tm:confusion",
+    "tm:drillpeck",
+    "tm:facade",
+    "tm:futuresight",
+    "tm:gust",
+    "tm:hurricane",
+    "tm:peck",
+    "tm:protect",
+    "tm:psybeam",
+    "tm:psychic",
+    "tm:rest",
+    "tm:substitute",
+    "tm:wingattack",
+    "tm:zenheadbutt"
+  ],
+  "labels": [
+    "dirtrobes",
+    "spectrobe",
+    "evolved"
+  ],
+  "aspects": [],
+  "pokedex": [],
+  "evolutions": [],
+  "baseScale": 1.0,
+  "hitbox": {
+    "width": 1.4,
+    "height": 1.8,
+    "fixed": false
+  },
+  "height": 18,
+  "weight": 1200,
+  "behaviour": {
+    "resting": {
+      "canSleep": true,
+      "willSleepOnBed": true
+    }
+  }
+}

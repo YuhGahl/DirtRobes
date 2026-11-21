@@ -1,0 +1,94 @@
+{
+  "implemented": true,
+  "name": "Ukazeer",
+  "nationalPokedexNumber": 213,
+  "primaryType": "water",
+  "secondaryType": "psychic",
+  "abilities": [
+    "torrent",
+    "swiftswim",
+    "h:synchronize"
+  ],
+  "baseStats": {
+    "hp": 152,
+    "attack": 68,
+    "defence": 66,
+    "special_attack": 78,
+    "special_defence": 73,
+    "speed": 71
+  },
+  "evYield": {
+    "hp": 3,
+    "attack": 0,
+    "defence": 0,
+    "special_attack": 0,
+    "special_defence": 0,
+    "speed": 0
+  },
+  "baseExperienceYield": 236,
+  "experienceGroup": "slow",
+  "catchRate": 45,
+  "baseFriendship": 70,
+  "maleRatio": -1,
+  "eggCycles": 40,
+  "eggGroups": [
+    "undiscovered"
+  ],
+  "moves": [
+    "1:tackle",
+    "1:leer",
+    "1:watergun",
+    "8:confusion",
+    "12:protect",
+    "15:aquajet",
+    "24:psybeam",
+    "24:rest",
+    "26:bubblebeam",
+    "36:endure",
+    "37:waterpulse",
+    "40:zenheadbutt",
+    "48:aquatail",
+    "56:psychic",
+    "59:surf",
+    "70:hydropump",
+    "72:futuresight",
+    "tm:aquajet",
+    "tm:aquatail",
+    "tm:bubblebeam",
+    "tm:confusion",
+    "tm:facade",
+    "tm:futuresight",
+    "tm:hydropump",
+    "tm:protect",
+    "tm:psybeam",
+    "tm:psychic",
+    "tm:rest",
+    "tm:substitute",
+    "tm:surf",
+    "tm:watergun",
+    "tm:waterpulse",
+    "tm:zenheadbutt"
+  ],
+  "labels": [
+    "dirtrobes",
+    "spectrobe",
+    "evolved"
+  ],
+  "aspects": [],
+  "pokedex": [],
+  "evolutions": [],
+  "baseScale": 1.0,
+  "hitbox": {
+    "width": 1.4,
+    "height": 1.8,
+    "fixed": false
+  },
+  "height": 18,
+  "weight": 1200,
+  "behaviour": {
+    "resting": {
+      "canSleep": true,
+      "willSleepOnBed": true
+    }
+  }
+}

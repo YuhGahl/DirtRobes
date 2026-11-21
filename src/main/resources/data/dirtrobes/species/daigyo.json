@@ -1,0 +1,100 @@
+{
+  "implemented": true,
+  "name": "Daigyo",
+  "nationalPokedexNumber": 25,
+  "primaryType": "grass",
+  "secondaryType": "water",
+  "abilities": [
+    "overgrow",
+    "chlorophyll",
+    "h:hydration"
+  ],
+  "baseStats": {
+    "hp": 180,
+    "attack": 55,
+    "defence": 63,
+    "special_attack": 55,
+    "special_defence": 63,
+    "speed": 66
+  },
+  "evYield": {
+    "hp": 3,
+    "attack": 0,
+    "defence": 0,
+    "special_attack": 0,
+    "special_defence": 0,
+    "speed": 0
+  },
+  "baseExperienceYield": 236,
+  "experienceGroup": "slow",
+  "catchRate": 45,
+  "baseFriendship": 70,
+  "maleRatio": -1,
+  "eggCycles": 40,
+  "eggGroups": [
+    "undiscovered"
+  ],
+  "moves": [
+    "1:tackle",
+    "1:leer",
+    "1:absorb",
+    "8:watergun",
+    "12:protect",
+    "13:vinewhip",
+    "19:aquajet",
+    "23:razorleaf",
+    "24:rest",
+    "29:bubblebeam",
+    "32:megadrain",
+    "36:endure",
+    "40:waterpulse",
+    "42:seedbomb",
+    "51:energyball",
+    "51:aquatail",
+    "61:leafblade",
+    "61:surf",
+    "70:solarbeam",
+    "72:hydropump",
+    "tm:absorb",
+    "tm:aquajet",
+    "tm:aquatail",
+    "tm:bubblebeam",
+    "tm:energyball",
+    "tm:facade",
+    "tm:hydropump",
+    "tm:leafblade",
+    "tm:megadrain",
+    "tm:protect",
+    "tm:razorleaf",
+    "tm:rest",
+    "tm:seedbomb",
+    "tm:solarbeam",
+    "tm:substitute",
+    "tm:surf",
+    "tm:vinewhip",
+    "tm:watergun",
+    "tm:waterpulse"
+  ],
+  "labels": [
+    "dirtrobes",
+    "spectrobe",
+    "evolved"
+  ],
+  "aspects": [],
+  "pokedex": [],
+  "evolutions": [],
+  "baseScale": 1.0,
+  "hitbox": {
+    "width": 1.4,
+    "height": 1.8,
+    "fixed": false
+  },
+  "height": 18,
+  "weight": 1200,
+  "behaviour": {
+    "resting": {
+      "canSleep": true,
+      "willSleepOnBed": true
+    }
+  }
+}

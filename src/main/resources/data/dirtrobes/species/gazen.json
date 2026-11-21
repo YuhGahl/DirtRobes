@@ -1,0 +1,106 @@
+{
+  "implemented": true,
+  "name": "Gazen",
+  "nationalPokedexNumber": 46,
+  "primaryType": "fire",
+  "secondaryType": "fighting",
+  "abilities": [
+    "blaze",
+    "flashfire",
+    "h:guts"
+  ],
+  "baseStats": {
+    "hp": 143,
+    "attack": 77,
+    "defence": 61,
+    "special_attack": 65,
+    "special_defence": 55,
+    "speed": 78
+  },
+  "evYield": {
+    "hp": 2,
+    "attack": 0,
+    "defence": 0,
+    "special_attack": 0,
+    "special_defence": 0,
+    "speed": 0
+  },
+  "baseExperienceYield": 147,
+  "experienceGroup": "slow",
+  "catchRate": 45,
+  "baseFriendship": 70,
+  "maleRatio": -1,
+  "eggCycles": 40,
+  "eggGroups": [
+    "undiscovered"
+  ],
+  "moves": [
+    "1:tackle",
+    "1:leer",
+    "1:ember",
+    "8:lowkick",
+    "12:flamecharge",
+    "12:protect",
+    "20:firefang",
+    "23:brickbreak",
+    "24:rest",
+    "28:incinerate",
+    "36:flamethrower",
+    "36:endure",
+    "39:drainpunch",
+    "44:fireblast",
+    "52:flareblitz",
+    "54:closecombat",
+    "tm:brickbreak",
+    "tm:closecombat",
+    "tm:drainpunch",
+    "tm:ember",
+    "tm:facade",
+    "tm:fireblast",
+    "tm:firefang",
+    "tm:flamecharge",
+    "tm:flamethrower",
+    "tm:flareblitz",
+    "tm:incinerate",
+    "tm:lowkick",
+    "tm:protect",
+    "tm:rest",
+    "tm:substitute"
+  ],
+  "labels": [
+    "dirtrobes",
+    "spectrobe",
+    "adult"
+  ],
+  "aspects": [],
+  "pokedex": [],
+  "evolutions": [
+    {
+      "id": "gazen_totsuzen",
+      "variant": "level_up",
+      "result": "dirtrobes:totsuzen",
+      "consumeHeldItem": false,
+      "learnableMoves": [],
+      "requirements": [
+        {
+          "variant": "level",
+          "minLevel": 30
+        }
+      ]
+    }
+  ],
+  "baseScale": 1.0,
+  "hitbox": {
+    "width": 1.0,
+    "height": 1.2,
+    "fixed": false
+  },
+  "height": 12,
+  "weight": 450,
+  "behaviour": {
+    "resting": {
+      "canSleep": true,
+      "willSleepOnBed": true
+    }
+  }
+}

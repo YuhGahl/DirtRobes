@@ -1,0 +1,109 @@
+{
+  "implemented": true,
+  "name": "Komainu Optoger",
+  "nationalPokedexNumber": 90,
+  "primaryType": "flying",
+  "secondaryType": "electric",
+  "abilities": [
+    "keeneye",
+    "pressure",
+    "h:static"
+  ],
+  "baseStats": {
+    "hp": 95,
+    "attack": 47,
+    "defence": 45,
+    "special_attack": 54,
+    "special_defence": 47,
+    "speed": 71
+  },
+  "evYield": {
+    "hp": 1,
+    "attack": 0,
+    "defence": 0,
+    "special_attack": 0,
+    "special_defence": 0,
+    "speed": 0
+  },
+  "baseExperienceYield": 62,
+  "experienceGroup": "slow",
+  "catchRate": 45,
+  "baseFriendship": 70,
+  "maleRatio": -1,
+  "eggCycles": 40,
+  "eggGroups": [
+    "undiscovered"
+  ],
+  "moves": [
+    "1:tackle",
+    "1:leer",
+    "1:gust",
+    "8:thundershock",
+    "9:peck",
+    "12:protect",
+    "14:wingattack",
+    "14:spark",
+    "19:aerialace",
+    "19:shockwave",
+    "24:airslash",
+    "24:rest",
+    "25:thunderbolt",
+    "29:drillpeck",
+    "30:wildcharge",
+    "34:hurricane",
+    "36:thunder",
+    "tm:aerialace",
+    "tm:airslash",
+    "tm:drillpeck",
+    "tm:facade",
+    "tm:gust",
+    "tm:hurricane",
+    "tm:peck",
+    "tm:protect",
+    "tm:rest",
+    "tm:shockwave",
+    "tm:spark",
+    "tm:substitute",
+    "tm:thunder",
+    "tm:thunderbolt",
+    "tm:thundershock",
+    "tm:wildcharge",
+    "tm:wingattack"
+  ],
+  "labels": [
+    "dirtrobes",
+    "spectrobe",
+    "child"
+  ],
+  "aspects": [],
+  "pokedex": [],
+  "evolutions": [
+    {
+      "id": "komainu_optoger_komanoto_optoger",
+      "variant": "level_up",
+      "result": "dirtrobes:komanoto_optoger",
+      "consumeHeldItem": false,
+      "learnableMoves": [],
+      "requirements": [
+        {
+          "variant": "level",
+          "minLevel": 10
+        }
+      ]
+    }
+  ],
+  "baseScale": 1.0,
+  "hitbox": {
+    "width": 0.6,
+    "height": 0.6,
+    "fixed": false
+  },
+  "height": 6,
+  "weight": 120,
+  "behaviour": {
+    "resting": {
+      "canSleep": true,
+      "willSleepOnBed": true
+    }
+  }
+}

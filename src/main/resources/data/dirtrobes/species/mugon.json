@@ -1,0 +1,107 @@
+{
+  "implemented": true,
+  "name": "Mugon",
+  "nationalPokedexNumber": 126,
+  "primaryType": "water",
+  "secondaryType": "dragon",
+  "abilities": [
+    "torrent",
+    "swiftswim",
+    "h:roughskin"
+  ],
+  "baseStats": {
+    "hp": 80,
+    "attack": 30,
+    "defence": 40,
+    "special_attack": 34,
+    "special_defence": 44,
+    "speed": 65
+  },
+  "evYield": {
+    "hp": 1,
+    "attack": 0,
+    "defence": 0,
+    "special_attack": 0,
+    "special_defence": 0,
+    "speed": 0
+  },
+  "baseExperienceYield": 62,
+  "experienceGroup": "medium_fast",
+  "catchRate": 45,
+  "baseFriendship": 70,
+  "maleRatio": -1,
+  "eggCycles": 40,
+  "eggGroups": [
+    "undiscovered"
+  ],
+  "moves": [
+    "1:tackle",
+    "1:leer",
+    "1:watergun",
+    "8:dragonbreath",
+    "9:aquajet",
+    "12:protect",
+    "14:bubblebeam",
+    "15:twister",
+    "19:waterpulse",
+    "22:dragonclaw",
+    "24:aquatail",
+    "24:rest",
+    "29:surf",
+    "29:dragonpulse",
+    "34:hydropump",
+    "36:outrage",
+    "tm:aquajet",
+    "tm:aquatail",
+    "tm:bubblebeam",
+    "tm:dragonbreath",
+    "tm:dragonclaw",
+    "tm:dragonpulse",
+    "tm:facade",
+    "tm:hydropump",
+    "tm:outrage",
+    "tm:protect",
+    "tm:rest",
+    "tm:substitute",
+    "tm:surf",
+    "tm:twister",
+    "tm:watergun",
+    "tm:waterpulse"
+  ],
+  "labels": [
+    "dirtrobes",
+    "spectrobe",
+    "child"
+  ],
+  "aspects": [],
+  "pokedex": [],
+  "evolutions": [
+    {
+      "id": "mugon_chomugon",
+      "variant": "level_up",
+      "result": "dirtrobes:chomugon",
+      "consumeHeldItem": false,
+      "learnableMoves": [],
+      "requirements": [
+        {
+          "variant": "level",
+          "minLevel": 10
+        }
+      ]
+    }
+  ],
+  "baseScale": 1.0,
+  "hitbox": {
+    "width": 0.6,
+    "height": 0.6,
+    "fixed": false
+  },
+  "height": 6,
+  "weight": 120,
+  "behaviour": {
+    "resting": {
+      "canSleep": true,
+      "willSleepOnBed": true
+    }
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "implemented": true,
+  "name": "Totemo",
+  "nationalPokedexNumber": 205,
+  "primaryType": "flying",
+  "secondaryType": "psychic",
+  "abilities": [
+    "keeneye",
+    "pressure",
+    "h:synchronize"
+  ],
+  "baseStats": {
+    "hp": 99,
+    "attack": 48,
+    "defence": 45,
+    "special_attack": 55,
+    "special_defence": 47,
+    "speed": 72
+  },
+  "evYield": {
+    "hp": 1,
+    "attack": 0,
+    "defence": 0,
+    "special_attack": 0,
+    "special_defence": 0,
+    "speed": 0
+  },
+  "baseExperienceYield": 62,
+  "experienceGroup": "slow",
+  "catchRate": 45,
+  "baseFriendship": 70,
+  "maleRatio": -1,
+  "eggCycles": 40,
+  "eggGroups": [
+    "undiscovered"
+  ],
+  "moves": [
+    "1:tackle",
+    "1:leer",
+    "1:gust",
+    "8:confusion",
+    "9:peck",
+    "12:protect",
+    "14:wingattack",
+    "15:psybeam",
+    "19:aerialace",
+    "22:zenheadbutt",
+    "24:airslash",
+    "24:rest",
+    "29:drillpeck",
+    "29:psychic",
+    "34:hurricane",
+    "36:futuresight",
+    "tm:aerialace",
+    "tm:airslash",
+    "tm:confusion",
+    "tm:drillpeck",
+    "tm:facade",
+    "tm:futuresight",
+    "tm:gust",
+    "tm:hurricane",
+    "tm:peck",
+    "tm:protect",
+    "tm:psybeam",
+    "tm:psychic",
+    "tm:rest",
+    "tm:substitute",
+    "tm:wingattack",
+    "tm:zenheadbutt"
+  ],
+  "labels": [
+    "dirtrobes",
+    "spectrobe",
+    "child"
+  ],
+  "aspects": [],
+  "pokedex": [],
+  "evolutions": [
+    {
+      "id": "totemo_totemoon",
+      "variant": "level_up",
+      "result": "dirtrobes:totemoon",
+      "consumeHeldItem": false,
+      "learnableMoves": [],
+      "requirements": [
+        {
+          "variant": "level",
+          "minLevel": 10
+        }
+      ]
+    }
+  ],
+  "baseScale": 1.0,
+  "hitbox": {
+    "width": 0.6,
+    "height": 0.6,
+    "fixed": false
+  },
+  "height": 6,
+  "weight": 120,
+  "behaviour": {
+    "resting": {
+      "canSleep": true,
+      "willSleepOnBed": true
+    }
+  }
+}

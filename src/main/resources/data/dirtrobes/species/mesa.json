@@ -1,0 +1,107 @@
+{
+  "implemented": true,
+  "name": "Mesa",
+  "nationalPokedexNumber": 119,
+  "primaryType": "fire",
+  "secondaryType": "ghost",
+  "abilities": [
+    "blaze",
+    "flashfire",
+    "h:cursedbody"
+  ],
+  "baseStats": {
+    "hp": 88,
+    "attack": 41,
+    "defence": 47,
+    "special_attack": 35,
+    "special_defence": 42,
+    "speed": 67
+  },
+  "evYield": {
+    "hp": 1,
+    "attack": 0,
+    "defence": 0,
+    "special_attack": 0,
+    "special_defence": 0,
+    "speed": 0
+  },
+  "baseExperienceYield": 62,
+  "experienceGroup": "medium_fast",
+  "catchRate": 45,
+  "baseFriendship": 70,
+  "maleRatio": -1,
+  "eggCycles": 40,
+  "eggGroups": [
+    "undiscovered"
+  ],
+  "moves": [
+    "1:tackle",
+    "1:leer",
+    "1:ember",
+    "8:astonish",
+    "9:flamecharge",
+    "12:protect",
+    "14:firefang",
+    "15:shadowsneak",
+    "19:incinerate",
+    "22:hex",
+    "24:flamethrower",
+    "24:rest",
+    "29:fireblast",
+    "29:shadowclaw",
+    "34:flareblitz",
+    "36:shadowball",
+    "tm:astonish",
+    "tm:ember",
+    "tm:facade",
+    "tm:fireblast",
+    "tm:firefang",
+    "tm:flamecharge",
+    "tm:flamethrower",
+    "tm:flareblitz",
+    "tm:hex",
+    "tm:incinerate",
+    "tm:protect",
+    "tm:rest",
+    "tm:shadowball",
+    "tm:shadowclaw",
+    "tm:shadowsneak",
+    "tm:substitute"
+  ],
+  "labels": [
+    "dirtrobes",
+    "spectrobe",
+    "child"
+  ],
+  "aspects": [],
+  "pokedex": [],
+  "evolutions": [
+    {
+      "id": "mesa_mesabone",
+      "variant": "level_up",
+      "result": "dirtrobes:mesabone",
+      "consumeHeldItem": false,
+      "learnableMoves": [],
+      "requirements": [
+        {
+          "variant": "level",
+          "minLevel": 10
+        }
+      ]
+    }
+  ],
+  "baseScale": 1.0,
+  "hitbox": {
+    "width": 0.6,
+    "height": 0.6,
+    "fixed": false
+  },
+  "height": 6,
+  "weight": 120,
+  "behaviour": {
+    "resting": {
+      "canSleep": true,
+      "willSleepOnBed": true
+    }
+  }
+}

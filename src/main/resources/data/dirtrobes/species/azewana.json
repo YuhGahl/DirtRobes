@@ -1,0 +1,92 @@
+{
+  "implemented": true,
+  "name": "Azewana",
+  "nationalPokedexNumber": 12,
+  "primaryType": "fire",
+  "secondaryType": "fighting",
+  "abilities": [
+    "blaze",
+    "flashfire",
+    "h:guts"
+  ],
+  "baseStats": {
+    "hp": 139,
+    "attack": 85,
+    "defence": 74,
+    "special_attack": 72,
+    "special_defence": 67,
+    "speed": 76
+  },
+  "evYield": {
+    "hp": 3,
+    "attack": 0,
+    "defence": 0,
+    "special_attack": 0,
+    "special_defence": 0,
+    "speed": 0
+  },
+  "baseExperienceYield": 236,
+  "experienceGroup": "slow",
+  "catchRate": 45,
+  "baseFriendship": 70,
+  "maleRatio": -1,
+  "eggCycles": 40,
+  "eggGroups": [
+    "undiscovered"
+  ],
+  "moves": [
+    "1:tackle",
+    "1:leer",
+    "1:ember",
+    "8:lowkick",
+    "12:protect",
+    "15:flamecharge",
+    "24:rest",
+    "26:firefang",
+    "29:brickbreak",
+    "36:endure",
+    "37:incinerate",
+    "48:flamethrower",
+    "51:drainpunch",
+    "59:fireblast",
+    "70:flareblitz",
+    "72:closecombat",
+    "tm:brickbreak",
+    "tm:closecombat",
+    "tm:drainpunch",
+    "tm:ember",
+    "tm:facade",
+    "tm:fireblast",
+    "tm:firefang",
+    "tm:flamecharge",
+    "tm:flamethrower",
+    "tm:flareblitz",
+    "tm:incinerate",
+    "tm:lowkick",
+    "tm:protect",
+    "tm:rest",
+    "tm:substitute"
+  ],
+  "labels": [
+    "dirtrobes",
+    "spectrobe",
+    "evolved"
+  ],
+  "aspects": [],
+  "pokedex": [],
+  "evolutions": [],
+  "baseScale": 1.0,
+  "hitbox": {
+    "width": 1.4,
+    "height": 1.8,
+    "fixed": false
+  },
+  "height": 18,
+  "weight": 1200,
+  "behaviour": {
+    "resting": {
+      "canSleep": true,
+      "willSleepOnBed": true
+    }
+  }
+}

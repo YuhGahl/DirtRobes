@@ -54,6 +54,11 @@ jobs:
           CR=$(grep '^create_version=' gradle.properties | cut -d= -f2)
           curl -fsSL -o run/mods/create.jar "https://api.modrinth.com/maven/maven/modrinth/LNytGWDc/$CR/LNytGWDc-$CR.jar"
           curl -fsSL -o run/mods/clothconfig.jar "https://api.modrinth.com/maven/maven/modrinth/9s6osm5g/$CC/9s6osm5g-$CC.jar"
+          # Cobblemon + Kotlin for Forge (pont optionnel)
+          CB=$(grep '^cobblemon_version=' gradle.properties | cut -d= -f2)
+          KF=$(grep '^kotlinforforge_version=' gradle.properties | cut -d= -f2)
+          curl -fsSL -o run/mods/cobblemon.jar "https://api.modrinth.com/maven/maven/modrinth/MdwFAVRL/$CB/MdwFAVRL-$CB.jar"
+          curl -fsSL -o run/mods/kotlinforforge.jar "https://api.modrinth.com/maven/maven/modrinth/ordsPcFz/$KF/ordsPcFz-$KF.jar"
           ls -la run/mods
 
       - name: Test - démarrage d'un serveur avec le mod

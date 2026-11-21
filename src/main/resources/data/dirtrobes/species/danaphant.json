@@ -1,0 +1,96 @@
+{
+  "implemented": true,
+  "name": "Danaphant",
+  "nationalPokedexNumber": 26,
+  "primaryType": "fire",
+  "secondaryType": "ground",
+  "abilities": [
+    "blaze",
+    "flashfire",
+    "h:sandforce"
+  ],
+  "baseStats": {
+    "hp": 166,
+    "attack": 47,
+    "defence": 67,
+    "special_attack": 40,
+    "special_defence": 60,
+    "speed": 60
+  },
+  "evYield": {
+    "hp": 3,
+    "attack": 0,
+    "defence": 0,
+    "special_attack": 0,
+    "special_defence": 0,
+    "speed": 0
+  },
+  "baseExperienceYield": 236,
+  "experienceGroup": "medium_fast",
+  "catchRate": 45,
+  "baseFriendship": 70,
+  "maleRatio": -1,
+  "eggCycles": 40,
+  "eggGroups": [
+    "undiscovered"
+  ],
+  "moves": [
+    "1:tackle",
+    "1:leer",
+    "1:ember",
+    "8:mudslap",
+    "12:protect",
+    "15:flamecharge",
+    "21:sandattack",
+    "24:rest",
+    "26:firefang",
+    "34:bulldoze",
+    "36:endure",
+    "37:incinerate",
+    "46:dig",
+    "48:flamethrower",
+    "59:fireblast",
+    "59:earthpower",
+    "70:flareblitz",
+    "72:earthquake",
+    "tm:bulldoze",
+    "tm:dig",
+    "tm:earthpower",
+    "tm:earthquake",
+    "tm:ember",
+    "tm:facade",
+    "tm:fireblast",
+    "tm:firefang",
+    "tm:flamecharge",
+    "tm:flamethrower",
+    "tm:flareblitz",
+    "tm:incinerate",
+    "tm:mudslap",
+    "tm:protect",
+    "tm:rest",
+    "tm:sandattack",
+    "tm:substitute"
+  ],
+  "labels": [
+    "dirtrobes",
+    "spectrobe",
+    "evolved"
+  ],
+  "aspects": [],
+  "pokedex": [],
+  "evolutions": [],
+  "baseScale": 1.0,
+  "hitbox": {
+    "width": 1.4,
+    "height": 1.8,
+    "fixed": false
+  },
+  "height": 18,
+  "weight": 1200,
+  "behaviour": {
+    "resting": {
+      "canSleep": true,
+      "willSleepOnBed": true
+    }
+  }
+}
