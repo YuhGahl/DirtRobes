@@ -1,0 +1,16 @@
+{
+  "name": "Komainu",
+  "property": "aurora",
+  "stage": "child",
+  "family": "komainu_bombzar",
+  "rarity": "secret",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 65,
+    "attack": 63,
+    "defense": 45,
+    "speed": 79
+  },
+  "evolves_into": "dirtrobes:komanoto_bombzar",
+  "evolution_level": 10
+}

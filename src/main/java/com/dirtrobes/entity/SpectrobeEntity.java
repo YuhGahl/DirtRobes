@@ -598,10 +598,15 @@ public class SpectrobeEntity extends TamableAnimal implements BedrockPosable {
     }
 
     private void tryEvolve() {
+        tryEvolve(false);
+    }
+
+    /** Évolue si possible ; {@code force} ignore le niveau requis (minéral d'Évolution). */
+    private boolean tryEvolve(boolean force) {
         Species s = getSpecies();
-        if (s == null || s.evolvesInto() == null || getSpectrobeLevel() < s.evolutionLevel()) return;
+        if (s == null || s.evolvesInto() == null || (!force && getSpectrobeLevel() < s.evolutionLevel())) return false;
         Species next = SpeciesManager.get(s.evolvesInto());
-        if (next == null) return;
+        if (next == null) return false;
         Component oldName = getDisplayName();
         setSpecies(next, true);
         if (level() instanceof ServerLevel server) {
@@ -612,7 +617,41 @@ public class SpectrobeEntity extends TamableAnimal implements BedrockPosable {
         level().broadcastEntityEvent(this, EVENT_CRY);
         notifyOwner(Component.translatable("message.dirtrobes.evolved", oldName, Component.translatable(next.translationKey()))
                 .withStyle(ChatFormatting.LIGHT_PURPLE, ChatFormatting.BOLD));
-        tryEvolve();
+        tryEvolve(false);
+        return true;
+    }
+
+    /** Minéraux de Spectrobes Origins. Retourne false si rien ne s'est passé (minéral d'Évolution sans évolution possible). */
+    public boolean feedOriginsMineral(com.dirtrobes.item.OriginsMineralItem.Kind kind) {
+        int ev = com.dirtrobes.item.OriginsMineralItem.STAT_EV;
+        switch (kind) {
+            case ATTACK -> addEv(MineralItem.Stat.POWER, ev);
+            case GUARD -> addEv(MineralItem.Stat.DEFENCE, ev);
+            case LIFE -> addEv(MineralItem.Stat.HEALTH, ev);
+            case SUPER -> {
+                addEv(MineralItem.Stat.POWER, ev / 2);
+                addEv(MineralItem.Stat.DEFENCE, ev / 2);
+                addEv(MineralItem.Stat.HEALTH, ev / 2);
+            }
+            case EVOLVE -> {
+                if (!tryEvolve(true)) return false;
+            }
+            default -> addXp(kind.xp);
+        }
+        if (level() instanceof ServerLevel server) {
+            server.sendParticles(ParticleTypes.HAPPY_VILLAGER, getX(), getY() + getBbHeight(), getZ(), 8, 0.4, 0.3, 0.4, 0.0);
+        }
+        level().playSound(null, blockPosition(), SoundEvents.GENERIC_EAT, SoundSource.NEUTRAL, 0.8f, 1.3f);
+        return true;
+    }
+
+    @Override
+    public boolean doHurtTarget(net.minecraft.world.entity.Entity target) {
+        boolean hit = super.doHurtTarget(target);
+        if (hit && target instanceof LivingEntity living && getRandom().nextFloat() < com.dirtrobes.combat.StatusEffects.NORMAL_CHANCE) {
+            com.dirtrobes.combat.StatusEffects.apply(getProperty(), living, false);
+        }
+        return hit;
     }
 
     public void feedMineral(MineralItem mineral, Player player) {
@@ -841,6 +880,9 @@ public class SpectrobeEntity extends TamableAnimal implements BedrockPosable {
             if (distanceTo(strikeTarget) < 4.5) {
                 float damage = (float) getAttributeValue(Attributes.ATTACK_DAMAGE) * strikeMultiplier;
                 strikeTarget.hurt(damageSources().mobAttack(this), damage);
+                if (getRandom().nextFloat() < com.dirtrobes.combat.StatusEffects.SPECIAL_CHANCE) {
+                    com.dirtrobes.combat.StatusEffects.apply(getProperty(), strikeTarget, true);
+                }
                 if (strikeCombo) com.dirtrobes.combat.ComboAttack.splash(this, strikeTarget, damage);
                 if (level() instanceof ServerLevel server) {
                     server.sendParticles(getProperty().particle(), strikeTarget.getX(), strikeTarget.getY() + strikeTarget.getBbHeight() / 2,

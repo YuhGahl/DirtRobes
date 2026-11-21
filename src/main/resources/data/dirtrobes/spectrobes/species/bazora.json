@@ -3,6 +3,7 @@
   "property": "halo",
   "stage": "adult",
   "family": "zora",
+  "rarity": "common",
   "search_range": 3,
   "base_stats": {
     "hp": 69,

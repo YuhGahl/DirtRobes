@@ -2,7 +2,7 @@
   "name": "Flamerax",
   "property": "corona",
   "stage": "secret",
-  "family": "flamerax",
+  "family": "komainu_flamerax",
   "rarity": "secret",
   "search_range": 3,
   "base_stats": {
@@ -10,5 +10,6 @@
     "attack": 113,
     "defense": 111,
     "speed": 71
-  }
+  },
+  "from_fossil": false
 }

@@ -3,6 +3,7 @@
   "property": "corona",
   "stage": "child",
   "family": "mesa",
+  "rarity": "common",
   "search_range": 4,
   "base_stats": {
     "hp": 62,

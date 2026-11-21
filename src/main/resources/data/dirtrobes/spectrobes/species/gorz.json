@@ -3,6 +3,7 @@
   "property": "eclipse",
   "stage": "child",
   "family": "gorz",
+  "rarity": "rare",
   "search_range": 3,
   "base_stats": {
     "hp": 57,

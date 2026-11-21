@@ -3,6 +3,7 @@
   "property": "flash",
   "stage": "adult",
   "family": "ryza",
+  "rarity": "common",
   "search_range": 3,
   "base_stats": {
     "hp": 69,

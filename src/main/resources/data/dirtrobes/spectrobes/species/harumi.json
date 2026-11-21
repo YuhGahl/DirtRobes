@@ -3,6 +3,7 @@
   "property": "flash",
   "stage": "child",
   "family": "harumi",
+  "rarity": "common",
   "search_range": 7,
   "base_stats": {
     "hp": 70,

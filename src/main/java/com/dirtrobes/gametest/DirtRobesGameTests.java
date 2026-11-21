@@ -563,6 +563,15 @@ public class DirtRobesGameTests {
         int[] capped = com.dirtrobes.species.Rarity.SECRET.redistribute(new int[]{190, 150, 100, 100});
         helper.assertTrue(capped[0] == 200 && capped[0] + capped[1] + capped[2] + capped[3] == 540, "Plafond 200, total gardé : " + java.util.Arrays.toString(capped));
         helper.assertTrue(com.dirtrobes.species.SpeciesManager.get(DirtRobes.id("nagu")).rarity() == com.dirtrobes.species.Rarity.EPIC, "Nagu est épique");
+        // rareté lue sur le disque d'Origins : 30 = Commun, 60 = Rare, 90 = Épique
+        helper.assertTrue(com.dirtrobes.species.SpeciesManager.get(DirtRobes.id("zappi")).rarity() == com.dirtrobes.species.Rarity.EPIC, "Zappi : 90 → Épique");
+        helper.assertTrue(com.dirtrobes.species.SpeciesManager.get(DirtRobes.id("komainu")).rarity() == com.dirtrobes.species.Rarity.RARE, "Komainu : 60 → Rare");
+        helper.assertTrue(com.dirtrobes.species.SpeciesManager.get(DirtRobes.id("zaza")).rarity() == com.dirtrobes.species.Rarity.COMMON, "Zaza : 30 → Commun");
+        // lignée secrète d'Origins : Komainu spécial → Komanoto spécial → Flamerax
+        var sk = com.dirtrobes.species.SpeciesManager.get(DirtRobes.id("komainu_flamerax"));
+        helper.assertTrue(sk != null && sk.rarity() == com.dirtrobes.species.Rarity.SECRET && sk.fromFossil()
+                && DirtRobes.id("komanoto_flamerax").equals(sk.evolvesInto()), "Komainu de la lignée Flamerax");
+        helper.assertTrue(!com.dirtrobes.species.SpeciesManager.get(DirtRobes.id("flamerax")).fromFossil(), "Flamerax ne sort plus d'un fossile");
         helper.assertTrue(com.dirtrobes.species.SpeciesManager.get(DirtRobes.id("windora")).rarity() == com.dirtrobes.species.Rarity.SECRET, "Windora est secret");
         helper.assertTrue(com.dirtrobes.species.SpeciesManager.get(DirtRobes.id("windora")).fromFossil(), "Les secrets sortent (rarement) des fossiles");
         // fossile : espèce tirée à l'extraction, de la bonne propriété
@@ -582,6 +591,14 @@ public class DirtRobesGameTests {
         be.start(Property.AURORA, player, 100);
         var cap = helper.getLevel().getCapability(net.neoforged.neoforge.capabilities.Capabilities.EnergyStorage.BLOCK, helper.absolutePos(pos), null);
         helper.assertTrue(cap != null, "L'incubateur accepte l'énergie FE");
+        // minéral d'évolution : évolue tout de suite
+        com.dirtrobes.entity.SpectrobeEntity pet = com.dirtrobes.entity.SpectrobeEntity.create(helper.getLevel(),
+                com.dirtrobes.species.SpeciesManager.get(DirtRobes.id("komainu_flamerax")), 1, player, helper.absoluteVec(new net.minecraft.world.phys.Vec3(8.5, 1, 8.5)));
+        helper.assertTrue(pet.feedOriginsMineral(com.dirtrobes.item.OriginsMineralItem.Kind.EVOLVE)
+                && DirtRobes.id("komanoto_flamerax").equals(pet.getSpeciesId()), "Minéral d'évolution : Komanoto, obtenu " + pet.getSpeciesId());
+        int lvl = pet.getSpectrobeLevel();
+        pet.feedOriginsMineral(com.dirtrobes.item.OriginsMineralItem.Kind.PURPLE);
+        helper.assertTrue(pet.getSpectrobeLevel() > lvl, "1 024 EXP font monter de niveau");
         com.dirtrobes.block.IncubatorBlockEntity.serverTick(helper.getLevel(), helper.absolutePos(pos), be.getBlockState(), be);
         helper.assertTrue(be.progress() == 1, "Sans énergie : 1 par tick, obtenu " + be.progress());
         cap.receiveEnergy(1000, false);

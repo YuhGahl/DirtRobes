@@ -3,6 +3,7 @@
   "property": "corona",
   "stage": "adult",
   "family": "komainu",
+  "rarity": "rare",
   "search_range": 3,
   "base_stats": {
     "hp": 90,

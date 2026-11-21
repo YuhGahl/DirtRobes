@@ -3,6 +3,7 @@
   "property": "eclipse",
   "stage": "child",
   "family": "tobasu",
+  "rarity": "common",
   "search_range": 3,
   "base_stats": {
     "hp": 54,

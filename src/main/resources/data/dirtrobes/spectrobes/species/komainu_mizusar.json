@@ -1,0 +1,16 @@
+{
+  "name": "Komainu",
+  "property": "flash",
+  "stage": "child",
+  "family": "komainu_mizusar",
+  "rarity": "secret",
+  "search_range": 3,
+  "base_stats": {
+    "hp": 65,
+    "attack": 63,
+    "defense": 45,
+    "speed": 79
+  },
+  "evolves_into": "dirtrobes:komanoto_mizusar",
+  "evolution_level": 10
+}

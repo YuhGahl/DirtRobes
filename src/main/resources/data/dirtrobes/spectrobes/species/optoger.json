@@ -2,7 +2,7 @@
   "name": "Optoger",
   "property": "halo",
   "stage": "secret",
-  "family": "optoger",
+  "family": "komainu_optoger",
   "rarity": "secret",
   "search_range": 3,
   "base_stats": {
@@ -10,5 +10,6 @@
     "attack": 120,
     "defense": 113,
     "speed": 74
-  }
+  },
+  "from_fossil": false
 }

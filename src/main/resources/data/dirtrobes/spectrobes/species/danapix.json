@@ -3,6 +3,7 @@
   "property": "corona",
   "stage": "adult",
   "family": "danawa",
+  "rarity": "common",
   "search_range": 3,
   "base_stats": {
     "hp": 112,

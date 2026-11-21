@@ -2,7 +2,7 @@
   "name": "Scarazook",
   "property": "eclipse",
   "stage": "secret",
-  "family": "scarazook",
+  "family": "komainu_scarazook",
   "rarity": "secret",
   "search_range": 3,
   "base_stats": {
@@ -10,5 +10,6 @@
     "attack": 126,
     "defense": 122,
     "speed": 73
-  }
+  },
+  "from_fossil": false
 }

@@ -3,6 +3,7 @@
   "property": "aurora",
   "stage": "child",
   "family": "gejio",
+  "rarity": "common",
   "search_range": 7,
   "base_stats": {
     "hp": 95,

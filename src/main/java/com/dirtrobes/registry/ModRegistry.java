@@ -233,6 +233,25 @@ public final class ModRegistry {
     public static final Map<Property, DeferredItem<FossilItem>> FOSSILS = new EnumMap<>(Property.class);
     /** Minéraux façon Spectrobes : Power (ATQ), Defence (DÉF), Health (PV), de C à A+. */
     public static final List<DeferredItem<MineralItem>> MINERALS = new ArrayList<>();
+    /** Minéraux de Spectrobes Origins (EXP, stats, évolution). */
+    public static final java.util.Map<com.dirtrobes.item.OriginsMineralItem.Kind, DeferredItem<com.dirtrobes.item.OriginsMineralItem>> ORIGINS_MINERALS =
+            new java.util.EnumMap<>(com.dirtrobes.item.OriginsMineralItem.Kind.class);
+
+    static {
+        for (var kind : com.dirtrobes.item.OriginsMineralItem.Kind.values()) {
+            String name = kind.xp > 0 ? kind.id() + "_exp_mineral" : kind.id() + "_mineral";
+            ORIGINS_MINERALS.put(kind, ITEMS.registerItem(name, props -> new com.dirtrobes.item.OriginsMineralItem(kind, props), new Item.Properties()));
+        }
+    }
+
+    public static final DeferredItem<com.dirtrobes.item.RiceBallItem> RICE_BALL = ITEMS.registerItem("rice_ball",
+            p -> new com.dirtrobes.item.RiceBallItem(4f, 3, p), new Item.Properties());
+    public static final DeferredItem<com.dirtrobes.item.RiceBallItem> MEGA_RICE_BALL = ITEMS.registerItem("mega_rice_ball",
+            p -> new com.dirtrobes.item.RiceBallItem(8f, 4, p), new Item.Properties());
+    public static final DeferredItem<com.dirtrobes.item.RiceBallItem> GIGA_RICE_BALL = ITEMS.registerItem("giga_rice_ball",
+            p -> new com.dirtrobes.item.RiceBallItem(14f, 6, p), new Item.Properties());
+    public static final DeferredItem<com.dirtrobes.item.RiceBallItem> NEO_RICE_BALL = ITEMS.registerItem("neo_rice_ball",
+            p -> new com.dirtrobes.item.RiceBallItem(-1f, 8, p), new Item.Properties());
 
     static {
         for (Property p : Property.values()) {
@@ -269,6 +288,11 @@ public final class ModRegistry {
                 GEMS.forEach(g -> output.accept(g.get()));
                 NATURE_GEMS.forEach(g -> output.accept(g.get()));
                 COMBAT_ITEMS.forEach(i -> output.accept(i.get()));
+                ORIGINS_MINERALS.values().forEach(i -> output.accept(i.get()));
+                output.accept(RICE_BALL.get());
+                output.accept(MEGA_RICE_BALL.get());
+                output.accept(GIGA_RICE_BALL.get());
+                output.accept(NEO_RICE_BALL.get());
                 output.accept(CHROMA_1.get());
                 output.accept(CHROMA_2.get());
                 output.accept(CHROMA_3.get());

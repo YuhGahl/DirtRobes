@@ -3,6 +3,7 @@
   "property": "aurora",
   "stage": "child",
   "family": "masetto",
+  "rarity": "common",
   "search_range": 2,
   "base_stats": {
     "hp": 58,
