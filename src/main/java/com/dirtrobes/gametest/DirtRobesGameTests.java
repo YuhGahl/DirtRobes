@@ -87,7 +87,7 @@ public class DirtRobesGameTests {
                 }
             });
         }
-        helper.runAfterDelay(IncubatorBlockEntity.DURATION + 250, () -> {
+        helper.runAfterDelay(400 + 250, () -> {
             SpectrobeEntity s = helper.getEntities(ModRegistry.SPECTROBE.get()).get(0);
             double d = s.distanceTo(player);
             helper.assertTrue(d < 6.5, "Le Spectrobe éclos aurait dû rejoindre son dresseur (distance " + String.format("%.1f", d) + ")");
