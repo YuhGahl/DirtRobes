@@ -27,6 +27,7 @@ sourceSets.main.resources {
 }
 
 repositories {
+    mavenCentral()
     // Curios (emplacement du gantelet Prizmod), dépendance optionnelle
     maven {
         name = "Curios"
@@ -157,6 +158,7 @@ dependencies {
     // fournit la bibliothèque standard Kotlin utilisée par les signatures de Cobblemon.
     compileOnly("maven.modrinth:MdwFAVRL:${cobblemon_version}") { transitive = false }
     compileOnly("maven.modrinth:ordsPcFz:${kotlinforforge_version}") { transitive = false }
+    compileOnly "org.jetbrains.kotlin:kotlin-stdlib:2.1.20"
     // bibliothèques embarquées dans le jar de Create (Ponder, Flywheel, Registrate…), nécessaires à la compilation
     compileOnly fileTree(dir: layout.buildDirectory.dir('create-nested'), include: '*.jar').builtBy(extractCreateNested)
 
