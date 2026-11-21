@@ -6,9 +6,10 @@
   "rarity": "epic",
   "search_range": 3,
   "base_stats": {
-    "hp": 120,
-    "attack": 59,
-    "defense": 54
+    "hp": 132,
+    "attack": 65,
+    "defense": 59,
+    "speed": 73
   },
   "evolves_into": "dirtrobes:totegarda",
   "evolution_level": 30

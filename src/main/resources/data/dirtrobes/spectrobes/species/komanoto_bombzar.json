@@ -6,9 +6,10 @@
   "rarity": "secret",
   "search_range": 3,
   "base_stats": {
-    "hp": 110,
-    "attack": 54,
-    "defense": 52
+    "hp": 127,
+    "attack": 62,
+    "defense": 60,
+    "speed": 71
   },
   "evolves_into": "dirtrobes:bombzar",
   "evolution_level": 30,

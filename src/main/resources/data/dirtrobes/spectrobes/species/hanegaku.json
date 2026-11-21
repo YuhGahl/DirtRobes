@@ -6,9 +6,10 @@
   "rarity": "rare",
   "search_range": 3,
   "base_stats": {
-    "hp": 104,
-    "attack": 80,
-    "defense": 51
+    "hp": 109,
+    "attack": 84,
+    "defense": 54,
+    "speed": 85
   },
   "evolves_into": "dirtrobes:hanebakuon",
   "evolution_level": 30

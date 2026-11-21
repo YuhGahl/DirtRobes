@@ -6,30 +6,27 @@ import net.minecraft.network.chat.MutableComponent;
 import java.util.Locale;
 
 /**
- * Rareté d'une lignée de Spectrobes : un bonus en pourcentage sur PV, ATQ et DÉF (0 / 5 / 10 / 15 %), un fossile plus
- * long à dégager et une espèce plus rare à l'extraction. Les valeurs suivent l'onglet Rareté du document de conception.
+ * Rareté d'une lignée de Spectrobes : un fossile plus long à dégager et une espèce plus rare à l'extraction.
+ * Elle ne modifie pas les stats : celles des fichiers d'espèces sont déjà les valeurs finales du document de conception.
  */
 public enum Rarity {
-    COMMON(0xFFFFFF, 70, 0, 0.42f, 0.58f, 75),
-    RARE(0x55AAFF, 22, 5, 0.32f, 0.50f, 90),
-    EPIC(0xC070FF, 7, 10, 0.22f, 0.42f, 105),
-    SECRET(0xFFC040, 1, 15, 0.12f, 0.32f, 120);
+    COMMON(0xFFFFFF, 70, 0.42f, 0.58f, 75),
+    RARE(0x55AAFF, 22, 0.32f, 0.50f, 90),
+    EPIC(0xC070FF, 7, 0.22f, 0.42f, 105),
+    SECRET(0xFFC040, 1, 0.12f, 0.32f, 120);
 
     public final int color;
     /** Poids du palier quand on tire l'espèce d'un fossile. */
     public final int weight;
-    /** Bonus de PV, ATQ et DÉF, en pourcentage. */
-    public final int bonusPercent;
     /** Seuils du bruit de la roche au mini-jeu de fouille : plus bas = plus de couches dures. */
     public final float depth2;
     public final float depth3;
     /** Temps du mini-jeu, en secondes. */
     public final int excavationSeconds;
 
-    Rarity(int color, int weight, int bonusPercent, float depth2, float depth3, int excavationSeconds) {
+    Rarity(int color, int weight, float depth2, float depth3, int excavationSeconds) {
         this.color = color;
         this.weight = weight;
-        this.bonusPercent = bonusPercent;
         this.depth2 = depth2;
         this.depth3 = depth3;
         this.excavationSeconds = excavationSeconds;
@@ -53,8 +50,4 @@ public enum Rarity {
         return v[Math.max(0, Math.min(v.length - 1, i))];
     }
 
-    /** Applique le bonus de rareté à une stat de base (arrondi comme ARRONDI du tableur). */
-    public int applyBonus(int base) {
-        return (int) Math.round(base * (100 + bonusPercent) / 100.0);
-    }
 }

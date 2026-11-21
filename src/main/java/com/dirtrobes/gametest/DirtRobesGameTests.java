@@ -568,12 +568,9 @@ public class DirtRobesGameTests {
     /** Rareté : répartition des stats (total gardé, 200 max), paliers des lignées, tirage des fossiles, incubateur à l'électricité. */
     @GameTest(template = "platform")
     public static void rarityAndPoweredIncubator(GameTestHelper helper) {
-        // bonus de rareté : +0 / +5 / +10 / +15 %, arrondi comme le tableur
-        helper.assertTrue(com.dirtrobes.species.Rarity.COMMON.applyBonus(100) == 100 && com.dirtrobes.species.Rarity.RARE.applyBonus(110) == 116
-                && com.dirtrobes.species.Rarity.EPIC.applyBonus(140) == 154 && com.dirtrobes.species.Rarity.SECRET.applyBonus(135) == 155, "Bonus de rareté");
         var spikan = com.dirtrobes.species.SpeciesManager.get(DirtRobes.id("spikan"));
         helper.assertTrue(spikan.baseHp() == 105 && spikan.baseAttack() == 55 && spikan.baseDefense() == 55 && spikan.baseSpeed() == 70,
-                "Spikan (rare) : 105/55/55/70 comme le document, obtenu " + spikan.baseHp() + "/" + spikan.baseAttack() + "/" + spikan.baseDefense() + "/" + spikan.baseSpeed());
+                "Spikan : 105/55/55/70, valeurs brutes de la liste, obtenu " + spikan.baseHp() + "/" + spikan.baseAttack() + "/" + spikan.baseDefense() + "/" + spikan.baseSpeed());
         // lignées complètes : Winba → Winbus → Windora, Vilamasta → Vilakroma (rare), espèces d'Au-delà des portails
         helper.assertTrue(DirtRobes.id("windora").equals(com.dirtrobes.species.SpeciesManager.get(DirtRobes.id("winbus")).evolvesInto()), "Winbus évolue en Windora");
         var vilamasta = com.dirtrobes.species.SpeciesManager.get(DirtRobes.id("vilamasta"));

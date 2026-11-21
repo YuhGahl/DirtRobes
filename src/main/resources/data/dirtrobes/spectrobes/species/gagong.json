@@ -6,9 +6,10 @@
   "rarity": "epic",
   "search_range": 3,
   "base_stats": {
-    "hp": 89,
-    "attack": 41,
-    "defense": 49
+    "hp": 98,
+    "attack": 45,
+    "defense": 54,
+    "speed": 66
   },
   "evolves_into": "dirtrobes:gorgong",
   "evolution_level": 10

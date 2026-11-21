@@ -6,9 +6,10 @@
   "rarity": "rare",
   "search_range": 3,
   "base_stats": {
-    "hp": 120,
-    "attack": 55,
-    "defense": 58
+    "hp": 126,
+    "attack": 58,
+    "defense": 61,
+    "speed": 69
   },
   "evolves_into": "dirtrobes:zuwakrid",
   "evolution_level": 30

@@ -8,7 +8,8 @@
   "base_stats": {
     "hp": 89,
     "attack": 49,
-    "defense": 58
+    "defense": 58,
+    "speed": 66
   },
   "evolves_into": "dirtrobes:gekikro",
   "evolution_level": 30

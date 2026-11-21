@@ -6,9 +6,10 @@
   "rarity": "rare",
   "search_range": 3,
   "base_stats": {
-    "hp": 66,
-    "attack": 115,
-    "defense": 47
+    "hp": 69,
+    "attack": 121,
+    "defense": 49,
+    "speed": 106
   },
   "evolves_into": "dirtrobes:zaamaros",
   "evolution_level": 30

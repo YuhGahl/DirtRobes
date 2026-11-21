@@ -6,9 +6,10 @@
   "rarity": "rare",
   "search_range": 3,
   "base_stats": {
-    "hp": 87,
-    "attack": 52,
-    "defense": 57
+    "hp": 91,
+    "attack": 55,
+    "defense": 60,
+    "speed": 68
   },
   "evolves_into": "dirtrobes:trogallup",
   "evolution_level": 30

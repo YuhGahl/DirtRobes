@@ -6,9 +6,10 @@
   "rarity": "epic",
   "search_range": 3,
   "base_stats": {
-    "hp": 90,
-    "attack": 43,
-    "defense": 45
+    "hp": 99,
+    "attack": 47,
+    "defense": 50,
+    "speed": 69
   },
   "evolves_into": "dirtrobes:zenigor",
   "evolution_level": 10

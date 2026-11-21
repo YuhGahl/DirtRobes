@@ -6,9 +6,10 @@
   "rarity": "rare",
   "search_range": 3,
   "base_stats": {
-    "hp": 41,
-    "attack": 44,
-    "defense": 61
+    "hp": 43,
+    "attack": 46,
+    "defense": 64,
+    "speed": 61
   },
   "evolves_into": "dirtrobes:rudatori",
   "evolution_level": 10

@@ -6,9 +6,10 @@
   "rarity": "rare",
   "search_range": 3,
   "base_stats": {
-    "hp": 86,
-    "attack": 61,
-    "defense": 66
+    "hp": 90,
+    "attack": 64,
+    "defense": 69,
+    "speed": 68
   },
   "evolves_into": "dirtrobes:musageki",
   "evolution_level": 30

@@ -6,9 +6,10 @@
   "rarity": "epic",
   "search_range": 3,
   "base_stats": {
-    "hp": 111,
-    "attack": 77,
-    "defense": 50
+    "hp": 122,
+    "attack": 85,
+    "defense": 55,
+    "speed": 85
   },
   "evolves_into": "dirtrobes:daigyo",
   "evolution_level": 30

@@ -8,7 +8,8 @@
   "base_stats": {
     "hp": 104,
     "attack": 51,
-    "defense": 54
+    "defense": 54,
+    "speed": 69
   },
   "evolves_into": "dirtrobes:zozanero",
   "evolution_level": 30

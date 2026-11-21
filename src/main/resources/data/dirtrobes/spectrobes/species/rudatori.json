@@ -6,9 +6,10 @@
   "rarity": "rare",
   "search_range": 3,
   "base_stats": {
-    "hp": 54,
-    "attack": 59,
-    "defense": 81
+    "hp": 57,
+    "attack": 62,
+    "defense": 85,
+    "speed": 59
   },
   "evolves_into": "dirtrobes:rudatake",
   "evolution_level": 30

@@ -45,10 +45,7 @@ public record Species(
         int def = GsonHelper.getAsInt(stats, "defense", 50);
         boolean secret = stage == Stage.SECRET || stage == Stage.SPECIAL;
         Rarity rarity = Rarity.byId(GsonHelper.getAsString(json, "rarity", secret ? "secret" : "common"));
-        // stats de base (document de conception) + bonus de rareté ; la VIT découle de l'ATQ et de la DÉF finales
-        hp = rarity.applyBonus(hp);
-        atk = rarity.applyBonus(atk);
-        def = rarity.applyBonus(def);
+        // stats brutes de la liste des Spectrobes (document de conception), sans aucun bonus ajouté
         int spd = GsonHelper.getAsInt(stats, "speed", defaultSpeed(atk, def));
         ResourceLocation rareEvo = null;
         float rareChance = 0f;

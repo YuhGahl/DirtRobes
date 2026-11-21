@@ -8,7 +8,8 @@
   "base_stats": {
     "hp": 101,
     "attack": 61,
-    "defense": 59
+    "defense": 59,
+    "speed": 71
   },
   "evolves_into": "dirtrobes:kugaster",
   "evolution_level": 30

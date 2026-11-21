@@ -6,9 +6,10 @@
   "rarity": "rare",
   "search_range": 3,
   "base_stats": {
-    "hp": 78,
-    "attack": 44,
-    "defense": 36
+    "hp": 82,
+    "attack": 46,
+    "defense": 38,
+    "speed": 74
   },
   "evolves_into": "dirtrobes:kamakuri",
   "evolution_level": 10

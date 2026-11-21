@@ -6,9 +6,10 @@
   "rarity": "rare",
   "search_range": 3,
   "base_stats": {
-    "hp": 89,
-    "attack": 63,
-    "defense": 55
+    "hp": 93,
+    "attack": 66,
+    "defense": 58,
+    "speed": 74
   },
   "evolves_into": "dirtrobes:pahaxion",
   "evolution_level": 30

@@ -6,9 +6,10 @@
   "rarity": "epic",
   "search_range": 3,
   "base_stats": {
-    "hp": 125,
-    "attack": 60,
-    "defense": 52
+    "hp": 138,
+    "attack": 66,
+    "defense": 57,
+    "speed": 75
   },
   "evolves_into": "dirtrobes:zappizor",
   "evolution_level": 30

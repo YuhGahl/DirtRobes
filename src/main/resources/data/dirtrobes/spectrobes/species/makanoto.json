@@ -6,9 +6,10 @@
   "rarity": "rare",
   "search_range": 3,
   "base_stats": {
-    "hp": 84,
-    "attack": 75,
-    "defense": 56
+    "hp": 88,
+    "attack": 79,
+    "defense": 59,
+    "speed": 80
   },
   "evolves_into": "dirtrobes:makadoros",
   "evolution_level": 30

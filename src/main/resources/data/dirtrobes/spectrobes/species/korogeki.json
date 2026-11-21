@@ -6,9 +6,10 @@
   "rarity": "rare",
   "search_range": 3,
   "base_stats": {
-    "hp": 73,
-    "attack": 67,
-    "defense": 54
+    "hp": 77,
+    "attack": 70,
+    "defense": 57,
+    "speed": 77
   },
   "evolves_into": "dirtrobes:korozama",
   "evolution_level": 30

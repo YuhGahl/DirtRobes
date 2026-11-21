@@ -6,9 +6,10 @@
   "rarity": "rare",
   "search_range": 3,
   "base_stats": {
-    "hp": 80,
-    "attack": 56,
-    "defense": 38
+    "hp": 84,
+    "attack": 59,
+    "defense": 40,
+    "speed": 80
   },
   "evolves_into": "dirtrobes:dendama",
   "evolution_level": 10

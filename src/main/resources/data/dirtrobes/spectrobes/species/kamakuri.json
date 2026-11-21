@@ -6,9 +6,10 @@
   "rarity": "rare",
   "search_range": 3,
   "base_stats": {
-    "hp": 104,
-    "attack": 59,
-    "defense": 48
+    "hp": 109,
+    "attack": 62,
+    "defense": 50,
+    "speed": 76
   },
   "evolves_into": "dirtrobes:gekikuri",
   "evolution_level": 30
