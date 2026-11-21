@@ -92,6 +92,18 @@ public final class ModNetwork {
         }
     }
 
+    /** Touches du gantelet : 0 = sortir/ranger l'arme, 1 = extraire, 2 = ouvrir l'équipe. */
+    public record GauntletPayload(int action) implements CustomPacketPayload {
+        public static final Type<GauntletPayload> TYPE = new Type<>(DirtRobes.id("gauntlet"));
+        public static final StreamCodec<ByteBuf, GauntletPayload> STREAM_CODEC = StreamCodec.composite(
+                ByteBufCodecs.VAR_INT, GauntletPayload::action, GauntletPayload::new);
+
+        @Override
+        public Type<? extends CustomPacketPayload> type() {
+            return TYPE;
+        }
+    }
+
     /** Le joueur clique sur « Sortir » / « Ranger » pour le membre n°slot. */
     public record TeamActionPayload(int slot) implements CustomPacketPayload {
         public static final Type<TeamActionPayload> TYPE = new Type<>(DirtRobes.id("team_action"));
@@ -108,10 +120,20 @@ public final class ModNetwork {
     public static volatile int clientCh;
 
     public static void register(RegisterPayloadHandlersEvent event) {
-        event.registrar("5")
+        event.registrar("6")
                 .playToClient(ChSyncPayload.TYPE, ChSyncPayload.STREAM_CODEC, (payload, context) -> clientCh = payload.ch())
                 .playToClient(TeamSyncPayload.TYPE, TeamSyncPayload.STREAM_CODEC, ModNetwork::handleTeamSync)
                 .playToServer(TeamActionPayload.TYPE, TeamActionPayload.STREAM_CODEC, ModNetwork::handleTeamAction)
+                .playToServer(GauntletPayload.TYPE, GauntletPayload.STREAM_CODEC, (payload, context) -> context.enqueueWork(() -> {
+                    if (!(context.player() instanceof ServerPlayer player)) return;
+                    switch (payload.action()) {
+                        case 0 -> com.dirtrobes.gauntlet.GauntletActions.toggleWeapon(player);
+                        case 1 -> com.dirtrobes.gauntlet.GauntletActions.extract(player);
+                        case 2 -> com.dirtrobes.gauntlet.GauntletActions.openTeam(player);
+                        default -> {
+                        }
+                    }
+                }))
                 .playToServer(ComboPayload.TYPE, ComboPayload.STREAM_CODEC, (payload, context) -> context.enqueueWork(() -> {
                     if (context.player() instanceof ServerPlayer player) ComboAttack.trigger(player, lookedAtEntity(player, 24.0));
                 }))

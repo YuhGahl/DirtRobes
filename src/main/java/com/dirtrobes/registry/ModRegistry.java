@@ -54,6 +54,9 @@ public final class ModRegistry {
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(Registries.ENTITY_TYPE, DirtRobes.MODID);
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, DirtRobes.MODID);
     public static final DeferredRegister<MenuType<?>> MENUS = DeferredRegister.create(Registries.MENU, DirtRobes.MODID);
+    public static final DeferredRegister.DataComponents DATA_COMPONENTS = DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE, DirtRobes.MODID);
+    public static final DeferredRegister<net.minecraft.world.item.crafting.RecipeSerializer<?>> RECIPE_SERIALIZERS =
+            DeferredRegister.create(Registries.RECIPE_SERIALIZER, DirtRobes.MODID);
     public static final DeferredRegister<CreativeModeTab> TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, DirtRobes.MODID);
 
     // ---------- Entité unique (l'espèce est une donnée synchronisée, comme Cobblemon) ----------
@@ -68,6 +71,16 @@ public final class ModRegistry {
                     .sized(0.8f, 0.9f)
                     .clientTrackingRange(10)
                     .build("krawl"));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<com.dirtrobes.gauntlet.GauntletShot>> GAUNTLET_SHOT = ENTITIES.register("gauntlet_shot",
+            () -> EntityType.Builder.<com.dirtrobes.gauntlet.GauntletShot>of(com.dirtrobes.gauntlet.GauntletShot::new, MobCategory.MISC)
+                    .sized(0.3f, 0.3f).clientTrackingRange(4).updateInterval(10).build("gauntlet_shot"));
+
+    public static final DeferredHolder<net.minecraft.core.component.DataComponentType<?>, net.minecraft.core.component.DataComponentType<com.dirtrobes.gauntlet.GauntletModules>> GAUNTLET_MODULES =
+            DATA_COMPONENTS.registerComponentType("gauntlet_modules", b -> b.persistent(com.dirtrobes.gauntlet.GauntletModules.CODEC)
+                    .networkSynchronized(com.dirtrobes.gauntlet.GauntletModules.STREAM_CODEC));
+    public static final DeferredHolder<net.minecraft.world.item.crafting.RecipeSerializer<?>, com.dirtrobes.gauntlet.GauntletModuleRecipe.Serializer> GAUNTLET_MODULE_SERIALIZER =
+            RECIPE_SERIALIZERS.register("gauntlet_module", com.dirtrobes.gauntlet.GauntletModuleRecipe.Serializer::new);
 
     // ---------- Blocs ----------
     public static final DeferredBlock<Block> FOSSIL_STONE = BLOCKS.registerSimpleBlock("fossil_stone",
@@ -172,6 +185,24 @@ public final class ModRegistry {
             props -> new CombatItem(CombatItem.Kind.ANTIDOTE, props), new Item.Properties().stacksTo(16));
     public static final List<DeferredItem<CombatItem>> COMBAT_ITEMS = List.of(SERUM, REVIVE, CH_RECHARGE, ANTIDOTE);
 
+    public static final DeferredItem<com.dirtrobes.gauntlet.GauntletItem> GAUNTLET = ITEMS.registerItem("gauntlet",
+            com.dirtrobes.gauntlet.GauntletItem::new, new Item.Properties().stacksTo(1));
+    public static final DeferredItem<com.dirtrobes.gauntlet.GauntletWeaponItem> GAUNTLET_BLADE = ITEMS.registerItem("gauntlet_blade",
+            p -> new com.dirtrobes.gauntlet.GauntletWeaponItem("blade", p), new Item.Properties());
+    public static final DeferredItem<com.dirtrobes.gauntlet.GauntletWeaponItem> GAUNTLET_CANNON = ITEMS.registerItem("gauntlet_cannon",
+            p -> new com.dirtrobes.gauntlet.GauntletWeaponItem("cannon", p), new Item.Properties());
+    public static final DeferredItem<com.dirtrobes.gauntlet.GauntletWeaponItem> GAUNTLET_FIST = ITEMS.registerItem("gauntlet_fist",
+            p -> new com.dirtrobes.gauntlet.GauntletWeaponItem("fist", p), new Item.Properties());
+    public static final DeferredItem<Item> GAUNTLET_SHOT_ITEM = ITEMS.registerSimpleItem("gauntlet_shot");
+    public static final DeferredItem<com.dirtrobes.gauntlet.ModuleItem> MODULE_BLADE = ITEMS.registerItem("module_blade",
+            p -> new com.dirtrobes.gauntlet.ModuleItem("blade", p), new Item.Properties());
+    public static final DeferredItem<com.dirtrobes.gauntlet.ModuleItem> MODULE_CANNON = ITEMS.registerItem("module_cannon",
+            p -> new com.dirtrobes.gauntlet.ModuleItem("cannon", p), new Item.Properties());
+    public static final DeferredItem<com.dirtrobes.gauntlet.ModuleItem> MODULE_FIST = ITEMS.registerItem("module_fist",
+            p -> new com.dirtrobes.gauntlet.ModuleItem("fist", p), new Item.Properties());
+    public static final DeferredItem<com.dirtrobes.gauntlet.ModuleItem> MODULE_EXTRACTOR = ITEMS.registerItem("module_extractor",
+            p -> new com.dirtrobes.gauntlet.ModuleItem("extractor", p), new Item.Properties());
+
     public static final DeferredItem<BlockItem> MINERAL_DEPOSIT_ITEM = ITEMS.registerSimpleBlockItem("mineral_deposit", MINERAL_DEPOSIT);
     public static final DeferredItem<BlockItem> DEEPSLATE_MINERAL_DEPOSIT_ITEM = ITEMS.registerSimpleBlockItem("deepslate_mineral_deposit", DEEPSLATE_MINERAL_DEPOSIT);
     public static final DeferredItem<BlockItem> SPECTROBE_PC_ITEM = ITEMS.registerSimpleBlockItem("spectrobe_pc", SPECTROBE_PC);
@@ -212,6 +243,11 @@ public final class ModRegistry {
                 output.accept(MINERAL_DEPOSIT_ITEM.get());
                 output.accept(DEEPSLATE_MINERAL_DEPOSIT_ITEM.get());
                 output.accept(VORTEX_ITEM.get());
+                output.accept(GAUNTLET.get());
+                output.accept(MODULE_BLADE.get());
+                output.accept(MODULE_CANNON.get());
+                output.accept(MODULE_FIST.get());
+                output.accept(MODULE_EXTRACTOR.get());
                 output.accept(SPECTROBE_PC_ITEM.get());
                 output.accept(LAB_TERMINAL_ITEM.get());
                 GEMS.forEach(g -> output.accept(g.get()));
@@ -231,6 +267,8 @@ public final class ModRegistry {
         ENTITIES.register(modBus);
         BLOCK_ENTITIES.register(modBus);
         MENUS.register(modBus);
+        DATA_COMPONENTS.register(modBus);
+        RECIPE_SERIALIZERS.register(modBus);
         TABS.register(modBus);
     }
 }

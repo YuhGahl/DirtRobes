@@ -1,0 +1,12 @@
+{
+  "type": "dirtrobes:gauntlet_module",
+  "template": {
+    "item": "dirtrobes:module_fist"
+  },
+  "base": {
+    "item": "dirtrobes:gauntlet"
+  },
+  "addition": {
+    "tag": "dirtrobes:minerals"
+  }
+}

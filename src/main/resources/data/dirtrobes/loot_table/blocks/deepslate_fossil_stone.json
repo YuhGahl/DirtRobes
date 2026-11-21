@@ -3,7 +3,6 @@
   "pools": [
     {
       "rolls": 1,
-      "bonus_rolls": 0,
       "conditions": [
         {
           "condition": "minecraft:match_tool",
@@ -30,7 +29,6 @@
     },
     {
       "rolls": 1,
-      "bonus_rolls": 0,
       "conditions": [
         {
           "condition": "minecraft:inverted",
@@ -57,118 +55,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "dirtrobes:corona_fossil",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "dirtrobes:aurora_fossil",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "dirtrobes:flash_fossil",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "dirtrobes:eclipse_fossil",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "dirtrobes:halo_fossil",
-          "weight": 1
-        }
-      ]
-    },
-    {
-      "rolls": 1,
-      "bonus_rolls": 0,
-      "conditions": [
-        {
-          "condition": "minecraft:inverted",
-          "term": {
-            "condition": "minecraft:match_tool",
-            "predicate": {
-              "predicates": {
-                "minecraft:enchantments": [
-                  {
-                    "enchantments": "minecraft:silk_touch",
-                    "levels": {
-                      "min": 1
-                    }
-                  }
-                ]
-              }
-            }
-          }
-        },
-        {
-          "condition": "minecraft:random_chance",
-          "chance": 0.6
-        }
-      ],
-      "entries": [
-        {
-          "type": "minecraft:item",
-          "name": "dirtrobes:power_c",
-          "weight": 10
-        },
-        {
-          "type": "minecraft:item",
-          "name": "dirtrobes:power_b",
-          "weight": 5
-        },
-        {
-          "type": "minecraft:item",
-          "name": "dirtrobes:power_a",
-          "weight": 2
-        },
-        {
-          "type": "minecraft:item",
-          "name": "dirtrobes:power_a_plus",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "dirtrobes:defence_c",
-          "weight": 10
-        },
-        {
-          "type": "minecraft:item",
-          "name": "dirtrobes:defence_b",
-          "weight": 5
-        },
-        {
-          "type": "minecraft:item",
-          "name": "dirtrobes:defence_a",
-          "weight": 2
-        },
-        {
-          "type": "minecraft:item",
-          "name": "dirtrobes:defence_a_plus",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "dirtrobes:health_c",
-          "weight": 10
-        },
-        {
-          "type": "minecraft:item",
-          "name": "dirtrobes:health_b",
-          "weight": 5
-        },
-        {
-          "type": "minecraft:item",
-          "name": "dirtrobes:health_a",
-          "weight": 2
-        },
-        {
-          "type": "minecraft:item",
-          "name": "dirtrobes:health_a_plus",
-          "weight": 1
+          "name": "minecraft:cobbled_deepslate"
         }
       ]
     }

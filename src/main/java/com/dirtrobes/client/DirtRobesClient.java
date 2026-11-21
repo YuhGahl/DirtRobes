@@ -39,6 +39,12 @@ public class DirtRobesClient {
             InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_V, "key.categories.dirtrobes");
     public static final KeyMapping COMBO = new KeyMapping("key.dirtrobes.combo",
             InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_G, "key.categories.dirtrobes");
+    public static final KeyMapping GAUNTLET_WEAPON = new KeyMapping("key.dirtrobes.gauntlet_weapon",
+            InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_B, "key.categories.dirtrobes");
+    public static final KeyMapping GAUNTLET_EXTRACT = new KeyMapping("key.dirtrobes.gauntlet_extract",
+            InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_Z, "key.categories.dirtrobes");
+    public static final KeyMapping GAUNTLET_TEAM = new KeyMapping("key.dirtrobes.gauntlet_team",
+            InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_P, "key.categories.dirtrobes");
     public static final KeyMapping HUD_LAYOUT = new KeyMapping("key.dirtrobes.hud_layout",
             InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_J, "key.categories.dirtrobes");
     public static final KeyMapping TEAM_SUMMARY = new KeyMapping("key.dirtrobes.team_summary",
@@ -57,6 +63,7 @@ public class DirtRobesClient {
     private static void onRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(ModRegistry.SPECTROBE.get(), BedrockEntityRenderer::new);
         event.registerEntityRenderer(ModRegistry.KRAWL.get(), BedrockEntityRenderer::new);
+        event.registerEntityRenderer(ModRegistry.GAUNTLET_SHOT.get(), net.minecraft.client.renderer.entity.ThrownItemRenderer::new);
     }
 
     private static void onReloadListeners(RegisterClientReloadListenersEvent event) {
@@ -80,6 +87,9 @@ public class DirtRobesClient {
         event.register(TEAM_SUMMARY);
         event.register(HUD_LAYOUT);
         event.register(COMBO);
+        event.register(GAUNTLET_WEAPON);
+        event.register(GAUNTLET_EXTRACT);
+        event.register(GAUNTLET_TEAM);
     }
 
     private static void onClientTick(ClientTickEvent.Post event) {
@@ -89,6 +99,9 @@ public class DirtRobesClient {
         while (SPECIAL_ATTACK.consumeClick()) {
             PacketDistributor.sendToServer(new ModNetwork.SpecialAttackPayload());
         }
+        while (GAUNTLET_WEAPON.consumeClick()) PacketDistributor.sendToServer(new ModNetwork.GauntletPayload(0));
+        while (GAUNTLET_EXTRACT.consumeClick()) PacketDistributor.sendToServer(new ModNetwork.GauntletPayload(1));
+        while (GAUNTLET_TEAM.consumeClick()) PacketDistributor.sendToServer(new ModNetwork.GauntletPayload(2));
         while (COMBO.consumeClick()) PacketDistributor.sendToServer(new ModNetwork.ComboPayload());
         while (TEAM_UP.consumeClick()) ClientTeam.select(-1);
         while (TEAM_DOWN.consumeClick()) ClientTeam.select(1);

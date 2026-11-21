@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "CGC",
+    "GXG",
+    "CGC"
+  ],
+  "key": {
+    "C": {
+      "item": "minecraft:copper_ingot"
+    },
+    "G": {
+      "item": "minecraft:gold_nugget"
+    },
+    "X": {
+      "item": "minecraft:crossbow"
+    }
+  },
+  "result": {
+    "id": "dirtrobes:module_cannon",
+    "count": 1
+  }
+}
