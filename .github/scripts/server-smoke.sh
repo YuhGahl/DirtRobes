@@ -7,6 +7,8 @@ echo "eula=true" > run/eula.txt
 LOG=server.log
 rm -f "$LOG" /tmp/srv_in
 mkfifo /tmp/srv_in
+# avec Cobblemon, la vérification du pont se lance seule puis arrête le serveur
+export DIRTROBES_COBBLEMON_SELFCHECK=1
 ./gradlew runServer --console=plain < /tmp/srv_in > "$LOG" 2>&1 &
 PID=$!
 exec 3>/tmp/srv_in
@@ -22,7 +24,9 @@ if [ "$ready" = 1 ]; then
   echo "summon dirtrobes:spectrobe 0 100 0" >&3
   sleep 5
   # pont Cobblemon : toutes les espèces chargées côté Cobblemon + aller-retour Spectrobe → Pokémon → Spectrobe
-  if ls run/mods | grep -qi cobblemon; then echo "dirtrobes cobblemon check" >&3; sleep 5; fi
+  if ls run/mods | grep -qi cobblemon; then
+    for i in $(seq 1 60); do grep -q "Intégration Cobblemon" "$LOG" && break; sleep 1; done
+  fi
   echo "stop" >&3
   for i in $(seq 1 90); do kill -0 "$PID" 2>/dev/null || break; sleep 1; done
 fi

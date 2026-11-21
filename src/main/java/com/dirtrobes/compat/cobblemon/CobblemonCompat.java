@@ -11,6 +11,16 @@ public final class CobblemonCompat {
 
     public static void register(IEventBus gameBus) {
         gameBus.addListener(CobblemonCompat::onCommands);
+        // CI : la console du serveur n'est plus lue une fois Cobblemon chargé ; la vérification se lance seule
+        if ("1".equals(System.getenv("DIRTROBES_COBBLEMON_SELFCHECK"))) gameBus.addListener(CobblemonCompat::onServerTick);
+    }
+
+    private static int ticks;
+
+    private static void onServerTick(net.neoforged.neoforge.event.tick.ServerTickEvent.Post event) {
+        if (++ticks != 100) return;
+        CobblemonBridge.selfCheck(event.getServer());
+        event.getServer().halt(false);
     }
 
     /** /dirtrobes cobblemon check : vérifie que les espèces sont chargées côté Cobblemon (opérateurs, utilisé par la CI). */
