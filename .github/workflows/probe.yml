@@ -10,9 +10,9 @@ jobs:
         with: { distribution: temurin, java-version: 21 }
       - run: |
           mkdir j && cd j
-          curl -sSfL -o jade.jar "https://cdn.modrinth.com/data/nvQzSEkH/versions/eYz2YBGT/Jade-1.21.1-NeoForge-15.10.6.jar"
-          mkdir x && (cd x && unzip -q ../jade.jar)
-          for c in snownee.jade.api.IWailaPlugin snownee.jade.api.IWailaClientRegistration snownee.jade.api.IWailaCommonRegistration snownee.jade.api.IBlockComponentProvider snownee.jade.api.IServerDataProvider snownee.jade.api.BlockAccessor snownee.jade.api.ITooltip snownee.jade.api.IComponentProvider snownee.jade.api.ui.IElementHelper snownee.jade.api.WailaPlugin snownee.jade.api.config.IPluginConfig snownee.jade.api.IToggleableProvider; do echo "== $c"; javap -cp x $c 2>&1 | head -45; done
-          echo "== ui classes"; ls x/snownee/jade/api/ui/ | head -60
-          for c in snownee.jade.api.ui.ProgressStyle snownee.jade.api.ui.BoxStyle snownee.jade.api.ui.IProgressStyle; do echo "== $c"; javap -cp x $c 2>&1 | head -40; done
-          echo "== furnace provider"; (cd x && find . -iname "*Furnace*Provider*.class"); for c in $(cd x && find . -iname "FurnaceProvider.class" | sed 's|^\./||;s/\.class$//'); do javap -p -c -cp x $c | grep -n "invoke\|public\|private" | head -60; done
+          curl -sSfL -o jei.jar "https://cdn.modrinth.com/data/u6dRKJwZ/versions/oXFV6wK5/jei-1.21.1-neoforge-19.71.0.475.jar"
+          mkdir x && (cd x && unzip -q ../jei.jar)
+          (cd x && find . -path "*api*" -iname "*mith*.class")
+          for c in mezz.jei.api.registration.IVanillaCategoryExtensionRegistration mezz.jei.api.recipe.category.extensions.vanilla.smithing.IExtendableSmithingRecipeCategory mezz.jei.api.recipe.category.extensions.vanilla.smithing.ISmithingCategoryExtension mezz.jei.api.gui.ingredient.IRecipeSlotDrawable mezz.jei.api.recipe.category.extensions.vanilla.smithing.ISmithingRecipeSlots mezz.jei.api.registration.IRecipeRegistration mezz.jei.api.IModPlugin mezz.jei.api.constants.RecipeTypes; do echo "== $c"; javap -cp x $c 2>&1 | head -40; done
+          echo "== how vanilla smithing recipes are collected"; (cd x && find . -iname "*SmithingRecipe*" | grep -v api | head)
+          for c in $(cd x && find . -iname "SmithingRecipeCategory.class" | sed 's|^\./||;s/\.class$//'); do javap -p -cp x $c | head -40; done
