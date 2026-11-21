@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(targets = "net.bettercombat.logic.PlayerAttackHelper", remap = false)
 public abstract class PlayerAttackHelperMixin {
     @Redirect(method = "*", at = @At(value = "INVOKE",
-            target = "Lnet/minecraft/world/entity/player/Player;getMainHandItem()Lnet/minecraft/world/item/ItemStack;"), require = 0)
+            target = "Lnet/minecraft/world/entity/player/Player;getMainHandItem()Lnet/minecraft/world/item/ItemStack;"), require = 1)
     private static ItemStack dirtrobes$gauntletWeapon(Player player) {
         return BetterCombatCompat.attackStack(player);
     }

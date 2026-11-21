@@ -74,6 +74,7 @@ public final class CommonEvents {
         bus.addListener(CommonEvents::onLogin);
         bus.addListener(CommonEvents::onLogout);
         bus.addListener(CommonEvents::onToss);
+        bus.addListener(CommonEvents::onServerStarted);
         bus.addListener(net.neoforged.bus.api.EventPriority.HIGH, CommonEvents::onGauntletDamage);
         bus.addListener(CommonEvents::onGauntletDamagePost);
     }
@@ -148,6 +149,20 @@ public final class CommonEvents {
         if (!gauntlet.isEmpty()) {
             com.dirtrobes.gauntlet.GauntletActions.storeBack(player, gauntlet, stack.copy());
             event.setCanceled(true);
+        }
+    }
+
+    /** Vérifie que l'intégration Better Combat est bien en place (journal du serveur). */
+    private static void onServerStarted(net.neoforged.neoforge.event.server.ServerStartedEvent event) {
+        if (!net.neoforged.fml.ModList.get().isLoaded("bettercombat")) return;
+        try {
+            int hooks = 0;
+            for (String cls : new String[]{"net.bettercombat.logic.PlayerAttackHelper", "net.bettercombat.logic.WeaponRegistry"}) {
+                for (var m : Class.forName(cls).getDeclaredMethods()) if (m.getName().contains("dirtrobes$")) hooks++;
+            }
+            com.dirtrobes.DirtRobes.LOGGER.info("Intégration Better Combat : {} crochets DirtRobes actifs", hooks);
+        } catch (Throwable t) {
+            com.dirtrobes.DirtRobes.LOGGER.error("Intégration Better Combat : vérification impossible", t);
         }
     }
 

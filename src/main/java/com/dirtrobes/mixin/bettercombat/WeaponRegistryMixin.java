@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(value = WeaponRegistry.class, remap = false)
 public abstract class WeaponRegistryMixin {
     @Inject(method = "getAttributes(Lnet/minecraft/world/item/ItemStack;)Lnet/bettercombat/api/WeaponAttributes;",
-            at = @At("HEAD"), cancellable = true, require = 0)
+            at = @At("HEAD"), cancellable = true, require = 1)
     private static void dirtrobes$emptyHand(ItemStack stack, CallbackInfoReturnable<WeaponAttributes> cir) {
         if (stack == null || !stack.isEmpty() || BetterCombatCompat.isNoWeapon(stack)) return;
         ItemStack weapon = BetterCombatCompat.localWeapon();
