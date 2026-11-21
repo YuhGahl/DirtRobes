@@ -6,10 +6,12 @@
   "rarity": "rare",
   "search_range": 3,
   "base_stats": {
-    "hp": 95,
-    "attack": 43,
-    "defense": 46,
-    "speed": 69
+    "hp": 61,
+    "attack": 46,
+    "defense": 52,
+    "special_attack": 53,
+    "special_defense": 58,
+    "speed": 49
   },
   "evolves_into": "dirtrobes:zuwaja",
   "evolution_level": 10

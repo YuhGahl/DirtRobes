@@ -10,16 +10,16 @@
     "h:rockhead"
   ],
   "baseStats": {
-    "hp": 101,
-    "attack": 61,
-    "defence": 59,
-    "special_attack": 61,
-    "special_defence": 59,
-    "speed": 71
+    "hp": 62,
+    "attack": 70,
+    "defence": 70,
+    "special_attack": 70,
+    "special_defence": 70,
+    "speed": 70
   },
   "evYield": {
-    "hp": 2,
-    "attack": 0,
+    "hp": 0,
+    "attack": 2,
     "defence": 0,
     "special_attack": 0,
     "special_defence": 0,

@@ -10,20 +10,20 @@
     "h:cursedbody"
   ],
   "baseStats": {
-    "hp": 74,
-    "attack": 51,
-    "defence": 53,
-    "special_attack": 59,
-    "special_defence": 58,
-    "speed": 69
+    "hp": 44,
+    "attack": 60,
+    "defence": 66,
+    "special_attack": 69,
+    "special_defence": 73,
+    "speed": 76
   },
   "evYield": {
-    "hp": 2,
+    "hp": 0,
     "attack": 0,
     "defence": 0,
     "special_attack": 0,
     "special_defence": 0,
-    "speed": 0
+    "speed": 2
   },
   "baseExperienceYield": 147,
   "experienceGroup": "medium_fast",

@@ -10,12 +10,12 @@
     "h:clearbody"
   ],
   "baseStats": {
-    "hp": 149,
-    "attack": 57,
-    "defence": 59,
-    "special_attack": 66,
-    "special_defence": 65,
-    "speed": 69
+    "hp": 112,
+    "attack": 82,
+    "defence": 81,
+    "special_attack": 94,
+    "special_defence": 89,
+    "speed": 95
   },
   "evYield": {
     "hp": 3,

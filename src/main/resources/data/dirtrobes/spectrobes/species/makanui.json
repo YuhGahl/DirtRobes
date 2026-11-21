@@ -6,10 +6,12 @@
   "rarity": "rare",
   "search_range": 3,
   "base_stats": {
-    "hp": 66,
-    "attack": 59,
-    "defense": 44,
-    "speed": 78
+    "hp": 35,
+    "attack": 73,
+    "defense": 48,
+    "special_attack": 62,
+    "special_defense": 43,
+    "speed": 58
   },
   "evolves_into": "dirtrobes:makanoto",
   "evolution_level": 10

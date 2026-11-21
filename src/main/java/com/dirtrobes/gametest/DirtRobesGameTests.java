@@ -73,7 +73,8 @@ public class DirtRobesGameTests {
                     s.getSpeciesId(), s.getSpectrobeLevel(), String.format("%.1f", s.distanceTo(player)), s.isTame(),
                     s.getOwner() == player, s.isOrderedToSit(), s.isNoAi());
             helper.assertTrue(s.isOwnedBy(player), "Le Spectrobe éclos devrait appartenir au joueur");
-            helper.assertTrue(s.getQuality() == 100, "Intégrité 95 % : stats à 100 % attendues, obtenu " + s.getQuality());
+            helper.assertTrue(java.util.Arrays.equals(s.getIvs(), StatCalc.perfectIvs()),
+                    "Intégrité 95 % : IV à 31 partout attendus, obtenu " + java.util.Arrays.toString(s.getIvs()));
         });
         for (int t = 20; t <= 240; t += 20) {
             final int dt = t;
@@ -113,24 +114,31 @@ public class DirtRobesGameTests {
         });
     }
 
-    /** Échelle intégrité du fossile → qualité des stats, et effet sur les stats réelles. */
+    /** Échelle intégrité du fossile → IV, et formule de Pokémon pour les stats réelles. */
     @GameTest(template = "platform")
     public static void integrityScalesStats(GameTestHelper helper) {
-        int[][] expected = {{100, 100}, {95, 100}, {94, 99}, {52, 75}, {11, 51}, {10, 50}, {1, 50}};
+        int[][] expected = {{100, 31}, {95, 31}, {94, 31}, {52, 15}, {11, 0}, {10, 0}, {1, 0}};
         for (int[] e : expected) {
-            int q = StatCalc.qualityForIntegrity(e[0]);
-            helper.assertTrue(q == e[1], "Intégrité " + e[0] + " % : qualité " + e[1] + " attendue, obtenue " + q);
+            int iv = StatCalc.ivForIntegrity(e[0]);
+            helper.assertTrue(iv == e[1], "Intégrité " + e[0] + " % : IV moyen " + e[1] + " attendu, obtenu " + iv);
         }
+        int[] rolled = StatCalc.rollIvs(52, helper.getLevel().random);
+        for (int v : rolled) helper.assertTrue(v >= 15 - StatCalc.IV_SPREAD && v <= 15 + StatCalc.IV_SPREAD, "IV tiré hors de l'écart : " + v);
+        // exemple : niv. 78, base PV 108, IV 24, EV 74 → 289 PV ; base ATQ 130, IV 12, EV 195 → 254 (nature neutre)
+        helper.assertTrue(StatCalc.hp(108, 24, 74, 78) == 289, "PV attendus 289, obtenu " + StatCalc.hp(108, 24, 74, 78));
+        helper.assertTrue(StatCalc.other(130, 12, 195, 78) == 254, "ATQ attendue 254, obtenue " + StatCalc.other(130, 12, 195, 78));
+
         ServerPlayer player = placePlayer(helper, 10.5, 10.5);
         Species adult = SpeciesManager.all().stream().filter(s -> s.stage() == Stage.ADULT).findFirst().orElseThrow();
-        SpectrobeEntity perfect = SpectrobeEntity.create(helper.getLevel(), adult, 50, 100, player, helper.absoluteVec(new Vec3(4.5, 1, 4.5)));
-        SpectrobeEntity damaged = SpectrobeEntity.create(helper.getLevel(), adult, 50, 50, player, helper.absoluteVec(new Vec3(15.5, 1, 15.5)));
+        SpectrobeEntity perfect = SpectrobeEntity.create(helper.getLevel(), adult, 50, StatCalc.perfectIvs(), player, helper.absoluteVec(new Vec3(4.5, 1, 4.5)));
+        SpectrobeEntity damaged = SpectrobeEntity.create(helper.getLevel(), adult, 50, new int[6], player, helper.absoluteVec(new Vec3(15.5, 1, 15.5)));
         perfect.setNature(Nature.BALANCED);
         damaged.setNature(Nature.BALANCED);
-        log("Stats à 100 % : PV {} ATQ {} DÉF {} · à 50 % : PV {} ATQ {} DÉF {}", perfect.hpStat(), perfect.attackStat(), perfect.defenseStat(),
+        log("IV 31 : PV {} ATQ {} DÉF {} · IV 0 : PV {} ATQ {} DÉF {}", perfect.hpStat(), perfect.attackStat(), perfect.defenseStat(),
                 damaged.hpStat(), damaged.attackStat(), damaged.defenseStat());
-        helper.assertTrue(Math.abs(damaged.attackStat() * 2 - perfect.attackStat()) <= 1, "L'ATQ à 50 % devrait être la moitié de l'ATQ à 100 %");
-        helper.assertTrue(damaged.getMaxHealth() < perfect.getMaxHealth(), "Les PV max devraient baisser avec la qualité");
+        // niveau 50 : 31 points d'IV valent 15 points de stat
+        helper.assertTrue(perfect.attackStat() - damaged.attackStat() == 15, "IV 31 vs 0 au niveau 50 : +15 en ATQ attendus");
+        helper.assertTrue(damaged.getMaxHealth() < perfect.getMaxHealth(), "Les PV max devraient baisser avec des IV faibles");
         helper.succeed();
     }
 
@@ -569,8 +577,8 @@ public class DirtRobesGameTests {
     @GameTest(template = "platform")
     public static void rarityAndPoweredIncubator(GameTestHelper helper) {
         var spikan = com.dirtrobes.species.SpeciesManager.get(DirtRobes.id("spikan"));
-        helper.assertTrue(spikan.baseHp() == 105 && spikan.baseAttack() == 55 && spikan.baseDefense() == 55 && spikan.baseSpeed() == 70,
-                "Spikan : 105/55/55/70, valeurs brutes de la liste, obtenu " + spikan.baseHp() + "/" + spikan.baseAttack() + "/" + spikan.baseDefense() + "/" + spikan.baseSpeed());
+        helper.assertTrue(spikan.baseHp() == 69 && spikan.baseAttack() == 63 && spikan.baseDefense() == 66 && spikan.baseSpeed() == 72,
+                "Spikan : 69/63/66/72, valeurs brutes de la liste, obtenu " + spikan.baseHp() + "/" + spikan.baseAttack() + "/" + spikan.baseDefense() + "/" + spikan.baseSpeed());
         // lignées complètes : Winba → Winbus → Windora, Vilamasta → Vilakroma (rare), espèces d'Au-delà des portails
         helper.assertTrue(DirtRobes.id("windora").equals(com.dirtrobes.species.SpeciesManager.get(DirtRobes.id("winbus")).evolvesInto()), "Winbus évolue en Windora");
         var vilamasta = com.dirtrobes.species.SpeciesManager.get(DirtRobes.id("vilamasta"));

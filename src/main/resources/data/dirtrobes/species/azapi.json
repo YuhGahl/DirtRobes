@@ -10,20 +10,20 @@
     "h:rockhead"
   ],
   "baseStats": {
-    "hp": 65,
-    "attack": 81,
-    "defence": 41,
-    "special_attack": 93,
-    "special_defence": 45,
-    "speed": 90
+    "hp": 25,
+    "attack": 83,
+    "defence": 31,
+    "special_attack": 95,
+    "special_defence": 34,
+    "speed": 51
   },
   "evYield": {
     "hp": 0,
-    "attack": 0,
+    "attack": 1,
     "defence": 0,
     "special_attack": 0,
     "special_defence": 0,
-    "speed": 1
+    "speed": 0
   },
   "baseExperienceYield": 62,
   "experienceGroup": "medium_slow",

@@ -6,10 +6,12 @@
   "rarity": "common",
   "search_range": 3,
   "base_stats": {
-    "hp": 65,
-    "attack": 48,
-    "defense": 81,
-    "speed": 54
+    "hp": 33,
+    "attack": 49,
+    "defense": 114,
+    "special_attack": 42,
+    "special_defense": 102,
+    "speed": 48
   },
   "evolves_into": "dirtrobes:darutake",
   "evolution_level": 30

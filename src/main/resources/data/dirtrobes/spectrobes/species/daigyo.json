@@ -6,9 +6,11 @@
   "rarity": "epic",
   "search_range": 3,
   "base_stats": {
-    "hp": 180,
-    "attack": 55,
-    "defense": 63,
-    "speed": 66
+    "hp": 148,
+    "attack": 78,
+    "defense": 89,
+    "special_attack": 78,
+    "special_defense": 89,
+    "speed": 89
   }
 }

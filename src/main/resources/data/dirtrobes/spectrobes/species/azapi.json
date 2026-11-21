@@ -6,10 +6,12 @@
   "rarity": "rare",
   "search_range": 3,
   "base_stats": {
-    "hp": 65,
-    "attack": 81,
-    "defense": 41,
-    "speed": 90
+    "hp": 25,
+    "attack": 83,
+    "defense": 31,
+    "special_attack": 95,
+    "special_defense": 34,
+    "speed": 51
   },
   "evolves_into": "dirtrobes:azamaru",
   "evolution_level": 10

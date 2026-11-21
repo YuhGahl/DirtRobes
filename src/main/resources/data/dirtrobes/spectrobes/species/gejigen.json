@@ -6,10 +6,12 @@
   "rarity": "common",
   "search_range": 3,
   "base_stats": {
-    "hp": 157,
-    "attack": 37,
-    "defense": 64,
-    "speed": 57
+    "hp": 127,
+    "attack": 34,
+    "defense": 82,
+    "special_attack": 34,
+    "special_defense": 82,
+    "speed": 53
   },
   "evolves_into": "dirtrobes:gejigage",
   "evolution_level": 30

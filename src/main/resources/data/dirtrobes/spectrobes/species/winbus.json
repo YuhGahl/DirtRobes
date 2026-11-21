@@ -6,10 +6,12 @@
   "rarity": "secret",
   "search_range": 3,
   "base_stats": {
-    "hp": 131,
-    "attack": 63,
-    "defense": 71,
-    "speed": 66
+    "hp": 87,
+    "attack": 70,
+    "defense": 88,
+    "special_attack": 70,
+    "special_defense": 88,
+    "speed": 61
   },
   "evolves_into": "dirtrobes:windora",
   "evolution_level": 30

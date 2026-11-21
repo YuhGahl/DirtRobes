@@ -6,10 +6,12 @@
   "rarity": "rare",
   "search_range": 3,
   "base_stats": {
-    "hp": 70,
-    "attack": 49,
-    "defense": 43,
-    "speed": 73
+    "hp": 40,
+    "attack": 57,
+    "defense": 49,
+    "special_attack": 57,
+    "special_defense": 49,
+    "speed": 55
   },
   "evolves_into": "dirtrobes:pahazoa",
   "evolution_level": 10

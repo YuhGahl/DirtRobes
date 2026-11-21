@@ -10,12 +10,12 @@
     "h:sandforce"
   ],
   "baseStats": {
-    "hp": 126,
-    "attack": 29,
-    "defence": 53,
-    "special_attack": 25,
-    "special_defence": 48,
-    "speed": 58
+    "hp": 97,
+    "attack": 26,
+    "defence": 66,
+    "special_attack": 22,
+    "special_defence": 60,
+    "speed": 38
   },
   "evYield": {
     "hp": 1,

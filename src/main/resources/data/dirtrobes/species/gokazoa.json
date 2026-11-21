@@ -10,20 +10,20 @@
     "h:synchronize"
   ],
   "baseStats": {
-    "hp": 134,
-    "attack": 56,
-    "defence": 54,
-    "special_attack": 64,
-    "special_defence": 59,
-    "speed": 71
+    "hp": 97,
+    "attack": 81,
+    "defence": 72,
+    "special_attack": 94,
+    "special_defence": 79,
+    "speed": 101
   },
   "evYield": {
-    "hp": 3,
+    "hp": 0,
     "attack": 0,
     "defence": 0,
     "special_attack": 0,
     "special_defence": 0,
-    "speed": 0
+    "speed": 3
   },
   "baseExperienceYield": 236,
   "experienceGroup": "medium_slow",

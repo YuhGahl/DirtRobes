@@ -10,12 +10,12 @@
     "h:swarm"
   ],
   "baseStats": {
-    "hp": 87,
-    "attack": 93,
-    "defence": 50,
-    "special_attack": 93,
-    "special_defence": 50,
-    "speed": 92
+    "hp": 40,
+    "attack": 105,
+    "defence": 44,
+    "special_attack": 105,
+    "special_defence": 44,
+    "speed": 84
   },
   "evYield": {
     "hp": 0,

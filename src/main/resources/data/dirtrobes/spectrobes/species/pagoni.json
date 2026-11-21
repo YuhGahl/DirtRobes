@@ -6,10 +6,12 @@
   "rarity": "epic",
   "search_range": 3,
   "base_stats": {
-    "hp": 132,
-    "attack": 51,
-    "defense": 78,
-    "speed": 57
+    "hp": 81,
+    "attack": 46,
+    "defense": 92,
+    "special_attack": 53,
+    "special_defense": 101,
+    "speed": 44
   },
   "evolves_into": "dirtrobes:pagoyama",
   "evolution_level": 30

@@ -6,10 +6,12 @@
   "rarity": "rare",
   "search_range": 3,
   "base_stats": {
-    "hp": 111,
-    "attack": 55,
-    "defense": 53,
-    "speed": 71
+    "hp": 76,
+    "attack": 64,
+    "defense": 63,
+    "special_attack": 64,
+    "special_defense": 63,
+    "speed": 76
   },
   "evolves_into": "dirtrobes:saboquill",
   "evolution_level": 30

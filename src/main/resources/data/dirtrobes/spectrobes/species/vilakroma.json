@@ -6,10 +6,12 @@
   "rarity": "secret",
   "search_range": 3,
   "base_stats": {
-    "hp": 131,
-    "attack": 66,
-    "defense": 112,
-    "speed": 47
+    "hp": 73,
+    "attack": 81,
+    "defense": 167,
+    "special_attack": 69,
+    "special_defense": 150,
+    "speed": 42
   },
   "from_fossil": false
 }

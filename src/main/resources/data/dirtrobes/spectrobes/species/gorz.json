@@ -6,10 +6,12 @@
   "rarity": "rare",
   "search_range": 3,
   "base_stats": {
-    "hp": 88,
-    "attack": 42,
-    "defense": 44,
-    "speed": 69
+    "hp": 63,
+    "attack": 51,
+    "defense": 56,
+    "special_attack": 41,
+    "special_defense": 51,
+    "speed": 56
   },
   "evolves_into": "dirtrobes:gorgan",
   "evolution_level": 10

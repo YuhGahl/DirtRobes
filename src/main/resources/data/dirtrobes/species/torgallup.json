@@ -10,12 +10,12 @@
     "h:scrappy"
   ],
   "baseStats": {
-    "hp": 154,
-    "attack": 61,
-    "defence": 62,
-    "special_attack": 52,
-    "special_defence": 56,
-    "speed": 70
+    "hp": 118,
+    "attack": 92,
+    "defence": 88,
+    "special_attack": 78,
+    "special_defence": 79,
+    "speed": 98
   },
   "evYield": {
     "hp": 3,

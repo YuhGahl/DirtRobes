@@ -6,10 +6,12 @@
   "rarity": "rare",
   "search_range": 3,
   "base_stats": {
-    "hp": 53,
-    "attack": 90,
-    "defense": 37,
-    "speed": 97
+    "hp": 17,
+    "attack": 91,
+    "defense": 25,
+    "special_attack": 105,
+    "special_defense": 27,
+    "speed": 54
   },
   "evolves_into": "dirtrobes:zaamaru",
   "evolution_level": 10

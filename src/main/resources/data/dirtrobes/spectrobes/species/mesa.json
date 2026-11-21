@@ -6,10 +6,12 @@
   "rarity": "common",
   "search_range": 4,
   "base_stats": {
-    "hp": 88,
-    "attack": 41,
-    "defense": 47,
-    "speed": 67
+    "hp": 61,
+    "attack": 46,
+    "defense": 59,
+    "special_attack": 39,
+    "special_defense": 53,
+    "speed": 51
   },
   "evolves_into": "dirtrobes:mesabone",
   "evolution_level": 10

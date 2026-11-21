@@ -6,10 +6,12 @@
   "rarity": "common",
   "search_range": 3,
   "base_stats": {
-    "hp": 70,
-    "attack": 35,
-    "defense": 107,
-    "speed": 34
+    "hp": 29,
+    "attack": 24,
+    "defense": 137,
+    "special_attack": 28,
+    "special_defense": 151,
+    "speed": 19
   },
   "evolves_into": "dirtrobes:harumitey",
   "evolution_level": 30

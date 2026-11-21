@@ -6,10 +6,12 @@
   "rarity": "common",
   "search_range": 3,
   "base_stats": {
-    "hp": 110,
-    "attack": 48,
-    "defense": 50,
-    "speed": 69
+    "hp": 81,
+    "attack": 56,
+    "defense": 63,
+    "special_attack": 64,
+    "special_defense": 69,
+    "speed": 79
   },
   "evolves_into": "dirtrobes:shakoblad",
   "evolution_level": 30

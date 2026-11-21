@@ -10,12 +10,12 @@
     "h:bigpecks"
   ],
   "baseStats": {
-    "hp": 65,
-    "attack": 48,
-    "defence": 81,
-    "special_attack": 41,
-    "special_defence": 73,
-    "speed": 54
+    "hp": 33,
+    "attack": 49,
+    "defence": 114,
+    "special_attack": 42,
+    "special_defence": 102,
+    "speed": 48
   },
   "evYield": {
     "hp": 0,

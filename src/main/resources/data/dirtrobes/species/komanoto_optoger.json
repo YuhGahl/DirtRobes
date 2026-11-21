@@ -10,12 +10,12 @@
     "h:static"
   ],
   "baseStats": {
-    "hp": 127,
-    "attack": 62,
-    "defence": 60,
-    "special_attack": 71,
-    "special_defence": 63,
-    "speed": 71
+    "hp": 85,
+    "attack": 70,
+    "defence": 70,
+    "special_attack": 81,
+    "special_defence": 74,
+    "speed": 70
   },
   "evYield": {
     "hp": 2,

@@ -10,12 +10,12 @@
     "h:guts"
   ],
   "baseStats": {
-    "hp": 143,
-    "attack": 77,
-    "defence": 61,
-    "special_attack": 65,
-    "special_defence": 55,
-    "speed": 78
+    "hp": 92,
+    "attack": 86,
+    "defence": 64,
+    "special_attack": 73,
+    "special_defence": 57,
+    "speed": 71
   },
   "evYield": {
     "hp": 2,

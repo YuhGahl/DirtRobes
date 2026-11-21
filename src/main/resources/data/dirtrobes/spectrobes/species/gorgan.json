@@ -6,10 +6,12 @@
   "rarity": "rare",
   "search_range": 3,
   "base_stats": {
-    "hp": 118,
-    "attack": 56,
-    "defense": 59,
-    "speed": 69
+    "hp": 85,
+    "attack": 66,
+    "defense": 76,
+    "special_attack": 53,
+    "special_defense": 68,
+    "speed": 74
   },
   "evolves_into": "dirtrobes:gorberus",
   "evolution_level": 30

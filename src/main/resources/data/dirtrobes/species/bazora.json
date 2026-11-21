@@ -10,20 +10,20 @@
     "h:intimidate"
   ],
   "baseStats": {
-    "hp": 100,
-    "attack": 48,
-    "defence": 50,
-    "special_attack": 55,
-    "special_defence": 52,
-    "speed": 69
+    "hp": 71,
+    "attack": 56,
+    "defence": 63,
+    "special_attack": 65,
+    "special_defence": 66,
+    "speed": 80
   },
   "evYield": {
-    "hp": 2,
+    "hp": 0,
     "attack": 0,
     "defence": 0,
     "special_attack": 0,
     "special_defence": 0,
-    "speed": 0
+    "speed": 2
   },
   "baseExperienceYield": 147,
   "experienceGroup": "medium_fast",

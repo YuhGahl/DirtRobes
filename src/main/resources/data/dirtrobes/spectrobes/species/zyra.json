@@ -6,10 +6,12 @@
   "rarity": "rare",
   "search_range": 3,
   "base_stats": {
-    "hp": 68,
-    "attack": 42,
-    "defense": 43,
-    "speed": 70
+    "hp": 40,
+    "attack": 47,
+    "defense": 51,
+    "special_attack": 54,
+    "special_defense": 56,
+    "speed": 53
   },
   "evolves_into": "dirtrobes:zyrgazelle",
   "evolution_level": 10

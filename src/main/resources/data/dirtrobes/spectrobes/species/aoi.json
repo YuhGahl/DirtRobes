@@ -6,10 +6,12 @@
   "rarity": "common",
   "search_range": 5,
   "base_stats": {
-    "hp": 77,
-    "attack": 39,
-    "defense": 38,
-    "speed": 71
+    "hp": 54,
+    "attack": 47,
+    "defense": 46,
+    "special_attack": 54,
+    "special_defense": 49,
+    "speed": 59
   },
   "evolves_into": "dirtrobes:aoba",
   "evolution_level": 10

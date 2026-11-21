@@ -11,8 +11,7 @@ Sans Cobblemon, ces fichiers ne sont lus par personne : le mod se comporte exact
 Règles :
   - type 1 = propriété (Corona=Feu, Aurora=Plante, Flash=Eau, Eclipse=Sol, Halo=Vol, Prisma=Normal),
     type 2 = choisi par lignée (FAMILIES ci-dessous).
-  - stats : PV/ATQ/DÉF/VIT = stats brutes de la liste ; Atq. Spé / Déf. Spé dérivées de ATQ / DÉF
-    selon le style de la propriété (SPECIAL_RATIO).
+  - stats : les 6 stats de base de la liste des Spectrobes (tools/stats/pokemon_like_stats.py).
   - talents : 2 talents selon le type 1, talent caché selon le type 2.
   - attaques : attaques Pokémon existantes du type 1 et du type 2, apprises par niveau, + CT de ces types.
   - évolutions : niveau DirtRobes (enfant 10, adulte 30). Évolution rare (Vilakroma) : minéral d'Évolution
@@ -158,8 +157,9 @@ def main():
         st = d["base_stats"]
         hp, atk, df, spe = st["hp"], st["attack"], st["defense"], st.get("speed", 50)
         ra, rd = SPECIAL_RATIO[prop]
-        base = {"hp": hp, "attack": atk, "defence": df, "special_attack": round(atk * ra),
-                "special_defence": round(df * rd), "speed": spe}
+        # Atq. Spé / Déf. Spé : celles de la liste des Spectrobes (6 stats), sinon déduites de ATQ / DÉF
+        base = {"hp": hp, "attack": atk, "defence": df, "special_attack": st.get("special_attack", round(atk * ra)),
+                "special_defence": st.get("special_defense", round(df * rd)), "speed": spe}
         best = max(("hp", "attack", "defence", "speed"), key=lambda k: base[k])
         ev = {k: 0 for k in base}
         ev[best] = EV_YIELD[stage]

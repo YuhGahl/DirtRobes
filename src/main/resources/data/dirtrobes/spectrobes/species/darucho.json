@@ -6,10 +6,12 @@
   "rarity": "common",
   "search_range": 3,
   "base_stats": {
-    "hp": 49,
-    "attack": 36,
-    "defense": 61,
-    "speed": 58
+    "hp": 24,
+    "attack": 37,
+    "defense": 85,
+    "special_attack": 31,
+    "special_defense": 75,
+    "speed": 39
   },
   "evolves_into": "dirtrobes:darutori",
   "evolution_level": 10

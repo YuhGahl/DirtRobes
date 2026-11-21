@@ -11,7 +11,7 @@ import net.minecraft.network.codec.StreamCodec;
 /** Ce que l'interface (bandeau d'équipe, écran du Prizmod, fiche) affiche pour un membre de l'équipe. */
 public record TeamSummary(
         String speciesId, String nameKey, int level, int property, int stage,
-        float health, float maxHealth, boolean knockedOut, int quality, boolean out, boolean found,
+        float health, float maxHealth, boolean knockedOut, int ivPacked, boolean out, boolean found,
         int hp, int atk, int def, int spd,
         int evHp, int evAtk, int evDef, int evSpd,
         int nature, int xp, int xpLevelStart, int xpNextLevel,
@@ -24,7 +24,7 @@ public record TeamSummary(
         int lvl = s.getSpectrobeLevel();
         return new TeamSummary(
                 s.getSpeciesId() == null ? "" : s.getSpeciesId().toString(), key, lvl, s.getProperty().ordinal(), s.getStage().ordinal(),
-                s.getHealth(), s.getMaxHealth(), s.isKnockedOut(), s.getQuality(), out, found,
+                s.getHealth(), s.getMaxHealth(), s.isKnockedOut(), packIvs(s), out, found,
                 s.hpStat(), s.attackStat(), s.defenseStat(), s.speedStat(),
                 s.getEv(MineralItem.Stat.HEALTH), s.getEv(MineralItem.Stat.POWER), s.getEv(MineralItem.Stat.DEFENCE), s.getEv(MineralItem.Stat.SPEED),
                 s.getNature().ordinal(), s.getXp(), StatCalc.xpForLevel(lvl), StatCalc.xpForLevel(Math.min(StatCalc.MAX_LEVEL, lvl + 1)),
@@ -33,8 +33,18 @@ public record TeamSummary(
     }
 
     public static TeamSummary missing() {
-        return new TeamSummary("", "entity.dirtrobes.spectrobe", 1, 0, 0, 0, 1, false, 100, true, false,
+        return new TeamSummary("", "entity.dirtrobes.spectrobe", 1, 0, 0, 0, 1, false, 0, true, false,
                 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, "", "", 0, 0, 0);
+    }
+
+    /** IV en jeu (PV, ATQ, DÉF, VIT) rangés sur 5 bits chacun. */
+    private static int packIvs(SpectrobeEntity s) {
+        return s.getIv(StatCalc.IV_HP) | s.getIv(StatCalc.IV_ATK) << 5 | s.getIv(StatCalc.IV_DEF) << 10 | s.getIv(StatCalc.IV_SPD) << 15;
+    }
+
+    /** IV n°i (0 PV, 1 ATQ, 2 DÉF, 3 VIT). */
+    public int iv(int i) {
+        return (ivPacked >> (5 * i)) & 31;
     }
 
     public int totalEv() {
@@ -51,7 +61,7 @@ public record TeamSummary(
                 buf.writeFloat(s.health);
                 buf.writeFloat(s.maxHealth);
                 buf.writeBoolean(s.knockedOut);
-                buf.writeVarInt(s.quality);
+                buf.writeVarInt(s.ivPacked);
                 buf.writeBoolean(s.out);
                 buf.writeBoolean(s.found);
                 buf.writeVarInt(s.hp);

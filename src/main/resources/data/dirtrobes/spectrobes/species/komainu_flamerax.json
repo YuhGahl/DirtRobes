@@ -6,10 +6,12 @@
   "rarity": "secret",
   "search_range": 3,
   "base_stats": {
-    "hp": 95,
-    "attack": 47,
-    "defense": 45,
-    "speed": 71
+    "hp": 67,
+    "attack": 56,
+    "defense": 55,
+    "special_attack": 48,
+    "special_defense": 49,
+    "speed": 55
   },
   "evolves_into": "dirtrobes:komanoto_flamerax",
   "evolution_level": 10

@@ -10,12 +10,12 @@
     "h:synchronize"
   ],
   "baseStats": {
-    "hp": 118,
-    "attack": 53,
-    "defence": 50,
-    "special_attack": 61,
-    "special_defence": 55,
-    "speed": 72
+    "hp": 83,
+    "attack": 60,
+    "defence": 58,
+    "special_attack": 69,
+    "special_defence": 63,
+    "speed": 77
   },
   "evYield": {
     "hp": 2,

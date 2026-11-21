@@ -10,12 +10,12 @@
     "h:icebody"
   ],
   "baseStats": {
-    "hp": 68,
-    "attack": 42,
-    "defence": 43,
-    "special_attack": 48,
-    "special_defence": 47,
-    "speed": 70
+    "hp": 40,
+    "attack": 47,
+    "defence": 51,
+    "special_attack": 54,
+    "special_defence": 56,
+    "speed": 53
   },
   "evYield": {
     "hp": 0,

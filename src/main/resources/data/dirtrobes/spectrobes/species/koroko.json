@@ -6,10 +6,12 @@
   "rarity": "rare",
   "search_range": 3,
   "base_stats": {
-    "hp": 58,
-    "attack": 53,
-    "defense": 43,
-    "speed": 75
+    "hp": 31,
+    "attack": 65,
+    "defense": 49,
+    "special_attack": 55,
+    "special_defense": 44,
+    "speed": 57
   },
   "evolves_into": "dirtrobes:korogeki",
   "evolution_level": 10

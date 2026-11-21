@@ -6,10 +6,12 @@
   "rarity": "secret",
   "search_range": 3,
   "base_stats": {
-    "hp": 133,
-    "attack": 64,
-    "defense": 70,
-    "speed": 67
+    "hp": 93,
+    "attack": 74,
+    "defense": 89,
+    "special_attack": 63,
+    "special_defense": 80,
+    "speed": 65
   },
   "evolves_into": "dirtrobes:thundora",
   "evolution_level": 30

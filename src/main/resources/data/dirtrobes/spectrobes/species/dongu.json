@@ -6,10 +6,12 @@
   "rarity": "epic",
   "search_range": 3,
   "base_stats": {
-    "hp": 99,
-    "attack": 48,
-    "defense": 43,
-    "speed": 73
+    "hp": 66,
+    "attack": 53,
+    "defense": 47,
+    "special_attack": 53,
+    "special_defense": 47,
+    "speed": 52
   },
   "evolves_into": "dirtrobes:rapagu",
   "evolution_level": 10

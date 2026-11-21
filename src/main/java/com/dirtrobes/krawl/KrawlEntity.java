@@ -143,9 +143,9 @@ public class KrawlEntity extends Monster implements BedrockPosable {
         KrawlSpecies k = getSpecies();
         if (k == null || level().isClientSide) return;
         int lvl = getKrawlLevel();
-        setBase(Attributes.MAX_HEALTH, StatCalc.toMaxHealth(StatCalc.hp(k.baseHp(), 0, lvl)));
-        setBase(Attributes.ATTACK_DAMAGE, StatCalc.toAttackDamage(StatCalc.other(k.baseAttack(), 0, lvl)));
-        setBase(Attributes.ARMOR, StatCalc.toArmor(StatCalc.other(k.baseDefense(), 0, lvl)));
+        setBase(Attributes.MAX_HEALTH, StatCalc.toMaxHealth(StatCalc.hp(k.baseHp(), 0, 0, lvl)));
+        setBase(Attributes.ATTACK_DAMAGE, StatCalc.toAttackDamage(StatCalc.other(k.baseAttack(), 0, 0, lvl)));
+        setBase(Attributes.ARMOR, StatCalc.toArmor(StatCalc.other(k.baseDefense(), 0, 0, lvl)));
         setBase(Attributes.MOVEMENT_SPEED, k.speed());
         setBase(Attributes.SCALE, k.scale());
     }

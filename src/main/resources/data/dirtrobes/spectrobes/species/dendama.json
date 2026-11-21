@@ -6,10 +6,12 @@
   "rarity": "rare",
   "search_range": 3,
   "base_stats": {
-    "hp": 111,
-    "attack": 79,
-    "defense": 53,
-    "speed": 83
+    "hp": 62,
+    "attack": 89,
+    "defense": 52,
+    "special_attack": 89,
+    "special_defense": 52,
+    "speed": 78
   },
   "evolves_into": "dirtrobes:denpachi",
   "evolution_level": 30

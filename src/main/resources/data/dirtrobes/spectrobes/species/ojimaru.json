@@ -6,10 +6,12 @@
   "rarity": "rare",
   "search_range": 3,
   "base_stats": {
-    "hp": 77,
-    "attack": 49,
-    "defense": 45,
-    "speed": 72
+    "hp": 49,
+    "attack": 59,
+    "defense": 54,
+    "special_attack": 51,
+    "special_defense": 49,
+    "speed": 56
   },
   "evolves_into": "dirtrobes:ojidono",
   "evolution_level": 10

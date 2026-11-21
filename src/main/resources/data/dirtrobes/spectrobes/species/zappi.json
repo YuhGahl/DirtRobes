@@ -6,10 +6,12 @@
   "rarity": "epic",
   "search_range": 3,
   "base_stats": {
-    "hp": 103,
-    "attack": 50,
-    "defense": 43,
-    "speed": 74
+    "hp": 67,
+    "attack": 54,
+    "defense": 45,
+    "special_attack": 63,
+    "special_defense": 47,
+    "speed": 51
   },
   "evolves_into": "dirtrobes:zappira",
   "evolution_level": 10

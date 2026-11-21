@@ -10,12 +10,12 @@
     "h:roughskin"
   ],
   "baseStats": {
-    "hp": 166,
-    "attack": 72,
-    "defence": 74,
-    "special_attack": 72,
-    "special_defence": 74,
-    "speed": 69
+    "hp": 111,
+    "attack": 100,
+    "defence": 97,
+    "special_attack": 100,
+    "special_defence": 97,
+    "speed": 82
   },
   "evYield": {
     "hp": 3,

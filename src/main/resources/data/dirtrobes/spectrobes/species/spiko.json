@@ -6,10 +6,12 @@
   "rarity": "rare",
   "search_range": 3,
   "base_stats": {
-    "hp": 79,
-    "attack": 41,
-    "defense": 41,
-    "speed": 70
+    "hp": 53,
+    "attack": 48,
+    "defense": 49,
+    "special_attack": 48,
+    "special_defense": 49,
+    "speed": 55
   },
   "evolves_into": "dirtrobes:spikan",
   "evolution_level": 10

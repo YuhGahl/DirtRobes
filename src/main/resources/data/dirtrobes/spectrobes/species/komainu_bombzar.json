@@ -6,10 +6,12 @@
   "rarity": "secret",
   "search_range": 3,
   "base_stats": {
-    "hp": 95,
-    "attack": 47,
-    "defense": 45,
-    "speed": 71
+    "hp": 65,
+    "attack": 54,
+    "defense": 52,
+    "special_attack": 54,
+    "special_defense": 52,
+    "speed": 53
   },
   "evolves_into": "dirtrobes:komanoto_bombzar",
   "evolution_level": 10

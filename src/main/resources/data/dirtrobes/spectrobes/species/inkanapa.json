@@ -6,10 +6,12 @@
   "rarity": "common",
   "search_range": 3,
   "base_stats": {
-    "hp": 58,
-    "attack": 46,
-    "defense": 94,
-    "speed": 46
+    "hp": 25,
+    "attack": 43,
+    "defense": 131,
+    "special_attack": 36,
+    "special_defense": 118,
+    "speed": 35
   },
   "evolves_into": "dirtrobes:inkaflare",
   "evolution_level": 30

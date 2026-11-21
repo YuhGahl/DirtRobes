@@ -10,12 +10,12 @@
     "h:cutecharm"
   ],
   "baseStats": {
-    "hp": 53,
-    "attack": 26,
-    "defence": 80,
-    "special_attack": 30,
-    "special_defence": 88,
-    "speed": 43
+    "hp": 22,
+    "attack": 18,
+    "defence": 100,
+    "special_attack": 21,
+    "special_defence": 110,
+    "speed": 20
   },
   "evYield": {
     "hp": 0,

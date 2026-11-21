@@ -6,10 +6,12 @@
   "rarity": "rare",
   "search_range": 3,
   "base_stats": {
-    "hp": 102,
-    "attack": 66,
-    "defense": 60,
-    "speed": 73
+    "hp": 64,
+    "attack": 78,
+    "defense": 72,
+    "special_attack": 67,
+    "special_defense": 65,
+    "speed": 75
   },
   "evolves_into": "dirtrobes:ojizama",
   "evolution_level": 30

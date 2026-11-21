@@ -10,20 +10,20 @@
     "h:poisonpoint"
   ],
   "baseStats": {
-    "hp": 104,
-    "attack": 51,
-    "defence": 54,
-    "special_attack": 43,
-    "special_defence": 49,
-    "speed": 69
+    "hp": 77,
+    "attack": 63,
+    "defence": 72,
+    "special_attack": 54,
+    "special_defence": 65,
+    "speed": 81
   },
   "evYield": {
-    "hp": 2,
+    "hp": 0,
     "attack": 0,
     "defence": 0,
     "special_attack": 0,
     "special_defence": 0,
-    "speed": 0
+    "speed": 2
   },
   "baseExperienceYield": 147,
   "experienceGroup": "medium_fast",

@@ -6,10 +6,12 @@
   "rarity": "rare",
   "search_range": 3,
   "base_stats": {
-    "hp": 49,
-    "attack": 56,
-    "defense": 49,
-    "speed": 74
+    "hp": 21,
+    "attack": 62,
+    "defense": 53,
+    "special_attack": 62,
+    "special_defense": 53,
+    "speed": 50
   },
   "evolves_into": "dirtrobes:boma_boma",
   "evolution_level": 10

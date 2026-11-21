@@ -6,10 +6,12 @@
   "rarity": "rare",
   "search_range": 3,
   "base_stats": {
-    "hp": 87,
-    "attack": 93,
-    "defense": 50,
-    "speed": 92
+    "hp": 40,
+    "attack": 105,
+    "defense": 44,
+    "special_attack": 105,
+    "special_defense": 44,
+    "speed": 84
   },
   "evolves_into": "dirtrobes:pinorska",
   "evolution_level": 30

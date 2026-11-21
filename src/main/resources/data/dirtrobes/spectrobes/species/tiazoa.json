@@ -6,10 +6,12 @@
   "rarity": "rare",
   "search_range": 3,
   "base_stats": {
-    "hp": 118,
-    "attack": 53,
-    "defense": 50,
-    "speed": 72
+    "hp": 83,
+    "attack": 60,
+    "defense": 58,
+    "special_attack": 69,
+    "special_defense": 63,
+    "speed": 77
   },
   "evolves_into": "dirtrobes:gokazoa",
   "evolution_level": 30

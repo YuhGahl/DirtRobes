@@ -10,12 +10,12 @@
     "h:poisonpoint"
   ],
   "baseStats": {
-    "hp": 110,
-    "attack": 54,
-    "defence": 55,
-    "special_attack": 54,
-    "special_defence": 55,
-    "speed": 70
+    "hp": 76,
+    "attack": 61,
+    "defence": 66,
+    "special_attack": 61,
+    "special_defence": 66,
+    "speed": 74
   },
   "evYield": {
     "hp": 2,

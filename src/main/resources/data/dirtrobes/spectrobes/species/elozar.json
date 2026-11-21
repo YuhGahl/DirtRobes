@@ -6,9 +6,11 @@
   "rarity": "rare",
   "search_range": 3,
   "base_stats": {
-    "hp": 109,
-    "attack": 81,
-    "defense": 59,
-    "speed": 81
+    "hp": 63,
+    "attack": 126,
+    "defense": 73,
+    "special_attack": 107,
+    "special_defense": 66,
+    "speed": 110
   }
 }

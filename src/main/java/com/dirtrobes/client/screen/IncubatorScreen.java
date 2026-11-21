@@ -83,7 +83,7 @@ public class IncubatorScreen extends AbstractContainerScreen<IncubatorMenu> {
         Component status;
         if (menu.isIncubating()) {
             status = Component.translatable("gui.dirtrobes.incubator.awakening", Math.round(menu.progress() * 100),
-                    com.dirtrobes.entity.StatCalc.qualityForIntegrity(menu.integrity()));
+                    com.dirtrobes.entity.StatCalc.ivForIntegrity(menu.integrity()));
         } else if (menu.fossil().isEmpty()) {
             status = Component.translatable("gui.dirtrobes.incubator.insert");
         } else {

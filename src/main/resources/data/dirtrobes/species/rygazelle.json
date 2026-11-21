@@ -10,20 +10,20 @@
     "h:roughskin"
   ],
   "baseStats": {
-    "hp": 100,
-    "attack": 46,
-    "defence": 51,
-    "special_attack": 53,
-    "special_defence": 56,
-    "speed": 68
+    "hp": 71,
+    "attack": 53,
+    "defence": 65,
+    "special_attack": 61,
+    "special_defence": 71,
+    "speed": 77
   },
   "evYield": {
-    "hp": 2,
+    "hp": 0,
     "attack": 0,
     "defence": 0,
     "special_attack": 0,
     "special_defence": 0,
-    "speed": 0
+    "speed": 2
   },
   "baseExperienceYield": 147,
   "experienceGroup": "medium_fast",

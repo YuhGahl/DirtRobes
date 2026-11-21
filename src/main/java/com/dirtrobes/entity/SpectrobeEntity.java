@@ -80,8 +80,8 @@ public class SpectrobeEntity extends TamableAnimal implements BedrockPosable {
     private int evSpd;
     private Nature nature = Nature.BALANCED;
     private int koTicks;
-    /** Qualité des stats en % (50 à 100), fixée à l'éclosion selon l'intégrité du fossile. */
-    private int quality = 100;
+    /** IV (0 à 31) : PV, ATQ, DÉF, Atq. Spé, Déf. Spé, VIT. Fixés à l'éveil selon l'intégrité du fossile. */
+    private int[] ivs = StatCalc.perfectIvs();
     private int specialCooldown;
     private int strikeTicks;
     @Nullable
@@ -407,27 +407,27 @@ public class SpectrobeEntity extends TamableAnimal implements BedrockPosable {
     }
 
     // =====================================================================
-    // Stats (façon Pokémon, sans IV)
+    // Stats (formules de Pokémon, avec IV)
     // =====================================================================
 
     public int hpStat() {
         Species s = getSpecies();
-        return s == null ? 20 : StatCalc.applyQuality(StatCalc.applyNature(StatCalc.hp(s.baseHp(), evHp, getSpectrobeLevel()), nature, MineralItem.Stat.HEALTH), quality);
+        return s == null ? 20 : StatCalc.applyNature(StatCalc.hp(s.baseHp(), ivs[StatCalc.IV_HP], evHp, getSpectrobeLevel()), nature, MineralItem.Stat.HEALTH);
     }
 
     public int attackStat() {
         Species s = getSpecies();
-        return s == null ? 10 : StatCalc.applyQuality(StatCalc.applyNature(StatCalc.other(s.baseAttack(), evAtk, getSpectrobeLevel()), nature, MineralItem.Stat.POWER), quality);
+        return s == null ? 10 : StatCalc.applyNature(StatCalc.other(s.baseAttack(), ivs[StatCalc.IV_ATK], evAtk, getSpectrobeLevel()), nature, MineralItem.Stat.POWER);
     }
 
     public int defenseStat() {
         Species s = getSpecies();
-        return s == null ? 10 : StatCalc.applyQuality(StatCalc.applyNature(StatCalc.other(s.baseDefense(), evDef, getSpectrobeLevel()), nature, MineralItem.Stat.DEFENCE), quality);
+        return s == null ? 10 : StatCalc.applyNature(StatCalc.other(s.baseDefense(), ivs[StatCalc.IV_DEF], evDef, getSpectrobeLevel()), nature, MineralItem.Stat.DEFENCE);
     }
 
     public int speedStat() {
         Species s = getSpecies();
-        return s == null ? 10 : StatCalc.applyQuality(StatCalc.applyNature(StatCalc.other(s.baseSpeed(), evSpd, getSpectrobeLevel()), nature, MineralItem.Stat.SPEED), quality);
+        return s == null ? 10 : StatCalc.applyNature(StatCalc.other(s.baseSpeed(), ivs[StatCalc.IV_SPD], evSpd, getSpectrobeLevel()), nature, MineralItem.Stat.SPEED);
     }
 
     public Nature getNature() {
@@ -469,12 +469,19 @@ public class SpectrobeEntity extends TamableAnimal implements BedrockPosable {
         return xp;
     }
 
-    public int getQuality() {
-        return quality;
+    /** Copie des 6 IV (PV, ATQ, DÉF, Atq. Spé, Déf. Spé, VIT). */
+    public int[] getIvs() {
+        return ivs.clone();
     }
 
-    public void setQuality(int quality) {
-        this.quality = Math.max(50, Math.min(100, quality));
+    public int getIv(int index) {
+        return ivs[index];
+    }
+
+    public void setIvs(int[] values) {
+        int[] v = new int[6];
+        for (int i = 0; i < 6; i++) v[i] = i < values.length ? Math.max(0, Math.min(StatCalc.MAX_IV, values[i])) : StatCalc.MAX_IV;
+        this.ivs = v;
         recomputeStats(true);
     }
 
@@ -926,9 +933,8 @@ public class SpectrobeEntity extends TamableAnimal implements BedrockPosable {
         player.sendSystemMessage(Component.translatable("message.dirtrobes.card.stats",
                 Mth.ceil(getHealth() * hpStat() / Math.max(1f, getMaxHealth())), hpStat(), attackStat(), defenseStat(), speedStat()));
         player.sendSystemMessage(natureLine().withStyle(ChatFormatting.GRAY));
-        if (quality < 100) {
-            player.sendSystemMessage(Component.translatable("message.dirtrobes.card.quality", quality).withStyle(ChatFormatting.GRAY));
-        }
+        player.sendSystemMessage(Component.translatable("message.dirtrobes.card.ivs", ivs[StatCalc.IV_HP], ivs[StatCalc.IV_ATK],
+                ivs[StatCalc.IV_DEF], ivs[StatCalc.IV_SPD]).withStyle(ChatFormatting.GRAY));
         player.sendSystemMessage(Component.translatable("message.dirtrobes.card.ev", evHp, evAtk, evDef, evSpd, totalEv(), StatCalc.MAX_EV_TOTAL)
                 .withStyle(ChatFormatting.GRAY));
         int next = StatCalc.xpForLevel(getSpectrobeLevel() + 1);
@@ -982,7 +988,7 @@ public class SpectrobeEntity extends TamableAnimal implements BedrockPosable {
         tag.putInt("EvSpd", evSpd);
         tag.putString("Nature", nature.id());
         tag.putInt("KoTicks", isKnockedOut() ? koTicks : 0);
-        tag.putInt("Quality", quality);
+        tag.putIntArray("Ivs", ivs);
         tag.putInt("Color", colorVariant());
     }
 
@@ -997,7 +1003,15 @@ public class SpectrobeEntity extends TamableAnimal implements BedrockPosable {
         evSpd = tag.getInt("EvSpd");
         nature = tag.contains("Nature") ? Nature.byId(tag.getString("Nature")) : Nature.random(random);
         koTicks = tag.getInt("KoTicks");
-        quality = tag.contains("Quality") ? Math.max(50, Math.min(100, tag.getInt("Quality"))) : 100;
+        if (tag.contains("Ivs")) {
+            int[] read = tag.getIntArray("Ivs");
+            ivs = new int[6];
+            for (int i = 0; i < 6; i++) ivs[i] = i < read.length ? Math.max(0, Math.min(StatCalc.MAX_IV, read[i])) : StatCalc.MAX_IV;
+        } else {
+            // Spectrobe d'avant les IV : sa qualité (50 à 100 %) devient des IV équivalents
+            int legacy = StatCalc.ivFromLegacyQuality(tag.contains("Quality") ? tag.getInt("Quality") : 100);
+            ivs = new int[]{legacy, legacy, legacy, legacy, legacy, legacy};
+        }
         this.entityData.set(DATA_COLOR, (byte) Math.max(0, Math.min(2, tag.getInt("Color"))));
         setFlag(FLAG_KO, koTicks > 0);
         Species s = SpeciesManager.get(ResourceLocation.tryParse(tag.getString("Species")));
@@ -1025,14 +1039,14 @@ public class SpectrobeEntity extends TamableAnimal implements BedrockPosable {
 
     /** Crée un Spectrobe d'une espèce donnée (incubateur, commande). */
     public static SpectrobeEntity create(ServerLevel level, Species species, int spectrobeLevel, @Nullable Player owner, Vec3 pos) {
-        return create(level, species, spectrobeLevel, 100, owner, pos);
+        return create(level, species, spectrobeLevel, StatCalc.perfectIvs(), owner, pos);
     }
 
-    /** @param quality qualité des stats en % (50 à 100), voir {@link StatCalc#qualityForIntegrity}. */
-    public static SpectrobeEntity create(ServerLevel level, Species species, int spectrobeLevel, int quality, @Nullable Player owner, Vec3 pos) {
+    /** @param ivs les 6 IV (voir {@link StatCalc#rollIvs}). */
+    public static SpectrobeEntity create(ServerLevel level, Species species, int spectrobeLevel, int[] ivs, @Nullable Player owner, Vec3 pos) {
         SpectrobeEntity entity = new SpectrobeEntity(ModRegistry.SPECTROBE.get(), level);
         entity.moveTo(pos.x, pos.y, pos.z, level.random.nextFloat() * 360f, 0f);
-        entity.quality = Math.max(50, Math.min(100, quality));
+        entity.ivs = ivs.clone();
         entity.nature = Nature.random(level.random);
         entity.setSpecies(species, true);
         entity.setSpectrobeLevel(spectrobeLevel);

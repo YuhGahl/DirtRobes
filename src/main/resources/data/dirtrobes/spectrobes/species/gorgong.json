@@ -6,10 +6,12 @@
   "rarity": "epic",
   "search_range": 3,
   "base_stats": {
-    "hp": 130,
-    "attack": 61,
-    "defense": 72,
-    "speed": 65
+    "hp": 81,
+    "attack": 62,
+    "defense": 83,
+    "special_attack": 62,
+    "special_defense": 84,
+    "speed": 56
   },
   "evolves_into": "dirtrobes:zeragong",
   "evolution_level": 30

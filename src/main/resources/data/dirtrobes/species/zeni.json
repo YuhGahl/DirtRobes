@@ -10,12 +10,12 @@
     "h:flamebody"
   ],
   "baseStats": {
-    "hp": 99,
-    "attack": 47,
-    "defence": 50,
-    "special_attack": 54,
-    "special_defence": 55,
-    "speed": 69
+    "hp": 60,
+    "attack": 48,
+    "defence": 54,
+    "special_attack": 55,
+    "special_defence": 60,
+    "speed": 44
   },
   "evYield": {
     "hp": 1,

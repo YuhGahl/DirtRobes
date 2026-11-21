@@ -6,10 +6,12 @@
   "rarity": "rare",
   "search_range": 3,
   "base_stats": {
-    "hp": 103,
-    "attack": 40,
-    "defense": 80,
-    "speed": 50
+    "hp": 51,
+    "attack": 30,
+    "defense": 87,
+    "special_attack": 34,
+    "special_defense": 95,
+    "speed": 22
   },
   "evolves_into": "dirtrobes:samurite",
   "evolution_level": 10

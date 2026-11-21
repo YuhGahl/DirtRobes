@@ -6,10 +6,12 @@
   "rarity": "common",
   "search_range": 4,
   "base_stats": {
-    "hp": 47,
-    "attack": 32,
-    "defense": 33,
-    "speed": 70
+    "hp": 31,
+    "attack": 42,
+    "defense": 46,
+    "special_attack": 49,
+    "special_defense": 51,
+    "speed": 72
   },
   "evolves_into": "dirtrobes:mossarito",
   "evolution_level": 10

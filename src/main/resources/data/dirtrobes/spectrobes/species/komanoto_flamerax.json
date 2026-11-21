@@ -6,10 +6,12 @@
   "rarity": "secret",
   "search_range": 3,
   "base_stats": {
-    "hp": 127,
-    "attack": 62,
-    "defense": 60,
-    "speed": 71
+    "hp": 93,
+    "attack": 75,
+    "defense": 75,
+    "special_attack": 64,
+    "special_defense": 68,
+    "speed": 75
   },
   "evolves_into": "dirtrobes:flamerax",
   "evolution_level": 30,

@@ -6,10 +6,12 @@
   "rarity": "common",
   "search_range": 3,
   "base_stats": {
-    "hp": 62,
-    "attack": 42,
-    "defense": 44,
-    "speed": 69
+    "hp": 42,
+    "attack": 56,
+    "defense": 63,
+    "special_attack": 64,
+    "special_defense": 69,
+    "speed": 94
   },
   "evolves_into": "dirtrobes:mossax",
   "evolution_level": 30

@@ -10,12 +10,12 @@
     "h:leafguard"
   ],
   "baseStats": {
-    "hp": 47,
-    "attack": 32,
-    "defence": 33,
-    "special_attack": 37,
-    "special_defence": 36,
-    "speed": 70
+    "hp": 31,
+    "attack": 42,
+    "defence": 46,
+    "special_attack": 49,
+    "special_defence": 51,
+    "speed": 72
   },
   "evYield": {
     "hp": 0,

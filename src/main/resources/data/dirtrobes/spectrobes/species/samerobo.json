@@ -6,10 +6,12 @@
   "rarity": "rare",
   "search_range": 3,
   "base_stats": {
-    "hp": 63,
-    "attack": 64,
-    "defense": 77,
-    "speed": 64
+    "hp": 27,
+    "attack": 66,
+    "defense": 93,
+    "special_attack": 66,
+    "special_defense": 92,
+    "speed": 54
   },
   "evolves_into": "dirtrobes:sametosu",
   "evolution_level": 30

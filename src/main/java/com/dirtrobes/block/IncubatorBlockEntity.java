@@ -36,7 +36,7 @@ import java.util.UUID;
  * Incubateur : un emplacement pour un fossile. Le joueur dégage le fossile de sa gangue dans le
  * mini-jeu de fouille ; si le fossile survit, l'éveil démarre et un Spectrobe enfant apparaît
  * au bout de {@link #DURATION} ticks. Plus le fossile est intact, meilleures sont ses stats
- * (voir {@link StatCalc#qualityForIntegrity}).
+ * (voir {@link StatCalc#ivForIntegrity}).
  */
 public class IncubatorBlockEntity extends BlockEntity implements MenuProvider {
     /** Durée de base de l'éveil : 2 minutes sans accélération. */
@@ -217,13 +217,13 @@ public class IncubatorBlockEntity extends BlockEntity implements MenuProvider {
         Species species = speciesId != null ? SpeciesManager.get(speciesId) : null;
         if (species == null && property != null) species = SpeciesManager.rollFossilSpecies(property, server.random);
         if (species != null) {
-            SpectrobeEntity.create(server, species, 1, StatCalc.qualityForIntegrity(integrity), player, Vec3.atBottomCenterOf(worldPosition.above()));
+            SpectrobeEntity.create(server, species, 1, StatCalc.rollIvs(integrity, server.random), player, Vec3.atBottomCenterOf(worldPosition.above()));
             server.sendParticles(ParticleTypes.TOTEM_OF_UNDYING, worldPosition.getX() + 0.5, worldPosition.getY() + 1.2, worldPosition.getZ() + 0.5,
                     40, 0.4, 0.5, 0.4, 0.25);
             server.playSound(null, worldPosition, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.BLOCKS, 1.0f, 1.0f);
             if (player != null) {
                 Component msg = Component.translatable("message.dirtrobes.hatched", Component.translatable(species.translationKey()),
-                            StatCalc.qualityForIntegrity(integrity)).withStyle(ChatFormatting.AQUA);
+                            StatCalc.ivForIntegrity(integrity)).withStyle(ChatFormatting.AQUA);
                 if (species.rarity() != com.dirtrobes.species.Rarity.COMMON) {
                     msg = Component.empty().append(msg).append(Component.literal(" ")).append(species.rarity().displayName().withStyle(ChatFormatting.BOLD));
                 }

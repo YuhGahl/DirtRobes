@@ -10,12 +10,12 @@
     "h:cursedbody"
   ],
   "baseStats": {
-    "hp": 56,
-    "attack": 38,
-    "defence": 40,
-    "special_attack": 44,
-    "special_defence": 44,
-    "speed": 69
+    "hp": 33,
+    "attack": 45,
+    "defence": 50,
+    "special_attack": 51,
+    "special_defence": 55,
+    "speed": 57
   },
   "evYield": {
     "hp": 0,

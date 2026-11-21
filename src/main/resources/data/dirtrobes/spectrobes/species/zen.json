@@ -6,10 +6,12 @@
   "rarity": "epic",
   "search_range": 3,
   "base_stats": {
-    "hp": 108,
-    "attack": 58,
-    "defense": 45,
-    "speed": 77
+    "hp": 69,
+    "attack": 65,
+    "defense": 46,
+    "special_attack": 56,
+    "special_defense": 42,
+    "speed": 52
   },
   "evolves_into": "dirtrobes:gazen",
   "evolution_level": 10

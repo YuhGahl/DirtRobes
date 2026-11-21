@@ -6,10 +6,12 @@
   "rarity": "rare",
   "search_range": 3,
   "base_stats": {
-    "hp": 106,
-    "attack": 54,
-    "defense": 62,
-    "speed": 66
+    "hp": 65,
+    "attack": 57,
+    "defense": 73,
+    "special_attack": 65,
+    "special_defense": 81,
+    "speed": 62
   },
   "evolves_into": "dirtrobes:mantrados",
   "evolution_level": 30

@@ -6,10 +6,12 @@
   "rarity": "common",
   "search_range": 3,
   "base_stats": {
-    "hp": 80,
-    "attack": 30,
-    "defense": 40,
-    "speed": 65
+    "hp": 60,
+    "attack": 33,
+    "defense": 53,
+    "special_attack": 38,
+    "special_defense": 58,
+    "speed": 55
   },
   "evolves_into": "dirtrobes:chomugon",
   "evolution_level": 10

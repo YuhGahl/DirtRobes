@@ -204,7 +204,7 @@ public class SpectrobeSummaryScreen extends Screen {
         row(g, x, y + 12, "gui.dirtrobes.summary.property", Component.translatable(p.translationKey()).withStyle(s -> s.withColor(p.color())));
         row(g, x, y + 24, "gui.dirtrobes.summary.stage", Component.translatable(Stage.byOrdinal(m.stage()).translationKey()));
         row(g, x, y + 36, "gui.dirtrobes.summary.nature", natureText(Nature.values()[m.nature()]));
-        row(g, x, y + 48, "gui.dirtrobes.summary.quality", Component.literal(m.quality() + " %"));
+        row(g, x, y + 48, "gui.dirtrobes.summary.ivs", Component.literal(m.iv(0) + " / " + m.iv(1) + " / " + m.iv(2) + " / " + m.iv(3)));
         // PV
         float hpFrac = m.maxHealth() <= 0 ? 0 : m.health() / m.maxHealth();
         g.drawString(font, Component.translatable("stat.dirtrobes.health"), x, y + 64, 0xFF8FA6B8, false);

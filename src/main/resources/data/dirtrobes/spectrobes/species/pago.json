@@ -6,10 +6,12 @@
   "rarity": "epic",
   "search_range": 3,
   "base_stats": {
-    "hp": 99,
-    "attack": 39,
-    "defense": 58,
-    "speed": 61
+    "hp": 59,
+    "attack": 35,
+    "defense": 66,
+    "special_attack": 41,
+    "special_defense": 74,
+    "speed": 36
   },
   "evolves_into": "dirtrobes:pagoni",
   "evolution_level": 10

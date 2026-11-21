@@ -2,6 +2,7 @@ package com.dirtrobes.compat.cobblemon;
 
 import com.cobblemon.mod.common.Cobblemon;
 import com.cobblemon.mod.common.api.pokemon.PokemonSpecies;
+import com.cobblemon.mod.common.api.pokemon.stats.Stats;
 import com.cobblemon.mod.common.api.storage.party.PlayerPartyStore;
 import com.cobblemon.mod.common.entity.pokemon.PokemonEntity;
 import com.cobblemon.mod.common.pokemon.Pokemon;
@@ -66,6 +67,7 @@ public final class CobblemonBridge {
             pokemon.setLevel(level);
             pokemon.initialize(); // IV, talent, nature, attaques apprises à ce niveau
         }
+        applyIvsEvs(pokemon, record);
         pokemon.heal();
         CompoundTag copy = record.copy();
         copy.remove(COBBLEMON_KEY);
@@ -101,6 +103,14 @@ public final class CobblemonBridge {
         record.putString("Species", id.toString());
         record.putInt("SpectrobeLevel", lvl);
         if (lvl != oldLevel) record.putInt("Xp", StatCalc.xpForLevel(lvl));
+        // IV et EV : Cobblemon fait foi au retour (bouchons, entraînement…)
+        int[] ivs = new int[6];
+        for (int i = 0; i < 6; i++) ivs[i] = clamp(pokemon.getIvs().getOrDefault(STATS[i]), 0, StatCalc.MAX_IV);
+        record.putIntArray("Ivs", ivs);
+        record.putInt("EvHp", clamp(pokemon.getEvs().getOrDefault(Stats.HP), 0, StatCalc.MAX_EV_PER_STAT));
+        record.putInt("EvAtk", clamp(pokemon.getEvs().getOrDefault(Stats.ATTACK), 0, StatCalc.MAX_EV_PER_STAT));
+        record.putInt("EvDef", clamp(pokemon.getEvs().getOrDefault(Stats.DEFENCE), 0, StatCalc.MAX_EV_PER_STAT));
+        record.putInt("EvSpd", clamp(pokemon.getEvs().getOrDefault(Stats.SPEED), 0, StatCalc.MAX_EV_PER_STAT));
         record.putFloat("Health", 10_000f); // ramené aux PV max au chargement
         record.putInt("KoTicks", 0);
         // données Cobblemon sans la sauvegarde DirtRobes elle-même (pas d'imbrication d'un voyage à l'autre)
@@ -110,6 +120,38 @@ public final class CobblemonBridge {
         if (!inside.isEmpty()) pokemon.getPersistentData().put(RECORD_KEY, inside);
         record.put(COBBLEMON_KEY, data);
         return record;
+    }
+
+    /** Ordre des IV de DirtRobes (StatCalc.IV_*) : PV, ATQ, DÉF, Atq. Spé, Déf. Spé, VIT. */
+    private static final Stats[] STATS = {Stats.HP, Stats.ATTACK, Stats.DEFENCE, Stats.SPECIAL_ATTACK, Stats.SPECIAL_DEFENCE, Stats.SPEED};
+
+    private static int clamp(int v, int min, int max) {
+        return Math.max(min, Math.min(max, v));
+    }
+
+    /** IV (les 6) et EV (PV, ATQ, DÉF, VIT) du Spectrobe → Pokémon. Les EV d'Atq./Déf. Spé restent ceux de Cobblemon. */
+    private static void applyIvsEvs(Pokemon pokemon, CompoundTag record) {
+        int[] ivs = record.contains("Ivs") ? record.getIntArray("Ivs") : StatCalc.perfectIvs();
+        if (!record.contains("Ivs") && record.contains("Quality")) {
+            int legacy = StatCalc.ivFromLegacyQuality(record.getInt("Quality"));
+            ivs = new int[]{legacy, legacy, legacy, legacy, legacy, legacy};
+        }
+        for (int i = 0; i < 6 && i < ivs.length; i++) pokemon.getIvs().set(STATS[i], clamp(ivs[i], 0, StatCalc.MAX_IV));
+        int hp = clamp(record.getInt("EvHp"), 0, StatCalc.MAX_EV_PER_STAT), atk = clamp(record.getInt("EvAtk"), 0, StatCalc.MAX_EV_PER_STAT);
+        int def = clamp(record.getInt("EvDef"), 0, StatCalc.MAX_EV_PER_STAT), spe = clamp(record.getInt("EvSpd"), 0, StatCalc.MAX_EV_PER_STAT);
+        int room = Math.max(0, StatCalc.MAX_EV_TOTAL - hp - atk - def - spe);
+        int spa = pokemon.getEvs().getOrDefault(Stats.SPECIAL_ATTACK), spd = pokemon.getEvs().getOrDefault(Stats.SPECIAL_DEFENCE);
+        if (spa + spd > room) {
+            spa = Math.min(spa, room);
+            spd = Math.min(spd, room - spa);
+        }
+        // on baisse d'abord les EV spéciaux pour ne jamais dépasser le total de 510
+        pokemon.getEvs().set(Stats.SPECIAL_ATTACK, spa);
+        pokemon.getEvs().set(Stats.SPECIAL_DEFENCE, spd);
+        pokemon.getEvs().set(Stats.HP, hp);
+        pokemon.getEvs().set(Stats.ATTACK, atk);
+        pokemon.getEvs().set(Stats.DEFENCE, def);
+        pokemon.getEvs().set(Stats.SPEED, spe);
     }
 
     /** Envoie une sauvegarde dans l'équipe Cobblemon du joueur (ou son PC Cobblemon si l'équipe est pleine). */
@@ -169,6 +211,7 @@ public final class CobblemonBridge {
             if (e != null) {
                 e.setSpecies(first, true);
                 e.setSpectrobeLevel(23);
+                e.setIvs(new int[]{3, 7, 11, 19, 23, 29});
                 CompoundTag record = new CompoundTag();
                 e.saveWithoutId(record);
                 e.discard();
@@ -176,7 +219,9 @@ public final class CobblemonBridge {
                 CompoundTag back = p == null ? null : toRecord(level, null, p);
                 boolean ok = p != null && p.getLevel() == 23 && back != null
                         && back.getString("Species").equals(first.id().toString()) && back.getInt("SpectrobeLevel") == 23
-                        && back.getUUID("UUID").equals(record.getUUID("UUID"));
+                        && back.getUUID("UUID").equals(record.getUUID("UUID"))
+                        && java.util.Arrays.equals(back.getIntArray("Ivs"), new int[]{3, 7, 11, 19, 23, 29})
+                        && p.getIvs().getOrDefault(Stats.SPEED) == 29;
                 // second voyage : les données Cobblemon (IV…) sont conservées
                 if (ok) {
                     Pokemon again = toPokemon(level.registryAccess(), back);

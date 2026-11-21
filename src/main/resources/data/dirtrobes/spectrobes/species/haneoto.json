@@ -6,10 +6,12 @@
   "rarity": "rare",
   "search_range": 3,
   "base_stats": {
-    "hp": 82,
-    "attack": 63,
-    "defense": 40,
-    "speed": 82
+    "hp": 42,
+    "attack": 69,
+    "defense": 36,
+    "special_attack": 79,
+    "special_defense": 40,
+    "speed": 53
   },
   "evolves_into": "dirtrobes:hanegaku",
   "evolution_level": 10

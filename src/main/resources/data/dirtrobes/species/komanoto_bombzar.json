@@ -10,12 +10,12 @@
     "h:intimidate"
   ],
   "baseStats": {
-    "hp": 127,
-    "attack": 62,
-    "defence": 60,
-    "special_attack": 62,
-    "special_defence": 60,
-    "speed": 71
+    "hp": 90,
+    "attack": 72,
+    "defence": 72,
+    "special_attack": 72,
+    "special_defence": 72,
+    "speed": 72
   },
   "evYield": {
     "hp": 2,
