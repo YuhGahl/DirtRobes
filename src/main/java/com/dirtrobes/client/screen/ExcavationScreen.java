@@ -30,6 +30,9 @@ public class ExcavationScreen extends Screen {
     private static final int GRID_H = ExcavationGame.HEIGHT * CELL;
     private static final int[] ROCK = {0xFF3A2F27, 0xFF8E7A62, 0xFF6E5C49, 0xFF4F4135};
     private static final int BONE = 0xFFEDE3C8;
+    private static final int STONE = 0xFF8C8F96;
+    private static final int STONE_DARK = 0xFF5D6068;
+    private static final int SWEET = 0xFFF3D36B;
     private static final int BONE_SHADE = 0xFFC9BB98;
 
     private final BlockPos incubatorPos;
@@ -121,6 +124,15 @@ public class ExcavationScreen extends Screen {
             spawnDebris(cx, cy, hit.layersRemoved(), ROCK[Math.max(1, before)]);
             play(tool == ExcavationGame.Tool.DRILL ? SoundEvents.STONE_BREAK : SoundEvents.STONE_HIT, 0.9f + random.nextFloat() * 0.3f);
             if (tool == ExcavationGame.Tool.DRILL) shake = 3;
+        }
+        if (hit.stoneHits() > 0) {
+            spawnDebris(cx, cy, hit.sweetSpot() ? 4 : 2, STONE);
+            play(hit.sweetSpot() ? SoundEvents.AMETHYST_BLOCK_HIT : SoundEvents.DEEPSLATE_HIT, hit.sweetSpot() ? 1.3f : 0.8f + random.nextFloat() * 0.2f);
+        }
+        if (hit.stonesBroken() > 0) {
+            spawnDebris(cx, cy, 6 + hit.stonesBroken() * 3, STONE);
+            play(SoundEvents.DEEPSLATE_BREAK, 0.7f);
+            shake = 5;
         }
         if (hit.damage() > 0) {
             flash = 6;
@@ -263,8 +275,10 @@ public class ExcavationScreen extends Screen {
 
         // Aide / outil courant
         Component hint = Component.translatable(tool == ExcavationGame.Tool.DRILL ? "gui.dirtrobes.excavation.drill_hint" : "gui.dirtrobes.excavation.chisel_hint");
-        g.drawCenteredString(font, Component.translatable("gui.dirtrobes.excavation.exposed", Math.round(game.exposed() * 100)),
-                width / 2, top + GRID_H + 5, 0xFFFFFFFF);
+        long stonesLeft = game.stones().stream().filter(st -> !st.broken()).count();
+        Component exposed = Component.translatable("gui.dirtrobes.excavation.exposed", Math.round(game.exposed() * 100));
+        if (stonesLeft > 0) exposed = exposed.copy().append(Component.translatable("gui.dirtrobes.excavation.stones", stonesLeft));
+        g.drawCenteredString(font, exposed, width / 2, top + GRID_H + 5, 0xFFFFFFFF);
         g.drawCenteredString(font, hint, width / 2, top + GRID_H + 42, 0xFFBFB6A8);
 
         // Résultat
@@ -304,6 +318,11 @@ public class ExcavationScreen extends Screen {
     }
 
     private void drawCell(GuiGraphics g, int px, int py, int x, int y, int accent) {
+        int stoneId = game.stoneAt(x, y);
+        if (stoneId >= 0) {
+            drawStone(g, px, py, x, y, stoneId);
+            return;
+        }
         int depth = game.depth(x, y);
         boolean fossil = game.isFossil(x, y);
         long h = hash(x, y);
@@ -340,6 +359,36 @@ public class ExcavationScreen extends Screen {
             g.fill(px + 3, py + 5, px + 9, py + 6, 0xFFB8A888);
             g.fill(px + 5, py + 3, px + 6, py + 9, 0xFFB8A888);
         }
+    }
+
+    /** Pierre d'Origins : gris bleuté, contour aux bords de la pierre, fissures selon les PV perdus, point sensible doré. */
+    private void drawStone(GuiGraphics g, int px, int py, int x, int y, int id) {
+        ExcavationGame.Stone stone = game.stone(id);
+        long h = hash(x, y);
+        int base = lighten(STONE, (int) (h & 7) - 4);
+        g.fill(px, py, px + CELL, py + CELL, base);
+        if (!sameStone(x, y - 1, id)) g.fill(px, py, px + CELL, py + 1, lighten(base, 30));
+        if (!sameStone(x - 1, y, id)) g.fill(px, py, px + 1, py + CELL, lighten(base, 22));
+        if (!sameStone(x, y + 1, id)) g.fill(px, py + CELL - 2, px + CELL, py + CELL, STONE_DARK);
+        if (!sameStone(x + 1, y, id)) g.fill(px + CELL - 2, py, px + CELL, py + CELL, STONE_DARK);
+        float damage = 1f - stone.hp() / (float) stone.maxHp;
+        int cracks = Math.round(damage * 4);
+        for (int i = 0; i < cracks; i++) {
+            long k = h >> (i * 7);
+            int cx = px + 2 + (int) (k & 7), cy = py + 2 + (int) (k >> 3 & 7);
+            g.fill(cx, cy, cx + 3, cy + 1, 0xFF34363C);
+            g.fill(cx + 2, cy, cx + 3, cy + 3, 0xFF34363C);
+        }
+        if (game.isSweetSpot(x, y)) {
+            int pulse = (int) ((System.currentTimeMillis() / 120) % 6);
+            int c = pulse < 3 ? SWEET : lighten(SWEET, -40);
+            g.fill(px + 4, py + 5, px + CELL - 4, py + 6, c);
+            g.fill(px + 5, py + 4, px + 6, py + CELL - 4, c);
+        }
+    }
+
+    private boolean sameStone(int x, int y, int id) {
+        return ExcavationGame.inside(x, y) && game.stoneAt(x, y) == id;
     }
 
     private boolean isFossilAt(int x, int y) {

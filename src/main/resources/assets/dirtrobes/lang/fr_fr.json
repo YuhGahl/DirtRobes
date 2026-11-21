@@ -626,5 +626,6 @@
   "krawl.dirtrobes.dekaton": "Dekaton",
   "krawl.dirtrobes.grapatar": "Grapatar",
   "krawl.dirtrobes.windorix": "Windorix",
-  "krawl.dirtrobes.thundorix": "Thundorix"
+  "krawl.dirtrobes.thundorix": "Thundorix",
+  "gui.dirtrobes.excavation.stones": " · Pierres : %s (vise les points dorés)"
 }

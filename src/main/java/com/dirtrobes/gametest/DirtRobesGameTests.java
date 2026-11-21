@@ -648,6 +648,38 @@ public class DirtRobesGameTests {
         rough.use(ExcavationGame.Tool.DRILL, fx, fy);
         helper.assertTrue(rough.integrity() < before, "La foreuse aurait dû abîmer le fossile");
 
+        // Pierres d'Origins : PV de 10 à 20, plus nombreuses sur un fossile rare, point sensible plus efficace.
+        ExcavationGame rocky = new ExcavationGame(Property.FLASH, com.dirtrobes.species.Rarity.SECRET, RandomSource.create(11));
+        helper.assertTrue(rocky.stones().size() == ExcavationGame.MAX_STONES, "Un fossile secret porte 10 pierres");
+        helper.assertTrue(new ExcavationGame(Property.FLASH, RandomSource.create(11)).stones().size() < rocky.stones().size(), "Moins de pierres sur un fossile commun");
+        for (var st : rocky.stones()) {
+            helper.assertTrue(st.maxHp >= 10 && st.maxHp <= ExcavationGame.MAX_STONE_HP, "PV de pierre hors limites : " + st.maxHp);
+        }
+        int sx = -1, sy = -1, nx = -1, ny = -1;
+        for (int x = 0; x < ExcavationGame.WIDTH; x++) {
+            for (int y = 0; y < ExcavationGame.HEIGHT; y++) {
+                if (rocky.isSweetSpot(x, y) && sx < 0) { sx = x; sy = y; }
+            }
+        }
+        helper.assertTrue(sx >= 0, "Au moins un point sensible");
+        var target = rocky.stone(rocky.stoneAt(sx, sy));
+        for (int x = 0; x < ExcavationGame.WIDTH && nx < 0; x++) {
+            for (int y = 0; y < ExcavationGame.HEIGHT; y++) {
+                if (rocky.stoneAt(x, y) == target.id && !rocky.isSweetSpot(x, y)) { nx = x; ny = y; break; }
+            }
+        }
+        if (nx >= 0) {
+            int hp0 = target.hp();
+            rocky.use(ExcavationGame.Tool.CHISEL, nx, ny);
+            int normal = hp0 - target.hp();
+            int hp1 = target.hp();
+            var sweetHit = rocky.use(ExcavationGame.Tool.CHISEL, sx, sy);
+            helper.assertTrue(sweetHit.sweetSpot() && (hp1 - target.hp() > normal || target.broken()), "Le point sensible frappe plus fort");
+        }
+        int guard = 0;
+        while (!target.broken() && guard++ < 50) rocky.use(ExcavationGame.Tool.CHISEL, sx, sy);
+        helper.assertTrue(target.broken() && rocky.stoneAt(sx, sy) < 0, "La pierre finit par se briser et libère ses cases");
+
         // Le temps écoulé termine la partie.
         ExcavationGame slow = new ExcavationGame(Property.AURORA, RandomSource.create(3));
         for (int i = 0; i < slow.timeLimit(); i++) slow.tick();
