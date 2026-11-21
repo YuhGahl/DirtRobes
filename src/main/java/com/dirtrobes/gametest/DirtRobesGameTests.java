@@ -554,6 +554,42 @@ public class DirtRobesGameTests {
         helper.succeed();
     }
 
+    /** Rareté : répartition des stats (total gardé, 200 max), paliers des lignées, tirage des fossiles, incubateur à l'électricité. */
+    @GameTest(template = "platform")
+    public static void rarityAndPoweredIncubator(GameTestHelper helper) {
+        int[] r = com.dirtrobes.species.Rarity.RARE.redistribute(new int[]{100, 80, 60, 40});
+        helper.assertTrue(r[0] == 107 && r[1] == 83 && r[2] == 54 && r[3] == 36, "Rare : 100/80/60/40 → 107/83/54/36, obtenu " + java.util.Arrays.toString(r));
+        int[] capped = com.dirtrobes.species.Rarity.SECRET.redistribute(new int[]{190, 150, 100, 100});
+        helper.assertTrue(capped[0] == 200 && capped[0] + capped[1] + capped[2] + capped[3] == 540, "Plafond 200, total gardé : " + java.util.Arrays.toString(capped));
+        helper.assertTrue(com.dirtrobes.species.SpeciesManager.get(DirtRobes.id("nagu")).rarity() == com.dirtrobes.species.Rarity.EPIC, "Nagu est épique");
+        helper.assertTrue(com.dirtrobes.species.SpeciesManager.get(DirtRobes.id("windora")).rarity() == com.dirtrobes.species.Rarity.SECRET, "Windora est secret");
+        helper.assertTrue(com.dirtrobes.species.SpeciesManager.get(DirtRobes.id("windora")).fromFossil(), "Les secrets sortent (rarement) des fossiles");
+        // fossile : espèce tirée à l'extraction, de la bonne propriété
+        ItemStack fossil = new ItemStack(ModRegistry.FOSSILS.get(Property.AURORA).get());
+        com.dirtrobes.item.FossilItem.assignSpecies(fossil, RandomSource.create(5));
+        var sp = com.dirtrobes.species.SpeciesManager.get(fossil.get(ModRegistry.FOSSIL_SPECIES.get()));
+        helper.assertTrue(sp != null && sp.property() == Property.AURORA && com.dirtrobes.item.FossilItem.rarity(fossil) == sp.rarity(),
+                "Le fossile Aurora contient une espèce Aurora de la même rareté");
+        // fouille plus longue pour un fossile rare
+        helper.assertTrue(new ExcavationGame(Property.AURORA, com.dirtrobes.species.Rarity.EPIC, RandomSource.create(1)).timeLimit()
+                > new ExcavationGame(Property.AURORA, RandomSource.create(1)).timeLimit(), "Fouille épique plus longue");
+        // incubateur : 1 vitesse de base, +2 avec l'électricité
+        BlockPos pos = new BlockPos(4, 1, 4);
+        helper.setBlock(pos, ModRegistry.INCUBATOR.get());
+        com.dirtrobes.block.IncubatorBlockEntity be = helper.getBlockEntity(pos);
+        ServerPlayer player = placePlayer(helper, 6.5, 6.5);
+        be.start(Property.AURORA, player, 100);
+        var cap = helper.getLevel().getCapability(net.neoforged.neoforge.capabilities.Capabilities.EnergyStorage.BLOCK, helper.absolutePos(pos), null);
+        helper.assertTrue(cap != null, "L'incubateur accepte l'énergie FE");
+        com.dirtrobes.block.IncubatorBlockEntity.serverTick(helper.getLevel(), helper.absolutePos(pos), be.getBlockState(), be);
+        helper.assertTrue(be.progress() == 1, "Sans énergie : 1 par tick, obtenu " + be.progress());
+        cap.receiveEnergy(1000, false);
+        com.dirtrobes.block.IncubatorBlockEntity.serverTick(helper.getLevel(), helper.absolutePos(pos), be.getBlockState(), be);
+        helper.assertTrue(be.progress() == 4 && cap.getEnergyStored() == 1000 - com.dirtrobes.block.IncubatorBlockEntity.FE_PER_TICK,
+                "Avec énergie : +3 au tick (progression " + be.progress() + ", énergie " + cap.getEnergyStored() + ")");
+        helper.succeed();
+    }
+
     /** Logique du mini-jeu de fouille. */
     @GameTest(template = "platform")
     public static void excavationLogic(GameTestHelper helper) {
@@ -586,7 +622,7 @@ public class DirtRobesGameTests {
 
         // Le temps écoulé termine la partie.
         ExcavationGame slow = new ExcavationGame(Property.AURORA, RandomSource.create(3));
-        for (int i = 0; i < ExcavationGame.TIME_LIMIT; i++) slow.tick();
+        for (int i = 0; i < slow.timeLimit(); i++) slow.tick();
         helper.assertTrue(slow.isOver(), "La partie aurait dû se terminer à la fin du temps");
         helper.succeed();
     }

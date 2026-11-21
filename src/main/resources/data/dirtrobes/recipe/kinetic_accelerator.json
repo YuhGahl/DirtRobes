@@ -1,0 +1,30 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "create"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " S ",
+    "MCM",
+    " S "
+  ],
+  "key": {
+    "S": {
+      "item": "create:shaft"
+    },
+    "M": {
+      "tag": "dirtrobes:minerals"
+    },
+    "C": {
+      "item": "create:andesite_casing"
+    }
+  },
+  "result": {
+    "id": "dirtrobes:kinetic_accelerator",
+    "count": 1
+  }
+}

@@ -3,6 +3,7 @@
   "property": "flash",
   "stage": "adult",
   "family": "zuwa",
+  "rarity": "rare",
   "search_range": 3,
   "base_stats": {
     "hp": 80,

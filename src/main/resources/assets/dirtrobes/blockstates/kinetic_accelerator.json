@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=y": {
+      "model": "dirtrobes:block/kinetic_accelerator"
+    },
+    "axis=x": {
+      "model": "dirtrobes:block/kinetic_accelerator",
+      "x": 90,
+      "y": 90
+    },
+    "axis=z": {
+      "model": "dirtrobes:block/kinetic_accelerator",
+      "x": 90
+    }
+  }
+}

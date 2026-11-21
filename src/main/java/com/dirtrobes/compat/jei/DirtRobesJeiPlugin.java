@@ -71,6 +71,10 @@ public class DirtRobesJeiPlugin implements IModPlugin {
             registration.addIngredientInfo(item.get(), Component.translatable("jei.dirtrobes.info.combat_item", CombatItem.SHARED_COOLDOWN / 20));
         }
         for (var fossil : ModRegistry.FOSSILS.values()) info(registration, "fossil", fossil.get());
+        registration.addIngredientInfo(ModRegistry.INCUBATOR_ITEM.get(), Component.translatable("jei.dirtrobes.info.incubator",
+                com.dirtrobes.block.IncubatorBlockEntity.FE_PER_TICK, 32));
+        net.minecraft.core.registries.BuiltInRegistries.ITEM.getOptional(DirtRobes.id("kinetic_accelerator")).ifPresent(item ->
+                registration.addIngredientInfo(item, Component.translatable("jei.dirtrobes.info.kinetic_accelerator", 32, 4)));
     }
 
     private static void info(IRecipeRegistration registration, String key, ItemLike... items) {

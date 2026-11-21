@@ -10,7 +10,6 @@
   "stat.dirtrobes.power": "ATQ",
   "stat.dirtrobes.defence": "DÉF",
   "stat.dirtrobes.health": "PV",
-  "tooltip.dirtrobes.fossil": "Place-le dans un incubateur et dégage-le de sa roche pour l'éveiller.",
   "tooltip.dirtrobes.mineral": "À donner à ton Spectrobe : +%s XP, +%s EV %s",
   "message.dirtrobes.not_yours": "Ce Spectrobe ne t'appartient pas.",
   "message.dirtrobes.recall": "%s Spectrobe(s) rappelé(s).",
@@ -440,5 +439,13 @@
   "jei.dirtrobes.info.module": "Table de forge : module + gantelet + un minéral. Le Module de lame accepte aussi une épée à la place du minéral : l'épée devient l'arme du gantelet et garde ses enchantements.",
   "jei.dirtrobes.info.prizmod": "Clic droit : ton équipe (6 Spectrobes, 2 dehors). Accroupi + clic droit sur ton Spectrobe : assis / suivre. Accroupi + clic droit dans le vide : rappeler tes Spectrobes. Se place dans le gantelet.",
   "jei.dirtrobes.info.combat_item": "Clic droit pour l'utiliser sur un de tes Spectrobes. Un objet par combat : %s s de recharge partagée.",
-  "jei.dirtrobes.info.fossil": "S'obtient uniquement en extrayant une pierre à fossile avec le gantelet (module d'extraction, touche Z). Place-le dans un incubateur et dégage-le de sa roche pour l'éveiller."
+  "jei.dirtrobes.info.fossil": "S'obtient uniquement en extrayant une pierre à fossile avec le gantelet (module d'extraction, touche Z). Place-le dans un incubateur et dégage-le de sa roche pour l'éveiller.",
+  "rarity.dirtrobes.common": "Commun",
+  "rarity.dirtrobes.rare": "Rare",
+  "rarity.dirtrobes.epic": "Épique",
+  "rarity.dirtrobes.secret": "Secret",
+  "jade.dirtrobes.incubator.speed": "Vitesse ×%s",
+  "block.dirtrobes.kinetic_accelerator": "Accélérateur cinétique",
+  "jei.dirtrobes.info.incubator": "Éveil d'un fossile : 2 minutes. L'électricité (FE, par ex. Create: New Age) l'accélère : +2 vitesse pour %s FE/tick. Avec Create, un accélérateur cinétique collé à l'incubateur ajoute +1 vitesse par %s tr/min. Les bonus se cumulent.",
+  "jei.dirtrobes.info.kinetic_accelerator": "À coller à un incubateur et à brancher sur un axe Create : +1 vitesse d'éveil par %s tr/min (consomme %s de contrainte par tr/min). Sans effet en surcharge."
 }

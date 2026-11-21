@@ -32,7 +32,7 @@ public class IncubatorScreen extends AbstractContainerScreen<IncubatorMenu> {
     private void startExcavation() {
         ItemStack stack = menu.fossil();
         if (minecraft == null || !(stack.getItem() instanceof FossilItem fossil) || menu.isIncubating()) return;
-        minecraft.setScreen(new ExcavationScreen(menu.pos(), fossil.property(), stack.getHoverName()));
+        minecraft.setScreen(new ExcavationScreen(menu.pos(), fossil.property(), FossilItem.rarity(stack), stack.getHoverName()));
     }
 
     private void updateButton() {

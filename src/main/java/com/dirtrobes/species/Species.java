@@ -25,18 +25,27 @@ public record Species(
         int baseSpeed,
         float scale,
         boolean fromFossil,
-        boolean flying
+        boolean flying,
+        Rarity rarity
 ) {
     /** Copie avec un autre mode de déplacement (tests, commandes). */
     public Species withFlying(boolean value) {
         return new Species(id, name, property, stage, family, evolvesInto, evolutionLevel, searchRange,
-                baseHp, baseAttack, baseDefense, baseSpeed, scale, fromFossil, value);
+                baseHp, baseAttack, baseDefense, baseSpeed, scale, fromFossil, value, rarity);
     }
 
     public static Species fromJson(ResourceLocation id, JsonObject json) {
         JsonObject stats = GsonHelper.getAsJsonObject(json, "base_stats", new JsonObject());
         Stage stage = Stage.byId(GsonHelper.getAsString(json, "stage", "child"));
         String evo = GsonHelper.getAsString(json, "evolves_into", "");
+        int hp = GsonHelper.getAsInt(stats, "hp", 50);
+        int atk = GsonHelper.getAsInt(stats, "attack", 50);
+        int def = GsonHelper.getAsInt(stats, "defense", 50);
+        int spd = GsonHelper.getAsInt(stats, "speed", defaultSpeed(atk, def));
+        boolean secret = stage == Stage.SECRET || stage == Stage.SPECIAL;
+        Rarity rarity = Rarity.byId(GsonHelper.getAsString(json, "rarity", secret ? "secret" : "common"));
+        // stats du wiki (fiche) → répartition selon la rareté
+        int[] s = rarity.redistribute(new int[]{hp, atk, def, spd});
         return new Species(
                 id,
                 GsonHelper.getAsString(json, "name", id.getPath()),
@@ -46,13 +55,11 @@ public record Species(
                 evo.isEmpty() ? null : ResourceLocation.parse(evo),
                 GsonHelper.getAsInt(json, "evolution_level", stage == Stage.CHILD ? 10 : 30),
                 GsonHelper.getAsInt(json, "search_range", 3),
-                GsonHelper.getAsInt(stats, "hp", 50),
-                GsonHelper.getAsInt(stats, "attack", 50),
-                GsonHelper.getAsInt(stats, "defense", 50),
-                GsonHelper.getAsInt(stats, "speed", defaultSpeed(GsonHelper.getAsInt(stats, "attack", 50), GsonHelper.getAsInt(stats, "defense", 50))),
+                s[0], s[1], s[2], s[3],
                 GsonHelper.getAsFloat(json, "scale", stage.scale()),
-                GsonHelper.getAsBoolean(json, "from_fossil", stage == Stage.CHILD),
-                GsonHelper.getAsBoolean(json, "flying", false)
+                GsonHelper.getAsBoolean(json, "from_fossil", stage == Stage.CHILD || secret),
+                GsonHelper.getAsBoolean(json, "flying", false),
+                rarity
         );
     }
 

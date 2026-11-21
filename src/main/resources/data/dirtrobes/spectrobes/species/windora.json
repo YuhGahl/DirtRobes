@@ -3,6 +3,7 @@
   "property": "aurora",
   "stage": "secret",
   "family": "windora",
+  "rarity": "secret",
   "search_range": 3,
   "base_stats": {
     "hp": 104,

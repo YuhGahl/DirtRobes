@@ -3,6 +3,7 @@
   "property": "halo",
   "stage": "secret",
   "family": "optoger",
+  "rarity": "secret",
   "search_range": 3,
   "base_stats": {
     "hp": 107,

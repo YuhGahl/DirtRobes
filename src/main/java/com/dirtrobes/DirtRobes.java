@@ -26,12 +26,17 @@ public class DirtRobes {
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public DirtRobes(IEventBus modBus, ModContainer container) {
+        if (net.neoforged.fml.ModList.get().isLoaded("create")) com.dirtrobes.compat.create.CreateCompat.register(modBus);
         ModRegistry.register(modBus);
         ChGauge.ATTACHMENTS.register(modBus);
         PrizmodTeam.ATTACHMENTS.register(modBus);
         modBus.addListener(CommonEvents::onAttributes);
         modBus.addListener(CommonEvents::onSpawnPlacements);
         modBus.addListener(ModNetwork::register);
+        // Énergie FE : l'incubateur accepte l'électricité (Create: New Age, et tout mod à énergie FE)
+        modBus.addListener((net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent event) ->
+                event.registerBlockEntity(net.neoforged.neoforge.capabilities.Capabilities.EnergyStorage.BLOCK, ModRegistry.INCUBATOR_BE.get(),
+                        (be, side) -> be.energy()));
         modBus.addListener(com.dirtrobes.lab.LabNetwork::register);
         modBus.addListener((RegisterGameTestsEvent event) -> event.register(DirtRobesGameTests.class));
         CommonEvents.registerGameEvents(NeoForge.EVENT_BUS);

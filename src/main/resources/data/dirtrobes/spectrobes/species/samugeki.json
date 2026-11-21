@@ -3,6 +3,7 @@
   "property": "flash",
   "stage": "evolved",
   "family": "samukabu",
+  "rarity": "rare",
   "search_range": 3,
   "base_stats": {
     "hp": 104,

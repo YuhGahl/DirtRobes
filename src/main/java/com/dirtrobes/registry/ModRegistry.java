@@ -82,6 +82,14 @@ public final class ModRegistry {
     public static final DeferredHolder<net.minecraft.core.component.DataComponentType<?>, net.minecraft.core.component.DataComponentType<net.minecraft.world.item.component.ItemContainerContents>> GAUNTLET_WEAPON =
             DATA_COMPONENTS.registerComponentType("gauntlet_weapon", b -> b.persistent(net.minecraft.world.item.component.ItemContainerContents.CODEC)
                     .networkSynchronized(net.minecraft.world.item.component.ItemContainerContents.STREAM_CODEC).cacheEncoding());
+    /** Espèce contenue dans un fossile (tirée à l'extraction). */
+    public static final DeferredHolder<net.minecraft.core.component.DataComponentType<?>, net.minecraft.core.component.DataComponentType<net.minecraft.resources.ResourceLocation>> FOSSIL_SPECIES =
+            DATA_COMPONENTS.registerComponentType("fossil_species", b -> b.persistent(net.minecraft.resources.ResourceLocation.CODEC)
+                    .networkSynchronized(net.minecraft.resources.ResourceLocation.STREAM_CODEC));
+    /** Rareté du fossile (visible par le client : infobulle, difficulté de la fouille). */
+    public static final DeferredHolder<net.minecraft.core.component.DataComponentType<?>, net.minecraft.core.component.DataComponentType<Integer>> FOSSIL_RARITY =
+            DATA_COMPONENTS.registerComponentType("fossil_rarity", b -> b.persistent(com.mojang.serialization.Codec.INT)
+                    .networkSynchronized(net.minecraft.network.codec.ByteBufCodecs.VAR_INT));
     /** Arme à rendre au joueur quand il prend le gantelet à la table de forge (temporaire). */
     public static final DeferredHolder<net.minecraft.core.component.DataComponentType<?>, net.minecraft.core.component.DataComponentType<net.minecraft.world.item.component.ItemContainerContents>> GAUNTLET_RETURN =
             DATA_COMPONENTS.registerComponentType("gauntlet_return", b -> b.persistent(net.minecraft.world.item.component.ItemContainerContents.CODEC)
@@ -245,6 +253,7 @@ public final class ModRegistry {
             .displayItems((params, output) -> {
                 output.accept(PRIZMOD.get());
                 output.accept(INCUBATOR_ITEM.get());
+                if (net.neoforged.fml.ModList.get().isLoaded("create")) com.dirtrobes.compat.create.CreateCompat.fillTab(output);
                 output.accept(FOSSIL_STONE_ITEM.get());
                 output.accept(DEEPSLATE_FOSSIL_STONE_ITEM.get());
                 output.accept(MINERAL_DEPOSIT_ITEM.get());

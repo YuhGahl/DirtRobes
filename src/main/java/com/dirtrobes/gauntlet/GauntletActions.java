@@ -167,6 +167,7 @@ public final class GauntletActions {
                 .withParameter(LootContextParams.THIS_ENTITY, player)
                 .create(LootContextParamSets.GIFT);
         for (ItemStack drop : table.getRandomItems(params)) {
+            com.dirtrobes.item.FossilItem.assignSpecies(drop, level.random);
             if (!player.getInventory().add(drop)) player.drop(drop, false);
         }
         level.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, state), pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,

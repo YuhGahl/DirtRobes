@@ -7,6 +7,10 @@
     "dirtrobes:mineral_deposit",
     "dirtrobes:deepslate_mineral_deposit",
     "dirtrobes:lab_terminal",
-    "dirtrobes:spectrobe_pc"
+    "dirtrobes:spectrobe_pc",
+    {
+      "id": "dirtrobes:kinetic_accelerator",
+      "required": false
+    }
   ]
 }

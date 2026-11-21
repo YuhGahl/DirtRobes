@@ -10,7 +10,6 @@
   "stat.dirtrobes.power": "ATK",
   "stat.dirtrobes.defence": "DEF",
   "stat.dirtrobes.health": "HP",
-  "tooltip.dirtrobes.fossil": "Put it in an incubator and dig it out of its rock to awaken it.",
   "tooltip.dirtrobes.mineral": "Feed it to your Spectrobe: +%s XP, +%s %s EV",
   "message.dirtrobes.not_yours": "This Spectrobe isn't yours.",
   "message.dirtrobes.recall": "%s Spectrobe(s) recalled.",
@@ -440,5 +439,13 @@
   "jei.dirtrobes.info.module": "Smithing table: module + gauntlet + a mineral. The Blade Module also accepts a sword instead of the mineral: the sword becomes the gauntlet's weapon and keeps its enchantments.",
   "jei.dirtrobes.info.prizmod": "Right-click: your team (6 Spectrobes, 2 out). Sneak + right-click your Spectrobe: sit / follow. Sneak + right-click the air: call your Spectrobes back. Fits into the gauntlet.",
   "jei.dirtrobes.info.combat_item": "Right-click to use it on one of your Spectrobes. One item per fight: %ss shared cooldown.",
-  "jei.dirtrobes.info.fossil": "Only obtained by extracting a fossil stone with the gauntlet (extraction module, Z key). Put it in an incubator and dig it out of its rock to awaken it."
+  "jei.dirtrobes.info.fossil": "Only obtained by extracting a fossil stone with the gauntlet (extraction module, Z key). Put it in an incubator and dig it out of its rock to awaken it.",
+  "rarity.dirtrobes.common": "Common",
+  "rarity.dirtrobes.rare": "Rare",
+  "rarity.dirtrobes.epic": "Epic",
+  "rarity.dirtrobes.secret": "Secret",
+  "jade.dirtrobes.incubator.speed": "Speed ×%s",
+  "block.dirtrobes.kinetic_accelerator": "Kinetic Accelerator",
+  "jei.dirtrobes.info.incubator": "Awakening a fossil: 2 minutes. Electricity (FE, e.g. Create: New Age) speeds it up: +2 speed for %s FE/tick. With Create, a kinetic accelerator touching the incubator adds +1 speed per %s RPM. Bonuses stack.",
+  "jei.dirtrobes.info.kinetic_accelerator": "Place it against an incubator and connect a Create shaft: +1 awakening speed per %s RPM (uses %s stress per RPM). No effect when overstressed."
 }

@@ -38,11 +38,19 @@ public class ExcavationGame {
     private final int fossilCells;
     private final Property property;
     private int integrity = 100;
-    private int ticksLeft = TIME_LIMIT;
+    private final int timeLimit;
+    private int ticksLeft;
     private State state = State.PLAYING;
 
     public ExcavationGame(Property property, RandomSource random) {
+        this(property, com.dirtrobes.species.Rarity.COMMON, random);
+    }
+
+    /** Plus le fossile est rare, plus la roche est dure (couches profondes) et plus le temps accordé est long. */
+    public ExcavationGame(Property property, com.dirtrobes.species.Rarity rarity, RandomSource random) {
         this.property = property;
+        this.timeLimit = 20 * rarity.excavationSeconds;
+        this.ticksLeft = timeLimit;
         // Roche : bruit lissé pour former des veines plus ou moins dures.
         float[][] noise = new float[WIDTH][HEIGHT];
         for (int x = 0; x < WIDTH; x++) {
@@ -62,7 +70,7 @@ public class ExcavationGame {
                     }
                 }
                 float v = sum / n;
-                depth[x][y] = v < 0.42f ? 1 : v < 0.58f ? 2 : 3;
+                depth[x][y] = v < rarity.depth2 ? 1 : v < rarity.depth3 ? 2 : 3;
             }
         }
         // Fossile : une silhouette propre à la propriété, posée au hasard (éventuellement retournée).
@@ -85,6 +93,10 @@ public class ExcavationGame {
             }
         }
         this.fossilCells = count;
+    }
+
+    public int timeLimit() {
+        return timeLimit;
     }
 
     public static boolean inside(int x, int y) {

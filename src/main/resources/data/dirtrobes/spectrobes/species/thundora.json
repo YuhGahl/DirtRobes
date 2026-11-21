@@ -3,6 +3,7 @@
   "property": "corona",
   "stage": "secret",
   "family": "thundora",
+  "rarity": "secret",
   "search_range": 3,
   "base_stats": {
     "hp": 104,

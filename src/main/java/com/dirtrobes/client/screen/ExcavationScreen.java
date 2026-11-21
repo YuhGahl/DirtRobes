@@ -52,10 +52,14 @@ public class ExcavationScreen extends Screen {
     private int top;
 
     public ExcavationScreen(BlockPos incubatorPos, Property property, Component fossilName) {
+        this(incubatorPos, property, com.dirtrobes.species.Rarity.COMMON, fossilName);
+    }
+
+    public ExcavationScreen(BlockPos incubatorPos, Property property, com.dirtrobes.species.Rarity rarity, Component fossilName) {
         super(Component.translatable("gui.dirtrobes.excavation.title"));
         this.incubatorPos = incubatorPos;
         this.fossilName = fossilName;
-        this.game = new ExcavationGame(property, RandomSource.create());
+        this.game = new ExcavationGame(property, rarity, RandomSource.create());
         this.noiseSeed = random.nextLong();
     }
 
@@ -218,7 +222,7 @@ public class ExcavationScreen extends Screen {
         g.drawCenteredString(font, Component.translatable("gui.dirtrobes.excavation.header", fossilName), width / 2, gy - 26, 0xFFFFFFFF);
         drawBar(g, gx, gy - 14, GRID_W / 2 - 4, game.integrity() / 100f, integrityColor(),
                 Component.translatable("gui.dirtrobes.excavation.integrity", game.integrity(), StatCalc.qualityForIntegrity(game.integrity())));
-        float time = game.ticksLeft() / (float) ExcavationGame.TIME_LIMIT;
+        float time = game.ticksLeft() / (float) game.timeLimit();
         drawBar(g, gx + GRID_W / 2 + 4, gy - 14, GRID_W / 2 - 4, time, time < 0.25f ? 0xFFE0533D : 0xFF6FB7E8,
                 Component.translatable("gui.dirtrobes.excavation.time", Mth.ceil(game.ticksLeft() / 20f)));
 

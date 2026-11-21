@@ -39,7 +39,11 @@ import java.util.UUID;
  * (voir {@link StatCalc#qualityForIntegrity}).
  */
 public class IncubatorBlockEntity extends BlockEntity implements MenuProvider {
-    public static final int DURATION = 400; // 20 secondes
+    /** Durée de base de l'éveil : 2 minutes sans accélération. */
+    public static final int DURATION = 20 * 120;
+    /** Énergie FE consommée par tick pour accélérer (+{@link #FE_BONUS} vitesse). */
+    public static final int FE_PER_TICK = 60;
+    public static final float FE_BONUS = 2f;
 
     private final SimpleContainer inventory = new SimpleContainer(1) {
         @Override
@@ -59,7 +63,7 @@ public class IncubatorBlockEntity extends BlockEntity implements MenuProvider {
         @Override
         public int get(int index) {
             return switch (index) {
-                case 0 -> progress;
+                case 0 -> (int) progress;
                 case 1 -> property == null ? 0 : DURATION;
                 case 2 -> integrity;
                 default -> 0;
@@ -80,8 +84,20 @@ public class IncubatorBlockEntity extends BlockEntity implements MenuProvider {
     private Property property;
     @Nullable
     private UUID owner;
-    private int progress;
+    private float progress;
     private int integrity;
+    @Nullable
+    private net.minecraft.resources.ResourceLocation speciesId;
+    /** Dernière vitesse calculée (1 = normale), pour l'affichage. */
+    private float lastSpeed = 1f;
+    private final net.neoforged.neoforge.energy.EnergyStorage energy = new net.neoforged.neoforge.energy.EnergyStorage(20_000, 1_000, 0) {
+        @Override
+        public int receiveEnergy(int toReceive, boolean simulate) {
+            int r = super.receiveEnergy(toReceive, simulate);
+            if (r > 0 && !simulate) setChanged();
+            return r;
+        }
+    };
 
     public IncubatorBlockEntity(BlockPos pos, BlockState state) {
         super(ModRegistry.INCUBATOR_BE.get(), pos, state);
@@ -96,7 +112,20 @@ public class IncubatorBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     public int progress() {
-        return progress;
+        return (int) progress;
+    }
+
+    public float speed() {
+        return lastSpeed;
+    }
+
+    public net.neoforged.neoforge.energy.IEnergyStorage energy() {
+        return energy;
+    }
+
+    @Nullable
+    public net.minecraft.resources.ResourceLocation speciesId() {
+        return speciesId;
     }
 
     public int integrity() {
@@ -117,6 +146,7 @@ public class IncubatorBlockEntity extends BlockEntity implements MenuProvider {
         ItemStack stack = inventory.getItem(0);
         if (!(stack.getItem() instanceof FossilItem fossil)) return;
         Property p = fossil.property();
+        net.minecraft.resources.ResourceLocation fossilSpecies = stack.get(com.dirtrobes.registry.ModRegistry.FOSSIL_SPECIES.get());
         stack.shrink(1);
         inventory.setChanged();
         if (integrity <= 0) {
@@ -125,6 +155,7 @@ public class IncubatorBlockEntity extends BlockEntity implements MenuProvider {
             return;
         }
         start(p, player, Math.min(100, integrity));
+        this.speciesId = fossilSpecies;
         player.displayClientMessage(Component.translatable("message.dirtrobes.incubator_start", Math.min(100, integrity)), true);
     }
 
@@ -133,6 +164,7 @@ public class IncubatorBlockEntity extends BlockEntity implements MenuProvider {
         this.owner = player.getUUID();
         this.progress = 0;
         this.integrity = integrity;
+        this.speciesId = null;
         if (level != null) {
             level.setBlock(worldPosition, getBlockState().setValue(IncubatorBlock.ACTIVE, true), 3);
             level.playSound(null, worldPosition, SoundEvents.BEACON_ACTIVATE, SoundSource.BLOCKS, 0.6f, 1.6f);
@@ -142,8 +174,19 @@ public class IncubatorBlockEntity extends BlockEntity implements MenuProvider {
 
     public static void serverTick(Level level, BlockPos pos, BlockState state, IncubatorBlockEntity be) {
         if (be.property == null || !(level instanceof ServerLevel server)) return;
-        be.progress++;
-        if (be.progress % 10 == 0) {
+        float speed = 1f;
+        if (be.energy.getEnergyStored() >= FE_PER_TICK) {
+            be.energy.extractEnergy(FE_PER_TICK, false);
+            speed += FE_BONUS;
+        }
+        // accélérateurs voisins (ex. : accélérateur cinétique de Create)
+        for (net.minecraft.core.Direction d : net.minecraft.core.Direction.values()) {
+            if (level.getBlockEntity(pos.relative(d)) instanceof IncubatorBooster booster) speed += Math.max(0f, booster.incubatorBonus());
+        }
+        be.lastSpeed = speed;
+        int before = (int) be.progress;
+        be.progress += speed;
+        if ((int) be.progress / 10 != before / 10) {
             server.sendParticles(ParticleTypes.END_ROD, pos.getX() + 0.5, pos.getY() + 1.1, pos.getZ() + 0.5, 3, 0.25, 0.2, 0.25, 0.01);
         }
         if (be.progress >= DURATION) be.hatch(server);
@@ -152,16 +195,20 @@ public class IncubatorBlockEntity extends BlockEntity implements MenuProvider {
 
     private void hatch(ServerLevel server) {
         Player player = owner == null ? null : server.getPlayerByUUID(owner);
-        Species species = property == null ? null : SpeciesManager.randomFossilSpecies(property, server.random);
+        Species species = speciesId != null ? SpeciesManager.get(speciesId) : null;
+        if (species == null && property != null) species = SpeciesManager.rollFossilSpecies(property, server.random);
         if (species != null) {
             SpectrobeEntity.create(server, species, 1, StatCalc.qualityForIntegrity(integrity), player, Vec3.atBottomCenterOf(worldPosition.above()));
             server.sendParticles(ParticleTypes.TOTEM_OF_UNDYING, worldPosition.getX() + 0.5, worldPosition.getY() + 1.2, worldPosition.getZ() + 0.5,
                     40, 0.4, 0.5, 0.4, 0.25);
             server.playSound(null, worldPosition, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.BLOCKS, 1.0f, 1.0f);
             if (player != null) {
-                player.sendSystemMessage(Component.translatable("message.dirtrobes.hatched", Component.translatable(species.translationKey()),
-                            StatCalc.qualityForIntegrity(integrity))
-                        .withStyle(ChatFormatting.AQUA));
+                Component msg = Component.translatable("message.dirtrobes.hatched", Component.translatable(species.translationKey()),
+                            StatCalc.qualityForIntegrity(integrity)).withStyle(ChatFormatting.AQUA);
+                if (species.rarity() != com.dirtrobes.species.Rarity.COMMON) {
+                    msg = Component.empty().append(msg).append(Component.literal(" ")).append(species.rarity().displayName().withStyle(ChatFormatting.BOLD));
+                }
+                player.sendSystemMessage(msg);
             }
         } else if (player != null) {
             player.sendSystemMessage(Component.translatable("message.dirtrobes.hatch_failed"));
@@ -194,8 +241,10 @@ public class IncubatorBlockEntity extends BlockEntity implements MenuProvider {
         tag.put("Inventory", inventory.createTag(registries));
         if (property != null) tag.putString("Property", property.id());
         if (owner != null) tag.putUUID("Owner", owner);
-        tag.putInt("Progress", progress);
+        tag.putFloat("Progress", progress);
         tag.putInt("Integrity", integrity);
+        tag.putInt("Energy", energy.getEnergyStored());
+        if (speciesId != null) tag.putString("Species", speciesId.toString());
     }
 
     @Override
@@ -204,7 +253,9 @@ public class IncubatorBlockEntity extends BlockEntity implements MenuProvider {
         inventory.fromTag(tag.getList("Inventory", 10), registries);
         property = tag.contains("Property") ? Property.byId(tag.getString("Property")) : null;
         owner = tag.hasUUID("Owner") ? tag.getUUID("Owner") : null;
-        progress = tag.getInt("Progress");
+        progress = tag.getFloat("Progress");
+        speciesId = tag.contains("Species") ? net.minecraft.resources.ResourceLocation.tryParse(tag.getString("Species")) : null;
+        if (tag.contains("Energy")) energy.receiveEnergy(tag.getInt("Energy") - energy.getEnergyStored(), false);
         integrity = tag.contains("Integrity") ? tag.getInt("Integrity") : 50;
     }
 }

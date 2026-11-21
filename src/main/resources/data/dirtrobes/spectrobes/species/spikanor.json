@@ -3,6 +3,7 @@
   "property": "aurora",
   "stage": "evolved",
   "family": "spiko",
+  "rarity": "rare",
   "search_range": 3,
   "base_stats": {
     "hp": 88,

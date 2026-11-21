@@ -28,6 +28,8 @@ public enum IncubatorProvider implements IBlockComponentProvider, IServerDataPro
         data.putInt("Progress", be.progress());
         data.putInt("Integrity", be.integrity());
         if (be.property() != null) data.putString("Property", be.property().id());
+        data.putFloat("Speed", be.speed());
+        data.putInt("Energy", be.energy().getEnergyStored());
         ItemStack waiting = be.inventory().getItem(0);
         if (!waiting.isEmpty()) data.put("Waiting", waiting.save(accessor.getLevel().registryAccess()));
     }
@@ -49,11 +51,17 @@ public enum IncubatorProvider implements IBlockComponentProvider, IServerDataPro
         }
         if (active) {
             float ratio = Math.min(1f, data.getInt("Progress") / (float) IncubatorBlockEntity.DURATION);
-            int seconds = Math.max(0, (IncubatorBlockEntity.DURATION - data.getInt("Progress")) / 20);
+            float spd = Math.max(1f, data.getFloat("Speed"));
+            int seconds = Math.max(0, Math.round((IncubatorBlockEntity.DURATION - data.getInt("Progress")) / 20f / spd));
             Component label = Component.translatable("jade.dirtrobes.incubator.progress", Math.round(ratio * 100), seconds);
             tooltip.add(helper.progress(ratio, label, helper.progressStyle().color(0xFF35C8D8, 0xFF1A6A76).textColor(0xFFFFFFFF),
                     BoxStyle.getNestedBox(), true));
             tooltip.add(Component.translatable("jade.dirtrobes.incubator.integrity", data.getInt("Integrity")).withStyle(ChatFormatting.GRAY));
+            float speed = data.getFloat("Speed");
+            if (speed > 1.01f) {
+                tooltip.add(Component.translatable("jade.dirtrobes.incubator.speed", String.format(java.util.Locale.ROOT, "%.1f", speed))
+                        .withStyle(ChatFormatting.YELLOW));
+            }
         }
     }
 

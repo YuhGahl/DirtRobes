@@ -165,6 +165,11 @@ public class SpectrobeSummaryScreen extends Screen {
         // ---- Colonne de gauche : nom, niveau, modèle
         g.drawString(font, Component.translatable(m.nameKey()).withStyle(ChatFormatting.BOLD), left + 6, top + 6, 0xFFFFFFFF, true);
         g.drawString(font, Component.translatable("message.dirtrobes.card.level", m.level()), left + 6, top + 17, 0xFFD8E2EC, false);
+        com.dirtrobes.species.Rarity rarity = com.dirtrobes.species.Rarity.byOrdinal(m.rarity());
+        if (rarity != com.dirtrobes.species.Rarity.COMMON) {
+            Component rl = rarity.displayName();
+            g.drawString(font, rl, left + MODEL_W - 6 - font.width(rl), top + 17, 0xFFFFFFFF, true);
+        }
         SpectrobeEntity preview = ClientTeam.preview(m.speciesId(), m.property(), m.stage(), m.color());
         if (preview != null) {
             float scale = m.stage() == Stage.CHILD.ordinal() ? 52f : m.stage() == Stage.ADULT.ordinal() ? 42f : 34f;

@@ -51,6 +51,8 @@ jobs:
           curl -fsSL -o run/mods/jade.jar "https://api.modrinth.com/maven/maven/modrinth/nvQzSEkH/$JD/nvQzSEkH-$JD.jar"
           JE=$(grep '^jei_version=' gradle.properties | cut -d= -f2)
           curl -fsSL -o run/mods/jei.jar "https://api.modrinth.com/maven/maven/modrinth/u6dRKJwZ/$JE/u6dRKJwZ-$JE.jar"
+          CR=$(grep '^create_version=' gradle.properties | cut -d= -f2)
+          curl -fsSL -o run/mods/create.jar "https://api.modrinth.com/maven/maven/modrinth/LNytGWDc/$CR/LNytGWDc-$CR.jar"
           curl -fsSL -o run/mods/clothconfig.jar "https://api.modrinth.com/maven/maven/modrinth/9s6osm5g/$CC/9s6osm5g-$CC.jar"
           ls -la run/mods
 

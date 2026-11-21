@@ -60,6 +60,24 @@ public class SpeciesManager extends SimpleJsonResourceReloadListener {
 
     /** Tire au hasard une espèce enfant de cette propriété qu'on peut obtenir par fossile. */
     @Nullable
+    /** Tire l'espèce d'un fossile : d'abord le palier de rareté (poids), puis une espèce de ce palier. */
+    public static Species rollFossilSpecies(Property property, RandomSource random) {
+        java.util.Map<Rarity, List<Species>> byRarity = new java.util.EnumMap<>(Rarity.class);
+        for (Species s : species.values()) {
+            if (s.fromFossil() && s.property() == property) byRarity.computeIfAbsent(s.rarity(), r -> new ArrayList<>()).add(s);
+        }
+        if (byRarity.isEmpty()) return null;
+        int total = 0;
+        for (Rarity r : byRarity.keySet()) total += r.weight;
+        int roll = random.nextInt(Math.max(1, total));
+        for (var e : byRarity.entrySet()) {
+            roll -= e.getKey().weight;
+            if (roll < 0) return e.getValue().get(random.nextInt(e.getValue().size()));
+        }
+        List<Species> any = byRarity.values().iterator().next();
+        return any.get(random.nextInt(any.size()));
+    }
+
     public static Species randomFossilSpecies(Property property, RandomSource random) {
         List<Species> pool = new ArrayList<>();
         for (Species s : species.values()) {

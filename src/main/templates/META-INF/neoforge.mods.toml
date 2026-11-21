@@ -130,3 +130,11 @@ config="${mod_id}.mixins.json"
     versionRange="[19,)"
     ordering="NONE"
     side="BOTH"
+
+# Create : accélérateur cinétique pour l'incubateur (optionnel)
+[[dependencies.${mod_id}]]
+    modId="create"
+    type="optional"
+    versionRange="[6.0,)"
+    ordering="NONE"
+    side="BOTH"

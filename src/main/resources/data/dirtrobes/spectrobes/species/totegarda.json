@@ -3,6 +3,7 @@
   "property": "halo",
   "stage": "evolved",
   "family": "totemo",
+  "rarity": "rare",
   "search_range": 3,
   "base_stats": {
     "hp": 101,

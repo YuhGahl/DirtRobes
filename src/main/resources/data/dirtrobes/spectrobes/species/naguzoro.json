@@ -3,6 +3,7 @@
   "property": "flash",
   "stage": "evolved",
   "family": "nagu",
+  "rarity": "epic",
   "search_range": 3,
   "base_stats": {
     "hp": 105,
