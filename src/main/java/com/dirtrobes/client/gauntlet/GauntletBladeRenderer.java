@@ -62,7 +62,7 @@ public final class GauntletBladeRenderer {
     static void renderInHand(AbstractClientPlayer player, ItemStack weapon, PoseStack pose, MultiBufferSource buffers, int light) {
         // garde de l'épée (texel 4,11 de la texture) placée sur le cristal ; la pointe vers la main et au-delà
         float guard = 0.309f * SCALE;
-        pose.translate(-4.5f / 16f, 7f / 16f + guard, 0f);
+        pose.translate(-3.4f / 16f, 7f / 16f + guard, 0f);
         pose.mulPose(Axis.YP.rotationDegrees(90f));   // plat de la lame tourné vers l'extérieur du bras
         pose.mulPose(Axis.ZP.rotationDegrees(45f));   // diagonale de l'icône alignée sur l'axe du bras
         pose.scale(SCALE, SCALE, SCALE);

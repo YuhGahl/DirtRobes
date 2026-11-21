@@ -63,8 +63,9 @@ public class DirtRobesGameTests {
         incubator.finishExcavation(player, 95);
         helper.assertTrue(incubator.isBusy(), "L'incubateur devrait être en train d'éveiller le fossile");
         helper.assertTrue(incubator.inventory().getItem(0).isEmpty(), "Le fossile aurait dû être consommé");
+        incubator.skipAhead(400); // l'éveil dure 2 minutes : on garde 20 s pour le test
 
-        helper.runAfterDelay(IncubatorBlockEntity.DURATION + 5, () -> {
+        helper.runAfterDelay(400 + 5, () -> {
             List<SpectrobeEntity> found = helper.getEntities(ModRegistry.SPECTROBE.get());
             helper.assertTrue(found.size() == 1, "Un Spectrobe aurait dû éclore, trouvé : " + found.size());
             SpectrobeEntity s = found.get(0);
@@ -76,7 +77,7 @@ public class DirtRobesGameTests {
         });
         for (int t = 20; t <= 240; t += 20) {
             final int dt = t;
-            helper.runAfterDelay(IncubatorBlockEntity.DURATION + 5 + t, () -> {
+            helper.runAfterDelay(400 + 5 + t, () -> {
                 List<SpectrobeEntity> found = helper.getEntities(ModRegistry.SPECTROBE.get());
                 if (!found.isEmpty()) {
                     SpectrobeEntity s = found.get(0);

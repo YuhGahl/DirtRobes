@@ -27,7 +27,18 @@ public final class BetterCombatCompat {
         ItemStack hand = player.getInventory().getSelected();
         if (!hand.isEmpty()) return hand;
         ItemStack weapon = GauntletActions.activeWeapon(player);
-        return weapon.isEmpty() ? noWeapon() : weapon;
+        return weapon.isEmpty() ? noWeapon() : withCombo(weapon);
+    }
+
+    /**
+     * Épées et Lame du gantelet : enchaînement DirtRobes (deux coups horizontaux, un coup vertical, un estoc).
+     * Better Combat lit ce préréglage via son composant de données sur la copie de l'arme.
+     */
+    public static ItemStack withCombo(ItemStack weapon) {
+        if (!weapon.is(net.minecraft.tags.ItemTags.SWORDS) && !weapon.is(com.dirtrobes.registry.ModRegistry.GAUNTLET_BLADE.get())) return weapon;
+        ItemStack copy = weapon.copy();
+        copy.set(net.bettercombat.api.component.BetterCombatDataComponents.WEAPON_PRESET_ID, com.dirtrobes.DirtRobes.id("gauntlet_combo"));
+        return copy;
     }
 
     public static ItemStack offhandStack(Player player) {

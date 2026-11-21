@@ -90,14 +90,31 @@ public class IncubatorBlockEntity extends BlockEntity implements MenuProvider {
     private net.minecraft.resources.ResourceLocation speciesId;
     /** Dernière vitesse calculée (1 = normale), pour l'affichage. */
     private float lastSpeed = 1f;
-    private final net.neoforged.neoforge.energy.EnergyStorage energy = new net.neoforged.neoforge.energy.EnergyStorage(20_000, 1_000, 0) {
+    private final Energy energy = new Energy();
+
+    /** Réserve FE : se remplit de l'extérieur, se vide seulement par l'incubateur lui-même. */
+    private final class Energy extends net.neoforged.neoforge.energy.EnergyStorage {
+        Energy() {
+            super(20_000, 1_000, 0);
+        }
+
         @Override
         public int receiveEnergy(int toReceive, boolean simulate) {
             int r = super.receiveEnergy(toReceive, simulate);
             if (r > 0 && !simulate) setChanged();
             return r;
         }
-    };
+
+        boolean consume(int amount) {
+            if (energy < amount) return false;
+            energy -= amount;
+            return true;
+        }
+
+        void set(int value) {
+            energy = Math.max(0, Math.min(capacity, value));
+        }
+    }
 
     public IncubatorBlockEntity(BlockPos pos, BlockState state) {
         super(ModRegistry.INCUBATOR_BE.get(), pos, state);
@@ -113,6 +130,11 @@ public class IncubatorBlockEntity extends BlockEntity implements MenuProvider {
 
     public int progress() {
         return (int) progress;
+    }
+
+    /** Tests : avance l'éveil pour qu'il reste {@code remainingTicks} ticks. */
+    public void skipAhead(int remainingTicks) {
+        if (property != null) progress = Math.max(progress, DURATION - remainingTicks);
     }
 
     public float speed() {
@@ -175,10 +197,7 @@ public class IncubatorBlockEntity extends BlockEntity implements MenuProvider {
     public static void serverTick(Level level, BlockPos pos, BlockState state, IncubatorBlockEntity be) {
         if (be.property == null || !(level instanceof ServerLevel server)) return;
         float speed = 1f;
-        if (be.energy.getEnergyStored() >= FE_PER_TICK) {
-            be.energy.extractEnergy(FE_PER_TICK, false);
-            speed += FE_BONUS;
-        }
+        if (be.energy.consume(FE_PER_TICK)) speed += FE_BONUS;
         // accélérateurs voisins (ex. : accélérateur cinétique de Create)
         for (net.minecraft.core.Direction d : net.minecraft.core.Direction.values()) {
             if (level.getBlockEntity(pos.relative(d)) instanceof IncubatorBooster booster) speed += Math.max(0f, booster.incubatorBonus());
@@ -255,7 +274,7 @@ public class IncubatorBlockEntity extends BlockEntity implements MenuProvider {
         owner = tag.hasUUID("Owner") ? tag.getUUID("Owner") : null;
         progress = tag.getFloat("Progress");
         speciesId = tag.contains("Species") ? net.minecraft.resources.ResourceLocation.tryParse(tag.getString("Species")) : null;
-        if (tag.contains("Energy")) energy.receiveEnergy(tag.getInt("Energy") - energy.getEnergyStored(), false);
+        energy.set(tag.getInt("Energy"));
         integrity = tag.contains("Integrity") ? tag.getInt("Integrity") : 50;
     }
 }

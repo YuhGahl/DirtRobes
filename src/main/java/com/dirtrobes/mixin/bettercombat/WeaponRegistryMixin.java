@@ -20,6 +20,6 @@ public abstract class WeaponRegistryMixin {
     private static void dirtrobes$emptyHand(ItemStack stack, CallbackInfoReturnable<WeaponAttributes> cir) {
         if (stack == null || !stack.isEmpty() || BetterCombatCompat.isNoWeapon(stack)) return;
         ItemStack weapon = BetterCombatCompat.localWeapon();
-        if (!weapon.isEmpty()) cir.setReturnValue(WeaponRegistry.getAttributes(weapon));
+        if (!weapon.isEmpty()) cir.setReturnValue(WeaponRegistry.getAttributes(BetterCombatCompat.withCombo(weapon)));
     }
 }
