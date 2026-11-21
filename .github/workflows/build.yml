@@ -36,6 +36,13 @@ jobs:
       - name: Tests en jeu (GameTest)
         run: ./gradlew runGameTestServer --console=plain 2>&1 | tee gametest.log; exit ${PIPESTATUS[0]}
 
+      - name: Installer Curios pour le test serveur (dépendance optionnelle)
+        run: |
+          mkdir -p run/mods
+          V=$(grep '^curios_version=' gradle.properties | cut -d= -f2)
+          curl -fsSL -o "run/mods/curios-neoforge-$V.jar" "https://maven.theillusivec4.top/top/theillusivec4/curios/curios-neoforge/$V/curios-neoforge-$V.jar"
+          ls -la run/mods
+
       - name: Test - démarrage d'un serveur avec le mod
         run: .github/scripts/server-smoke.sh
 

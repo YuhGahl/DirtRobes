@@ -27,7 +27,7 @@ fi
 kill "$PID" 2>/dev/null; exec 3>&-
 
 echo "================ Résumé ================"
-grep -E "espèces de Spectrobes|Done \(" "$LOG" || true
+grep -E "espèces de Spectrobes|Done \(|curios|Curios" "$LOG" | grep -iE "espèces|Done|loaded|slot|curios" | head -8 || true
 ERRS=$(grep -nE "ERROR|Exception|Caused by|Failed to|Couldn't|Unknown|Invalid" "$LOG" \
   | grep -iE "dirtrobes|spectrobe|biome_modifier|worldgen|loot|recipe|tags?" \
   | grep -v "forge.logging" || true)

@@ -120,9 +120,9 @@ configurations {
 }
 
 dependencies {
-    // Curios : API à la compilation, mod complet seulement pour les lancements de dev / tests (pas imposé aux joueurs)
+    // Curios : API seulement à la compilation (dépendance optionnelle, pas imposée aux joueurs).
+    // Le test de démarrage serveur de la CI l'installe dans run/mods pour vérifier l'intégration.
     compileOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}:api"
-    localRuntime "top.theillusivec4.curios:curios-neoforge:${curios_version}"
 
     // Example optional mod dependency with JEI
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
