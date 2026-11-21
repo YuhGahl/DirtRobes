@@ -10,26 +10,9 @@ jobs:
         with: { distribution: temurin, java-version: 21 }
       - run: |
           mkdir j && cd j
-          curl -sSfL -o bc.jar "https://cdn.modrinth.com/data/5sy6g3kz/versions/VhIOvcXP/bettercombat-neoforge-2.4.0%2B1.21.1.jar"
-          curl -sSfL -o pa.jar "https://cdn.modrinth.com/data/gedNE4y2/versions/HJZB6bmA/player-animation-lib-forge-2.0.4%2B1.21.1.jar"
-          echo "== BC classes"; unzip -l bc.jar | awk '{print $4}' | grep -E "\.class$" | grep -v mixin | head -200
-          echo "== BC mixins"; unzip -l bc.jar | awk '{print $4}' | grep -i mixin | head -80
-          echo "== BC jsons"; unzip -l bc.jar | awk '{print $4}' | grep -E "json$|toml$" | head -60
-          unzip -p bc.jar META-INF/neoforge.mods.toml
-          echo "== PA"; unzip -l pa.jar | awk '{print $4}' | grep -E "\.class$" | grep -v "/impl/\|mixin" | head -150
-          unzip -p pa.jar META-INF/neoforge.mods.toml META-INF/mods.toml 2>/dev/null | head -40
-          mkdir bcx pax && (cd bcx && unzip -q ../bc.jar) && (cd pax && unzip -q ../pa.jar)
-          echo "== C getCurrentAttack"; javap -p -c -cp bcx net.bettercombat.logic.PlayerAttackHelper | sed -n '/getCurrentAttack(/,/^$/p' | head -80
-          echo "== C getAttributes"; javap -p -c -cp bcx net.bettercombat.logic.WeaponRegistry | sed -n '/public static net.bettercombat.api.WeaponAttributes getAttributes(net.minecraft.world.item.ItemStack)/,/^$/p' | head -60
-          echo "== C isTwoHanded/poseForPlayer"; javap -p -c -cp bcx net.bettercombat.logic.PlayerAttackHelper | sed -n '/poseForPlayer(/,/^$/p' | head -40
-          echo "== MCI calls"; javap -p -c -cp bcx net.bettercombat.mixin.client.MinecraftClientInject | grep -n "Method\|getMainHandItem\|getAttributes\|getCurrentAttack\|private\|public\|protected" | head -120
-          echo "== Server handler"; for c in $(cd bcx && find net/bettercombat/network -name "*.class" | sed 's/\.class$//'); do echo "-- $c"; javap -p -c -cp bcx $c | grep -n "getMainHandItem\|getAttributes\|getCurrentAttack\|isEmpty\|static .*(\|void .*(" | head -40; done
-          echo "== Mixin annots"; javap -v -cp bcx net.bettercombat.mixin.client.MinecraftClientInject | grep -i "target\|method" | grep -i "Lnet/minecraft\|startAttack\|handleKeybinds\|tick" | head -40
-          echo "== ACPEM"; javap -p -c -cp bcx net.bettercombat.mixin.client.AbstractClientPlayerEntityMixin | grep -n "getMainHandItem\|getAttributes\|private\|public\|PlayerAnimationAccess\|ModifierLayer" | head -60
-          echo "== client mods classes"; (cd bcx && find net/bettercombat/client -name "*.class") | head -60
-          echo "== PA access"; (cd pax && find . -name "PlayerAnimationAccess*.class" -o -name "PlayerAnimationFactory*.class" | head); for c in $(cd pax && find . -name "PlayerAnimationAccess.class" -o -name "PlayerAnimationFactory.class" | sed 's|^\./||;s/\.class$//'); do javap -p -cp pax $c; done
-          (cd pax && find . -name "FirstPerson*.class" -o -name "AbstractFadeModifier.class" | head); javap -p -cp pax dev.kosmx.playerAnim.api.firstPerson.FirstPersonConfiguration dev.kosmx.playerAnim.api.firstPerson.FirstPersonMode dev.kosmx.playerAnim.api.layered.modifier.AbstractFadeModifier | head -60
-          unzip -p pa.jar META-INF/neoforge.mods.toml | grep -A3 "modId"
-          unzip -p bc.jar META-INF/neoforge.mods.toml | grep -B1 -A6 "dependencies" | head -50
-          echo "== anim sample"; unzip -p bc.jar assets/bettercombat/player_animations/pose_one_handed_backwards.json | head -c 2500
-          echo; echo "== weapon_attributes sample"; unzip -l bc.jar | grep weapon_attributes | head -20; unzip -p bc.jar data/bettercombat/weapon_attributes/sword.json
+          curl -sSfL -o jade.jar "https://cdn.modrinth.com/data/nvQzSEkH/versions/eYz2YBGT/Jade-1.21.1-NeoForge-15.10.6.jar"
+          mkdir x && (cd x && unzip -q ../jade.jar)
+          for c in snownee.jade.api.IWailaPlugin snownee.jade.api.IWailaClientRegistration snownee.jade.api.IWailaCommonRegistration snownee.jade.api.IBlockComponentProvider snownee.jade.api.IServerDataProvider snownee.jade.api.BlockAccessor snownee.jade.api.ITooltip snownee.jade.api.IComponentProvider snownee.jade.api.ui.IElementHelper snownee.jade.api.WailaPlugin snownee.jade.api.config.IPluginConfig snownee.jade.api.IToggleableProvider; do echo "== $c"; javap -cp x $c 2>&1 | head -45; done
+          echo "== ui classes"; ls x/snownee/jade/api/ui/ | head -60
+          for c in snownee.jade.api.ui.ProgressStyle snownee.jade.api.ui.BoxStyle snownee.jade.api.ui.IProgressStyle; do echo "== $c"; javap -cp x $c 2>&1 | head -40; done
+          echo "== furnace provider"; (cd x && find . -iname "*Furnace*Provider*.class"); for c in $(cd x && find . -iname "FurnaceProvider.class" | sed 's|^\./||;s/\.class$//'); do javap -p -c -cp x $c | grep -n "invoke\|public\|private" | head -60; done
