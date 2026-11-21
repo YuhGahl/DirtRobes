@@ -516,9 +516,11 @@ public class DirtRobesGameTests {
         gauntlet = r2.get().value().assemble(in2, reg);
         helper.assertTrue(com.dirtrobes.gauntlet.GauntletWeapon.get(gauntlet).is(net.minecraft.world.item.Items.DIAMOND_SWORD), "L'épée devrait être dans le gantelet");
         // 3) une épée en fer la remplace : l'épée en diamant doit être rendue
-        var in3 = new net.minecraft.world.item.crafting.SmithingRecipeInput(new ItemStack(ModRegistry.MODULE_WEAPON.get()), gauntlet,
+        var in3 = new net.minecraft.world.item.crafting.SmithingRecipeInput(new ItemStack(ModRegistry.MODULE_BLADE.get()), gauntlet,
                 new ItemStack(net.minecraft.world.item.Items.IRON_SWORD));
-        gauntlet = r2.get().value().assemble(in3, reg);
+        var r3 = rm.getRecipeFor(net.minecraft.world.item.crafting.RecipeType.SMITHING, in3, helper.getLevel());
+        helper.assertTrue(r3.isPresent(), "Module de lame + épée devrait aussi marcher");
+        gauntlet = r3.get().value().assemble(in3, reg);
         gauntlet.getItem().onCraftedBy(gauntlet, helper.getLevel(), player);
         boolean gotBack = player.getInventory().items.stream().anyMatch(s -> s.is(net.minecraft.world.item.Items.DIAMOND_SWORD) && s.getDamageValue() == 42);
         helper.assertTrue(gotBack, "L'ancienne épée (avec son usure) aurait dû être rendue");

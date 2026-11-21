@@ -1,9 +1,14 @@
 {
   "type": "dirtrobes:gauntlet_module",
   "mode": "addition_weapon",
-  "template": {
-    "item": "dirtrobes:module_weapon"
-  },
+  "template": [
+    {
+      "item": "dirtrobes:module_weapon"
+    },
+    {
+      "item": "dirtrobes:module_blade"
+    }
+  ],
   "base": {
     "item": "dirtrobes:gauntlet"
   },

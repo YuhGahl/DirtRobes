@@ -34,7 +34,16 @@ public final class GauntletArmModel {
         return LayerDefinition.create(mesh, 32, 32);
     }
 
-    public static ModelPart bake(ModelPart root) {
-        return root;
+    private static ModelPart wide;
+    private static ModelPart slim;
+
+    /** Modèle cuit (bras larges ou fins), créé à la première utilisation. */
+    public static ModelPart get(boolean slimArms) {
+        if (wide == null) {
+            var models = net.minecraft.client.Minecraft.getInstance().getEntityModels();
+            wide = models.bakeLayer(LAYER);
+            slim = models.bakeLayer(LAYER_SLIM);
+        }
+        return slimArms ? slim : wide;
     }
 }
