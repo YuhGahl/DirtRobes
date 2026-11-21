@@ -208,6 +208,18 @@ public final class ModRegistry {
             p -> new com.dirtrobes.gauntlet.GauntletWeaponItem("cannon", p), new Item.Properties());
     public static final DeferredItem<com.dirtrobes.gauntlet.GauntletWeaponItem> GAUNTLET_FIST = ITEMS.registerItem("gauntlet_fist",
             p -> new com.dirtrobes.gauntlet.GauntletWeaponItem("fist", p), new Item.Properties());
+    /** Armes alimentées par un Spectrobe (Origins), par identifiant d'objet (blade_zazanero…). */
+    public static final java.util.Map<String, DeferredItem<com.dirtrobes.gauntlet.GauntletWeaponItem>> SPECTROBE_WEAPONS = new java.util.LinkedHashMap<>();
+
+    static {
+        for (var spec : com.dirtrobes.gauntlet.WeaponSpec.ALL) {
+            SPECTROBE_WEAPONS.put(spec.itemId(), ITEMS.registerItem(spec.itemId(),
+                    p -> new com.dirtrobes.gauntlet.GauntletWeaponItem(spec, p), new Item.Properties()));
+        }
+    }
+
+    public static final DeferredItem<com.dirtrobes.gauntlet.SpectrobeCoreItem> SPECTROBE_CORE = ITEMS.registerItem("spectrobe_core",
+            com.dirtrobes.gauntlet.SpectrobeCoreItem::new, new Item.Properties().stacksTo(16));
     public static final DeferredItem<Item> GAUNTLET_SHOT_ITEM = ITEMS.registerSimpleItem("gauntlet_shot");
     public static final DeferredItem<com.dirtrobes.gauntlet.ModuleItem> MODULE_BLADE = ITEMS.registerItem("module_blade",
             p -> new com.dirtrobes.gauntlet.ModuleItem("blade", p), new Item.Properties());
@@ -289,6 +301,7 @@ public final class ModRegistry {
                 NATURE_GEMS.forEach(g -> output.accept(g.get()));
                 COMBAT_ITEMS.forEach(i -> output.accept(i.get()));
                 ORIGINS_MINERALS.values().forEach(i -> output.accept(i.get()));
+                output.accept(SPECTROBE_CORE.get());
                 output.accept(RICE_BALL.get());
                 output.accept(MEGA_RICE_BALL.get());
                 output.accept(GIGA_RICE_BALL.get());

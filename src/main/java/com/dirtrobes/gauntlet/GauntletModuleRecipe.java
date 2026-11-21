@@ -32,6 +32,10 @@ public record GauntletModuleRecipe(Ingredient template, Ingredient base, Ingredi
     public boolean matches(SmithingRecipeInput input, Level level) {
         if (!template.test(input.template()) || !base.test(input.base()) || !addition.test(input.addition())) return false;
         if ("addition_weapon".equals(mode)) return true;
+        if ("core_weapon".equals(mode)) {
+            WeaponSpec spec = SpectrobeCoreItem.spec(input.addition());
+            return spec != null && input.template().getItem() instanceof ModuleItem m && m.module().equals(spec.kind());
+        }
         return input.template().getItem() instanceof ModuleItem m && !("extractor".equals(m.module()) && GauntletItem.modules(input.base()).extractor());
     }
 
@@ -41,6 +45,10 @@ public record GauntletModuleRecipe(Ingredient template, Ingredient base, Ingredi
         ItemStack newWeapon = ItemStack.EMPTY;
         if ("addition_weapon".equals(mode)) {
             newWeapon = input.addition().copyWithCount(1);
+        } else if ("core_weapon".equals(mode)) {
+            WeaponSpec spec = SpectrobeCoreItem.spec(input.addition());
+            if (spec == null) return ItemStack.EMPTY;
+            newWeapon = new ItemStack(ModRegistry.SPECTROBE_WEAPONS.get(spec.itemId()).get());
         } else if (input.template().getItem() instanceof ModuleItem m) {
             if ("extractor".equals(m.module())) {
                 result.set(ModRegistry.GAUNTLET_MODULES.get(), GauntletItem.modules(result).withExtractor());
@@ -55,6 +63,8 @@ public record GauntletModuleRecipe(Ingredient template, Ingredient base, Ingredi
         ItemStack old = GauntletWeapon.get(result);
         GauntletWeapon.set(result, newWeapon);
         // l'ancienne arme sera rendue au joueur quand il prendra le gantelet (GauntletItem#onCraftedBy)
+        // arme alimentée par un Spectrobe : on rend son noyau chargé
+        if (old.getItem() instanceof GauntletWeaponItem gw && gw.spec() != null) old = SpectrobeCoreItem.charged(gw.spec());
         if (!old.isEmpty() && !old.is(ModRegistry.GAUNTLET_BLADE.get()) && !old.is(ModRegistry.GAUNTLET_CANNON.get())
                 && !old.is(ModRegistry.GAUNTLET_FIST.get())) {
             result.set(ModRegistry.GAUNTLET_RETURN.get(), ItemContainerContents.fromItems(List.of(old)));

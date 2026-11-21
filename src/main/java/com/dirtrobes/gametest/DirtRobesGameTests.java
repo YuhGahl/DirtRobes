@@ -546,7 +546,17 @@ public class DirtRobesGameTests {
         helper.assertTrue(com.dirtrobes.gauntlet.GauntletActions.toggleWeapon(player) && !com.dirtrobes.gauntlet.GauntletItem.modules(gauntlet).drawn(), "Lame rangée");
         dmg = player.getAttributeValue(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE);
         helper.assertTrue(Math.abs(dmg - 1.0) < 0.01, "Lame rangée : plus de bonus, " + dmg);
-        // 5) extraction
+        // 5) arme alimentée par un Spectrobe : Module de lame + gantelet + noyau de Zazanero → Lame Zaza
+        ItemStack core = com.dirtrobes.gauntlet.SpectrobeCoreItem.charged(com.dirtrobes.gauntlet.WeaponSpec.forSpecies("zazanero"));
+        var in4 = new net.minecraft.world.item.crafting.SmithingRecipeInput(new ItemStack(ModRegistry.MODULE_BLADE.get()), gauntlet.copy(), core);
+        var r4 = rm.getRecipeFor(net.minecraft.world.item.crafting.RecipeType.SMITHING, in4, helper.getLevel());
+        helper.assertTrue(r4.isPresent(), "Recette module + gantelet + noyau introuvable");
+        ItemStack powered = r4.get().value().assemble(in4, reg);
+        helper.assertTrue(com.dirtrobes.gauntlet.GauntletWeapon.get(powered).is(ModRegistry.SPECTROBE_WEAPONS.get("blade_zazanero").get()), "Lame Zaza installée");
+        var wrongKind = new net.minecraft.world.item.crafting.SmithingRecipeInput(new ItemStack(ModRegistry.MODULE_CANNON.get()), gauntlet.copy(), core);
+        helper.assertTrue(rm.getRecipeFor(net.minecraft.world.item.crafting.RecipeType.SMITHING, wrongKind, helper.getLevel()).isEmpty(),
+                "Un noyau de lame ne fait pas de canon");
+        // 6) extraction
         BlockPos stone = new BlockPos(10, 1, 12);
         helper.setBlock(stone, ModRegistry.FOSSIL_STONE.get());
         helper.assertTrue(com.dirtrobes.gauntlet.GauntletActions.extractAt(player, helper.absolutePos(stone)), "L'extraction devrait marcher");

@@ -81,7 +81,8 @@ public final class GauntletBladeRenderer {
     public static void onUseKey(InputEvent.InteractionKeyMappingTriggered event) {
         if (!event.isUseItem() || event.getHand() != InteractionHand.MAIN_HAND) return;
         var player = Minecraft.getInstance().player;
-        if (player == null || !GauntletActions.activeWeapon(player).is(ModRegistry.GAUNTLET_CANNON.get())) return;
+        if (player == null || !(GauntletActions.activeWeapon(player).getItem() instanceof com.dirtrobes.gauntlet.GauntletWeaponItem gw)
+                || !"cannon".equals(gw.kind())) return;
         PacketDistributor.sendToServer(new ModNetwork.GauntletPayload(3));
         event.setSwingHand(true);
         event.setCanceled(true);

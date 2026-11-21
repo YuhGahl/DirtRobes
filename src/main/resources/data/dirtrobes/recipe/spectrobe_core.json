@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "MMM",
+    "MDM",
+    "MMM"
+  ],
+  "key": {
+    "M": {
+      "tag": "dirtrobes:minerals"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    }
+  },
+  "result": {
+    "id": "dirtrobes:spectrobe_core",
+    "count": 1
+  }
+}

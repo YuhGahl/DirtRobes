@@ -96,14 +96,22 @@ public final class GauntletActions {
 
     /** Clic droit main vide avec le Canon déployé : tir d'énergie. */
     public static boolean fireCannon(ServerPlayer player) {
-        if (!activeWeapon(player).is(ModRegistry.GAUNTLET_CANNON.get())) return false;
+        ItemStack weapon = activeWeapon(player);
+        if (!(weapon.getItem() instanceof GauntletWeaponItem gw) || !"cannon".equals(gw.kind())) return false;
         if (player.getCooldowns().isOnCooldown(ModRegistry.GAUNTLET_CANNON.get())) return false;
-        GauntletShot shot = new GauntletShot(player.level(), player);
-        Vec3 look = player.getLookAngle();
-        shot.shoot(look.x, look.y, look.z, 2.2f, 0.5f);
-        player.level().addFreshEntity(shot);
+        WeaponSpec spec = gw.spec();
+        int shots = spec == null ? 1 : Math.max(1, spec.shots());
+        float spread = spec == null ? 0f : spec.spread();
+        boolean laser = spec != null && "laser".equals(spec.style());
+        for (int i = 0; i < shots; i++) {
+            float yawOffset = (i - (shots - 1) / 2f) * spread;
+            GauntletShot shot = new GauntletShot(player.level(), player).withPower(gw.shotDamage(), gw.effect());
+            shot.shootFromRotation(player, player.getXRot(), player.getYRot() + yawOffset, 0f, laser ? 3.5f : 2.2f, spread > 0 ? 0f : 0.5f);
+            player.level().addFreshEntity(shot);
+        }
         player.level().playSound(null, player.blockPosition(), SoundEvents.BEACON_DEACTIVATE, SoundSource.PLAYERS, 0.5f, 2.0f);
-        player.getCooldowns().addCooldown(ModRegistry.GAUNTLET_CANNON.get(), 10);
+        int cooldown = spec == null ? 10 : "bazooka".equals(spec.style()) ? 30 : shots >= 5 ? 20 : 12;
+        player.getCooldowns().addCooldown(ModRegistry.GAUNTLET_CANNON.get(), cooldown);
         com.dirtrobes.network.PlayerAnims.play(player, com.dirtrobes.network.PlayerAnims.CANNON);
         return true;
     }

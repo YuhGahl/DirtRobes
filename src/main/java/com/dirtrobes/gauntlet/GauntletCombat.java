@@ -67,6 +67,7 @@ public final class GauntletCombat {
         if (!(source.getDirectEntity() instanceof ServerPlayer player) || !source.is(DamageTypes.PLAYER_ATTACK)) return amount;
         ItemStack weapon = GauntletActions.activeWeapon(player);
         if (weapon.isEmpty()) return amount;
+        if (weapon.getItem() instanceof GauntletWeaponItem gw) amount *= gw.effect().damageMultiplier(target);
         return EnchantmentHelper.modifyDamage(player.serverLevel(), weapon, target, source, amount);
     }
 
@@ -78,6 +79,15 @@ public final class GauntletCombat {
         if (weapon.isEmpty()) return;
         ServerLevel level = player.serverLevel();
         EnchantmentHelper.doPostAttackEffectsWithItemSource(level, target, source, weapon);
+        if (weapon.getItem() instanceof GauntletWeaponItem gw && gw.effect() != WeaponEffect.NONE) {
+            if (gw.effect() == WeaponEffect.DOUBLE) {
+                // deuxième coup enchaîné (Lame Maya)
+                target.invulnerableTime = 0;
+                target.hurt(level.damageSources().playerAttack(player), (float) player.getAttributeValue(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE) * 0.5f);
+            } else {
+                gw.effect().apply(target, player);
+            }
+        }
         if (!weapon.isDamageableItem()) return;
         weapon.hurtAndBreak(1, level, player, item -> {});
         GauntletWeapon.set(gauntlet, weapon);

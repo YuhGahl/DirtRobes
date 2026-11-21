@@ -28,24 +28,50 @@ import java.util.List;
  */
 public class GauntletWeaponItem extends Item {
     private final String kind;
+    @org.jetbrains.annotations.Nullable
+    private final WeaponSpec spec;
 
     public GauntletWeaponItem(String kind, Properties props) {
-        super(props.stacksTo(1).attributes(attributes(kind)).component(net.minecraft.core.component.DataComponents.UNBREAKABLE,
+        this(kind, null, props);
+    }
+
+    /** Arme alimentée par un Spectrobe évolué (Spectrobes Origins). */
+    public GauntletWeaponItem(WeaponSpec spec, Properties props) {
+        this(spec.kind(), spec, props);
+    }
+
+    private GauntletWeaponItem(String kind, @org.jetbrains.annotations.Nullable WeaponSpec spec, Properties props) {
+        super(props.stacksTo(1).attributes(attributes(kind, spec)).component(net.minecraft.core.component.DataComponents.UNBREAKABLE,
                 new net.minecraft.world.item.component.Unbreakable(false)));
         this.kind = kind;
+        this.spec = spec;
     }
 
     public String kind() {
         return kind;
     }
 
-    private static ItemAttributeModifiers attributes(String kind) {
-        double damage = switch (kind) {
+    @org.jetbrains.annotations.Nullable
+    public WeaponSpec spec() {
+        return spec;
+    }
+
+    public WeaponEffect effect() {
+        return spec == null ? WeaponEffect.NONE : spec.effect();
+    }
+
+    /** Dégâts d'un tir de canon. */
+    public float shotDamage() {
+        return spec != null && "cannon".equals(kind) ? spec.damage() : GauntletShot.DAMAGE;
+    }
+
+    private static ItemAttributeModifiers attributes(String kind, @org.jetbrains.annotations.Nullable WeaponSpec spec) {
+        double damage = spec != null && !"cannon".equals(kind) ? spec.damage() : switch (kind) {
             case "blade" -> 6.0;
             case "fist" -> 4.0;
             default -> 1.0;
         };
-        double speed = switch (kind) {
+        double speed = spec != null && !"cannon".equals(kind) ? spec.speed() : switch (kind) {
             case "blade" -> -2.4;
             case "fist" -> -1.2;
             default -> -2.0;
@@ -54,7 +80,7 @@ public class GauntletWeaponItem extends Item {
                 .add(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_ID, damage, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
                 .add(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_ID, speed, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
                 .add(Attributes.ATTACK_KNOCKBACK, new AttributeModifier(ResourceLocation.fromNamespaceAndPath("dirtrobes", "gauntlet_knockback"),
-                        "fist".equals(kind) ? 1.0 : 0.0, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
+                        "fist".equals(kind) && spec == null ? 1.0 : 0.0, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
                 .build();
     }
 

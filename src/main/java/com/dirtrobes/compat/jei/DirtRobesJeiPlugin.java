@@ -41,11 +41,19 @@ public class DirtRobesJeiPlugin implements IModPlugin {
 
             @Override
             public <T extends IIngredientAcceptor<T>> void setAddition(GauntletModuleRecipe recipe, T acceptor) {
+                if ("core_weapon".equals(recipe.mode())) {
+                    for (var spec : coreSpecs(recipe)) acceptor.addItemStack(com.dirtrobes.gauntlet.SpectrobeCoreItem.charged(spec));
+                    return;
+                }
                 acceptor.addIngredients(recipe.addition());
             }
 
             @Override
             public <T extends IIngredientAcceptor<T>> void setOutput(GauntletModuleRecipe recipe, T acceptor) {
+                if ("core_weapon".equals(recipe.mode())) {
+                    for (var spec : coreSpecs(recipe)) acceptor.addItemStack(new ItemStack(ModRegistry.SPECTROBE_WEAPONS.get(spec.itemId()).get()));
+                    return;
+                }
                 ItemStack[] templates = recipe.template().getItems();
                 ItemStack[] additions = recipe.addition().getItems();
                 if (templates.length == 0 || additions.length == 0) return;
@@ -60,6 +68,13 @@ public class DirtRobesJeiPlugin implements IModPlugin {
         });
     }
 
+    /** Armes possibles pour une recette « noyau » : celles du type du module gabarit. */
+    private static java.util.List<com.dirtrobes.gauntlet.WeaponSpec> coreSpecs(GauntletModuleRecipe recipe) {
+        ItemStack[] t = recipe.template().getItems();
+        String kind = t.length > 0 && t[0].getItem() instanceof com.dirtrobes.gauntlet.ModuleItem m ? m.module() : "";
+        return com.dirtrobes.gauntlet.WeaponSpec.ALL.stream().filter(s -> s.kind().equals(kind)).toList();
+    }
+
     /** Pages d'information : ce que faisaient les lignes d'aide des infobulles. */
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
@@ -67,6 +82,7 @@ public class DirtRobesJeiPlugin implements IModPlugin {
         info(registration, "module", ModRegistry.MODULE_BLADE.get(), ModRegistry.MODULE_CANNON.get(), ModRegistry.MODULE_FIST.get(),
                 ModRegistry.MODULE_EXTRACTOR.get());
         info(registration, "prizmod", ModRegistry.PRIZMOD.get());
+        info(registration, "spectrobe_core", ModRegistry.SPECTROBE_CORE.get());
         for (var item : ModRegistry.COMBAT_ITEMS) {
             registration.addIngredientInfo(item.get(), Component.translatable("jei.dirtrobes.info.combat_item", CombatItem.SHARED_COOLDOWN / 20));
         }

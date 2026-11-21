@@ -1,0 +1,13 @@
+{
+  "type": "dirtrobes:gauntlet_module",
+  "mode": "core_weapon",
+  "template": {
+    "item": "dirtrobes:module_blade"
+  },
+  "base": {
+    "item": "dirtrobes:gauntlet"
+  },
+  "addition": {
+    "item": "dirtrobes:spectrobe_core"
+  }
+}

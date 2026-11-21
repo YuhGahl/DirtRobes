@@ -15,6 +15,15 @@ import net.minecraft.world.phys.HitResult;
 public class GauntletShot extends ThrowableItemProjectile {
     public static final float DAMAGE = 5.0f;
 
+    private float damage = DAMAGE;
+    private WeaponEffect effect = WeaponEffect.NONE;
+
+    public GauntletShot withPower(float damage, WeaponEffect effect) {
+        this.damage = damage;
+        this.effect = effect;
+        return this;
+    }
+
     public GauntletShot(EntityType<? extends GauntletShot> type, Level level) {
         super(type, level);
     }
@@ -43,13 +52,21 @@ public class GauntletShot extends ThrowableItemProjectile {
     @Override
     protected void onHitEntity(EntityHitResult result) {
         super.onHitEntity(result);
-        result.getEntity().hurt(damageSources().thrown(this, getOwner()), DAMAGE);
+        if (!(level() instanceof ServerLevel)) return;
+        var target = result.getEntity();
+        float amount = damage;
+        if (target instanceof LivingEntity living) amount *= effect.damageMultiplier(living);
+        target.hurt(damageSources().thrown(this, getOwner()), amount);
+        if (target instanceof LivingEntity living && getOwner() instanceof LivingEntity owner && effect != WeaponEffect.EXPLOSIVE) effect.apply(living, owner);
     }
 
     @Override
     protected void onHit(HitResult result) {
         super.onHit(result);
         if (level() instanceof ServerLevel server) {
+            if (effect == WeaponEffect.EXPLOSIVE) {
+                server.explode(getOwner(), getX(), getY(), getZ(), 1.5f, net.minecraft.world.level.Level.ExplosionInteraction.NONE);
+            }
             server.sendParticles(ParticleTypes.ELECTRIC_SPARK, getX(), getY(), getZ(), 12, 0.2, 0.2, 0.2, 0.2);
             discard();
         }
