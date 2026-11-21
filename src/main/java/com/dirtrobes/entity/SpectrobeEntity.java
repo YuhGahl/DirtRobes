@@ -133,6 +133,11 @@ public class SpectrobeEntity extends TamableAnimal implements BedrockPosable {
     }
 
     @Override
+    public Component nameTag() {
+        return Component.translatable("message.dirtrobes.nametag", getDisplayName(), getSpectrobeLevel());
+    }
+
+    @Override
     public boolean isFlyingNow() {
         return isFlyer() && !onGround() && !isInWater();
     }

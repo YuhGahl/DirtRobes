@@ -33,6 +33,7 @@ public class PenScreen extends Screen {
     private int sx, sy, sz, ox, oy, oz, px, py, pz;
     private int left;
     private int top;
+    private int panelH = 270;
 
     public PenScreen(Screen parent, BlockPos terminal, @Nullable Pen pen) {
         super(Component.translatable("gui.dirtrobes.pen.title"));
@@ -92,8 +93,8 @@ public class PenScreen extends Screen {
     @Override
     protected void init() {
         left = 8;
-        top = Math.max(8, (height - 270) / 2);
-        int y = top + 22;
+        top = Math.max(4, (height - 300) / 2);
+        int y = top + 32;
         addRenderableWidget(Button.builder(Component.translatable(enabled ? "gui.dirtrobes.pen.disable" : "gui.dirtrobes.pen.enable"), b -> {
             enabled = !enabled;
             send();
@@ -116,6 +117,7 @@ public class PenScreen extends Screen {
                 .bounds(left + 8, y + 4, W - 16, 18).build()).active = enabled;
         addRenderableWidget(Button.builder(Component.translatable("gui.done"), b -> onClose())
                 .bounds(left + 8, y + 26, W - 16, 18).build());
+        panelH = y + 26 + 18 + 8 - top;
     }
 
     private int section(int y, String key) {
@@ -169,14 +171,14 @@ public class PenScreen extends Screen {
     @Override
     public void renderBackground(GuiGraphics g, int mouseX, int mouseY, float partialTick) {
         // pas de flou : on veut voir l'enclos dans le monde
-        GuiDraw.panel(g, left, top, W, 270, 0xFF7FE08A);
+        GuiDraw.panel(g, left, top, W, panelH, 0xFF7FE08A);
     }
 
     @Override
     public void render(GuiGraphics g, int mouseX, int mouseY, float partialTick) {
         super.render(g, mouseX, mouseY, partialTick);
         g.drawString(font, title, left + 8, top + 8, 0xFFFFFFFF, true);
-        g.drawString(font, Component.translatable("gui.dirtrobes.pen.hint"), left + 8, top + 262 - 10, 0xFF6F8294, false);
+        g.drawString(font, Component.translatable("gui.dirtrobes.pen.hint"), left + 8, top + 19, 0xFF6F8294, false);
     }
 
     @Override

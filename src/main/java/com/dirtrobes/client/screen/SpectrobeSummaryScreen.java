@@ -189,7 +189,9 @@ public class SpectrobeSummaryScreen extends Screen {
 
     private void row(GuiGraphics g, int x, int y, String labelKey, Component value) {
         g.drawString(font, Component.translatable(labelKey), x, y, 0xFF8FA6B8, false);
-        g.drawString(font, value, x + 70, y, 0xFFFFFFFF, false);
+        int maxW = left + W - 6 - (x + 62);
+        var lines = font.split(value, maxW);
+        if (!lines.isEmpty()) g.drawString(font, lines.get(0), x + 62, y, 0xFFFFFFFF, false);
     }
 
     private void renderInfo(GuiGraphics g, TeamSummary m, Property p, int x, int y) {
@@ -201,14 +203,14 @@ public class SpectrobeSummaryScreen extends Screen {
         // PV
         float hpFrac = m.maxHealth() <= 0 ? 0 : m.health() / m.maxHealth();
         g.drawString(font, Component.translatable("stat.dirtrobes.health"), x, y + 64, 0xFF8FA6B8, false);
-        GuiDraw.bar(g, x + 70, y + 65, 100, 6, hpFrac, GuiDraw.hpColor(hpFrac, m.knockedOut()), 0xFF0D1117);
-        g.drawString(font, Component.literal(Mth.ceil(hpFrac * m.hp()) + " / " + m.hp()), x + 70, y + 74, 0xFFB8C4D0, false);
+        GuiDraw.bar(g, x + 62, y + 65, 100, 6, hpFrac, GuiDraw.hpColor(hpFrac, m.knockedOut()), 0xFF0D1117);
+        g.drawString(font, Component.literal(Mth.ceil(hpFrac * m.hp()) + " / " + m.hp()), x + 62, y + 74, 0xFFB8C4D0, false);
         // XP
         int span = Math.max(1, m.xpNextLevel() - m.xpLevelStart());
         float xpFrac = m.level() >= StatCalc.MAX_LEVEL ? 1f : (m.xp() - m.xpLevelStart()) / (float) span;
         g.drawString(font, Component.literal("XP"), x, y + 92, 0xFF8FA6B8, false);
-        GuiDraw.bar(g, x + 70, y + 93, 100, 6, xpFrac, 0xFF5FB4F3, 0xFF0D1117);
-        g.drawString(font, Component.translatable("gui.dirtrobes.summary.xp_next", Math.max(0, m.xpNextLevel() - m.xp())), x + 70, y + 102, 0xFFB8C4D0, false);
+        GuiDraw.bar(g, x + 62, y + 93, 100, 6, xpFrac, 0xFF5FB4F3, 0xFF0D1117);
+        g.drawString(font, Component.translatable("gui.dirtrobes.summary.xp_next", Math.max(0, m.xpNextLevel() - m.xp())), x + 62, y + 102, 0xFFB8C4D0, false);
     }
 
     private static String pct(float f) {
@@ -227,45 +229,64 @@ public class SpectrobeSummaryScreen extends Screen {
         int[] stats = {m.hp(), m.atk(), m.def(), m.spd()};
         int[] evs = {m.evHp(), m.evAtk(), m.evDef(), m.evSpd()};
         MineralItem.Stat[] order = {MineralItem.Stat.HEALTH, MineralItem.Stat.POWER, MineralItem.Stat.DEFENCE, MineralItem.Stat.SPEED};
-        int max = 20;
-        for (int s : stats) max = Math.max(max, s);
-        float ref = Math.max(max * 1.15f, 60f);
+        // Radar normalisé sur la meilleure stat, pour que la forme reste lisible même au niveau 1
+        int max = 1;
+        for (int st : stats) max = Math.max(max, st);
+        float ref = max * 1.15f;
         float[] values = new float[4];
         float[] evValues = new float[4];
         for (int i = 0; i < 4; i++) {
             values[i] = stats[i] / ref;
             evValues[i] = evs[i] / (float) StatCalc.MAX_EV_PER_STAT;
         }
-        // Radar : PV en haut, ATQ à droite, DÉF en bas, VIT à gauche
-        float cx = x + 46, cy = y + 62, r = 40;
+        // Radar à gauche (PV en haut, ATQ à droite, DÉF en bas, VIT à gauche), libellés courts aux pointes
+        float cx = x + 52, cy = y + 50, r = 30;
         GuiDraw.radarGrid(g, cx, cy, r, 4, 0x553A4A5C);
         GuiDraw.radar(g, cx, cy, r, values, GuiDraw.withAlpha(accent, 0x90), accent);
         GuiDraw.radar(g, cx, cy, r, evValues, 0x40FFFFFF, 0xC0FFFFFF);
-        String[][] labels = {{"stat.dirtrobes.health", "0", "-14"}, {"stat.dirtrobes.power", "1", "0"}, {"stat.dirtrobes.defence", "0", "12"}, {"stat.dirtrobes.speed", "-1", "0"}};
         for (int i = 0; i < 4; i++) {
-            MineralItem.Stat st = order[i];
-            int color = st == n.raised ? 0xFFFF8A7A : st == n.lowered ? 0xFF7FB2FF : 0xFFD8E2EC;
-            Component lbl = Component.translatable(labels[i][0]).append(" " + stats[i]);
-            double a = -Math.PI / 2 + i * Math.PI / 2;
-            float lx = cx + (float) Math.cos(a) * (r + 6), ly = cy + (float) Math.sin(a) * (r + 6);
+            Component lbl = Component.translatable("stat.dirtrobes." + order[i].id());
             int w = font.width(lbl);
-            int ax = labels[i][1].equals("1") ? 0 : labels[i][1].equals("-1") ? -w : -w / 2;
-            g.drawString(font, lbl, Math.round(lx + ax), Math.round(ly - 4 + Integer.parseInt(labels[i][2]) / 3f), color, true);
+            int lx, ly;
+            switch (i) {
+                case 0 -> { lx = Math.round(cx - w / 2f); ly = Math.round(cy - r - 11); }
+                case 1 -> { lx = Math.round(cx + r + 3); ly = Math.round(cy - 4); }
+                case 2 -> { lx = Math.round(cx - w / 2f); ly = Math.round(cy + r + 3); }
+                default -> { lx = Math.round(cx - r - 3 - w); ly = Math.round(cy - 4); }
+            }
+            g.drawString(font, lbl, lx, ly, natureColor(n, order[i]), true);
         }
-        // EV
-        int ex = x + 102, ey = y + 4;
+        // Colonne de droite : valeur de chaque stat + barre de ses EV
+        int ex = x + 110, ey = y + 2, bw = 72;
         g.drawString(font, Component.translatable("gui.dirtrobes.summary.ev", m.totalEv(), StatCalc.MAX_EV_TOTAL), ex, ey, 0xFF8FA6B8, false);
         for (int i = 0; i < 4; i++) {
-            int yy = ey + 14 + i * 22;
-            g.drawString(font, Component.translatable("stat.dirtrobes." + order[i].id()).append(" " + evs[i]), ex, yy, 0xFFD8E2EC, false);
-            GuiDraw.bar(g, ex, yy + 10, 76, 5, evs[i] / (float) StatCalc.MAX_EV_PER_STAT, 0xFFE8E8F0, 0xFF0D1117);
+            int yy = ey + 13 + i * 22;
+            g.drawString(font, Component.translatable("stat.dirtrobes." + order[i].id()), ex, yy, natureColor(n, order[i]), false);
+            String val = String.valueOf(stats[i]);
+            g.drawString(font, val, ex + bw - font.width(val), yy, 0xFFFFFFFF, true);
+            GuiDraw.bar(g, ex, yy + 10, bw, 3, evs[i] / (float) StatCalc.MAX_EV_PER_STAT, 0xFFE8E8F0, 0xFF0D1117);
+            g.drawString(font, "EV " + evs[i], ex, yy + 14, 0xFF6F8294, false);
         }
-        g.drawString(font, Component.translatable("gui.dirtrobes.summary.legend"), x, y + H - 76, 0xFF6F8294, false);
+        // Bas : légende puis soutien, coupés à la largeur du panneau
+        int ty = y + 104;
+        int width = left + W - 6 - x;
+        for (var line : font.split(Component.translatable("gui.dirtrobes.summary.legend"), width)) {
+            g.drawString(font, line, x, ty, 0xFF6F8294, false);
+            ty += 10;
+        }
         com.dirtrobes.combat.Support sup = ClientTeam.support();
         Component supText = !m.out() ? Component.translatable("gui.dirtrobes.summary.support_giver")
                 : sup.isEmpty() ? Component.translatable("gui.dirtrobes.summary.support_none")
                 : Component.translatable("gui.dirtrobes.summary.support", pct(sup.atk()), pct(sup.def()), pct(sup.spd()), pct(sup.hp()), pct(sup.ch()));
-        g.drawString(font, supText, x, y + H - 64, 0xFFB58CFF, false);
+        for (var line : font.split(supText, width)) {
+            g.drawString(font, line, x, ty + 2, 0xFFB58CFF, false);
+            ty += 10;
+        }
+    }
+
+    /** Rouge = stat montée par la nature, bleu = baissée. */
+    private static int natureColor(Nature n, MineralItem.Stat st) {
+        return st == n.raised ? 0xFFFF8A7A : st == n.lowered ? 0xFF7FB2FF : 0xFFD8E2EC;
     }
 
     private void renderEvolution(GuiGraphics g, TeamSummary m, int x, int y) {

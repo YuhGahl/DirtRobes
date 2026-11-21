@@ -79,6 +79,11 @@ public class BedrockEntityRenderer<T extends LivingEntity & BedrockPosable> exte
             poseStack.popPose();
         }
         super.render(entity, entityYaw, partialTick, poseStack, buffers, packedLight);
+        // Étiquette « Nom Niv. X » quand on vise la créature (comme Cobblemon)
+        net.minecraft.client.Minecraft mc = net.minecraft.client.Minecraft.getInstance();
+        if (mc.crosshairPickEntity == entity && !entity.isInvisible() && entity.nameTag() != null && !mc.options.hideGui) {
+            renderNameTag(entity, entity.nameTag(), poseStack, buffers, packedLight, partialTick);
+        }
     }
 
     /** Mélange la couleur de la propriété avec du blanc (amount = part de blanc). */

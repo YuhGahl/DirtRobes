@@ -36,6 +36,12 @@ public interface BedrockPosable {
         return false;
     }
 
+    /** Étiquette affichée au-dessus de la créature quand le joueur la vise (nom + niveau), ou null. */
+    @Nullable
+    default net.minecraft.network.chat.Component nameTag() {
+        return null;
+    }
+
     /** Couleur Chroma : 0 = normale, 1 = spéciale 1, 2 = spéciale 2. */
     default int colorVariant() {
         return 0;

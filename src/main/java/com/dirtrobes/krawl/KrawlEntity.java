@@ -291,6 +291,11 @@ public class KrawlEntity extends Monster implements BedrockPosable {
 
     // ----- BedrockPosable -----
     @Override
+    public Component nameTag() {
+        return Component.translatable("message.dirtrobes.nametag", getDisplayName(), getKrawlLevel());
+    }
+
+    @Override
     public String resolverStage() {
         return "krawl";
     }

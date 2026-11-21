@@ -391,5 +391,6 @@
   "gui.dirtrobes.pen.spawn": "Spawn point (inside the pen)",
   "gui.dirtrobes.pen.spawn_here": "Spawn point here (my position)",
   "gui.dirtrobes.pen.not_inside": "Stand inside the pen to put the spawn point there.",
-  "gui.dirtrobes.pen.hint": "Shift + click: ±5"
+  "gui.dirtrobes.pen.hint": "Shift + click: ±5",
+  "message.dirtrobes.nametag": "%s Lv. %s"
 }

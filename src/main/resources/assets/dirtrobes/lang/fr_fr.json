@@ -391,5 +391,6 @@
   "gui.dirtrobes.pen.spawn": "Point de spawn (dans l'enclos)",
   "gui.dirtrobes.pen.spawn_here": "Point de spawn ici (ma position)",
   "gui.dirtrobes.pen.not_inside": "Place-toi dans l'enclos pour y mettre le point de spawn.",
-  "gui.dirtrobes.pen.hint": "Maj + clic : ±5"
+  "gui.dirtrobes.pen.hint": "Maj + clic : ±5",
+  "message.dirtrobes.nametag": "%s Niv. %s"
 }
