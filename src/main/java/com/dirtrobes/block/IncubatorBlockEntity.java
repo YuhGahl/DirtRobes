@@ -95,6 +95,19 @@ public class IncubatorBlockEntity extends BlockEntity implements MenuProvider {
         return property != null;
     }
 
+    public int progress() {
+        return progress;
+    }
+
+    public int integrity() {
+        return integrity;
+    }
+
+    @javax.annotation.Nullable
+    public Property property() {
+        return property;
+    }
+
     /**
      * Résultat du mini-jeu de fouille, validé côté serveur.
      * @param integrity état du fossile (0 = brisé, 100 = intact)

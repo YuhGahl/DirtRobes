@@ -136,6 +136,8 @@ dependencies {
     // Better Combat + Player Animator : à la compilation seulement (intégrations optionnelles)
     compileOnly("maven.modrinth:5sy6g3kz:${better_combat_version}") { transitive = false }
     compileOnly("maven.modrinth:gedNE4y2:${player_animator_version}") { transitive = false }
+    // Jade : infobulle de l'incubateur (optionnel)
+    compileOnly("maven.modrinth:nvQzSEkH:${jade_version}") { transitive = false }
 
     // Example optional mod dependency with JEI
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime

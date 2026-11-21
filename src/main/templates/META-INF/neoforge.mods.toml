@@ -114,3 +114,11 @@ config="${mod_id}.mixins.json"
     versionRange="[2.0,)"
     ordering="NONE"
     side="CLIENT"
+
+# Jade : état et progression de l'incubateur dans l'infobulle (optionnel)
+[[dependencies.${mod_id}]]
+    modId="jade"
+    type="optional"
+    versionRange="[15,)"
+    ordering="NONE"
+    side="BOTH"

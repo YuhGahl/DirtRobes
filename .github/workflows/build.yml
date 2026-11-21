@@ -47,6 +47,8 @@ jobs:
           CC=$(grep '^cloth_config_version=' gradle.properties | cut -d= -f2)
           curl -fsSL -o run/mods/bettercombat.jar "https://api.modrinth.com/maven/maven/modrinth/5sy6g3kz/$BC/5sy6g3kz-$BC.jar"
           curl -fsSL -o run/mods/playeranimator.jar "https://api.modrinth.com/maven/maven/modrinth/gedNE4y2/$PA/gedNE4y2-$PA.jar"
+          JD=$(grep '^jade_version=' gradle.properties | cut -d= -f2)
+          curl -fsSL -o run/mods/jade.jar "https://api.modrinth.com/maven/maven/modrinth/nvQzSEkH/$JD/nvQzSEkH-$JD.jar"
           curl -fsSL -o run/mods/clothconfig.jar "https://api.modrinth.com/maven/maven/modrinth/9s6osm5g/$CC/9s6osm5g-$CC.jar"
           ls -la run/mods
 

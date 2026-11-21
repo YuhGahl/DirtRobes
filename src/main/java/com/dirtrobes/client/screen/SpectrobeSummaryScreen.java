@@ -226,9 +226,10 @@ public class SpectrobeSummaryScreen extends Screen {
 
     private void renderStats(GuiGraphics g, TeamSummary m, int accent, int x, int y) {
         Nature n = Nature.values()[m.nature()];
-        int[] stats = {m.hp(), m.atk(), m.def(), m.spd()};
-        int[] evs = {m.evHp(), m.evAtk(), m.evDef(), m.evSpd()};
-        MineralItem.Stat[] order = {MineralItem.Stat.HEALTH, MineralItem.Stat.POWER, MineralItem.Stat.DEFENCE, MineralItem.Stat.SPEED};
+        // ordre des branches : Nord, Est, Sud, Ouest
+        int[] stats = {m.hp(), m.atk(), m.spd(), m.def()};
+        int[] evs = {m.evHp(), m.evAtk(), m.evSpd(), m.evDef()};
+        MineralItem.Stat[] order = {MineralItem.Stat.HEALTH, MineralItem.Stat.POWER, MineralItem.Stat.SPEED, MineralItem.Stat.DEFENCE};
         int areaW = W - MODEL_W - 20;
         int max = 1;
         for (int st : stats) max = Math.max(max, st);
@@ -239,7 +240,7 @@ public class SpectrobeSummaryScreen extends Screen {
             values[i] = stats[i] / ref;
             evValues[i] = evs[i] / (float) StatCalc.MAX_EV_PER_STAT;
         }
-        // Radar centré : PV en haut, ATQ à droite, DÉF en bas, VIT à gauche
+        // Radar centré : PV au nord, ATQ à l'est, VIT au sud, DÉF à l'ouest
         float cx = x + areaW / 2f, cy = y + 40, r = 28;
         GuiDraw.radarGrid(g, cx, cy, r, 4, 0x553A4A5C);
         GuiDraw.radar(g, cx, cy, r, values, GuiDraw.withAlpha(accent, 0x90), accent);

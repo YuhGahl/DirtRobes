@@ -437,5 +437,11 @@
   "tooltip.dirtrobes.prizmod.4": "S'insère dans le gantelet",
   "tooltip.dirtrobes.module.weapon": "Installe une épée dans le gantelet (elle garde ses enchantements)",
   "tooltip.dirtrobes.gauntlet.drawn": "lame déployée (main vide)",
-  "tooltip.dirtrobes.gauntlet_weapon": "Arme du gantelet : B pour la ranger"
+  "tooltip.dirtrobes.gauntlet_weapon": "Arme du gantelet : B pour la ranger",
+  "jade.dirtrobes.incubator.on": "Incubateur : ON",
+  "jade.dirtrobes.incubator.off": "Incubateur : OFF",
+  "jade.dirtrobes.incubator.waiting": "En attente : %s",
+  "jade.dirtrobes.incubator.progress": "Éclosion %s %% (%s s)",
+  "jade.dirtrobes.incubator.integrity": "Intégrité du fossile : %s %%",
+  "config.jade.plugin_dirtrobes.incubator": "Incubateur DirtRobes"
 }

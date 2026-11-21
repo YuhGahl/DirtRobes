@@ -437,5 +437,11 @@
   "tooltip.dirtrobes.prizmod.4": "Fits into the gauntlet",
   "tooltip.dirtrobes.module.weapon": "Installs a sword in the gauntlet (it keeps its enchantments)",
   "tooltip.dirtrobes.gauntlet.drawn": "blade deployed (empty hand)",
-  "tooltip.dirtrobes.gauntlet_weapon": "Gauntlet weapon: B to put it away"
+  "tooltip.dirtrobes.gauntlet_weapon": "Gauntlet weapon: B to put it away",
+  "jade.dirtrobes.incubator.on": "Incubator: ON",
+  "jade.dirtrobes.incubator.off": "Incubator: OFF",
+  "jade.dirtrobes.incubator.waiting": "Waiting: %s",
+  "jade.dirtrobes.incubator.progress": "Awakening %s%% (%ss)",
+  "jade.dirtrobes.incubator.integrity": "Fossil integrity: %s%%",
+  "config.jade.plugin_dirtrobes.incubator": "DirtRobes Incubator"
 }
