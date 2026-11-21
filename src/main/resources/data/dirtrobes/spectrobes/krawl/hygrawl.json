@@ -1,0 +1,15 @@
+{
+  "name": "Hygrawl",
+  "property": "flash",
+  "behaviour": "melee",
+  "base_stats": {
+    "hp": 80,
+    "attack": 34,
+    "defense": 50
+  },
+  "min_level": 60,
+  "max_level": 64,
+  "scale": 1.0,
+  "speed": 0.3,
+  "weight": 5
+}

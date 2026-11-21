@@ -1,0 +1,15 @@
+{
+  "name": "Grezacht",
+  "property": "halo",
+  "behaviour": "melee",
+  "base_stats": {
+    "hp": 120,
+    "attack": 34,
+    "defense": 60
+  },
+  "min_level": 45,
+  "max_level": 49,
+  "scale": 0.6,
+  "speed": 0.3,
+  "weight": 5
+}

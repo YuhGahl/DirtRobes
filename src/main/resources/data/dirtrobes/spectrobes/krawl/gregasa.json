@@ -1,0 +1,15 @@
+{
+  "name": "Gregasa",
+  "property": "halo",
+  "behaviour": "melee",
+  "base_stats": {
+    "hp": 80,
+    "attack": 24,
+    "defense": 60
+  },
+  "min_level": 40,
+  "max_level": 44,
+  "scale": 0.75,
+  "speed": 0.26,
+  "weight": 5
+}

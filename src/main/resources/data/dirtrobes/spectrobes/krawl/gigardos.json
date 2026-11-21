@@ -1,0 +1,16 @@
+{
+  "name": "Gigardos",
+  "property": "flash",
+  "behaviour": "melee",
+  "base_stats": {
+    "hp": 130,
+    "attack": 40,
+    "defense": 80
+  },
+  "min_level": 30,
+  "max_level": 35,
+  "scale": 1.67,
+  "speed": 0.26,
+  "weight": 1,
+  "leader": true
+}

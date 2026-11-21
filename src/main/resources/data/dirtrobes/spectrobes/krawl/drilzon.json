@@ -1,0 +1,16 @@
+{
+  "name": "Drilzon",
+  "property": "aurora",
+  "behaviour": "melee",
+  "base_stats": {
+    "hp": 120,
+    "attack": 40,
+    "defense": 60
+  },
+  "min_level": 20,
+  "max_level": 25,
+  "scale": 1.67,
+  "speed": 0.26,
+  "weight": 1,
+  "leader": true
+}

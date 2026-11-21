@@ -1,0 +1,15 @@
+{
+  "name": "Neoderog",
+  "property": "prisma",
+  "behaviour": "melee",
+  "base_stats": {
+    "hp": 50,
+    "attack": 40,
+    "defense": 50
+  },
+  "min_level": 60,
+  "max_level": 64,
+  "scale": 0.6,
+  "speed": 0.3,
+  "weight": 5
+}

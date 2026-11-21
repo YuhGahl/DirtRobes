@@ -1,0 +1,15 @@
+{
+  "name": "Qorcid",
+  "property": "aurora",
+  "behaviour": "melee",
+  "base_stats": {
+    "hp": 40,
+    "attack": 20,
+    "defense": 55
+  },
+  "min_level": 17,
+  "max_level": 21,
+  "scale": 0.6,
+  "speed": 0.26,
+  "weight": 12
+}

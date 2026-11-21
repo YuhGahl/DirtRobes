@@ -1,0 +1,16 @@
+{
+  "name": "Dekaton",
+  "property": "aurora",
+  "behaviour": "melee",
+  "base_stats": {
+    "hp": 200,
+    "attack": 20,
+    "defense": 60
+  },
+  "min_level": 16,
+  "max_level": 21,
+  "scale": 1.33,
+  "speed": 0.22,
+  "weight": 1,
+  "leader": true
+}

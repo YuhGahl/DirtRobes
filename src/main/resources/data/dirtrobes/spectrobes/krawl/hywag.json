@@ -1,0 +1,15 @@
+{
+  "name": "Hywag",
+  "property": "flash",
+  "behaviour": "melee",
+  "base_stats": {
+    "hp": 60,
+    "attack": 26,
+    "defense": 40
+  },
+  "min_level": 20,
+  "max_level": 24,
+  "scale": 1.5,
+  "speed": 0.3,
+  "weight": 8
+}

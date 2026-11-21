@@ -1,0 +1,16 @@
+{
+  "name": "Galgor",
+  "property": "prisma",
+  "behaviour": "melee",
+  "base_stats": {
+    "hp": 110,
+    "attack": 20,
+    "defense": 40
+  },
+  "min_level": 12,
+  "max_level": 17,
+  "scale": 1.67,
+  "speed": 0.26,
+  "weight": 1,
+  "leader": true
+}

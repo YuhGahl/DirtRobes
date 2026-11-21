@@ -1,0 +1,16 @@
+{
+  "name": "Gafing",
+  "property": "eclipse",
+  "behaviour": "melee",
+  "base_stats": {
+    "hp": 130,
+    "attack": 40,
+    "defense": 68
+  },
+  "min_level": 55,
+  "max_level": 60,
+  "scale": 1.67,
+  "speed": 0.26,
+  "weight": 1,
+  "leader": true
+}

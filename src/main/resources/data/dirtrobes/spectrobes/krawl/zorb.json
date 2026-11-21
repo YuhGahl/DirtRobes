@@ -1,0 +1,15 @@
+{
+  "name": "Zorb",
+  "property": "prisma",
+  "behaviour": "melee",
+  "base_stats": {
+    "hp": 60,
+    "attack": 20,
+    "defense": 40
+  },
+  "min_level": 9,
+  "max_level": 13,
+  "scale": 1.5,
+  "speed": 0.3,
+  "weight": 12
+}

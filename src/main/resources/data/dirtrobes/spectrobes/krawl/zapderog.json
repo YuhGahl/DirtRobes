@@ -1,0 +1,15 @@
+{
+  "name": "Zapderog",
+  "property": "halo",
+  "behaviour": "melee",
+  "base_stats": {
+    "hp": 50,
+    "attack": 25,
+    "defense": 50
+  },
+  "min_level": 45,
+  "max_level": 49,
+  "scale": 0.6,
+  "speed": 0.3,
+  "weight": 5
+}

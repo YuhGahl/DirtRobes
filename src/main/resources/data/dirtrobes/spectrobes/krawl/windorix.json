@@ -1,0 +1,16 @@
+{
+  "name": "Windorix",
+  "property": "halo",
+  "behaviour": "melee",
+  "base_stats": {
+    "hp": 200,
+    "attack": 25,
+    "defense": 60
+  },
+  "min_level": 43,
+  "max_level": 48,
+  "scale": 2.0,
+  "speed": 0.3,
+  "weight": 1,
+  "leader": true
+}

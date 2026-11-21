@@ -1,0 +1,15 @@
+{
+  "name": "Grivo",
+  "property": "aurora",
+  "behaviour": "melee",
+  "base_stats": {
+    "hp": 50,
+    "attack": 20,
+    "defense": 40
+  },
+  "min_level": 16,
+  "max_level": 20,
+  "scale": 1.5,
+  "speed": 0.3,
+  "weight": 12
+}

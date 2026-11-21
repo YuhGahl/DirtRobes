@@ -1,0 +1,15 @@
+{
+  "name": "Doznail",
+  "property": "aurora",
+  "behaviour": "melee",
+  "base_stats": {
+    "hp": 30,
+    "attack": 30,
+    "defense": 70
+  },
+  "min_level": 44,
+  "max_level": 48,
+  "scale": 0.6,
+  "speed": 0.26,
+  "weight": 5
+}

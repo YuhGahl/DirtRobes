@@ -1,0 +1,15 @@
+{
+  "name": "Gerbarun",
+  "property": "prisma",
+  "behaviour": "melee",
+  "base_stats": {
+    "hp": 200,
+    "attack": 42,
+    "defense": 60
+  },
+  "min_level": 41,
+  "max_level": 45,
+  "scale": 0.6,
+  "speed": 0.3,
+  "weight": 5
+}

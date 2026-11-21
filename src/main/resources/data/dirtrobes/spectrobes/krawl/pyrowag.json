@@ -1,0 +1,15 @@
+{
+  "name": "Pyrowag",
+  "property": "corona",
+  "behaviour": "melee",
+  "base_stats": {
+    "hp": 60,
+    "attack": 26,
+    "defense": 40
+  },
+  "min_level": 48,
+  "max_level": 52,
+  "scale": 1.5,
+  "speed": 0.3,
+  "weight": 5
+}

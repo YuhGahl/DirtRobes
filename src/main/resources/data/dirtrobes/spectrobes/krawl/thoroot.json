@@ -1,0 +1,15 @@
+{
+  "name": "Thoroot",
+  "property": "aurora",
+  "behaviour": "melee",
+  "base_stats": {
+    "hp": 115,
+    "attack": 25,
+    "defense": 50
+  },
+  "min_level": 32,
+  "max_level": 36,
+  "scale": 1.25,
+  "speed": 0.26,
+  "weight": 8
+}

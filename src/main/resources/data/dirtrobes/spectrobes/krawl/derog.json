@@ -1,0 +1,15 @@
+{
+  "name": "Derog",
+  "property": "prisma",
+  "behaviour": "melee",
+  "base_stats": {
+    "hp": 50,
+    "attack": 30,
+    "defense": 50
+  },
+  "min_level": 32,
+  "max_level": 36,
+  "scale": 0.6,
+  "speed": 0.3,
+  "weight": 8
+}

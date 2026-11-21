@@ -1,0 +1,16 @@
+{
+  "name": "Thundorix",
+  "property": "halo",
+  "behaviour": "melee",
+  "base_stats": {
+    "hp": 200,
+    "attack": 25,
+    "defense": 60
+  },
+  "min_level": 45,
+  "max_level": 50,
+  "scale": 2.0,
+  "speed": 0.3,
+  "weight": 1,
+  "leader": true
+}

@@ -1,0 +1,15 @@
+{
+  "name": "Gerzerok",
+  "property": "prisma",
+  "behaviour": "melee",
+  "base_stats": {
+    "hp": 70,
+    "attack": 27,
+    "defense": 55
+  },
+  "min_level": 31,
+  "max_level": 35,
+  "scale": 1.0,
+  "speed": 0.26,
+  "weight": 8
+}

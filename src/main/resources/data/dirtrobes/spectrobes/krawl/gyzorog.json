@@ -1,0 +1,15 @@
+{
+  "name": "Gyzorog",
+  "property": "flash",
+  "behaviour": "melee",
+  "base_stats": {
+    "hp": 100,
+    "attack": 24,
+    "defense": 50
+  },
+  "min_level": 20,
+  "max_level": 24,
+  "scale": 0.62,
+  "speed": 0.26,
+  "weight": 8
+}

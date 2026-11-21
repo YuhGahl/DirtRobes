@@ -1,0 +1,15 @@
+{
+  "name": "Jagasa",
+  "property": "halo",
+  "behaviour": "melee",
+  "base_stats": {
+    "hp": 90,
+    "attack": 32,
+    "defense": 60
+  },
+  "min_level": 50,
+  "max_level": 54,
+  "scale": 0.75,
+  "speed": 0.26,
+  "weight": 5
+}

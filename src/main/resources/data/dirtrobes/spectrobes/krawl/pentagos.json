@@ -1,0 +1,16 @@
+{
+  "name": "Pentagos",
+  "property": "eclipse",
+  "behaviour": "melee",
+  "base_stats": {
+    "hp": 200,
+    "attack": 25,
+    "defense": 60
+  },
+  "min_level": 28,
+  "max_level": 33,
+  "scale": 2.0,
+  "speed": 0.22,
+  "weight": 1,
+  "leader": true
+}

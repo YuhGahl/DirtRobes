@@ -1,0 +1,15 @@
+{
+  "name": "Sangrawl",
+  "property": "eclipse",
+  "behaviour": "melee",
+  "base_stats": {
+    "hp": 80,
+    "attack": 30,
+    "defense": 50
+  },
+  "min_level": 30,
+  "max_level": 34,
+  "scale": 1.0,
+  "speed": 0.3,
+  "weight": 8
+}

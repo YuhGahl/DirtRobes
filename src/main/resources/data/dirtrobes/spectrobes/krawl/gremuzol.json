@@ -1,0 +1,15 @@
+{
+  "name": "Gremuzol",
+  "property": "prisma",
+  "behaviour": "melee",
+  "base_stats": {
+    "hp": 15,
+    "attack": 22,
+    "defense": 30
+  },
+  "min_level": 10,
+  "max_level": 14,
+  "scale": 0.6,
+  "speed": 0.26,
+  "weight": 12
+}

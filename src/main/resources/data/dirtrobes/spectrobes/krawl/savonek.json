@@ -1,0 +1,16 @@
+{
+  "name": "Savonek",
+  "property": "aurora",
+  "behaviour": "melee",
+  "base_stats": {
+    "hp": 200,
+    "attack": 30,
+    "defense": 60
+  },
+  "min_level": 38,
+  "max_level": 43,
+  "scale": 1.33,
+  "speed": 0.22,
+  "weight": 1,
+  "leader": true
+}

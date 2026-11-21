@@ -1,0 +1,15 @@
+{
+  "name": "Muzol",
+  "property": "prisma",
+  "behaviour": "melee",
+  "base_stats": {
+    "hp": 10,
+    "attack": 20,
+    "defense": 30
+  },
+  "min_level": 7,
+  "max_level": 11,
+  "scale": 0.6,
+  "speed": 0.26,
+  "weight": 12
+}
