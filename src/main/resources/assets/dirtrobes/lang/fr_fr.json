@@ -726,6 +726,8 @@
   "message.dirtrobes.cobblemon.none": "Aucun Spectrobe dans ton équipe Cobblemon.",
   "message.dirtrobes.cobblemon.none_back": "Aucun Spectrobe n'a pu revenir (combat en cours ou rangement plein).",
   "message.dirtrobes.cobblemon.back": "%s Spectrobe(s) revenu(s) de Cobblemon.",
+  "message.dirtrobes.card.ivs": "IV : PV %s · ATQ %s · DÉF %s · VIT %s (sur 31)",
+  "gui.dirtrobes.summary.ivs": "IV",
   "dirtrobes.species.anuberos.name": "Anuberos",
   "dirtrobes.species.anuberos.desc": "",
   "dirtrobes.species.anubi.name": "Anubi",
@@ -1215,7 +1217,5 @@
   "dirtrobes.species.zyrdrake.name": "Zyrdrake",
   "dirtrobes.species.zyrdrake.desc": "",
   "dirtrobes.species.zyrgazelle.name": "Zyrgazelle",
-  "dirtrobes.species.zyrgazelle.desc": "",
-  "message.dirtrobes.card.ivs": "IV : PV %s · ATQ %s · DÉF %s · VIT %s (sur 31)",
-  "gui.dirtrobes.summary.ivs": "IV"
+  "dirtrobes.species.zyrgazelle.desc": ""
 }

@@ -726,6 +726,8 @@
   "message.dirtrobes.cobblemon.none": "No Spectrobe in your Cobblemon party.",
   "message.dirtrobes.cobblemon.none_back": "No Spectrobe could come back (battle in progress or storage full).",
   "message.dirtrobes.cobblemon.back": "%s Spectrobe(s) came back from Cobblemon.",
+  "message.dirtrobes.card.ivs": "IVs: HP %s · ATK %s · DEF %s · SPD %s (out of 31)",
+  "gui.dirtrobes.summary.ivs": "IVs",
   "dirtrobes.species.anuberos.name": "Anuberos",
   "dirtrobes.species.anuberos.desc": "",
   "dirtrobes.species.anubi.name": "Anubi",
@@ -1215,7 +1217,5 @@
   "dirtrobes.species.zyrdrake.name": "Zyrdrake",
   "dirtrobes.species.zyrdrake.desc": "",
   "dirtrobes.species.zyrgazelle.name": "Zyrgazelle",
-  "dirtrobes.species.zyrgazelle.desc": "",
-  "message.dirtrobes.card.ivs": "IVs: HP %s · ATK %s · DEF %s · SPD %s (out of 31)",
-  "gui.dirtrobes.summary.ivs": "IVs"
+  "dirtrobes.species.zyrgazelle.desc": ""
 }

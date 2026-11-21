@@ -233,3 +233,48 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+def export_doc_table():
+    """docs/cobblemon_fiches.tsv : types, talents, attaques… de chaque Spectrobe côté Cobblemon (en français),
+    importé par l'onglet « Cobblemon » du document de conception (IMPORTDATA)."""
+    fr = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "cobblemon_fr_names.json"), encoding="utf-8"))
+    T = lambda t: fr.get(f"cobblemon.type.{t}", t) if t else ""
+    A = lambda a: fr.get(f"cobblemon.ability.{a}", a)
+    M = lambda m: fr.get(f"cobblemon.move.{m}", m)
+    groups = {"medium_fast": "Moyenne", "medium_slow": "Parabolique", "slow": "Lente", "fast": "Rapide"}
+    evn = {"hp": "PV", "attack": "ATQ", "defence": "DÉF", "special_attack": "Atq. Spé", "special_defence": "Déf. Spé", "speed": "VIT"}
+    src = {os.path.basename(f)[:-5]: json.load(open(f, encoding="utf-8")) for f in glob.glob(os.path.join(SRC, "*.json"))}
+    lines = ["\t".join(["Nom (comme dans la liste)", "Type 1", "Type 2", "Talent 1", "Talent 2", "Talent caché",
+                        "Attaques apprises (niveau)", "CT", "EV donnés", "Courbe d'XP", "Évolution (Cobblemon)"])]
+    for sid in sorted(src):
+        d = src[sid]
+        c = json.load(open(os.path.join(OUT, f"{sid}.json"), encoding="utf-8"))
+        name = d["name"]
+        if "_" in sid and sid.split("_")[0] in ("komainu", "komanoto"):
+            name = f"{d['name']} (lignée {sid.split('_')[1].capitalize()})"
+        normal = [A(a) for a in c["abilities"] if not a.startswith("h:")]
+        hidden = [A(a[2:]) for a in c["abilities"] if a.startswith("h:")]
+        level = [m for m in c["moves"] if not m.startswith("tm:")]
+        tms = [m[3:] for m in c["moves"] if m.startswith("tm:")]
+        evo = []
+        for e in c["evolutions"]:
+            res = src[e["result"].split(":")[1]]["name"]
+            lvl = e["requirements"][0]["minLevel"]
+            evo.append(f"{res} (niv. {lvl})" if e["variant"] == "level_up" else f"{res} (minéral d'Évolution, niv. {lvl}+)")
+        lines.append("\t".join([
+            name, T(c["primaryType"]), T(c.get("secondaryType")), normal[0] if normal else "",
+            normal[1] if len(normal) > 1 else "", hidden[0] if hidden else "",
+            ", ".join(f"{m.split(':')[0]} {M(m.split(':')[1])}" for m in level),
+            ", ".join(M(t) for t in tms),
+            " · ".join(f"{v} {evn[k]}" for k, v in c["evYield"].items() if v),
+            groups.get(c["experienceGroup"], c["experienceGroup"]), " · ".join(evo) or "—"]))
+    path = os.path.join(ROOT, "docs", "cobblemon_fiches.tsv")
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "w", encoding="utf-8") as fh:
+        fh.write("\n".join(lines) + "\n")
+    print(f"Tableau du document : {path}")
+
+
+if __name__ == "__main__":
+    export_doc_table()
