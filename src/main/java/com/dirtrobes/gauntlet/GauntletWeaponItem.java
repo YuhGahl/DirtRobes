@@ -23,14 +23,15 @@ import net.minecraft.world.phys.Vec3;
 import java.util.List;
 
 /**
- * Arme sortie du gantelet : liée au gantelet, elle disparaît si on la lâche, si on change d'objet en main
- * ou si on la range (touche B). Lame (corps à corps), Poing (rapide, recul) ou Canon (tirs d'énergie).
+ * Arme de module du gantelet : Lame (corps à corps), Poing (rapide, recul) ou Canon (tirs d'énergie).
+ * Elle vit dans le gantelet et n'en sort que dans la main (touche B). Incassable.
  */
 public class GauntletWeaponItem extends Item {
     private final String kind;
 
     public GauntletWeaponItem(String kind, Properties props) {
-        super(props.stacksTo(1).attributes(attributes(kind)));
+        super(props.stacksTo(1).attributes(attributes(kind)).component(net.minecraft.core.component.DataComponents.UNBREAKABLE,
+                new net.minecraft.world.item.component.Unbreakable(false)));
         this.kind = kind;
     }
 
@@ -73,30 +74,10 @@ public class GauntletWeaponItem extends Item {
         return InteractionResultHolder.sidedSuccess(stack, level.isClientSide);
     }
 
-    /** Disparaît dès qu'elle n'est plus dans la main principale. */
-    @Override
-    public void inventoryTick(ItemStack stack, Level level, Entity entity, int slot, boolean selected) {
-        if (!level.isClientSide && entity instanceof Player player && !(selected && player.getMainHandItem() == stack)) {
-            stack.setCount(0);
-        }
-    }
-
-    @Override
-    public boolean onDroppedByPlayer(ItemStack item, Player player) {
-        item.setCount(0);
-        return false;
-    }
-
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
         tooltip.add(Component.translatable("tooltip.dirtrobes.gauntlet_weapon").withStyle(ChatFormatting.DARK_GRAY));
     }
 
-    public static boolean isBound(ItemStack stack) {
-        return stack.getItem() instanceof GauntletWeaponItem;
-    }
 
-    static void markUnbreakable(ItemStack stack) {
-        stack.set(DataComponents.UNBREAKABLE, new net.minecraft.world.item.component.Unbreakable(false));
-    }
 }

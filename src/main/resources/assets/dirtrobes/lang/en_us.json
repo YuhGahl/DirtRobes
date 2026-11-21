@@ -415,14 +415,13 @@
   "tooltip.dirtrobes.module.cannon": "Weapon: a cannon firing energy",
   "tooltip.dirtrobes.module.fist": "Weapon: a fast fist with knockback",
   "tooltip.dirtrobes.module.extractor": "Lets you extract fossils from their stone (Z key)",
-  "tooltip.dirtrobes.module_how": "Smithing table: module + gauntlet + a mineral",
+  "tooltip.dirtrobes.module_how": "Smithing table: module + gauntlet + a mineral (Weapon Module: + a sword)",
   "tooltip.dirtrobes.gauntlet.weapon": "Weapon: %s",
   "tooltip.dirtrobes.gauntlet.extractor_on": "Extraction: yes",
   "tooltip.dirtrobes.gauntlet.extractor_off": "Extraction: no",
   "tooltip.dirtrobes.gauntlet.prizmod_on": "Prizmod inserted",
   "tooltip.dirtrobes.gauntlet.prizmod_off": "No Prizmod (click it with the Prizmod)",
   "tooltip.dirtrobes.gauntlet.keys": "B: weapon · Z: extract · P: team",
-  "tooltip.dirtrobes.gauntlet_weapon": "Bound to the gauntlet: B to put it away",
   "key.dirtrobes.gauntlet_weapon": "Gauntlet: draw / put away weapon",
   "key.dirtrobes.gauntlet_extract": "Gauntlet: extract a fossil",
   "key.dirtrobes.gauntlet_team": "Gauntlet: team (Prizmod)",
@@ -435,5 +434,9 @@
   "message.dirtrobes.gauntlet_no_extractor": "The gauntlet needs the extraction module.",
   "message.dirtrobes.gauntlet_not_fossil": "Aim at a fossil stone.",
   "message.dirtrobes.gauntlet_extracted": "Fossil extracted!",
-  "tooltip.dirtrobes.prizmod.4": "Fits into the gauntlet"
+  "tooltip.dirtrobes.prizmod.4": "Fits into the gauntlet",
+  "item.dirtrobes.module_weapon": "Weapon Module",
+  "tooltip.dirtrobes.module.weapon": "Installs a sword in the gauntlet (it keeps its enchantments)",
+  "tooltip.dirtrobes.gauntlet.drawn": "drawn (in your hand)",
+  "tooltip.dirtrobes.gauntlet_weapon": "Gauntlet weapon: B to put it away"
 }

@@ -1,0 +1,13 @@
+{
+  "type": "dirtrobes:gauntlet_module",
+  "mode": "addition_weapon",
+  "template": {
+    "item": "dirtrobes:module_weapon"
+  },
+  "base": {
+    "item": "dirtrobes:gauntlet"
+  },
+  "addition": {
+    "tag": "minecraft:swords"
+  }
+}

@@ -79,6 +79,13 @@ public final class ModRegistry {
     public static final DeferredHolder<net.minecraft.core.component.DataComponentType<?>, net.minecraft.core.component.DataComponentType<com.dirtrobes.gauntlet.GauntletModules>> GAUNTLET_MODULES =
             DATA_COMPONENTS.registerComponentType("gauntlet_modules", b -> b.persistent(com.dirtrobes.gauntlet.GauntletModules.CODEC)
                     .networkSynchronized(com.dirtrobes.gauntlet.GauntletModules.STREAM_CODEC));
+    public static final DeferredHolder<net.minecraft.core.component.DataComponentType<?>, net.minecraft.core.component.DataComponentType<net.minecraft.world.item.component.ItemContainerContents>> GAUNTLET_WEAPON =
+            DATA_COMPONENTS.registerComponentType("gauntlet_weapon", b -> b.persistent(net.minecraft.world.item.component.ItemContainerContents.CODEC)
+                    .networkSynchronized(net.minecraft.world.item.component.ItemContainerContents.STREAM_CODEC).cacheEncoding());
+    /** Arme à rendre au joueur quand il prend le gantelet à la table de forge (temporaire). */
+    public static final DeferredHolder<net.minecraft.core.component.DataComponentType<?>, net.minecraft.core.component.DataComponentType<net.minecraft.world.item.component.ItemContainerContents>> GAUNTLET_RETURN =
+            DATA_COMPONENTS.registerComponentType("gauntlet_return", b -> b.persistent(net.minecraft.world.item.component.ItemContainerContents.CODEC)
+                    .networkSynchronized(net.minecraft.world.item.component.ItemContainerContents.STREAM_CODEC));
     public static final DeferredHolder<net.minecraft.world.item.crafting.RecipeSerializer<?>, com.dirtrobes.gauntlet.GauntletModuleRecipe.Serializer> GAUNTLET_MODULE_SERIALIZER =
             RECIPE_SERIALIZERS.register("gauntlet_module", com.dirtrobes.gauntlet.GauntletModuleRecipe.Serializer::new);
 
@@ -200,6 +207,8 @@ public final class ModRegistry {
             p -> new com.dirtrobes.gauntlet.ModuleItem("cannon", p), new Item.Properties());
     public static final DeferredItem<com.dirtrobes.gauntlet.ModuleItem> MODULE_FIST = ITEMS.registerItem("module_fist",
             p -> new com.dirtrobes.gauntlet.ModuleItem("fist", p), new Item.Properties());
+    public static final DeferredItem<com.dirtrobes.gauntlet.ModuleItem> MODULE_WEAPON = ITEMS.registerItem("module_weapon",
+            p -> new com.dirtrobes.gauntlet.ModuleItem("weapon", p), new Item.Properties());
     public static final DeferredItem<com.dirtrobes.gauntlet.ModuleItem> MODULE_EXTRACTOR = ITEMS.registerItem("module_extractor",
             p -> new com.dirtrobes.gauntlet.ModuleItem("extractor", p), new Item.Properties());
 
@@ -248,6 +257,7 @@ public final class ModRegistry {
                 output.accept(MODULE_CANNON.get());
                 output.accept(MODULE_FIST.get());
                 output.accept(MODULE_EXTRACTOR.get());
+                output.accept(MODULE_WEAPON.get());
                 output.accept(SPECTROBE_PC_ITEM.get());
                 output.accept(LAB_TERMINAL_ITEM.get());
                 GEMS.forEach(g -> output.accept(g.get()));

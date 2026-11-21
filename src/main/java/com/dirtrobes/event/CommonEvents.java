@@ -73,6 +73,7 @@ public final class CommonEvents {
         bus.addListener(CommonEvents::onPlayerTick);
         bus.addListener(CommonEvents::onLogin);
         bus.addListener(CommonEvents::onLogout);
+        bus.addListener(CommonEvents::onToss);
     }
 
     private static void onReload(AddReloadListenerEvent event) {
@@ -119,6 +120,7 @@ public final class CommonEvents {
         if (event.getEntity() instanceof ServerPlayer player) {
             if (player.tickCount % 20 == 0) ChGauge.tickDecay(player);
             if (player.tickCount % 100 == 0) PrizmodTeam.restStored(player, 100);
+            if (player.tickCount % 5 == 0) com.dirtrobes.gauntlet.GauntletActions.tick(player);
             // Bandeau d'équipe : PV et XP à jour toutes les secondes
             if (player.tickCount % 20 == 10 && !PrizmodTeam.team(player).entries.isEmpty()) {
                 PrizmodTeam.applySupport(player);
@@ -134,11 +136,28 @@ public final class CommonEvents {
         }
     }
 
+    /** Arme liée jetée (touche Q) : elle retourne dans le gantelet au lieu de tomber. */
+    private static void onToss(net.neoforged.neoforge.event.entity.item.ItemTossEvent event) {
+        if (!(event.getPlayer() instanceof ServerPlayer player)) return;
+        net.minecraft.world.item.ItemStack stack = event.getEntity().getItem();
+        if (!com.dirtrobes.gauntlet.GauntletWeapon.isBound(stack)) return;
+        net.minecraft.world.item.ItemStack gauntlet = com.dirtrobes.gauntlet.GauntletAccess.find(player);
+        if (!gauntlet.isEmpty()) {
+            com.dirtrobes.gauntlet.GauntletActions.storeBack(player, gauntlet, stack.copy());
+            event.setCanceled(true);
+        }
+    }
+
     private static void onLogout(PlayerEvent.PlayerLoggedOutEvent event) {
         if (event.getEntity() instanceof ServerPlayer player) PrizmodTeam.storeAllOut(player);
     }
 
     private static void onDeath(LivingDeathEvent event) {
+        // le joueur meurt l'arme sortie : elle retourne dans le gantelet avant que l'inventaire tombe
+        if (event.getEntity() instanceof ServerPlayer deadPlayer) {
+            net.minecraft.world.item.ItemStack g = com.dirtrobes.gauntlet.GauntletAccess.find(deadPlayer);
+            if (!g.isEmpty() && com.dirtrobes.gauntlet.GauntletItem.modules(g).drawn()) com.dirtrobes.gauntlet.GauntletActions.sheathe(deadPlayer, g);
+        }
         if (event.getEntity() instanceof SpectrobeEntity dead && !dead.level().isClientSide) PrizmodTeam.onSpectrobeDied(dead);
         if (event.getSource().getEntity() instanceof SpectrobeEntity spectrobe && !spectrobe.level().isClientSide) {
             spectrobe.onKill(event.getEntity());

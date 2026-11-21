@@ -495,35 +495,55 @@ public class DirtRobesGameTests {
         helper.succeed();
     }
 
-    /** Gantelet : module à la table de forge, Prizmod requis, arme sortie / rangée, extraction des fossiles. */
+    /** Gantelet : module et épée à la table de forge (ancienne arme rendue), Prizmod requis, vraie épée sortie / rangée, extraction. */
     @GameTest(template = "platform", timeoutTicks = 60)
     public static void gauntletModulesWeaponsAndExtraction(GameTestHelper helper) {
         ServerPlayer player = placePlayer(helper, 10.5, 10.5);
-        // Table de forge : module d'extraction + gantelet + minéral
-        net.minecraft.world.item.crafting.SmithingRecipeInput in = new net.minecraft.world.item.crafting.SmithingRecipeInput(
-                new ItemStack(ModRegistry.MODULE_EXTRACTOR.get()), new ItemStack(ModRegistry.GAUNTLET.get()), new ItemStack(ModRegistry.MINERALS.get(0).get()));
-        var recipe = helper.getLevel().getRecipeManager().getRecipeFor(net.minecraft.world.item.crafting.RecipeType.SMITHING, in, helper.getLevel());
-        helper.assertTrue(recipe.isPresent(), "La recette de forge du module devrait exister");
-        ItemStack gauntlet = recipe.get().value().assemble(in, helper.getLevel().registryAccess());
-        gauntlet = recipe.get().value().assemble(new net.minecraft.world.item.crafting.SmithingRecipeInput(
-                new ItemStack(ModRegistry.MODULE_BLADE.get()), gauntlet, new ItemStack(ModRegistry.MINERALS.get(0).get())), helper.getLevel().registryAccess());
-        com.dirtrobes.gauntlet.GauntletModules m = com.dirtrobes.gauntlet.GauntletItem.modules(gauntlet);
-        helper.assertTrue(m.extractor() && "blade".equals(m.weapon()), "Modules attendus : extraction + lame, obtenu " + m);
+        var rm = helper.getLevel().getRecipeManager();
+        var reg = helper.getLevel().registryAccess();
+        ItemStack mineral = new ItemStack(ModRegistry.MINERALS.get(0).get());
+        // 1) module d'extraction
+        var in1 = new net.minecraft.world.item.crafting.SmithingRecipeInput(new ItemStack(ModRegistry.MODULE_EXTRACTOR.get()), new ItemStack(ModRegistry.GAUNTLET.get()), mineral);
+        var r1 = rm.getRecipeFor(net.minecraft.world.item.crafting.RecipeType.SMITHING, in1, helper.getLevel());
+        helper.assertTrue(r1.isPresent(), "Recette du module d'extraction introuvable");
+        ItemStack gauntlet = r1.get().value().assemble(in1, reg);
+        // 2) une épée en diamant enchantée devient l'arme
+        ItemStack sword = new ItemStack(net.minecraft.world.item.Items.DIAMOND_SWORD);
+        sword.setDamageValue(42);
+        var in2 = new net.minecraft.world.item.crafting.SmithingRecipeInput(new ItemStack(ModRegistry.MODULE_WEAPON.get()), gauntlet, sword);
+        var r2 = rm.getRecipeFor(net.minecraft.world.item.crafting.RecipeType.SMITHING, in2, helper.getLevel());
+        helper.assertTrue(r2.isPresent(), "Recette de l'épée introuvable");
+        gauntlet = r2.get().value().assemble(in2, reg);
+        helper.assertTrue(com.dirtrobes.gauntlet.GauntletWeapon.get(gauntlet).is(net.minecraft.world.item.Items.DIAMOND_SWORD), "L'épée devrait être dans le gantelet");
+        // 3) une épée en fer la remplace : l'épée en diamant doit être rendue
+        var in3 = new net.minecraft.world.item.crafting.SmithingRecipeInput(new ItemStack(ModRegistry.MODULE_WEAPON.get()), gauntlet,
+                new ItemStack(net.minecraft.world.item.Items.IRON_SWORD));
+        gauntlet = r2.get().value().assemble(in3, reg);
+        gauntlet.getItem().onCraftedBy(gauntlet, helper.getLevel(), player);
+        boolean gotBack = player.getInventory().items.stream().anyMatch(s -> s.is(net.minecraft.world.item.Items.DIAMOND_SWORD) && s.getDamageValue() == 42);
+        helper.assertTrue(gotBack, "L'ancienne épée (avec son usure) aurait dû être rendue");
+        helper.assertTrue(com.dirtrobes.gauntlet.GauntletWeapon.get(gauntlet).is(net.minecraft.world.item.Items.IRON_SWORD), "Nouvelle arme : épée en fer");
+        // 4) sortir / ranger
+        player.getInventory().clearContent();
         player.getInventory().setItem(9, gauntlet);
         player.getInventory().selected = 0;
-        player.getInventory().setItem(0, ItemStack.EMPTY);
         helper.assertTrue(!com.dirtrobes.gauntlet.GauntletActions.toggleWeapon(player), "Sans Prizmod inséré, pas d'arme");
-        gauntlet.set(ModRegistry.GAUNTLET_MODULES.get(), m.withPrizmod(true));
-        helper.assertTrue(com.dirtrobes.gauntlet.GauntletActions.toggleWeapon(player) && player.getMainHandItem().is(ModRegistry.GAUNTLET_BLADE.get()),
-                "La lame devrait sortir dans la main");
-        helper.assertTrue(com.dirtrobes.gauntlet.GauntletActions.toggleWeapon(player) && player.getMainHandItem().isEmpty(), "Puis se ranger");
-        // Extraction
+        gauntlet.set(ModRegistry.GAUNTLET_MODULES.get(), com.dirtrobes.gauntlet.GauntletItem.modules(gauntlet).withPrizmod(true));
+        helper.assertTrue(com.dirtrobes.gauntlet.GauntletActions.toggleWeapon(player) && player.getMainHandItem().is(net.minecraft.world.item.Items.IRON_SWORD),
+                "L'épée devrait sortir dans la main");
+        helper.assertTrue(com.dirtrobes.gauntlet.GauntletWeapon.isBound(player.getMainHandItem()), "L'épée sortie est liée au gantelet");
+        // elle quitte la main (déplacée dans l'inventaire) → elle revient dans le gantelet
+        player.getInventory().setItem(20, player.getMainHandItem().copy());
+        player.getInventory().setItem(0, ItemStack.EMPTY);
+        com.dirtrobes.gauntlet.GauntletActions.tick(player);
+        helper.assertTrue(player.getInventory().getItem(20).isEmpty() && com.dirtrobes.gauntlet.GauntletWeapon.get(gauntlet).is(net.minecraft.world.item.Items.IRON_SWORD)
+                && !com.dirtrobes.gauntlet.GauntletWeapon.isBound(com.dirtrobes.gauntlet.GauntletWeapon.get(gauntlet)), "L'épée aurait dû revenir dans le gantelet");
+        // 5) extraction
         BlockPos stone = new BlockPos(10, 1, 12);
         helper.setBlock(stone, ModRegistry.FOSSIL_STONE.get());
         helper.assertTrue(com.dirtrobes.gauntlet.GauntletActions.extractAt(player, helper.absolutePos(stone)), "L'extraction devrait marcher");
         helper.assertBlockPresent(net.minecraft.world.level.block.Blocks.COBBLESTONE, stone);
-        boolean gotFossil = player.getInventory().items.stream().anyMatch(s -> s.getItem() instanceof com.dirtrobes.item.FossilItem);
-        helper.assertTrue(gotFossil, "Un fossile devrait être dans l'inventaire");
+        helper.assertTrue(player.getInventory().items.stream().anyMatch(s -> s.getItem() instanceof com.dirtrobes.item.FossilItem), "Un fossile attendu");
         helper.succeed();
     }
 

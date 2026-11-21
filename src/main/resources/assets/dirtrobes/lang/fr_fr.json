@@ -415,14 +415,13 @@
   "tooltip.dirtrobes.module.cannon": "Arme : un canon qui tire de l'énergie",
   "tooltip.dirtrobes.module.fist": "Arme : un poing rapide qui repousse",
   "tooltip.dirtrobes.module.extractor": "Permet d'extraire les fossiles de leur pierre (touche Z)",
-  "tooltip.dirtrobes.module_how": "Table de forge : module + gantelet + un minéral",
+  "tooltip.dirtrobes.module_how": "Table de forge : module + gantelet + un minéral (Module d'arme : + une épée)",
   "tooltip.dirtrobes.gauntlet.weapon": "Arme : %s",
   "tooltip.dirtrobes.gauntlet.extractor_on": "Extraction : oui",
   "tooltip.dirtrobes.gauntlet.extractor_off": "Extraction : non",
   "tooltip.dirtrobes.gauntlet.prizmod_on": "Prizmod inséré",
   "tooltip.dirtrobes.gauntlet.prizmod_off": "Pas de Prizmod (clique dessus avec le Prizmod)",
   "tooltip.dirtrobes.gauntlet.keys": "B : arme · Z : extraire · P : équipe",
-  "tooltip.dirtrobes.gauntlet_weapon": "Liée au gantelet : B pour la ranger",
   "key.dirtrobes.gauntlet_weapon": "Gantelet : sortir / ranger l'arme",
   "key.dirtrobes.gauntlet_extract": "Gantelet : extraire un fossile",
   "key.dirtrobes.gauntlet_team": "Gantelet : équipe (Prizmod)",
@@ -435,5 +434,9 @@
   "message.dirtrobes.gauntlet_no_extractor": "Il faut le module d'extraction sur le gantelet.",
   "message.dirtrobes.gauntlet_not_fossil": "Vise une pierre à fossile.",
   "message.dirtrobes.gauntlet_extracted": "Fossile extrait !",
-  "tooltip.dirtrobes.prizmod.4": "S'insère dans le gantelet"
+  "tooltip.dirtrobes.prizmod.4": "S'insère dans le gantelet",
+  "item.dirtrobes.module_weapon": "Module d'arme",
+  "tooltip.dirtrobes.module.weapon": "Installe une épée dans le gantelet (elle garde ses enchantements)",
+  "tooltip.dirtrobes.gauntlet.drawn": "sortie (dans ta main)",
+  "tooltip.dirtrobes.gauntlet_weapon": "Arme du gantelet : B pour la ranger"
 }

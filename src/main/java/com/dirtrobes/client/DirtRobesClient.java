@@ -56,6 +56,8 @@ public class DirtRobesClient {
         modBus.addListener(DirtRobesClient::onKeys);
         modBus.addListener(DirtRobesClient::onMenuScreens);
         modBus.addListener(DirtRobesClient::onGuiLayers);
+        modBus.addListener(DirtRobesClient::onLayerDefinitions);
+        modBus.addListener(DirtRobesClient::onClientSetup);
         NeoForge.EVENT_BUS.addListener(DirtRobesClient::onClientTick);
         NeoForge.EVENT_BUS.addListener(PenOutlineRenderer::onRender);
     }
@@ -68,6 +70,18 @@ public class DirtRobesClient {
 
     private static void onReloadListeners(RegisterClientReloadListenersEvent event) {
         event.registerReloadListener(new ModelRepository());
+    }
+
+    private static void onLayerDefinitions(net.neoforged.neoforge.client.event.EntityRenderersEvent.RegisterLayerDefinitions event) {
+        event.registerLayerDefinition(com.dirtrobes.client.gauntlet.GauntletArmModel.LAYER, () -> com.dirtrobes.client.gauntlet.GauntletArmModel.create(false));
+        event.registerLayerDefinition(com.dirtrobes.client.gauntlet.GauntletArmModel.LAYER_SLIM, () -> com.dirtrobes.client.gauntlet.GauntletArmModel.create(true));
+    }
+
+    /** Gantelet visible sur le bras : seulement si Curios est installé. */
+    private static void onClientSetup(net.neoforged.fml.event.lifecycle.FMLClientSetupEvent event) {
+        if (net.neoforged.fml.ModList.get().isLoaded("curios")) {
+            event.enqueueWork(com.dirtrobes.client.gauntlet.GauntletCurioRenderer::register);
+        }
     }
 
     private static void onGuiLayers(RegisterGuiLayersEvent event) {

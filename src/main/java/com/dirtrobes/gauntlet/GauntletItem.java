@@ -24,6 +24,18 @@ public class GauntletItem extends Item {
         return stack.getOrDefault(ModRegistry.GAUNTLET_MODULES.get(), GauntletModules.NONE);
     }
 
+    /** Pris à la table de forge : rend au joueur l'arme qui était installée avant. */
+    @Override
+    public void onCraftedBy(ItemStack stack, net.minecraft.world.level.Level level, net.minecraft.world.entity.player.Player player) {
+        var pending = stack.get(ModRegistry.GAUNTLET_RETURN.get());
+        if (pending == null) return;
+        stack.remove(ModRegistry.GAUNTLET_RETURN.get());
+        if (!level.isClientSide) {
+            ItemStack old = pending.copyOne();
+            if (!old.isEmpty() && !player.getInventory().add(old)) player.drop(old, false);
+        }
+    }
+
     /** Insérer le Prizmod (clic avec le Prizmod sur le gantelet) ou le ressortir (clic droit, curseur vide). */
     @Override
     public boolean overrideOtherStackedOnMe(ItemStack gauntlet, ItemStack carried, net.minecraft.world.inventory.Slot slot,
@@ -50,8 +62,10 @@ public class GauntletItem extends Item {
         GauntletModules m = modules(stack);
         tooltip.add(Component.translatable(m.prizmod() ? "tooltip.dirtrobes.gauntlet.prizmod_on" : "tooltip.dirtrobes.gauntlet.prizmod_off")
                 .withStyle(m.prizmod() ? ChatFormatting.AQUA : ChatFormatting.RED));
+        ItemStack weapon = GauntletWeapon.get(stack);
         tooltip.add(Component.translatable("tooltip.dirtrobes.gauntlet.weapon",
-                Component.translatable(m.hasWeapon() ? "module.dirtrobes." + m.weapon() : "module.dirtrobes.none")).withStyle(ChatFormatting.GRAY));
+                m.drawn() ? Component.translatable("tooltip.dirtrobes.gauntlet.drawn")
+                        : weapon.isEmpty() ? Component.translatable("module.dirtrobes.none") : weapon.getHoverName()).withStyle(ChatFormatting.GRAY));
         tooltip.add(Component.translatable(m.extractor() ? "tooltip.dirtrobes.gauntlet.extractor_on" : "tooltip.dirtrobes.gauntlet.extractor_off")
                 .withStyle(ChatFormatting.GRAY));
         tooltip.add(Component.translatable("tooltip.dirtrobes.gauntlet.keys").withStyle(ChatFormatting.DARK_GRAY));
