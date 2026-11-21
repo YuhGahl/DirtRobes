@@ -24,6 +24,5 @@ public class ModuleItem extends Item {
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
         tooltip.add(Component.translatable("tooltip.dirtrobes.module." + module).withStyle(ChatFormatting.GRAY));
-        tooltip.add(Component.translatable("tooltip.dirtrobes.module_how").withStyle(ChatFormatting.DARK_GRAY));
     }
 }

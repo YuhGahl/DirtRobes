@@ -68,6 +68,5 @@ public class GauntletItem extends Item {
                         : weapon.isEmpty() ? Component.translatable("module.dirtrobes.none") : weapon.getHoverName()).withStyle(ChatFormatting.GRAY));
         tooltip.add(Component.translatable(m.extractor() ? "tooltip.dirtrobes.gauntlet.extractor_on" : "tooltip.dirtrobes.gauntlet.extractor_off")
                 .withStyle(ChatFormatting.GRAY));
-        tooltip.add(Component.translatable("tooltip.dirtrobes.gauntlet.keys").withStyle(ChatFormatting.DARK_GRAY));
     }
 }

@@ -76,7 +76,6 @@ public class GauntletWeaponItem extends Item {
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
-        tooltip.add(Component.translatable("tooltip.dirtrobes.gauntlet_weapon").withStyle(ChatFormatting.DARK_GRAY));
     }
 
 

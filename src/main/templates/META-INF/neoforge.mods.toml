@@ -122,3 +122,11 @@ config="${mod_id}.mixins.json"
     versionRange="[15,)"
     ordering="NONE"
     side="BOTH"
+
+# JEI : recettes du gantelet et pages d'info (optionnel)
+[[dependencies.${mod_id}]]
+    modId="jei"
+    type="optional"
+    versionRange="[19,)"
+    ordering="NONE"
+    side="BOTH"

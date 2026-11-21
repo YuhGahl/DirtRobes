@@ -69,9 +69,6 @@ public class PrizmodItem extends Item {
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
-        tooltip.add(Component.translatable("tooltip.dirtrobes.prizmod.1").withStyle(ChatFormatting.GRAY));
-        tooltip.add(Component.translatable("tooltip.dirtrobes.prizmod.2").withStyle(ChatFormatting.GRAY));
-        tooltip.add(Component.translatable("tooltip.dirtrobes.prizmod.3").withStyle(ChatFormatting.GRAY));
         tooltip.add(Component.translatable("tooltip.dirtrobes.prizmod.4").withStyle(ChatFormatting.AQUA));
     }
 }

@@ -138,6 +138,8 @@ dependencies {
     compileOnly("maven.modrinth:gedNE4y2:${player_animator_version}") { transitive = false }
     // Jade : infobulle de l'incubateur (optionnel)
     compileOnly("maven.modrinth:nvQzSEkH:${jade_version}") { transitive = false }
+    // JEI : recettes du gantelet à la table de forge + pages d'info (optionnel)
+    compileOnly("maven.modrinth:u6dRKJwZ:${jei_version}") { transitive = false }
 
     // Example optional mod dependency with JEI
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
