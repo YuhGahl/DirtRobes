@@ -22,7 +22,7 @@ import java.util.List;
  * Table de forge, sur le gantelet (base) :
  * <ul>
  *   <li>mode « module » : module (gabarit) + minéral (ajout) → installe l'arme ou l'extraction du module ;</li>
- *   <li>mode « addition_weapon » : Module d'arme (gabarit) + une épée (ajout) → l'épée devient l'arme du gantelet.</li>
+ *   <li>mode « addition_weapon » : Module de lame (gabarit) + une épée (ajout) → l'épée devient l'arme du gantelet.</li>
  * </ul>
  * L'arme qui était déjà installée est rendue au joueur quand il récupère le gantelet.
  */
@@ -31,7 +31,6 @@ public record GauntletModuleRecipe(Ingredient template, Ingredient base, Ingredi
     @Override
     public boolean matches(SmithingRecipeInput input, Level level) {
         if (!template.test(input.template()) || !base.test(input.base()) || !addition.test(input.addition())) return false;
-        if (GauntletItem.modules(input.base()).drawn()) return false; // l'arme est sortie : la ranger d'abord
         if ("addition_weapon".equals(mode)) return true;
         return input.template().getItem() instanceof ModuleItem m && !("extractor".equals(m.module()) && GauntletItem.modules(input.base()).extractor());
     }

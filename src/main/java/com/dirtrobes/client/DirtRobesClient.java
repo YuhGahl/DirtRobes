@@ -59,6 +59,9 @@ public class DirtRobesClient {
         modBus.addListener(DirtRobesClient::onLayerDefinitions);
         modBus.addListener(DirtRobesClient::onClientSetup);
         NeoForge.EVENT_BUS.addListener(DirtRobesClient::onClientTick);
+        NeoForge.EVENT_BUS.addListener(com.dirtrobes.client.gauntlet.GauntletBladeRenderer::onRenderArm);
+        NeoForge.EVENT_BUS.addListener(com.dirtrobes.client.gauntlet.GauntletBladeRenderer::onUseKey);
+        modBus.addListener(com.dirtrobes.client.gauntlet.GauntletBladeRenderer::onAddLayers);
         NeoForge.EVENT_BUS.addListener(PenOutlineRenderer::onRender);
     }
 

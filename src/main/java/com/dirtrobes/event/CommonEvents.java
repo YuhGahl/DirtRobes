@@ -74,6 +74,8 @@ public final class CommonEvents {
         bus.addListener(CommonEvents::onLogin);
         bus.addListener(CommonEvents::onLogout);
         bus.addListener(CommonEvents::onToss);
+        bus.addListener(net.neoforged.bus.api.EventPriority.HIGH, CommonEvents::onGauntletDamage);
+        bus.addListener(CommonEvents::onGauntletDamagePost);
     }
 
     private static void onReload(AddReloadListenerEvent event) {
@@ -120,7 +122,8 @@ public final class CommonEvents {
         if (event.getEntity() instanceof ServerPlayer player) {
             if (player.tickCount % 20 == 0) ChGauge.tickDecay(player);
             if (player.tickCount % 100 == 0) PrizmodTeam.restStored(player, 100);
-            if (player.tickCount % 5 == 0) com.dirtrobes.gauntlet.GauntletActions.tick(player);
+            if (player.tickCount % 20 == 0) com.dirtrobes.gauntlet.GauntletActions.tick(player);
+            com.dirtrobes.gauntlet.GauntletCombat.syncAttributes(player);
             // Bandeau d'équipe : PV et XP à jour toutes les secondes
             if (player.tickCount % 20 == 10 && !PrizmodTeam.team(player).entries.isEmpty()) {
                 PrizmodTeam.applySupport(player);
@@ -148,15 +151,26 @@ public final class CommonEvents {
         }
     }
 
+    private static void onGauntletDamage(LivingIncomingDamageEvent event) {
+        event.setAmount(com.dirtrobes.gauntlet.GauntletCombat.modifyDamage(event.getEntity(), event.getSource(), event.getAmount()));
+    }
+
+    private static void onGauntletDamagePost(net.neoforged.neoforge.event.entity.living.LivingDamageEvent.Post event) {
+        com.dirtrobes.gauntlet.GauntletCombat.afterHit(event.getEntity(), event.getSource());
+    }
+
     private static void onLogout(PlayerEvent.PlayerLoggedOutEvent event) {
-        if (event.getEntity() instanceof ServerPlayer player) PrizmodTeam.storeAllOut(player);
+        if (event.getEntity() instanceof ServerPlayer player) {
+            PrizmodTeam.storeAllOut(player);
+            com.dirtrobes.gauntlet.GauntletCombat.forget(player);
+        }
     }
 
     private static void onDeath(LivingDeathEvent event) {
         // le joueur meurt l'arme sortie : elle retourne dans le gantelet avant que l'inventaire tombe
         if (event.getEntity() instanceof ServerPlayer deadPlayer) {
             net.minecraft.world.item.ItemStack g = com.dirtrobes.gauntlet.GauntletAccess.find(deadPlayer);
-            if (!g.isEmpty() && com.dirtrobes.gauntlet.GauntletItem.modules(g).drawn()) com.dirtrobes.gauntlet.GauntletActions.sheathe(deadPlayer, g);
+            if (!g.isEmpty()) com.dirtrobes.gauntlet.GauntletActions.sheathe(deadPlayer, g);
         }
         if (event.getEntity() instanceof SpectrobeEntity dead && !dead.level().isClientSide) PrizmodTeam.onSpectrobeDied(dead);
         if (event.getSource().getEntity() instanceof SpectrobeEntity spectrobe && !spectrobe.level().isClientSide) {

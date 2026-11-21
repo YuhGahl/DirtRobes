@@ -207,8 +207,6 @@ public final class ModRegistry {
             p -> new com.dirtrobes.gauntlet.ModuleItem("cannon", p), new Item.Properties());
     public static final DeferredItem<com.dirtrobes.gauntlet.ModuleItem> MODULE_FIST = ITEMS.registerItem("module_fist",
             p -> new com.dirtrobes.gauntlet.ModuleItem("fist", p), new Item.Properties());
-    public static final DeferredItem<com.dirtrobes.gauntlet.ModuleItem> MODULE_WEAPON = ITEMS.registerItem("module_weapon",
-            p -> new com.dirtrobes.gauntlet.ModuleItem("weapon", p), new Item.Properties());
     public static final DeferredItem<com.dirtrobes.gauntlet.ModuleItem> MODULE_EXTRACTOR = ITEMS.registerItem("module_extractor",
             p -> new com.dirtrobes.gauntlet.ModuleItem("extractor", p), new Item.Properties());
 
@@ -257,7 +255,6 @@ public final class ModRegistry {
                 output.accept(MODULE_CANNON.get());
                 output.accept(MODULE_FIST.get());
                 output.accept(MODULE_EXTRACTOR.get());
-                output.accept(MODULE_WEAPON.get());
                 output.accept(SPECTROBE_PC_ITEM.get());
                 output.accept(LAB_TERMINAL_ITEM.get());
                 GEMS.forEach(g -> output.accept(g.get()));

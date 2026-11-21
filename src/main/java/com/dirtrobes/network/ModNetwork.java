@@ -120,7 +120,7 @@ public final class ModNetwork {
     public static volatile int clientCh;
 
     public static void register(RegisterPayloadHandlersEvent event) {
-        event.registrar("6")
+        event.registrar("7")
                 .playToClient(ChSyncPayload.TYPE, ChSyncPayload.STREAM_CODEC, (payload, context) -> clientCh = payload.ch())
                 .playToClient(TeamSyncPayload.TYPE, TeamSyncPayload.STREAM_CODEC, ModNetwork::handleTeamSync)
                 .playToServer(TeamActionPayload.TYPE, TeamActionPayload.STREAM_CODEC, ModNetwork::handleTeamAction)
@@ -130,6 +130,7 @@ public final class ModNetwork {
                         case 0 -> com.dirtrobes.gauntlet.GauntletActions.toggleWeapon(player);
                         case 1 -> com.dirtrobes.gauntlet.GauntletActions.extract(player);
                         case 2 -> com.dirtrobes.gauntlet.GauntletActions.openTeam(player);
+                        case 3 -> com.dirtrobes.gauntlet.GauntletActions.fireCannon(player);
                         default -> {
                         }
                     }

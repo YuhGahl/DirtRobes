@@ -51,33 +51,61 @@ public final class GauntletActions {
         return m;
     }
 
-    /** Touche B : sortir l'arme du gantelet dans la main (vide), ou la ranger si on la tient. */
+    /**
+     * L'arme active du joueur : gantelet avec Prizmod, lame déployée (touche B) et main principale vide.
+     * L'arme reste dans le gantelet : c'est un effet visuel + ses statistiques appliquées au joueur.
+     */
+    public static ItemStack activeWeapon(net.minecraft.world.entity.player.Player player) {
+        if (!player.getMainHandItem().isEmpty()) return ItemStack.EMPTY;
+        ItemStack gauntlet = GauntletAccess.find(player);
+        if (gauntlet.isEmpty()) return ItemStack.EMPTY;
+        GauntletModules m = GauntletItem.modules(gauntlet);
+        if (!m.drawn() || !m.prizmod()) return ItemStack.EMPTY;
+        return GauntletWeapon.get(gauntlet);
+    }
+
+    /** Touche B : déployer ou ranger la lame. */
     public static boolean toggleWeapon(ServerPlayer player) {
         ItemStack gauntlet = GauntletAccess.find(player);
-        if (!gauntlet.isEmpty() && GauntletItem.modules(gauntlet).drawn()) return sheathe(player, gauntlet);
+        if (!gauntlet.isEmpty() && GauntletItem.modules(gauntlet).drawn()) {
+            gauntlet.set(ModRegistry.GAUNTLET_MODULES.get(), GauntletItem.modules(gauntlet).withDrawn(false));
+            player.level().playSound(null, player.blockPosition(), SoundEvents.BEACON_DEACTIVATE, SoundSource.PLAYERS, 0.5f, 1.8f);
+            GauntletCombat.syncAttributes(player);
+            return true;
+        }
         GauntletModules m = ready(player);
         if (m == null) return false;
-        ItemStack weapon = GauntletWeapon.get(gauntlet);
-        if (weapon.isEmpty()) {
+        if (GauntletWeapon.get(gauntlet).isEmpty()) {
             player.displayClientMessage(Component.translatable("message.dirtrobes.gauntlet_no_weapon"), true);
             return false;
         }
+        gauntlet.set(ModRegistry.GAUNTLET_MODULES.get(), m.withDrawn(true));
         if (!player.getMainHandItem().isEmpty()) {
             player.displayClientMessage(Component.translatable("message.dirtrobes.gauntlet_hand_full"), true);
-            return false;
         }
-        player.getInventory().setItem(player.getInventory().selected, GauntletWeapon.mark(weapon));
-        GauntletWeapon.set(gauntlet, ItemStack.EMPTY);
-        gauntlet.set(ModRegistry.GAUNTLET_MODULES.get(), m.withDrawn(true));
         player.level().playSound(null, player.blockPosition(), SoundEvents.BEACON_ACTIVATE, SoundSource.PLAYERS, 0.5f, 1.8f);
         if (player.level() instanceof ServerLevel server) {
             server.sendParticles(ParticleTypes.ELECTRIC_SPARK, player.getX(), player.getY() + 1.1, player.getZ(), 15, 0.3, 0.3, 0.3, 0.1);
         }
+        GauntletCombat.syncAttributes(player);
         return true;
     }
 
-    /** Range l'arme liée (où qu'elle soit dans l'inventaire) dans le gantelet. */
-    public static boolean sheathe(ServerPlayer player, ItemStack gauntlet) {
+    /** Clic droit main vide avec le Canon déployé : tir d'énergie. */
+    public static boolean fireCannon(ServerPlayer player) {
+        if (!activeWeapon(player).is(ModRegistry.GAUNTLET_CANNON.get())) return false;
+        if (player.getCooldowns().isOnCooldown(ModRegistry.GAUNTLET_CANNON.get())) return false;
+        GauntletShot shot = new GauntletShot(player.level(), player);
+        Vec3 look = player.getLookAngle();
+        shot.shoot(look.x, look.y, look.z, 2.2f, 0.5f);
+        player.level().addFreshEntity(shot);
+        player.level().playSound(null, player.blockPosition(), SoundEvents.BEACON_DEACTIVATE, SoundSource.PLAYERS, 0.5f, 2.0f);
+        player.getCooldowns().addCooldown(ModRegistry.GAUNTLET_CANNON.get(), 10);
+        return true;
+    }
+
+    /** Anciennes versions : une épée « liée » sortie du gantelet retourne dedans. */
+    public static void sheathe(ServerPlayer player, ItemStack gauntlet) {
         ItemStack found = ItemStack.EMPTY;
         var inv = player.getInventory();
         for (int i = 0; i < inv.getContainerSize(); i++) {
@@ -87,30 +115,17 @@ public final class GauntletActions {
                 inv.setItem(i, ItemStack.EMPTY);
             }
         }
-        if (GauntletWeapon.isBound(player.containerMenu.getCarried())) {
-            if (found.isEmpty()) found = player.containerMenu.getCarried().copy();
-            player.containerMenu.setCarried(ItemStack.EMPTY);
-        }
-        return storeBack(player, gauntlet, found);
+        if (!found.isEmpty()) storeBack(player, gauntlet, found);
     }
 
-    /** Remet une arme liée dans le gantelet (ou rien si elle a été détruite). */
-    public static boolean storeBack(ServerPlayer player, ItemStack gauntlet, ItemStack weapon) {
-        if (!weapon.isEmpty()) GauntletWeapon.set(gauntlet, GauntletWeapon.unmark(weapon));
-        gauntlet.set(ModRegistry.GAUNTLET_MODULES.get(), GauntletItem.modules(gauntlet).withDrawn(false));
-        player.level().playSound(null, player.blockPosition(), SoundEvents.BEACON_DEACTIVATE, SoundSource.PLAYERS, 0.5f, 1.8f);
-        return true;
+    public static void storeBack(ServerPlayer player, ItemStack gauntlet, ItemStack weapon) {
+        if (!weapon.isEmpty() && GauntletWeapon.get(gauntlet).isEmpty()) GauntletWeapon.set(gauntlet, GauntletWeapon.unmark(weapon));
     }
 
-    /**
-     * Vérification régulière : si l'arme sortie a quitté la main (déplacée dans l'inventaire), elle revient dans le
-     * gantelet ; si elle a disparu (cassée), le gantelet repasse à « rangée ».
-     */
+    /** Vérification régulière (anciennes épées liées). */
     public static void tick(ServerPlayer player) {
         ItemStack gauntlet = GauntletAccess.find(player);
-        if (gauntlet.isEmpty() || !GauntletItem.modules(gauntlet).drawn()) return;
-        if (GauntletWeapon.isBound(player.getMainHandItem())) return;
-        sheathe(player, gauntlet);
+        if (!gauntlet.isEmpty()) sheathe(player, gauntlet);
     }
 
     /**

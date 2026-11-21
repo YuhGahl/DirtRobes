@@ -495,7 +495,7 @@ public class DirtRobesGameTests {
         helper.succeed();
     }
 
-    /** Gantelet : module et épée à la table de forge (ancienne arme rendue), Prizmod requis, vraie épée sortie / rangée, extraction. */
+    /** Gantelet : module et épée à la table de forge (ancienne arme rendue), Prizmod requis, lame déployée (stats de l'épée) / rangée, extraction. */
     @GameTest(template = "platform", timeoutTicks = 60)
     public static void gauntletModulesWeaponsAndExtraction(GameTestHelper helper) {
         ServerPlayer player = placePlayer(helper, 10.5, 10.5);
@@ -510,7 +510,7 @@ public class DirtRobesGameTests {
         // 2) une épée en diamant enchantée devient l'arme
         ItemStack sword = new ItemStack(net.minecraft.world.item.Items.DIAMOND_SWORD);
         sword.setDamageValue(42);
-        var in2 = new net.minecraft.world.item.crafting.SmithingRecipeInput(new ItemStack(ModRegistry.MODULE_WEAPON.get()), gauntlet, sword);
+        var in2 = new net.minecraft.world.item.crafting.SmithingRecipeInput(new ItemStack(ModRegistry.MODULE_BLADE.get()), gauntlet, sword);
         var r2 = rm.getRecipeFor(net.minecraft.world.item.crafting.RecipeType.SMITHING, in2, helper.getLevel());
         helper.assertTrue(r2.isPresent(), "Recette de l'épée introuvable");
         gauntlet = r2.get().value().assemble(in2, reg);
@@ -531,15 +531,20 @@ public class DirtRobesGameTests {
         player.getInventory().selected = 0;
         helper.assertTrue(!com.dirtrobes.gauntlet.GauntletActions.toggleWeapon(player), "Sans Prizmod inséré, pas d'arme");
         gauntlet.set(ModRegistry.GAUNTLET_MODULES.get(), com.dirtrobes.gauntlet.GauntletItem.modules(gauntlet).withPrizmod(true));
-        helper.assertTrue(com.dirtrobes.gauntlet.GauntletActions.toggleWeapon(player) && player.getMainHandItem().is(net.minecraft.world.item.Items.IRON_SWORD),
-                "L'épée devrait sortir dans la main");
-        helper.assertTrue(com.dirtrobes.gauntlet.GauntletWeapon.isBound(player.getMainHandItem()), "L'épée sortie est liée au gantelet");
-        // elle quitte la main (déplacée dans l'inventaire) → elle revient dans le gantelet
-        player.getInventory().setItem(20, player.getMainHandItem().copy());
+        helper.assertTrue(com.dirtrobes.gauntlet.GauntletActions.toggleWeapon(player), "La lame devrait se déployer");
+        helper.assertTrue(player.getMainHandItem().isEmpty() && com.dirtrobes.gauntlet.GauntletWeapon.get(gauntlet).is(net.minecraft.world.item.Items.IRON_SWORD),
+                "L'épée reste dans le gantelet (effet visuel seulement)");
+        helper.assertTrue(com.dirtrobes.gauntlet.GauntletActions.activeWeapon(player).is(net.minecraft.world.item.Items.IRON_SWORD), "Arme active : épée en fer");
+        double dmg = player.getAttributeValue(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE);
+        helper.assertTrue(Math.abs(dmg - 6.0) < 0.01, "Dégâts main vide avec l'épée en fer : 6 attendus, " + dmg);
+        player.getInventory().setItem(0, new ItemStack(net.minecraft.world.item.Items.STICK));
+        com.dirtrobes.gauntlet.GauntletCombat.syncAttributes(player);
+        dmg = player.getAttributeValue(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE);
+        helper.assertTrue(Math.abs(dmg - 1.0) < 0.01, "Main occupée : plus de bonus, " + dmg);
         player.getInventory().setItem(0, ItemStack.EMPTY);
-        com.dirtrobes.gauntlet.GauntletActions.tick(player);
-        helper.assertTrue(player.getInventory().getItem(20).isEmpty() && com.dirtrobes.gauntlet.GauntletWeapon.get(gauntlet).is(net.minecraft.world.item.Items.IRON_SWORD)
-                && !com.dirtrobes.gauntlet.GauntletWeapon.isBound(com.dirtrobes.gauntlet.GauntletWeapon.get(gauntlet)), "L'épée aurait dû revenir dans le gantelet");
+        helper.assertTrue(com.dirtrobes.gauntlet.GauntletActions.toggleWeapon(player) && !com.dirtrobes.gauntlet.GauntletItem.modules(gauntlet).drawn(), "Lame rangée");
+        dmg = player.getAttributeValue(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE);
+        helper.assertTrue(Math.abs(dmg - 1.0) < 0.01, "Lame rangée : plus de bonus, " + dmg);
         // 5) extraction
         BlockPos stone = new BlockPos(10, 1, 12);
         helper.setBlock(stone, ModRegistry.FOSSIL_STONE.get());
