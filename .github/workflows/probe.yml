@@ -10,9 +10,11 @@ jobs:
         with: { distribution: temurin, java-version: 21 }
       - run: |
           mkdir j && cd j
-          curl -sSfL -o jei.jar "https://cdn.modrinth.com/data/u6dRKJwZ/versions/oXFV6wK5/jei-1.21.1-neoforge-19.71.0.475.jar"
-          mkdir x && (cd x && unzip -q ../jei.jar)
-          (cd x && find . -path "*api*" -iname "*mith*.class")
-          for c in mezz.jei.api.registration.IVanillaCategoryExtensionRegistration mezz.jei.api.recipe.category.extensions.vanilla.smithing.IExtendableSmithingRecipeCategory mezz.jei.api.recipe.category.extensions.vanilla.smithing.ISmithingCategoryExtension mezz.jei.api.gui.ingredient.IRecipeSlotDrawable mezz.jei.api.recipe.category.extensions.vanilla.smithing.ISmithingRecipeSlots mezz.jei.api.registration.IRecipeRegistration mezz.jei.api.IModPlugin mezz.jei.api.constants.RecipeTypes; do echo "== $c"; javap -cp x $c 2>&1 | head -40; done
-          echo "== how vanilla smithing recipes are collected"; (cd x && find . -iname "*SmithingRecipe*" | grep -v api | head)
-          for c in $(cd x && find . -iname "SmithingRecipeCategory.class" | sed 's|^\./||;s/\.class$//'); do javap -p -cp x $c | head -40; done
+          curl -sSfL -o c.jar "https://cdn.modrinth.com/data/LNytGWDc/versions/UjX6dr61/create-1.21.1-6.0.10.jar"
+          mkdir x && (cd x && unzip -q ../c.jar)
+          ls x/META-INF/jarjar 2>/dev/null | head; unzip -p c.jar META-INF/neoforge.mods.toml | grep -A4 "dependencies.create\]\]" | head -40
+          for c in com.simibubi.create.content.kinetics.base.KineticBlock com.simibubi.create.content.kinetics.base.KineticBlockEntity com.simibubi.create.content.kinetics.base.DirectionalShaftHalvesBlockEntity com.simibubi.create.content.kinetics.base.RotatedPillarKineticBlock com.simibubi.create.content.kinetics.base.IRotate com.simibubi.create.foundation.block.IBE com.simibubi.create.api.stress.BlockStressValues; do echo "== $c"; javap -cp x $c 2>&1 | head -60; done
+          echo "== IBE location"; (cd x && find . -name "IBE.class")
+          echo "== stress"; (cd x && find . -iname "*Stress*Values*.class" | head)
+          echo "== millstone"; javap -p -cp x com.simibubi.create.content.kinetics.millstone.MillstoneBlock | head -40; javap -p -cp x com.simibubi.create.content.kinetics.millstone.MillstoneBlockEntity | head -30
+          echo "== AllBlocks millstone stress registration"; javap -c -p -cp x com.simibubi.create.AllBlocks | grep -n -i "stress\|impact" | head -10
