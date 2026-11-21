@@ -52,13 +52,22 @@ public final class GauntletBladeRenderer {
         arm.zRot = zr;
     }
 
-    /** Même placement que l'objet tenu en main (ItemInHandLayer). La pose doit être sur le bras droit. */
+    /** Taille de la lame (1 = taille d'un objet posé). */
+    private static final float SCALE = 0.8f;
+
+    /**
+     * La lame part du cristal (face extérieure de l'avant-bras) et longe le bras vers la main, comme une lame de
+     * poignet. La pose doit être celle du bras droit (épaule en haut, main à y = 10/16).
+     */
     static void renderInHand(AbstractClientPlayer player, ItemStack weapon, PoseStack pose, MultiBufferSource buffers, int light) {
-        pose.mulPose(Axis.XP.rotationDegrees(-90f));
-        pose.mulPose(Axis.YP.rotationDegrees(180f));
-        pose.translate(1f / 16f, 0.125f, -0.625f);
-        Minecraft.getInstance().getEntityRenderDispatcher().getItemInHandRenderer()
-                .renderItem(player, weapon, ItemDisplayContext.THIRD_PERSON_RIGHT_HAND, false, pose, buffers, light);
+        // garde de l'épée (texel 4,11 de la texture) placée sur le cristal ; la pointe vers la main et au-delà
+        float guard = 0.309f * SCALE;
+        pose.translate(-4.5f / 16f, 7f / 16f + guard, 0f);
+        pose.mulPose(Axis.YP.rotationDegrees(90f));   // plat de la lame tourné vers l'extérieur du bras
+        pose.mulPose(Axis.ZP.rotationDegrees(45f));   // diagonale de l'icône alignée sur l'axe du bras
+        pose.scale(SCALE, SCALE, SCALE);
+        Minecraft.getInstance().getItemRenderer().renderStatic(weapon, ItemDisplayContext.NONE, light,
+                net.minecraft.client.renderer.texture.OverlayTexture.NO_OVERLAY, pose, buffers, player.level(), player.getId());
     }
 
     /** Troisième personne : couche ajoutée aux modèles de joueur. */
@@ -89,7 +98,7 @@ public final class GauntletBladeRenderer {
             ItemStack weapon = GauntletActions.activeWeapon(player);
             if (weapon.isEmpty()) return;
             pose.pushPose();
-            getParentModel().translateToHand(HumanoidArm.RIGHT, pose);
+            getParentModel().rightArm.translateAndRotate(pose);
             renderInHand(player, weapon, pose, buffers, light);
             pose.popPose();
         }

@@ -30,11 +30,22 @@ public final class BetterCombatCompat {
         return weapon.isEmpty() ? noWeapon() : weapon;
     }
 
+    public static ItemStack offhandStack(Player player) {
+        ItemStack off = player.getInventory().offhand.get(0);
+        return off.isEmpty() ? noWeapon() : off;
+    }
+
+    /**
+     * Vrai seulement pendant le traitement des touches du client (clic d'attaque) : c'est là que Better Combat
+     * consulte directement la main principale du joueur local.
+     */
+    public static volatile boolean handlingKeys;
+
     /** Arme du gantelet du joueur local (thread client seulement), sinon vide. */
     private static final ThreadLocal<Boolean> BUSY = ThreadLocal.withInitial(() -> false);
 
     public static ItemStack localWeapon() {
-        if (!FMLEnvironment.dist.isClient() || BUSY.get()) return ItemStack.EMPTY;
+        if (!FMLEnvironment.dist.isClient() || !handlingKeys || BUSY.get()) return ItemStack.EMPTY;
         BUSY.set(true);
         try {
             return com.dirtrobes.client.compat.ClientCompat.localWeapon();
