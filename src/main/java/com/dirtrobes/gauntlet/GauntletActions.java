@@ -56,7 +56,8 @@ public final class GauntletActions {
      * L'arme reste dans le gantelet : c'est un effet visuel + ses statistiques appliquées au joueur.
      */
     public static ItemStack activeWeapon(net.minecraft.world.entity.player.Player player) {
-        if (!player.getMainHandItem().isEmpty()) return ItemStack.EMPTY;
+        // lecture directe de l'inventaire : getMainHandItem() est intercepté par d'autres mods (Better Combat)
+        if (!player.getInventory().getSelected().isEmpty()) return ItemStack.EMPTY;
         ItemStack gauntlet = GauntletAccess.find(player);
         if (gauntlet.isEmpty()) return ItemStack.EMPTY;
         GauntletModules m = GauntletItem.modules(gauntlet);

@@ -24,15 +24,22 @@ public final class BetterCombatCompat {
 
     /** L'objet avec lequel le joueur attaque pour Better Combat : sa main, ou l'arme du gantelet si la main est vide. */
     public static ItemStack attackStack(Player player) {
-        ItemStack hand = player.getMainHandItem();
+        ItemStack hand = player.getInventory().getSelected();
         if (!hand.isEmpty()) return hand;
         ItemStack weapon = GauntletActions.activeWeapon(player);
         return weapon.isEmpty() ? noWeapon() : weapon;
     }
 
     /** Arme du gantelet du joueur local (thread client seulement), sinon vide. */
+    private static final ThreadLocal<Boolean> BUSY = ThreadLocal.withInitial(() -> false);
+
     public static ItemStack localWeapon() {
-        if (!FMLEnvironment.dist.isClient()) return ItemStack.EMPTY;
-        return com.dirtrobes.client.compat.ClientCompat.localWeapon();
+        if (!FMLEnvironment.dist.isClient() || BUSY.get()) return ItemStack.EMPTY;
+        BUSY.set(true);
+        try {
+            return com.dirtrobes.client.compat.ClientCompat.localWeapon();
+        } finally {
+            BUSY.set(false);
+        }
     }
 }
