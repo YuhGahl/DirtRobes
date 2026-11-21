@@ -127,6 +127,16 @@ neoForge {
 // "optional", meaning it will not be pulled by dependents of this mod.
 configurations {
     runtimeClasspath.extendsFrom localRuntime
+    createJar
+}
+
+def extractCreateNested = tasks.register('extractCreateNested', Copy) {
+    from({ zipTree(configurations.createJar.singleFile) }) {
+        include 'META-INF/jarjar/*.jar'
+        eachFile { path = name }
+        includeEmptyDirs = false
+    }
+    into layout.buildDirectory.dir('create-nested')
 }
 
 dependencies {
@@ -142,6 +152,9 @@ dependencies {
     compileOnly("maven.modrinth:u6dRKJwZ:${jei_version}") { transitive = false }
     // Create : accélérateur cinétique de l'incubateur (optionnel)
     compileOnly("maven.modrinth:LNytGWDc:${create_version}") { transitive = false }
+    createJar("maven.modrinth:LNytGWDc:${create_version}") { transitive = false }
+    // bibliothèques embarquées dans le jar de Create (Ponder, Flywheel, Registrate…), nécessaires à la compilation
+    compileOnly fileTree(dir: layout.buildDirectory.dir('create-nested'), include: '*.jar').builtBy(extractCreateNested)
 
     // Example optional mod dependency with JEI
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime

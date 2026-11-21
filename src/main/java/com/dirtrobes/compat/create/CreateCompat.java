@@ -34,7 +34,7 @@ public final class CreateCompat {
                 BlockBehaviour.Properties.of().mapColor(MapColor.STONE).strength(2.0f).sound(SoundType.METAL).noOcclusion());
         ACCELERATOR_ITEM = ModRegistry.ITEMS.registerSimpleBlockItem("kinetic_accelerator", ACCELERATOR, new Item.Properties());
         ACCELERATOR_BE = ModRegistry.BLOCK_ENTITIES.register("kinetic_accelerator",
-                () -> BlockEntityType.Builder.of(KineticAcceleratorBlockEntity::new, ACCELERATOR.get()).build(null));
+                () -> BlockEntityType.Builder.<KineticAcceleratorBlockEntity>of((pos, state) -> new KineticAcceleratorBlockEntity(ACCELERATOR_BE.get(), pos, state), ACCELERATOR.get()).build(null));
         modBus.addListener((FMLCommonSetupEvent event) ->
                 event.enqueueWork(() -> BlockStressValues.IMPACTS.register(ACCELERATOR.get(), () -> STRESS_IMPACT)));
     }
