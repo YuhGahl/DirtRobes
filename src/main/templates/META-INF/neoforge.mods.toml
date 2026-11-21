@@ -50,8 +50,8 @@ Mod fan inspiré de Spectrobes : compagnons, fouilles de fossiles, évolutions e
 '''
 
 # The [[mixins]] block allows you to declare your mixin config to FML so that it gets loaded.
-#[[mixins]]
-#config="${mod_id}.mixins.json"
+[[mixins]]
+config="${mod_id}.mixins.json"
 
 # The [[accessTransformers]] block allows you to declare where your AT file is.
 # If this block is omitted, a fallback attempt will be made to load an AT from META-INF/accesstransformer.cfg
@@ -98,3 +98,19 @@ Mod fan inspiré de Spectrobes : compagnons, fouilles de fossiles, évolutions e
     versionRange="[9.5,)"
     ordering="NONE"
     side="BOTH"
+
+# Better Combat : combos et attaques en arc, aussi avec la lame du gantelet (optionnel)
+[[dependencies.${mod_id}]]
+    modId="bettercombat"
+    type="optional"
+    versionRange="[2.1,)"
+    ordering="NONE"
+    side="BOTH"
+
+# Player Animator : animations du gantelet et du Prizmod (optionnel, côté client)
+[[dependencies.${mod_id}]]
+    modId="playeranimator"
+    type="optional"
+    versionRange="[2.0,)"
+    ordering="NONE"
+    side="CLIENT"

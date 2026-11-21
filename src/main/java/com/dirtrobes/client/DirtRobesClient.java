@@ -82,6 +82,9 @@ public class DirtRobesClient {
 
     /** Gantelet visible sur le bras : seulement si Curios est installé. */
     private static void onClientSetup(net.neoforged.fml.event.lifecycle.FMLClientSetupEvent event) {
+        if (net.neoforged.fml.ModList.get().isLoaded("playeranimator")) {
+            event.enqueueWork(com.dirtrobes.client.compat.PlayerAnimCompat::init);
+        }
         if (net.neoforged.fml.ModList.get().isLoaded("curios")) {
             event.enqueueWork(com.dirtrobes.client.gauntlet.GauntletCurioRenderer::register);
         }

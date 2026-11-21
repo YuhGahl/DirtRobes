@@ -41,6 +41,13 @@ jobs:
           mkdir -p run/mods
           V=$(grep '^curios_version=' gradle.properties | cut -d= -f2)
           curl -fsSL -o "run/mods/curios-neoforge-$V.jar" "https://maven.theillusivec4.top/top/theillusivec4/curios/curios-neoforge/$V/curios-neoforge-$V.jar"
+          # Better Combat + Player Animator + Cloth Config (intégrations optionnelles)
+          BC=$(grep '^better_combat_version=' gradle.properties | cut -d= -f2)
+          PA=$(grep '^player_animator_version=' gradle.properties | cut -d= -f2)
+          CC=$(grep '^cloth_config_version=' gradle.properties | cut -d= -f2)
+          curl -fsSL -o run/mods/bettercombat.jar "https://api.modrinth.com/maven/maven/modrinth/5sy6g3kz/$BC/5sy6g3kz-$BC.jar"
+          curl -fsSL -o run/mods/playeranimator.jar "https://api.modrinth.com/maven/maven/modrinth/gedNE4y2/$PA/gedNE4y2-$PA.jar"
+          curl -fsSL -o run/mods/clothconfig.jar "https://api.modrinth.com/maven/maven/modrinth/9s6osm5g/$CC/9s6osm5g-$CC.jar"
           ls -la run/mods
 
       - name: Test - démarrage d'un serveur avec le mod

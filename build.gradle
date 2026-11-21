@@ -32,6 +32,16 @@ repositories {
         name = "Curios"
         url = "https://maven.theillusivec4.top/"
     }
+    // Better Combat et Player Animator (dépendances optionnelles), via le dépôt Maven de Modrinth
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = "Modrinth"
+                url = "https://api.modrinth.com/maven"
+            }
+        }
+        filter { includeGroup "maven.modrinth" }
+    }
 }
 
 base {
@@ -123,6 +133,9 @@ dependencies {
     // Curios : API seulement à la compilation (dépendance optionnelle, pas imposée aux joueurs).
     // Le test de démarrage serveur de la CI l'installe dans run/mods pour vérifier l'intégration.
     compileOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}:api"
+    // Better Combat + Player Animator : à la compilation seulement (intégrations optionnelles)
+    compileOnly("maven.modrinth:5sy6g3kz:${better_combat_version}") { transitive = false }
+    compileOnly("maven.modrinth:gedNE4y2:${player_animator_version}") { transitive = false }
 
     // Example optional mod dependency with JEI
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime

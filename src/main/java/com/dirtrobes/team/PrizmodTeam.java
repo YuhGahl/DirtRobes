@@ -179,6 +179,7 @@ public final class PrizmodTeam {
             ok = sendOut(player, entry);
         }
         changed(player);
+        if (ok) com.dirtrobes.network.PlayerAnims.play(player, com.dirtrobes.network.PlayerAnims.PRIZMOD);
         return ok;
     }
 

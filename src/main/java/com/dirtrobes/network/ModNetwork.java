@@ -93,6 +93,18 @@ public final class ModNetwork {
     }
 
     /** Touches du gantelet : 0 = sortir/ranger l'arme, 1 = extraire, 2 = ouvrir l'équipe. */
+    /** Animation de joueur à jouer côté client (Player Animator). */
+    public record PlayAnimPayload(int entityId, String name) implements CustomPacketPayload {
+        public static final Type<PlayAnimPayload> TYPE = new Type<>(DirtRobes.id("play_anim"));
+        public static final StreamCodec<ByteBuf, PlayAnimPayload> STREAM_CODEC = StreamCodec.composite(
+                ByteBufCodecs.VAR_INT, PlayAnimPayload::entityId, ByteBufCodecs.STRING_UTF8, PlayAnimPayload::name, PlayAnimPayload::new);
+
+        @Override
+        public Type<? extends CustomPacketPayload> type() {
+            return TYPE;
+        }
+    }
+
     public record GauntletPayload(int action) implements CustomPacketPayload {
         public static final Type<GauntletPayload> TYPE = new Type<>(DirtRobes.id("gauntlet"));
         public static final StreamCodec<ByteBuf, GauntletPayload> STREAM_CODEC = StreamCodec.composite(
@@ -120,10 +132,15 @@ public final class ModNetwork {
     public static volatile int clientCh;
 
     public static void register(RegisterPayloadHandlersEvent event) {
-        event.registrar("7")
+        event.registrar("8")
                 .playToClient(ChSyncPayload.TYPE, ChSyncPayload.STREAM_CODEC, (payload, context) -> clientCh = payload.ch())
                 .playToClient(TeamSyncPayload.TYPE, TeamSyncPayload.STREAM_CODEC, ModNetwork::handleTeamSync)
                 .playToServer(TeamActionPayload.TYPE, TeamActionPayload.STREAM_CODEC, ModNetwork::handleTeamAction)
+                .playToClient(PlayAnimPayload.TYPE, PlayAnimPayload.STREAM_CODEC, (payload, context) -> context.enqueueWork(() -> {
+                    if (net.neoforged.fml.ModList.get().isLoaded("playeranimator")) {
+                        com.dirtrobes.client.compat.PlayerAnimCompat.play(payload.entityId(), payload.name());
+                    }
+                }))
                 .playToServer(GauntletPayload.TYPE, GauntletPayload.STREAM_CODEC, (payload, context) -> context.enqueueWork(() -> {
                     if (!(context.player() instanceof ServerPlayer player)) return;
                     switch (payload.action()) {

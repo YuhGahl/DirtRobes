@@ -71,6 +71,7 @@ public final class GauntletActions {
             gauntlet.set(ModRegistry.GAUNTLET_MODULES.get(), GauntletItem.modules(gauntlet).withDrawn(false));
             player.level().playSound(null, player.blockPosition(), SoundEvents.BEACON_DEACTIVATE, SoundSource.PLAYERS, 0.5f, 1.8f);
             GauntletCombat.syncAttributes(player);
+            com.dirtrobes.network.PlayerAnims.play(player, com.dirtrobes.network.PlayerAnims.DEPLOY);
             return true;
         }
         GauntletModules m = ready(player);
@@ -88,6 +89,7 @@ public final class GauntletActions {
             server.sendParticles(ParticleTypes.ELECTRIC_SPARK, player.getX(), player.getY() + 1.1, player.getZ(), 15, 0.3, 0.3, 0.3, 0.1);
         }
         GauntletCombat.syncAttributes(player);
+        com.dirtrobes.network.PlayerAnims.play(player, com.dirtrobes.network.PlayerAnims.DEPLOY);
         return true;
     }
 
@@ -101,6 +103,7 @@ public final class GauntletActions {
         player.level().addFreshEntity(shot);
         player.level().playSound(null, player.blockPosition(), SoundEvents.BEACON_DEACTIVATE, SoundSource.PLAYERS, 0.5f, 2.0f);
         player.getCooldowns().addCooldown(ModRegistry.GAUNTLET_CANNON.get(), 10);
+        com.dirtrobes.network.PlayerAnims.play(player, com.dirtrobes.network.PlayerAnims.CANNON);
         return true;
     }
 
@@ -170,6 +173,7 @@ public final class GauntletActions {
         level.sendParticles(ParticleTypes.END_ROD, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 15, 0.3, 0.3, 0.3, 0.05);
         level.playSound(null, pos, SoundEvents.AMETHYST_CLUSTER_BREAK, SoundSource.PLAYERS, 1f, 0.8f);
         player.displayClientMessage(Component.translatable("message.dirtrobes.gauntlet_extracted").withStyle(ChatFormatting.YELLOW), true);
+        com.dirtrobes.network.PlayerAnims.play(player, com.dirtrobes.network.PlayerAnims.EXTRACT);
         return true;
     }
 
