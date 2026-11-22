@@ -745,9 +745,11 @@ public class SpectrobeEntity extends TamableAnimal implements BedrockPosable, ne
         if (getVehicle() instanceof Player p) {
             // sur l'épaule gauche du joueur, tourné comme lui
             double yaw = Math.toRadians(p.yBodyRot);
-            double side = 0.4;
-            // pieds posés sur le haut de l'épaule (1,5 bloc debout)
-            double y = p.getY() + p.getBbHeight() * (p.isCrouching() ? 0.7 : 0.835);
+            // milieu de l'épaule du modèle joueur (bras de 0,23 à 0,44 bloc du centre)
+            double side = 0.34;
+            // haut de l'épaule : 24 px sur 32 du modèle joueur, soit 0,75 de sa hauteur (1,35 bloc debout),
+            // un peu plus bas encore pour qu'il soit couché dessus et pas posé en équilibre
+            double y = p.getY() + p.getBbHeight() * (p.isCrouching() ? 0.74 : 0.74);
             setPos(p.getX() + Math.cos(yaw) * side, y, p.getZ() + Math.sin(yaw) * side);
             setYRot(p.yBodyRot);
             yBodyRot = p.yBodyRot;
