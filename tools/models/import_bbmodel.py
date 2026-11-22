@@ -9,7 +9,8 @@ Le fichier spec (tools/models/specs/<espèce>.json) dit :
   - "id"      : nom du modèle (komainu) ;
   - "bones"   : os à créer, dans l'ordre, {"name", "parent", "pivot" (coordonnées Blockbench)} ;
   - "rules"   : [motif regex sur le nom de l'élément, os] (premier motif qui correspond) ;
-  - "colors"  : [motif regex, couleur #RRGGBB] pour la texture provisoire.
+  - "colors"  : [motif regex, couleur #RRGGBB] pour la texture provisoire ;
+  - "use_groups" (facultatif) : l'os d'un cube est le dossier Blockbench qui le contient (règles en secours).
 
 Sorties :
   - assets/dirtrobes/bedrock/{pokemon|spectrobes}/models/<id>.geo.json (os renommés pour les animations : head, body,
@@ -39,7 +40,8 @@ def main(spec_path):
     src = args[1] if len(args) > 1 else os.path.join(os.path.dirname(os.path.abspath(spec_path)), spec["source"])
     bb = json.load(open(src, encoding="utf-8"))
     mid = spec["id"]
-    elements = [e for e in bb["elements"] if e.get("type", "cube") == "cube"]
+    # les cubes « repere_… » des squelettes préparés ne servent qu'à voir l'échelle : jamais exportés
+    elements = [e for e in bb["elements"] if e.get("type", "cube") == "cube" and not e.get("name", "").lower().startswith("repere")]
     # « keep_uv » : on garde les UV dessinées dans Blockbench (sinon on les range en 64×64)
     keep_uv = spec.get("keep_uv", False)
     global TEX
@@ -52,6 +54,39 @@ def main(spec_path):
             if re.search(pat, name, re.I):
                 return bone
         raise SystemExit(f"Aucun os pour l'élément {name}")
+
+    # « use_groups » : l'os de chaque cube est le dossier (groupe) Blockbench qui le contient — c'est le cas des
+    # squelettes préparés (komanoto…) : on pose ses cubes dans le bon dossier, sans règle de nom.
+    # Les pivots des dossiers déplacés dans Blockbench remplacent ceux de la spec.
+    known = {b["name"] for b in spec["bones"]}
+    group_of, group_origin = {}, {}
+    if spec.get("use_groups"):
+        origins = {g["uuid"]: g.get("origin") for g in bb.get("groups", [])}
+
+        def walk(node, current):
+            if isinstance(node, str):
+                if current:
+                    group_of[node] = current
+                return
+            name = node.get("name")
+            here = name if name in known else current
+            if name in known:
+                o = node.get("origin") or origins.get(node.get("uuid"))
+                if o:
+                    group_origin[name] = o
+            for c in node.get("children", []):
+                walk(c, here)
+
+        for n in bb.get("outliner", []):
+            walk(n, None)
+        for b in spec["bones"]:
+            if b["name"] in group_origin:
+                b["pivot"] = group_origin[b["name"]]
+
+    def bone_of_el(e):
+        if e["uuid"] in group_of:
+            return group_of[e["uuid"]]
+        return bone_of(e["name"])
 
     def color_of(name):
         for pat, col in spec["colors"]:
@@ -148,7 +183,7 @@ def main(spec_path):
             cube["inflate"] = e["inflate"]
         if e.get("mirror_uv") and not keep_uv:
             cube["mirror"] = True
-        by_name[bone_of(e["name"])]["cubes"].append(cube)
+        by_name[bone_of_el(e)]["cubes"].append(cube)
     for b in bones_out:
         if not b["cubes"]:
             del b["cubes"]
@@ -173,7 +208,7 @@ def main(spec_path):
         by_group[b["name"]] = {"uuid": g["uuid"], "isOpen": True, "children": []}
     for e in out["elements"]:
         if keep_uv:
-            by_group[bone_of(e["name"])]["children"].append(e["uuid"])
+            by_group[bone_of_el(e)]["children"].append(e["uuid"])
             continue
         if e["uuid"] not in layout:
             continue
@@ -188,7 +223,7 @@ def main(spec_path):
             "up": {"uv": [u + d + w, v + d, u + d, v], "texture": 0},
             "down": {"uv": [u + d + 2 * w, v, u + d + w, v + d], "texture": 0},
         }
-        by_group[bone_of(e["name"])]["children"].append(e["uuid"])
+        by_group[bone_of_el(e)]["children"].append(e["uuid"])
     roots = []
     for b in spec["bones"]:
         node = by_group[b["name"]]
