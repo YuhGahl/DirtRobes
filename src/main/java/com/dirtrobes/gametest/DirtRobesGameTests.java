@@ -170,7 +170,9 @@ public class DirtRobesGameTests {
                     + " (" + spectrobe.getHealth() + " PV, K.O. " + spectrobe.isKnockedOut() + ", cible " + spectrobe.getTarget()
                     + ", boîte " + spectrobe.getBbWidth() + " × " + spectrobe.getBbHeight() + ", PV max " + spectrobe.getMaxHealth()
                     + ", a touché " + spectrobe.getLastHurtMob() + ", Krawl PV max " + krawl.getMaxHealth()
-                    + ", Krawl touché par " + krawl.getLastHurtByMob() + ")");
+                    + ", Krawl touché par " + krawl.getLastHurtByMob() + ", vue " + spectrobe.hasLineOfSight(krawl)
+                    + ", portée " + spectrobe.isWithinMeleeAttackRange(krawl) + ", y abs " + spectrobe.getY() + "/" + krawl.getY()
+                    + ", bloc sous " + helper.getLevel().getBlockState(spectrobe.blockPosition()) + ")");
             helper.assertTrue(spectrobe.getXp() > xpBefore, "Le Spectrobe aurait dû gagner de l'XP");
             log("Krawl vaincu, XP du Spectrobe : {} → {}", xpBefore, spectrobe.getXp());
         });
