@@ -32,6 +32,7 @@ jobs:
           python3 tools/models/recolor_variants.py
           python3 tools/models/gen_hitboxes.py
           python3 tools/cobblemon/gen_cobblemon_species.py
+          python3 tools/cobblemon/add_locators.py
           git status --short
 
       - name: Build with Gradle
