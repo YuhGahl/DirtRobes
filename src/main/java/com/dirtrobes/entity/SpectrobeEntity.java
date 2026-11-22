@@ -760,6 +760,30 @@ public class SpectrobeEntity extends TamableAnimal implements BedrockPosable, ne
         }
     }
 
+    /**
+     * Le serveur n'envoie la liste des passagers d'une entité qu'aux joueurs qui la « voient » : un joueur ne se
+     * voit pas lui-même, donc sans ça son propre client ne sait pas qu'il a un Spectrobe sur l'épaule (le Spectrobe
+     * reste figé là où il était, puis « tombe »). On lui envoie donc la mise à jour à la main.
+     */
+    public static void syncPassengersToSelf(@Nullable Entity vehicle) {
+        if (vehicle instanceof net.minecraft.server.level.ServerPlayer sp && sp.connection != null)
+            sp.connection.send(new net.minecraft.network.protocol.game.ClientboundSetPassengersPacket(sp));
+    }
+
+    @Override
+    public boolean startRiding(Entity vehicle, boolean force) {
+        boolean ok = super.startRiding(vehicle, force);
+        if (ok && !level().isClientSide) syncPassengersToSelf(vehicle);
+        return ok;
+    }
+
+    @Override
+    public void removeVehicle() {
+        Entity old = getVehicle();
+        super.removeVehicle();
+        if (old != null && !level().isClientSide) syncPassengersToSelf(old);
+    }
+
     /** Descend de l'épaule et se pose à côté du joueur. */
     public void jumpOffShoulder(Player p) {
         stopRiding();
@@ -855,6 +879,21 @@ public class SpectrobeEntity extends TamableAnimal implements BedrockPosable, ne
         ResourceLocation id = getSpeciesId();
         return id == null ? null : SoundEvent.createVariableRangeEvent(
                 ResourceLocation.fromNamespaceAndPath(id.getNamespace(), "spectrobe." + id.getPath() + ".cry"));
+    }
+
+    /** Cri de douleur (« dirtrobes:spectrobe.<espèce>.hurt », tiré du cri par tools/sounds/gen_cries.py). */
+    @Nullable
+    public SoundEvent hurtSound() {
+        ResourceLocation id = getSpeciesId();
+        return id == null ? null : SoundEvent.createVariableRangeEvent(
+                ResourceLocation.fromNamespaceAndPath(id.getNamespace(), "spectrobe." + id.getPath() + ".hurt"));
+    }
+
+    @Nullable
+    @Override
+    protected SoundEvent getHurtSound(DamageSource source) {
+        SoundEvent s = hurtSound();
+        return s != null ? s : super.getHurtSound(source);
     }
 
     @Nullable

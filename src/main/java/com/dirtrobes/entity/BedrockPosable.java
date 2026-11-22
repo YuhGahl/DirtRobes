@@ -36,6 +36,11 @@ public interface BedrockPosable {
         return false;
     }
 
+    /** Sur l'épaule d'un joueur : le moteur cherche la pose « SHOULDER » (ou SHOULDER_LEFT/RIGHT façon Cobblemon). */
+    default boolean isOnShoulder() {
+        return false;
+    }
+
     /** Étiquette affichée au-dessus de la créature quand le joueur la vise (nom + niveau), ou null. */
     @Nullable
     default net.minecraft.network.chat.Component nameTag() {

@@ -2203,5 +2203,2210 @@
       }
     ],
     "subtitle": "subtitles.dirtrobes.spectrobe.cry"
+  },
+  "spectrobe.anuberos.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/anuberos_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.anubi.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/anubi_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.anubos.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/anubos_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.aoba.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/aoba_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.aobasar.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/aobasar_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.aoi.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/aoi_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.azamaros.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/azamaros_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.azamaru.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/azamaru_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.azapi.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/azapi_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.azeko.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/azeko_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.azenor.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/azenor_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.azewana.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/azewana_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.bakuraiya.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/bakuraiya_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.bartolor.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/bartolor_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.bartolosa.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/bartolosa_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.bartor.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/bartor_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.bazora.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/bazora_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.boma.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/boma_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.boma_boma.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/boma_boma_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.bombzar.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/bombzar_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.butobasu.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/butobasu_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.chomugon.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/chomugon_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.chugyo.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/chugyo_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.daidongu.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/daidongu_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.daigyo.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/daigyo_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.danaphant.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/danaphant_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.danapix.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/danapix_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.danawa.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/danawa_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.darucho.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/darucho_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.darutake.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/darutake_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.darutori.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/darutori_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.dendama.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/dendama_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.denden.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/denden_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.denpachi.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/denpachi_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.doma_boma.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/doma_boma_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.dongiga.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/dongiga_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.dongor.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/dongor_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.dongora.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/dongora_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.dongu.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/dongu_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.elo.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/elo_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.elopuba.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/elopuba_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.elozar.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/elozar_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.flamerax.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/flamerax_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.florami.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/florami_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.gagong.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/gagong_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.gazen.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/gazen_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.gejigage.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/gejigage_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.gejigen.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/gejigen_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.gejio.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/gejio_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.gekikro.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/gekikro_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.gekikuri.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/gekikuri_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.gekimugon.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/gekimugon_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.gokazoa.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/gokazoa_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.gorberus.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/gorberus_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.gorgan.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/gorgan_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.gorgong.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/gorgong_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.gorz.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/gorz_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.grilda.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/grilda_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.grilden.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/grilden_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.grildragos.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/grildragos_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.hananomi.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/hananomi_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.hanebakuon.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/hanebakuon_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.hanegaku.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/hanegaku_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.haneoto.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/haneoto_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.hapacha.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/hapacha_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.hapaxion.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/hapaxion_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.hapazoa.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/hapazoa_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.harumi.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/harumi_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.harumite.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/harumite_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.harumitey.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/harumitey_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.hiko.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/hiko_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.hikodrake.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/hikodrake_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.hikolossa.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/hikolossa_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.inkaflare.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/inkaflare_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.inkana.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/inkana_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.inkanapa.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/inkanapa_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.isadora.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/isadora_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.kamakuri.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/kamakuri_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.karakuri.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/karakuri_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.kasumi.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/kasumi_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.kasumire.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/kasumire_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.kasumite.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/kasumite_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.ketobasu.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/ketobasu_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.kibatekka.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/kibatekka_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.komadoros.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/komadoros_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.komainu.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/komainu_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.komainu_bombzar.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/komainu_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.komainu_flamerax.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/komainu_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.komainu_mizusar.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/komainu_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.komainu_optoger.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/komainu_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.komainu_scarazook.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/komainu_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.komanoto.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/komanoto_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.komanoto_bombzar.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/komanoto_bombzar_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.komanoto_flamerax.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/komanoto_flamerax_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.komanoto_mizusar.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/komanoto_mizusar_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.komanoto_optoger.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/komanoto_optoger_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.komanoto_scarazook.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/komanoto_scarazook_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.korogeki.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/korogeki_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.koroko.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/koroko_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.korozama.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/korozama_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.kubaku.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/kubaku_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.kuganon.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/kuganon_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.kugaster.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/kugaster_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.leo.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/leo_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.leopuba.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/leopuba_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.leozar.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/leozar_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.makadoros.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/makadoros_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.makanoto.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/makanoto_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.makanui.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/makanui_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.mantrador.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/mantrador_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.mantradora.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/mantradora_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.mantrados.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/mantrados_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.maserobo.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/maserobo_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.masetosu.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/masetosu_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.masetto.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/masetto_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.mayar.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/mayar_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.mayarex.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/mayarex_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.mayazerra.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/mayazerra_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.mesa.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/mesa_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.mesabone.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/mesabone_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.mesathorn.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/mesathorn_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.mizusar.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/mizusar_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.mossari.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/mossari_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.mossarito.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/mossarito_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.mossax.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/mossax_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.mugon.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/mugon_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.musageki.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/musageki_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.musakabu.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/musakabu_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.musarite.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/musarite_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.nagu.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/nagu_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.naguryu.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/naguryu_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.naguzoro.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/naguzoro_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.nokogilla.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/nokogilla_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.nokogiro.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/nokogiro_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.nokoko.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/nokoko_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.ojidono.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/ojidono_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.ojimaru.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/ojimaru_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.ojizama.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/ojizama_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.optoger.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/optoger_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.paga.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/paga_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.pagadori.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/pagadori_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.pagani.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/pagani_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.pago.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/pago_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.pagoni.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/pagoni_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.pagoyama.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/pagoyama_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.pahacha.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/pahacha_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.pahaxion.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/pahaxion_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.pahazoa.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/pahazoa_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.pegatinum.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/pegatinum_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.pepe.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/pepe_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.pepethraz.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/pepethraz_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.pepeza.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/pepeza_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.pikos.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/pikos_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.pinorska.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/pinorska_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.pinska.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/pinska_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.piximi.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/piximi_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.rapagu.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/rapagu_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.rudacho.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/rudacho_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.rudatake.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/rudatake_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.rudatori.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/rudatori_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.rydrake.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/rydrake_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.rygazelle.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/rygazelle_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.ryza.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/ryza_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.sabo.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/sabo_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.sabogar.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/sabogar_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.saboquill.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/saboquill_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.samerobo.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/samerobo_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.sametosu.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/sametosu_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.sametto.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/sametto_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.samugeki.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/samugeki_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.samukabu.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/samukabu_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.samurite.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/samurite_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.scarazook.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/scarazook_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.segu.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/segu_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.segulara.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/segulara_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.segulos.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/segulos_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.senkro.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/senkro_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.senpu.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/senpu_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.senpuga.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/senpuga_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.senpura.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/senpura_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.shakin.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/shakin_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.shakoblad.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/shakoblad_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.shakor.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/shakor_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.shimadoros.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/shimadoros_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.shimainu.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/shimainu_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.shimanoto.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/shimanoto_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.shogyo.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/shogyo_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.spikan.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/spikan_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.spikanor.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/spikanor_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.spiko.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/spiko_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.tamazoa.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/tamazoa_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.tekka.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/tekka_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.tekkadon.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/tekkadon_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.tekkadorax.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/tekkadorax_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.tenkro.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/tenkro_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.thunba.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/thunba_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.thundor.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/thundor_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.thundora.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/thundora_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.tiazoa.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/tiazoa_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.tobasu.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/tobasu_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.torga.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/torga_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.torgallup.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/torgallup_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.torgazar.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/torgazar_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.totegarda.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/totegarda_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.totemo.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/totemo_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.totemoon.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/totemoon_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.totsuzen.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/totsuzen_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.troga.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/troga_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.trogallup.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/trogallup_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.trogazar.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/trogazar_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.ukabi.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/ukabi_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.ukalos.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/ukalos_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.ukazeer.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/ukazeer_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.vilakroma.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/vilakroma_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.vilamasta.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/vilamasta_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.vilanox.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/vilanox_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.vilar.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/vilar_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.winba.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/winba_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.winbus.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/winbus_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.windora.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/windora_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.yagizora.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/yagizora_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.zaamaros.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/zaamaros_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.zaamaru.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/zaamaru_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.zaapi.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/zaapi_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.zappi.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/zappi_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.zappira.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/zappira_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.zappizor.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/zappizor_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.zaza.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/zaza_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.zazane.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/zazane_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.zazanero.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/zazanero_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.zen.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/zen_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.zeni.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/zeni_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.zenigor.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/zenigor_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.zenipyra.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/zenipyra_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.zeragong.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/zeragong_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.zora.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/zora_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.zoza.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/zoza_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.zozane.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/zozane_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.zozanero.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/zozanero_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.zuwa.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/zuwa_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.zuwaja.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/zuwaja_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.zuwakrid.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/zuwakrid_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.zyra.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/zyra_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.zyrdrake.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/zyrdrake_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
+  },
+  "spectrobe.zyrgazelle.hurt": {
+    "sounds": [
+      {
+        "name": "dirtrobes:spectrobe/zyrgazelle_hurt",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.dirtrobes.spectrobe.hurt"
   }
 }

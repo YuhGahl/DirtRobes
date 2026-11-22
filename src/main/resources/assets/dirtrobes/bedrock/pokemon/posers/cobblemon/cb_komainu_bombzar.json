@@ -2,7 +2,8 @@
   "animations": {
     "cry": "q.bedrock_stateful('cb_komainu_bombzar', 'cry')",
     "faint": "q.bedrock_primary('komainu', 'faint', q.curve('one'))",
-    "recoil": "q.bedrock_stateful('komainu', 'recoil')"
+    "recoil": "q.bedrock_stateful('komainu', 'recoil')",
+    "jump": "q.bedrock_stateful('komainu', 'jump')"
   },
   "portraitScale": 2.6,
   "portraitTranslation": [
@@ -68,6 +69,19 @@
       ],
       "poseTypes": [
         "SLEEP"
+      ]
+    },
+    "shoulder": {
+      "animations": [
+        "q.look('head')",
+        "q.bedrock('komainu', 'shoulder')"
+      ],
+      "poseTypes": [
+        "SHOULDER_LEFT",
+        "SHOULDER_RIGHT"
+      ],
+      "quirks": [
+        "q.bedrock_quirk('komainu', 'blink')"
       ]
     }
   }

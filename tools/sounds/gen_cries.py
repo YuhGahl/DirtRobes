@@ -103,6 +103,38 @@ def write_ogg(samples, path):
     os.remove(tmp.name)
 
 
+def read_audio(path):
+    """Décode n'importe quel son (ogg…) en mono, SR Hz, flottants -1..1."""
+    raw = subprocess.run(["ffmpeg", "-loglevel", "error", "-i", path, "-ac", "1", "-ar", str(SR), "-f", "s16le", "-"],
+                         check=True, capture_output=True).stdout
+    return np.frombuffer(raw, dtype=np.int16).astype(np.float64) / 32768.0
+
+
+def hurt_from_cry(cry):
+    """Cri de douleur tiré du cri : le passage le plus fort, joué plus aigu puis qui retombe (un « kyaï »),
+    attaque sèche, fin rapide, un peu de saturation pour l'effort."""
+    win = int(0.05 * SR)
+    if len(cry) < win * 2:
+        cry = np.pad(cry, (0, win * 2))
+    rms = np.sqrt(np.convolve(cry ** 2, np.ones(win) / win, mode="same"))
+    peak = int(np.argmax(rms))
+    start = max(0, peak - int(0.12 * SR))
+    src = cry[start:start + int(0.6 * SR)]
+    if len(src) < int(0.2 * SR):
+        src = cry
+    n_out = int(0.32 * SR)
+    u = np.linspace(0, 1, n_out)
+    speed = 1.45 - 0.4 * u                        # hauteur : +45 % au début, +5 % à la fin
+    pos = np.cumsum(speed)
+    pos = np.clip(pos, 0, len(src) - 1)
+    out = np.interp(pos, np.arange(len(src)), src)
+    out *= 1 + 0.35 * np.sin(2 * np.pi * 28 * u * 0.32)  # petit tremblement
+    env = np.minimum(1, u / 0.03) * np.exp(-3.2 * u) * np.minimum(1, (1 - u) / 0.15)
+    out = np.tanh(2.2 * out * env / max(1e-6, np.max(np.abs(out))))
+    out /= max(1e-6, np.max(np.abs(out)))
+    return (out * 0.75 * 32767).astype(np.int16)
+
+
 def sha(path):
     return hashlib.sha1(open(path, "rb").read()).hexdigest()
 
@@ -134,11 +166,29 @@ def main():
             made += 1
         sounds[f"spectrobe.{sid}.cry"] = {"sounds": [{"name": f"dirtrobes:spectrobe/{sid}_cry", "volume": 0.8}],
                                           "subtitle": "subtitles.dirtrobes.spectrobe.cry"}
+    # cris de douleur (« spectrobe.<id>.hurt ») tirés du cri de chaque espèce ; refaits quand le cri change,
+    # jamais écrasés si tu as mis ton propre <id>_hurt.ogg
+    hurt_made = 0
+    for f in sorted(glob.glob(os.path.join(SPECIES, "*.json"))):
+        sid = os.path.basename(f)[:-5]
+        src = SAME_CRY.get(sid, sid)
+        cry = os.path.join(OUT, f"{src}_cry.ogg")
+        hurt = os.path.join(OUT, f"{src}_hurt.ogg")
+        if src == sid and os.path.exists(cry):
+            mine = not os.path.exists(hurt) or manifest.get("hurt:" + sid) == sha(hurt)
+            if mine and (not os.path.exists(hurt) or manifest.get("hurtsrc:" + sid) != sha(cry)):
+                write_ogg(hurt_from_cry(read_audio(cry)), hurt)
+                manifest["hurt:" + sid] = sha(hurt)
+                manifest["hurtsrc:" + sid] = sha(cry)
+                hurt_made += 1
+        sounds[f"spectrobe.{sid}.hurt"] = {"sounds": [{"name": f"dirtrobes:spectrobe/{src}_hurt", "volume": 0.8}],
+                                           "subtitle": "subtitles.dirtrobes.spectrobe.hurt"}
+    print(f"cris de douleur : {hurt_made} générés")
     with open(sounds_path, "w", encoding="utf-8") as fh:
         json.dump(sounds, fh, indent=2, ensure_ascii=False)
     with open(MANIFEST, "w") as fh:
         json.dump(manifest, fh, indent=0, sort_keys=True)
-    print(f"cris : {made} générés, {kept} fournis par toi conservés, {len(manifest)} au total")
+    print(f"cris : {made} générés, {kept} fournis par toi conservés")
 
 
 if __name__ == "__main__":

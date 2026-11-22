@@ -425,6 +425,10 @@ def main():
             "weight": weight,
             "behaviour": {"resting": {"canSleep": True, "willSleepOnBed": True}},
         }
+        if stage == "child":
+            # comme dans DirtRobes : les petits montent sur l'épaule (pose SHOULDER_LEFT/RIGHT des posers)
+            out["shoulderMountable"] = True
+            out["shoulderEffects"] = []
         if d.get("flying"):
             out["behaviour"]["moving"] = {"fly": {"canFly": True}}
         with open(os.path.join(OUT, f"{sid}.json"), "w", encoding="utf-8") as fh:

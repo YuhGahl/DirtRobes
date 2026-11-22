@@ -739,6 +739,7 @@
   "gui.dirtrobes.pc.release_confirm": "Sure? Click",
   "gui.dirtrobes.pc.release.tooltip": "Releases the selected Spectrobe for good: it will not come back. Click twice to confirm.",
   "message.dirtrobes.released": "%s was released. Goodbye!",
+  "subtitles.dirtrobes.spectrobe.hurt": "Spectrobe yelps",
   "dirtrobes.species.anuberos.name": "Anuberos",
   "dirtrobes.species.anuberos.desc": "",
   "dirtrobes.species.anubi.name": "Anubi",

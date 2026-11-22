@@ -101,5 +101,7 @@
       "canSleep": true,
       "willSleepOnBed": true
     }
-  }
+  },
+  "shoulderMountable": true,
+  "shoulderEffects": []
 }

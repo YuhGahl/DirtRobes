@@ -20,7 +20,7 @@ import java.util.regex.Pattern;
  * q.quadruped_walk(période, amplitude, 'patte_av_g', 'patte_av_d', 'patte_ar_g', 'patte_ar_d').
  */
 public final class Poser {
-    public enum PoseType { STAND, WALK, SLEEP, FLY, HOVER, NONE }
+    public enum PoseType { STAND, WALK, SLEEP, FLY, HOVER, SHOULDER, NONE }
 
     public static final class PoseDef {
         public final String name;
@@ -91,7 +91,11 @@ public final class Poser {
             PoseDef def = new PoseDef(e.getKey());
             for (JsonElement t : GsonHelper.getAsJsonArray(pj, "poseTypes", new JsonArray())) {
                 try {
-                    def.types.add(PoseType.valueOf(t.getAsString().toUpperCase(Locale.ROOT)));
+                    String name = t.getAsString().toUpperCase(Locale.ROOT);
+                    // Cobblemon distingue l'épaule gauche et droite ; ici une seule pose
+                    if (name.startsWith("SHOULDER")) name = "SHOULDER";
+                    PoseType pt = PoseType.valueOf(name);
+                    if (!def.types.contains(pt)) def.types.add(pt);
                 } catch (IllegalArgumentException ignored) {
                     // types Cobblemon non gérés (PORTRAIT, PROFILE, FLOAT, SWIM…)
                 }
@@ -114,7 +118,7 @@ public final class Poser {
             }
         }
         if (fallback != null) return fallback;
-        if (type == PoseType.WALK) return select(PoseType.STAND, battle);
+        if (type == PoseType.WALK || type == PoseType.SHOULDER) return select(PoseType.STAND, battle);
         if (type == PoseType.FLY) return select(PoseType.HOVER, battle);
         if (type == PoseType.HOVER) return select(PoseType.WALK, battle);
         return poses.isEmpty() ? null : poses.values().iterator().next();

@@ -42,6 +42,8 @@ public class BedrockEntityRenderer<T extends LivingEntity & BedrockPosable> exte
         int seenCryTick = -1000;
         float recoilStart = -100f;
         float faintStart = -1f;
+        float jumpStart = -100f;
+        boolean wasOnGround = true;
     }
 
     @Override
@@ -176,7 +178,8 @@ public class BedrockEntityRenderer<T extends LivingEntity & BedrockPosable> exte
         }
 
         Poser.PoseType type;
-        if (entity.isPoseSleeping()) type = Poser.PoseType.SLEEP;
+        if (entity.isOnShoulder()) type = Poser.PoseType.SHOULDER;
+        else if (entity.isPoseSleeping()) type = Poser.PoseType.SLEEP;
         else if (entity.isFlyingNow()) type = entity.getDeltaMovement().horizontalDistanceSqr() > 0.0004 ? Poser.PoseType.FLY : Poser.PoseType.HOVER;
         else if (entity.walkAnimation.speed(pt) > 0.05f) type = Poser.PoseType.WALK;
         else type = Poser.PoseType.STAND;
@@ -200,6 +203,11 @@ public class BedrockEntityRenderer<T extends LivingEntity & BedrockPosable> exte
             state.cryStart = now;
         }
         if (entity.hurtTime == entity.hurtDuration && entity.hurtTime > 0) state.recoilStart = now;
+        // saut : il quitte le sol en montant (pas sur l'épaule, pas en vol)
+        boolean ground = entity.onGround() || entity.isPassenger() || entity.isFlyingNow() || entity.isInWater();
+        if (state.wasOnGround && !ground && entity.getY() - entity.yo > 0.04) state.jumpStart = now;
+        state.wasOnGround = ground;
+        if (type != Poser.PoseType.SHOULDER) playOneShot(poser, "jump", entity, pose, ctx, now - state.jumpStart, pt);
         playOneShot(poser, "cry", entity, pose, ctx, now - state.cryStart, pt);
         playOneShot(poser, "recoil", entity, pose, ctx, now - state.recoilStart, pt);
         return pose;

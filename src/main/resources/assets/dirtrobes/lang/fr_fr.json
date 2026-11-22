@@ -739,6 +739,7 @@
   "gui.dirtrobes.pc.release_confirm": "Sûr ? Re-clic",
   "gui.dirtrobes.pc.release.tooltip": "Relâche définitivement le Spectrobe sélectionné : il ne reviendra pas. Clique deux fois pour confirmer.",
   "message.dirtrobes.released": "%s a été relâché. Au revoir !",
+  "subtitles.dirtrobes.spectrobe.hurt": "Un Spectrobe glapit de douleur",
   "dirtrobes.species.anuberos.name": "Anuberos",
   "dirtrobes.species.anuberos.desc": "",
   "dirtrobes.species.anubi.name": "Anubi",
