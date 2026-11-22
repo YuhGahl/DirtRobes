@@ -155,7 +155,19 @@
                 23
               ]
             }
-          ]
+          ],
+          "locators": {
+            "physical": [
+              0.0,
+              8.85,
+              -11
+            ],
+            "special": [
+              0.0,
+              8.85,
+              -11
+            ]
+          }
         },
         {
           "name": "ear_left",
@@ -293,7 +305,14 @@
                 23
               ]
             }
-          ]
+          ],
+          "locators": {
+            "eye2": [
+              2.0,
+              8.5,
+              -9.05
+            ]
+          }
         },
         {
           "name": "locator_eye_left",
@@ -336,7 +355,14 @@
                 23
               ]
             }
-          ]
+          ],
+          "locators": {
+            "eye1": [
+              -2.0,
+              8.5,
+              -9.05
+            ]
+          }
         },
         {
           "name": "locator_eye_right",
@@ -475,7 +501,14 @@
                 14
               ]
             }
-          ]
+          ],
+          "locators": {
+            "foot_primary1": [
+              2.0,
+              0,
+              -0.5
+            ]
+          }
         },
         {
           "name": "front_leg_right",
@@ -502,7 +535,14 @@
                 14
               ]
             }
-          ]
+          ],
+          "locators": {
+            "foot_primary2": [
+              -2.0,
+              0,
+              -0.5
+            ]
+          }
         },
         {
           "name": "back_leg_left",
@@ -529,7 +569,14 @@
                 14
               ]
             }
-          ]
+          ],
+          "locators": {
+            "foot_secondary1": [
+              2.0,
+              0,
+              3.5
+            ]
+          }
         },
         {
           "name": "back_leg_right",
@@ -556,7 +603,14 @@
                 23
               ]
             }
-          ]
+          ],
+          "locators": {
+            "foot_secondary2": [
+              -2.0,
+              0,
+              3.5
+            ]
+          }
         },
         {
           "name": "locator_foot_primary",
@@ -599,7 +653,14 @@
                 23
               ]
             }
-          ]
+          ],
+          "locators": {
+            "tail": [
+              0,
+              6.5,
+              5
+            ]
+          }
         },
         {
           "name": "tail_flame",

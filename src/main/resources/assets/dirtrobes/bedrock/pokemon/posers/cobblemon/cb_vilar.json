@@ -1,87 +1,86 @@
 {
-  "animations": {
-    "cry": "q.bedrock_stateful('cb_vilar', 'cry')",
-    "faint": "q.bedrock_primary('placeholder_child', 'faint', q.curve('one'))",
-    "recoil": "q.bedrock_stateful('placeholder_child', 'recoil')",
-    "jump": "q.bedrock_stateful('placeholder_child', 'jump')"
-  },
-  "portraitScale": 1.5,
+  "portraitScale": 1.6,
   "portraitTranslation": [
     0,
-    0,
+    -0.6,
     0
   ],
-  "profileScale": 1.0,
+  "profileScale": 0.7,
   "profileTranslation": [
     0,
-    0,
+    0.5,
     0
   ],
-  "rootBone": "placeholder_child",
+  "rootBone": "vilar",
+  "animations": {
+    "cry": "q.bedrock_stateful('cb_vilar', 'cry')",
+    "recoil": "q.bedrock_stateful('vilar', 'recoil')",
+    "jump": "q.bedrock_stateful('vilar', 'jump')",
+    "faint": "q.bedrock_primary('vilar', 'faint', q.curve('one'))"
+  },
   "poses": {
     "battle-standing": {
-      "animations": [
-        "q.look('head')",
-        "q.bedrock('placeholder_child', 'battle_idle')"
-      ],
-      "isBattle": true,
       "poseTypes": [
         "STAND"
       ],
+      "isBattle": true,
+      "animations": [
+        "q.look('head', 1, 1, 30, -20, 35, -35)",
+        "q.bedrock('vilar', 'battle_idle')"
+      ],
       "quirks": [
-        "q.bedrock_quirk('placeholder_child', 'blink')"
+        "q.bedrock_quirk('vilar', 'blink')"
       ]
     },
     "standing": {
-      "animations": [
-        "q.look('head')",
-        "q.bedrock('placeholder_child', 'ground_idle')"
-      ],
-      "isBattle": false,
       "poseTypes": [
         "STAND",
-        "NONE",
+        "FLOAT",
         "PORTRAIT",
         "PROFILE",
-        "FLOAT"
+        "NONE"
+      ],
+      "isBattle": false,
+      "animations": [
+        "q.look('head', 1, 1, 30, -20, 35, -35)",
+        "q.bedrock('vilar', 'ground_idle')"
       ],
       "quirks": [
-        "q.bedrock_quirk('placeholder_child', 'blink')"
+        "q.bedrock_quirk('vilar', 'blink')"
       ]
     },
     "walking": {
-      "animations": [
-        "q.look('head')",
-        "q.bedrock('placeholder_child', 'ground_idle')",
-        "q.quadruped_walk(0.66, 1.4, 'front_leg_left', 'front_leg_right', 'back_leg_left', 'back_leg_right')"
-      ],
       "poseTypes": [
         "WALK",
         "SWIM"
       ],
-      "quirks": [
-        "q.bedrock_quirk('placeholder_child', 'blink')"
-      ]
-    },
-    "sleep": {
       "animations": [
-        "q.bedrock('placeholder_child', 'sleep')"
+        "q.look('head', 1, 1, 30, -20, 35, -35)",
+        "q.bedrock('vilar', 'walk')"
       ],
-      "poseTypes": [
-        "SLEEP"
+      "quirks": [
+        "q.bedrock_quirk('vilar', 'blink')"
       ]
     },
     "shoulder": {
-      "animations": [
-        "q.look('head')",
-        "q.bedrock('placeholder_child', 'shoulder')"
-      ],
       "poseTypes": [
         "SHOULDER_LEFT",
         "SHOULDER_RIGHT"
       ],
+      "animations": [
+        "q.look('head', 1, 1, 30, -20, 35, -35)",
+        "q.bedrock('vilar', 'shoulder')"
+      ],
       "quirks": [
-        "q.bedrock_quirk('placeholder_child', 'blink')"
+        "q.bedrock_quirk('vilar', 'blink')"
+      ]
+    },
+    "sleep": {
+      "poseTypes": [
+        "SLEEP"
+      ],
+      "animations": [
+        "q.bedrock('vilar', 'sleep')"
       ]
     }
   }

@@ -296,7 +296,19 @@
                 35
               ]
             }
-          ]
+          ],
+          "locators": {
+            "physical": [
+              0.0,
+              15.575,
+              -18
+            ],
+            "special": [
+              0.0,
+              15.575,
+              -18
+            ]
+          }
         },
         {
           "name": "jaw",
@@ -499,7 +511,14 @@
                 42
               ]
             }
-          ]
+          ],
+          "locators": {
+            "eye2": [
+              2.5,
+              16.0,
+              -15.05
+            ]
+          }
         },
         {
           "name": "locator_eye_left",
@@ -542,7 +561,14 @@
                 42
               ]
             }
-          ]
+          ],
+          "locators": {
+            "eye1": [
+              -2.5,
+              16.0,
+              -15.05
+            ]
+          }
         },
         {
           "name": "locator_eye_right",
@@ -697,7 +723,14 @@
                 35
               ]
             }
-          ]
+          ],
+          "locators": {
+            "foot_primary1": [
+              3.5,
+              0,
+              -3.0
+            ]
+          }
         },
         {
           "name": "front_leg_right",
@@ -740,7 +773,14 @@
                 35
               ]
             }
-          ]
+          ],
+          "locators": {
+            "foot_primary2": [
+              -3.5,
+              0,
+              -3.0
+            ]
+          }
         },
         {
           "name": "back_leg_left",
@@ -783,7 +823,14 @@
                 35
               ]
             }
-          ]
+          ],
+          "locators": {
+            "foot_secondary1": [
+              3.5,
+              0,
+              6.0
+            ]
+          }
         },
         {
           "name": "back_leg_right",
@@ -826,7 +873,14 @@
                 35
               ]
             }
-          ]
+          ],
+          "locators": {
+            "foot_secondary2": [
+              -3.5,
+              0,
+              6.0
+            ]
+          }
         },
         {
           "name": "locator_foot_primary",
@@ -869,7 +923,14 @@
                 23
               ]
             }
-          ]
+          ],
+          "locators": {
+            "tail": [
+              0,
+              12,
+              10
+            ]
+          }
         },
         {
           "name": "tail2",

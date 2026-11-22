@@ -45,8 +45,8 @@ def add(path):
             out += subtree(c)
         return out
 
-    if any(b["name"].startswith("locator_") for b in bones):
-        return False  # modèle qui a déjà ses repères (modèles provisoires)
+    # repères déjà présents (posés dans Blockbench, ou modèles provisoires) : jamais remplacés
+    existing = {n for b in bones if b["name"].startswith("locator_") for n in b.get("locators", {})}
     root = next(b for b in bones if not b.get("parent"))
     allc = subtree(root["name"])
     if not allc:
@@ -56,6 +56,8 @@ def add(path):
     loc = {}  # os -> {nom: position}
 
     def put(bone, name, pos):
+        if name in existing:
+            return
         loc.setdefault(bone if bone in by else root["name"], {})[name] = r(pos)
 
     body = "body" if "body" in by else root["name"]
@@ -94,6 +96,8 @@ def add(path):
             put(leg, n, [(ll[0] + lh[0]) / 2, ll[1], (ll[2] + lh[2]) / 2])
     changed = False
     for b in bones:
+        if b["name"].startswith("locator_"):
+            continue
         want = loc.get(b["name"])
         if want and b.get("locators") != want:
             b["locators"] = want

@@ -1,0 +1,8 @@
+{
+  "species": "dirtrobes:vilar",
+  "model": "dirtrobes:vilar",
+  "texture": "dirtrobes:textures/spectrobes/vilar.png",
+  "poser": "dirtrobes:vilar",
+  "tint": false,
+  "scale": 0.45
+}
