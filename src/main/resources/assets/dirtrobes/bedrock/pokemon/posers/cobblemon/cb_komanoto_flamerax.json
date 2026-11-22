@@ -1,74 +1,75 @@
 {
-  "animations": {
-    "cry": "q.bedrock_stateful('cb_komanoto_flamerax', 'cry')",
-    "faint": "q.bedrock_primary('komanoto', 'faint', q.curve('one'))",
-    "recoil": "q.bedrock_stateful('komanoto', 'recoil')",
-    "jump": "q.bedrock_stateful('komanoto', 'jump')"
-  },
-  "portraitScale": 1.2,
+  "portraitScale": 1.45,
   "portraitTranslation": [
-    0,
-    -1.4,
+    -0.7,
+    1.35,
     0
   ],
-  "profileScale": 0.8,
+  "profileScale": 0.55,
   "profileTranslation": [
     0,
-    0.3,
+    0.85,
     0
   ],
   "rootBone": "komanoto",
+  "animations": {
+    "cry": "q.bedrock_stateful('cb_komanoto_flamerax', 'cry')",
+    "recoil": "q.bedrock_stateful('komanoto', 'recoil')",
+    "jump": "q.bedrock_stateful('komanoto', 'jump')",
+    "faint": "q.bedrock_primary('komanoto', 'faint', q.curve('one'))"
+  },
   "poses": {
     "battle-standing": {
-      "animations": [
-        "q.look('head')",
-        "q.bedrock('komanoto', 'battle_idle')"
-      ],
-      "isBattle": true,
       "poseTypes": [
         "STAND"
+      ],
+      "isBattle": true,
+      "animations": [
+        "q.look('head_ai', 1, 1, 30, -12.5, 25, -25)",
+        "q.bedrock('komanoto', 'battle_idle')"
       ],
       "quirks": [
         "q.bedrock_quirk('komanoto', 'blink')"
       ]
     },
     "standing": {
+      "poseTypes": [
+        "STAND",
+        "FLOAT",
+        "PORTRAIT",
+        "PROFILE",
+        "NONE"
+      ],
       "animations": [
-        "q.look('head')",
+        "q.look('head_ai', 1, 1, 30, -12.5, 25, -25)",
         "q.bedrock('komanoto', 'ground_idle')"
       ],
       "isBattle": false,
-      "poseTypes": [
-        "STAND",
-        "NONE",
-        "PORTRAIT",
-        "PROFILE",
-        "FLOAT"
-      ],
       "quirks": [
         "q.bedrock_quirk('komanoto', 'blink')"
       ]
     },
     "walking": {
-      "animations": [
-        "q.look('head')",
-        "q.bedrock('komanoto', 'ground_idle')",
-        "q.quadruped_walk(0.6, 1.0, 'front_leg_left', 'front_leg_right', 'back_leg_left', 'back_leg_right')"
-      ],
+      "poseName": "walking",
       "poseTypes": [
         "WALK",
         "SWIM"
+      ],
+      "animations": [
+        "q.look('head_ai', 1, 1, 30, -12.5, 25, -25)",
+        "q.bedrock('komanoto', 'ground_idle')",
+        "q.quadruped_walk(1, 1, 'leg_front_left', 'leg_front_right', 'leg_back_left', 'leg_back_right')"
       ],
       "quirks": [
         "q.bedrock_quirk('komanoto', 'blink')"
       ]
     },
     "sleep": {
-      "animations": [
-        "q.bedrock('komanoto', 'sleep')"
-      ],
       "poseTypes": [
         "SLEEP"
+      ],
+      "animations": [
+        "q.bedrock('komanoto', 'sleep')"
       ]
     }
   }

@@ -238,8 +238,9 @@ public class BedrockEntityRenderer<T extends LivingEntity & BedrockPosable> exte
                 Pose.BoneTransform head = pose.get(ins.arg(0, "head"));
                 float bodyYaw = Mth.rotLerp(pt, entity.yBodyRotO, entity.yBodyRot);
                 float headYaw = Mth.rotLerp(pt, entity.yHeadRotO, entity.yHeadRot);
-                float yaw = Mth.clamp(Mth.wrapDegrees(headYaw - bodyYaw), -60f, 60f);
-                float pitch = Mth.clamp(entity.getViewXRot(pt), -45f, 45f);
+                // comme Cobblemon : q.look(os, ×tangage, ×lacet, tangage max, tangage min, lacet max, lacet min)
+                float yaw = Mth.clamp(Mth.wrapDegrees(headYaw - bodyYaw) * ins.floatArg(2, 1f), ins.floatArg(6, -60f), ins.floatArg(5, 60f));
+                float pitch = Mth.clamp(entity.getViewXRot(pt) * ins.floatArg(1, 1f), ins.floatArg(4, -45f), ins.floatArg(3, 45f));
                 head.ry += -yaw * Mth.DEG_TO_RAD;
                 head.rx += -pitch * Mth.DEG_TO_RAD;
             }
