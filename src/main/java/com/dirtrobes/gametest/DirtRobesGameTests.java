@@ -703,6 +703,17 @@ public class DirtRobesGameTests {
         helper.succeed();
     }
 
+    /** /dirtrobes spawn komainu : le Komainu Corona, pas une lignée secrète qui porte le même nom. */
+    @GameTest(template = "platform")
+    public static void speciesLookupById(GameTestHelper helper) {
+        Species k = SpeciesManager.byName("komainu");
+        helper.assertTrue(k != null && k.id().getPath().equals("komainu") && k.property() == Property.CORONA,
+                "komainu devrait désigner le Komainu Corona, obtenu " + (k == null ? "rien" : k.id()));
+        Species f = SpeciesManager.byName("komainu_flamerax");
+        helper.assertTrue(f != null && f.id().getPath().equals("komainu_flamerax"), "komainu_flamerax introuvable");
+        helper.succeed();
+    }
+
     /** Roue d'interaction : un enfant monte sur l'épaule et en redescend, on chevauche un évolué ; ils restent « dehors » dans l'équipe. */
     @GameTest(template = "platform")
     public static void wheelShoulderAndRide(GameTestHelper helper) {

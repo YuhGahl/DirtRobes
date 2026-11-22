@@ -48,8 +48,14 @@ public class SpeciesManager extends SimpleJsonResourceReloadListener {
 
     @Nullable
     public static Species byName(String name) {
+        // d'abord l'identifiant exact (plusieurs espèces portent le même nom, ex. les six Komainu),
+        // puis le nom affiché
+        String path = name.contains(":") ? name.substring(name.indexOf(':') + 1) : name;
         for (Species s : species.values()) {
-            if (s.name().equalsIgnoreCase(name) || s.id().getPath().equalsIgnoreCase(name)) return s;
+            if (s.id().getPath().equalsIgnoreCase(path)) return s;
+        }
+        for (Species s : species.values()) {
+            if (s.name().equalsIgnoreCase(name)) return s;
         }
         return null;
     }
