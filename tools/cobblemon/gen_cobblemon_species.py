@@ -169,23 +169,122 @@ def _tinted(texture, prop, variant, emissive):
     return f"dirtrobes:{TINT_DIR}/{name}"
 
 
+_CB_MODELS = {}
+
+
+def _find_model(model_id):
+    name = model_id.split(":")[1] + ".geo.json"
+    for folder in ("bedrock/pokemon/models", "bedrock/spectrobes/models"):
+        p = os.path.join(ASSETS, folder, name)
+        if os.path.exists(p):
+            return p, folder
+    raise SystemExit(f"Modèle introuvable : {model_id}")
+
+
+def cobblemon_model(model_id, textures):
+    """Référence du modèle pour Cobblemon et textures à utiliser.
+
+    Cobblemon ne lit que les UV « de boîte ». Si le modèle DirtRobes a des UV par face (dessinées librement dans
+    Blockbench), on en fabrique automatiquement une version Cobblemon : mêmes os et cubes, UV de boîte rangées
+    sous la texture d'origine, et pour chaque texture une copie agrandie où les pixels de chaque face sont
+    recopiés à leur nouvelle place. Tout est régénéré à chaque build : il suffit de modifier la texture DirtRobes."""
+    path, folder = _find_model(model_id)
+    geo = json.load(open(path, encoding="utf-8"))
+    g = geo["minecraft:geometry"][0]
+    per_face = any(isinstance(c.get("uv"), dict) for b in g["bones"] for c in b.get("cubes", []))
+    if not per_face:
+        return model_id + ".geo", {t: t for t in textures if t}
+    import math
+    from PIL import Image
+    W, H = g["description"]["texture_width"], g["description"]["texture_height"]
+    # place pour les patrons de boîte sous la texture d'origine
+    x = 0
+    y = H
+    row = 0
+    layout = []  # (cube, u, v)
+    cubes = [c for b in g["bones"] for c in b.get("cubes", []) if isinstance(c.get("uv"), dict)]
+    for c in cubes:
+        w, h, d = (max(1, math.ceil(v - 1e-6)) for v in c["size"])
+        nw, nh = 2 * (d + w), d + h
+        if x + nw > W:
+            x, y, row = 0, y + row + 1, 0
+        layout.append((c, x, y))
+        x += nw + 1
+        row = max(row, nh)
+    newH = y + row + 1
+    newH = max(H * 2, 1 << (newH - 1).bit_length())
+    cb = json.loads(json.dumps(geo))
+    cg = cb["minecraft:geometry"][0]
+    cg["description"]["identifier"] = g["description"]["identifier"] + "_cobblemon"
+    cg["description"]["texture_height"] = newH
+    by_id = {id(c): (u, v) for c, u, v in layout}
+    cb_cubes = [c for b in cg["bones"] for c in b.get("cubes", [])]
+    for orig, new in zip([c for b in g["bones"] for c in b.get("cubes", [])], cb_cubes):
+        if id(orig) in by_id:
+            new["uv"] = list(by_id[id(orig)])
+    name = model_id.split(":")[1] + "_cobblemon"
+    with open(os.path.join(ASSETS, "bedrock/pokemon/models", name + ".geo.json"), "w", encoding="utf-8") as fh:
+        json.dump(cb, fh, indent=2)
+    out = {}
+    for t in textures:
+        if not t:
+            continue
+        src = Image.open(os.path.join(ASSETS, t.split(":")[1])).convert("RGBA")
+        sw, sh = src.size
+        sx, sy = sw / W, sh / H  # textures plus grandes que la grille du modèle
+        img = Image.new("RGBA", (sw, round(newH * sy)), (0, 0, 0, 0))
+        img.paste(src, (0, 0))
+        sp, dp = src.load(), img.load()
+        for c, bu, bv in layout:
+            w, h, d = c["size"][0], c["size"][1], c["size"][2]
+            boxes = {"north": (bu + d, bv + d, w, h), "south": (bu + 2 * d + w, bv + d, w, h), "west": (bu, bv + d, d, h),
+                     "east": (bu + d + w, bv + d, d, h), "up": (bu + d, bv, w, d), "down": (bu + d + w, bv, w, d)}
+            for face, (du, dv, dw, dh) in boxes.items():
+                f = c["uv"].get(face)
+                if not f or dw <= 0 or dh <= 0:
+                    continue
+                fu, fv = f["uv"]
+                fw, fh = f.get("uv_size", [0, 0])
+                for px in range(math.floor(du * sx), math.ceil((du + dw) * sx)):
+                    s_ = min(max((px + 0.5) / sx - du, 0) / dw, 0.999)
+                    for py in range(math.floor(dv * sy), math.ceil((dv + dh) * sy)):
+                        t_ = min(max((py + 0.5) / sy - dv, 0) / dh, 0.999)
+                        qx = min(sw - 1, max(0, math.floor((fu + s_ * fw) * sx)))
+                        qy = min(sh - 1, max(0, math.floor((fv + t_ * fh) * sy)))
+                        if 0 <= px < img.width and 0 <= py < img.height:
+                            dp[px, py] = sp[qx, qy]
+        rel = f"{TINT_DIR}/{os.path.basename(t.split(':')[1])[:-4]}_cobblemon.png"
+        os.makedirs(os.path.join(ASSETS, TINT_DIR), exist_ok=True)
+        img.save(os.path.join(ASSETS, rel))
+        out[t] = f"dirtrobes:{rel}"
+    return f"dirtrobes:{name}.geo", out
+
+
 def cobblemon_resolver(sid, d):
     """Resolver Cobblemon qui reprend le modèle, le poser et la texture du Spectrobe dans DirtRobes.
     Modèles, animations et posers sont partagés (assets/dirtrobes/bedrock/pokemon/…) : rien n'est copié.
     Seules les textures provisoires teintées par propriété sont générées (Cobblemon ne teinte pas)."""
     stage, prop = d["stage"], d["property"]
     r = dirtrobes_resolver(sid, stage)
-    model = r["model"] + ".geo"
     tint = r.get("tint", False)
-    tex = _tinted(r["texture"], prop, 0, False) if tint else r["texture"]
+    key = r["model"]
+    if key not in _CB_MODELS:
+        texs = [r["texture"], r.get("emissive")] + (r.get("variant_textures") or []) + (r.get("variant_emissives") or [])
+        _CB_MODELS[key] = cobblemon_model(r["model"], texs)
+    model, remap = _CB_MODELS[key]
+    tex = _tinted(r["texture"], prop, 0, False) if tint else remap.get(r["texture"], r["texture"])
     glow = r.get("emissive")
     if glow and tint:
         glow = _tinted(glow, prop, 0, True)
+    elif glow:
+        glow = remap.get(glow, glow)
     base = {"aspects": [], "poser": r["poser"], "model": model, "texture": tex,
             "layers": [{"name": "glow", "emissive": True, "texture": glow}] if glow else []}
     variations = [base]
     # Chroma 2 de DirtRobes = chromatique (« shiny ») de Cobblemon
     shiny = (r.get("variant_textures") or [None])[0]
+    if shiny:
+        shiny = remap.get(shiny, shiny)
     if shiny is None and tint:
         shiny = _tinted(r["texture"], prop, 1, False)
     if shiny:
@@ -311,6 +410,17 @@ def main():
         with open(p, "w", encoding="utf-8") as fh:
             json.dump(lang, fh, ensure_ascii=False, indent=2)
             fh.write("\n")
+    # garde-fou : un resolver Cobblemon qui pointe vers un modèle absent ou illisible fait échouer TOUT le
+    # rechargement des ressources du jeu (les packs de ressources du joueur sont alors désactivés)
+    for f in glob.glob(os.path.join(CB_RESOLVERS, "*.json")):
+        for v in json.load(open(f, encoding="utf-8"))["variations"]:
+            if "model" not in v:
+                continue
+            mp = os.path.join(ASSETS, "bedrock/pokemon/models", v["model"].split(":")[1] + ".json")
+            assert os.path.exists(mp), f"{f} : modèle Cobblemon introuvable {mp}"
+            g = json.load(open(mp, encoding="utf-8"))["minecraft:geometry"][0]
+            assert all(isinstance(c.get("uv", [0, 0]), list) for b in g["bones"] for c in b.get("cubes", [])), \
+                f"{mp} : UV par face, illisibles par Cobblemon"
     ids = {showdown_id(n) for n in names.values()}
     assert len(ids) == len(names), "noms Showdown en double"
     print(f"{len(src)} espèces Cobblemon générées dans {OUT}")

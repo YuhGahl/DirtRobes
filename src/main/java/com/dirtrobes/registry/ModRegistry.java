@@ -269,7 +269,7 @@ public final class ModRegistry {
             FOSSILS.put(p, ITEMS.registerItem(p.id() + "_fossil", props -> new FossilItem(p, props), new Item.Properties().stacksTo(16)));
         }
         // anciens minéraux S1 (retirés) : ceux restés dans les mondes deviennent les minéraux d'Origins équivalents
-        String[][] legacy = {{"power", "attack_mineral"}, {"defence", "guard_mineral"}, {"health", "life_mineral"}};
+        String[][] legacy = {{"power", "attack_mineral"}, {"defence", "guard_mineral"}, {"health", "life_mineral"}, {"speed", "super_mineral"}};
         for (String[] l : legacy) {
             for (String grade : new String[]{"c", "b", "a", "a_plus"}) {
                 ITEMS.addAlias(DirtRobes.id(l[0] + "_" + grade), DirtRobes.id(l[1]));
