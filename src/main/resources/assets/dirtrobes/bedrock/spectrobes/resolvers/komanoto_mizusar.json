@@ -1,0 +1,8 @@
+{
+  "species": "dirtrobes:komanoto_mizusar",
+  "model": "dirtrobes:komanoto",
+  "texture": "dirtrobes:textures/spectrobes/komanoto_mizusar.png",
+  "poser": "dirtrobes:komanoto",
+  "tint": false,
+  "scale": 0.7
+}

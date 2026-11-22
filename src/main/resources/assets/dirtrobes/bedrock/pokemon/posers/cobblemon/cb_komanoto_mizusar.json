@@ -1,41 +1,41 @@
 {
   "animations": {
     "cry": "q.bedrock_stateful('cb_komanoto_mizusar', 'cry')",
-    "faint": "q.bedrock_primary('placeholder_adult', 'faint', q.curve('one'))",
-    "recoil": "q.bedrock_stateful('placeholder_adult', 'recoil')",
-    "jump": "q.bedrock_stateful('placeholder_adult', 'jump')"
+    "faint": "q.bedrock_primary('komanoto', 'faint', q.curve('one'))",
+    "recoil": "q.bedrock_stateful('komanoto', 'recoil')",
+    "jump": "q.bedrock_stateful('komanoto', 'jump')"
   },
-  "portraitScale": 1.5,
+  "portraitScale": 1.2,
   "portraitTranslation": [
     0,
-    0,
+    -1.4,
     0
   ],
-  "profileScale": 1.0,
+  "profileScale": 0.8,
   "profileTranslation": [
     0,
-    0,
+    0.3,
     0
   ],
-  "rootBone": "placeholder_adult",
+  "rootBone": "komanoto",
   "poses": {
     "battle-standing": {
       "animations": [
         "q.look('head')",
-        "q.bedrock('placeholder_adult', 'battle_idle')"
+        "q.bedrock('komanoto', 'battle_idle')"
       ],
       "isBattle": true,
       "poseTypes": [
         "STAND"
       ],
       "quirks": [
-        "q.bedrock_quirk('placeholder_adult', 'blink')"
+        "q.bedrock_quirk('komanoto', 'blink')"
       ]
     },
     "standing": {
       "animations": [
         "q.look('head')",
-        "q.bedrock('placeholder_adult', 'ground_idle')"
+        "q.bedrock('komanoto', 'ground_idle')"
       ],
       "isBattle": false,
       "poseTypes": [
@@ -46,26 +46,26 @@
         "FLOAT"
       ],
       "quirks": [
-        "q.bedrock_quirk('placeholder_adult', 'blink')"
+        "q.bedrock_quirk('komanoto', 'blink')"
       ]
     },
     "walking": {
       "animations": [
         "q.look('head')",
-        "q.bedrock('placeholder_adult', 'ground_idle')",
-        "q.quadruped_walk(0.66, 1.4, 'front_leg_left', 'front_leg_right', 'back_leg_left', 'back_leg_right')"
+        "q.bedrock('komanoto', 'ground_idle')",
+        "q.quadruped_walk(0.6, 1.0, 'front_leg_left', 'front_leg_right', 'back_leg_left', 'back_leg_right')"
       ],
       "poseTypes": [
         "WALK",
         "SWIM"
       ],
       "quirks": [
-        "q.bedrock_quirk('placeholder_adult', 'blink')"
+        "q.bedrock_quirk('komanoto', 'blink')"
       ]
     },
     "sleep": {
       "animations": [
-        "q.bedrock('placeholder_adult', 'sleep')"
+        "q.bedrock('komanoto', 'sleep')"
       ],
       "poseTypes": [
         "SLEEP"

@@ -27,6 +27,13 @@ VARIANTS = {
         "komainu_optoger": [(BODY, (46, 1.1, 1.08)), (CREST, (50, 0.25, 1.05))],     # Halo : doré, crête presque blanche
         "komainu_scarazook": [(BODY, (28, 0.55, 0.72)), (CREST, (40, 0.5, 0.85))],   # Eclipse : brun terre, crête sable
     },
+    "komanoto": {  # mêmes teintes que les Komainu de chaque lignée
+        "komanoto_flamerax": [(BODY, (14, 1.35, 1.0))],
+        "komanoto_mizusar": [(BODY, (212, 1.1, 1.0))],
+        "komanoto_bombzar": [(BODY, (112, 0.95, 0.95))],
+        "komanoto_optoger": [(BODY, (46, 1.1, 1.08))],
+        "komanoto_scarazook": [(BODY, (28, 0.55, 0.72))],
+    },
 }
 
 

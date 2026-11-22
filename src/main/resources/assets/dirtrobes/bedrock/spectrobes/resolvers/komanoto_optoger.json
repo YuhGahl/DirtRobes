@@ -1,0 +1,8 @@
+{
+  "species": "dirtrobes:komanoto_optoger",
+  "model": "dirtrobes:komanoto",
+  "texture": "dirtrobes:textures/spectrobes/komanoto_optoger.png",
+  "poser": "dirtrobes:komanoto",
+  "tint": false,
+  "scale": 0.7
+}

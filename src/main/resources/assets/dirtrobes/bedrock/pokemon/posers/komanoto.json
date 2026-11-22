@@ -5,10 +5,10 @@
     "recoil": "q.bedrock_stateful('komanoto', 'recoil')",
     "jump": "q.bedrock_stateful('komanoto', 'jump')"
   },
-  "portraitScale": 1.4,
+  "portraitScale": 1.2,
   "portraitTranslation": [
     0,
-    -0.9,
+    -1.4,
     0
   ],
   "profileScale": 0.8,
@@ -53,7 +53,7 @@
       "animations": [
         "q.look('head')",
         "q.bedrock('komanoto', 'ground_idle')",
-        "q.quadruped_walk(0.6, 1.2, 'front_leg_left', 'front_leg_right', 'back_leg_left', 'back_leg_right')"
+        "q.quadruped_walk(0.6, 1.0, 'front_leg_left', 'front_leg_right', 'back_leg_left', 'back_leg_right')"
       ],
       "poseTypes": [
         "WALK",

@@ -1,0 +1,8 @@
+{
+  "species": "dirtrobes:komanoto_scarazook",
+  "model": "dirtrobes:komanoto",
+  "texture": "dirtrobes:textures/spectrobes/komanoto_scarazook.png",
+  "poser": "dirtrobes:komanoto",
+  "tint": false,
+  "scale": 0.7
+}

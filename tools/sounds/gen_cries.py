@@ -27,7 +27,9 @@ MANIFEST = os.path.join(os.path.dirname(os.path.abspath(__file__)), "generated.j
 SR = 22050
 # espèces qui reprennent le cri d'une autre (même Spectrobe, autre couleur)
 SAME_CRY = {"komainu_flamerax": "komainu", "komainu_mizusar": "komainu", "komainu_bombzar": "komainu",
-            "komainu_optoger": "komainu", "komainu_scarazook": "komainu"}
+            "komainu_optoger": "komainu", "komainu_scarazook": "komainu",
+            "komanoto_flamerax": "komanoto", "komanoto_mizusar": "komanoto", "komanoto_bombzar": "komanoto",
+            "komanoto_optoger": "komanoto", "komanoto_scarazook": "komanoto"}
 
 STAGE = {"child": (880, 0.45), "adult": (600, 0.65), "evolved": (400, 0.85), "secret": (340, 0.95), "special": (300, 1.0)}
 

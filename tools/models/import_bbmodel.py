@@ -8,7 +8,8 @@ Le fichier spec (tools/models/specs/<espèce>.json) dit :
   - "source"  : le .bbmodel de l'utilisateur (non modifié) ;
   - "id"      : nom du modèle (komainu) ;
   - "bones"   : os à créer, dans l'ordre, {"name", "parent", "pivot" (coordonnées Blockbench)} ;
-  - "rules"   : [motif regex sur le nom de l'élément, os] (premier motif qui correspond) ;
+  - "rules"   : [motif regex sur le nom de l'élément, os] (premier motif qui correspond), ou
+                {"match": motif, "x"/"y"/"z": "<n" ou ">n" (centre du cube), "bone": os} ;
   - "colors"  : [motif regex, couleur #RRGGBB] pour la texture provisoire ;
   - "use_groups" (facultatif) : l'os d'un cube est le dossier Blockbench qui le contient (règles en secours).
 
@@ -86,7 +87,20 @@ def main(spec_path):
     def bone_of_el(e):
         if e["uuid"] in group_of:
             return group_of[e["uuid"]]
-        return bone_of(e["name"])
+        # règles avec position : {"match": motif, "x": "<0", "z": ">0", "bone": os} (centre du cube, coordonnées
+        # Blockbench) pour les cubes qui portent le même nom à plusieurs endroits (griffes, piques…)
+        c = [(e["from"][i] + e["to"][i]) / 2 for i in range(3)]
+        for r in spec["rules"]:
+            if isinstance(r, dict):
+                if not re.search(r["match"], e["name"], re.I):
+                    continue
+                ok = all(not r.get(ax) or (c[i] < float(r[ax][1:]) if r[ax][0] == "<" else c[i] > float(r[ax][1:]))
+                         for i, ax in enumerate("xyz"))
+                if ok:
+                    return r["bone"]
+            elif re.search(r[0], e["name"], re.I):
+                return r[1]
+        raise SystemExit(f"Aucun os pour l'élément {e['name']}")
 
     def color_of(name):
         for pat, col in spec["colors"]:

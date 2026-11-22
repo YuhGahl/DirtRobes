@@ -830,7 +830,7 @@
   "spectrobe.komanoto_bombzar.cry": {
     "sounds": [
       {
-        "name": "dirtrobes:spectrobe/komanoto_bombzar_cry",
+        "name": "dirtrobes:spectrobe/komanoto_cry",
         "volume": 0.8
       }
     ],
@@ -839,7 +839,7 @@
   "spectrobe.komanoto_flamerax.cry": {
     "sounds": [
       {
-        "name": "dirtrobes:spectrobe/komanoto_flamerax_cry",
+        "name": "dirtrobes:spectrobe/komanoto_cry",
         "volume": 0.8
       }
     ],
@@ -848,7 +848,7 @@
   "spectrobe.komanoto_mizusar.cry": {
     "sounds": [
       {
-        "name": "dirtrobes:spectrobe/komanoto_mizusar_cry",
+        "name": "dirtrobes:spectrobe/komanoto_cry",
         "volume": 0.8
       }
     ],
@@ -857,7 +857,7 @@
   "spectrobe.komanoto_optoger.cry": {
     "sounds": [
       {
-        "name": "dirtrobes:spectrobe/komanoto_optoger_cry",
+        "name": "dirtrobes:spectrobe/komanoto_cry",
         "volume": 0.8
       }
     ],
@@ -866,7 +866,7 @@
   "spectrobe.komanoto_scarazook.cry": {
     "sounds": [
       {
-        "name": "dirtrobes:spectrobe/komanoto_scarazook_cry",
+        "name": "dirtrobes:spectrobe/komanoto_cry",
         "volume": 0.8
       }
     ],
@@ -3035,7 +3035,7 @@
   "spectrobe.komanoto_bombzar.hurt": {
     "sounds": [
       {
-        "name": "dirtrobes:spectrobe/komanoto_bombzar_hurt",
+        "name": "dirtrobes:spectrobe/komanoto_hurt",
         "volume": 0.8
       }
     ],
@@ -3044,7 +3044,7 @@
   "spectrobe.komanoto_flamerax.hurt": {
     "sounds": [
       {
-        "name": "dirtrobes:spectrobe/komanoto_flamerax_hurt",
+        "name": "dirtrobes:spectrobe/komanoto_hurt",
         "volume": 0.8
       }
     ],
@@ -3053,7 +3053,7 @@
   "spectrobe.komanoto_mizusar.hurt": {
     "sounds": [
       {
-        "name": "dirtrobes:spectrobe/komanoto_mizusar_hurt",
+        "name": "dirtrobes:spectrobe/komanoto_hurt",
         "volume": 0.8
       }
     ],
@@ -3062,7 +3062,7 @@
   "spectrobe.komanoto_optoger.hurt": {
     "sounds": [
       {
-        "name": "dirtrobes:spectrobe/komanoto_optoger_hurt",
+        "name": "dirtrobes:spectrobe/komanoto_hurt",
         "volume": 0.8
       }
     ],
@@ -3071,7 +3071,7 @@
   "spectrobe.komanoto_scarazook.hurt": {
     "sounds": [
       {
-        "name": "dirtrobes:spectrobe/komanoto_scarazook_hurt",
+        "name": "dirtrobes:spectrobe/komanoto_hurt",
         "volume": 0.8
       }
     ],
