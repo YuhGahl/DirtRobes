@@ -1224,5 +1224,9 @@
   "dirtrobes.species.zyrdrake.name": "Zyrdrake",
   "dirtrobes.species.zyrdrake.desc": "",
   "dirtrobes.species.zyrgazelle.name": "Zyrgazelle",
-  "dirtrobes.species.zyrgazelle.desc": ""
+  "dirtrobes.species.zyrgazelle.desc": "",
+  "gui.dirtrobes.pc.release": "Release",
+  "gui.dirtrobes.pc.release_confirm": "Sure? Click",
+  "gui.dirtrobes.pc.release.tooltip": "Releases the selected Spectrobe for good: it will not come back. Click twice to confirm.",
+  "message.dirtrobes.released": "%s was released. Goodbye!"
 }

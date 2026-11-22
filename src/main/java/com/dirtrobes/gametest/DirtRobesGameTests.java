@@ -703,6 +703,21 @@ public class DirtRobesGameTests {
         helper.succeed();
     }
 
+    /** PC : relâcher un Spectrobe le retire définitivement de l'équipe. */
+    @GameTest(template = "platform")
+    public static void pcRelease(GameTestHelper helper) {
+        ServerPlayer player = placePlayer(helper, 10.5, 10.5);
+        Species child = SpeciesManager.all().stream().filter(s -> s.stage() == Stage.CHILD).findFirst().orElseThrow();
+        SpectrobeEntity s = SpectrobeEntity.create(helper.getLevel(), child, 5, player, helper.absoluteVec(new Vec3(9.5, 1, 10.5)));
+        int slot = com.dirtrobes.team.PrizmodTeam.indexOf(player, s.getUUID());
+        helper.assertTrue(slot >= 0, "Le Spectrobe devrait être dans l'équipe");
+        helper.assertTrue(com.dirtrobes.lab.LabNetwork.release(player, com.dirtrobes.storage.GlobalPc.get(helper.getLevel().getServer()),
+                com.dirtrobes.storage.StorageOps.AREA_TEAM, slot), "Le relâcher aurait dû réussir");
+        helper.assertTrue(com.dirtrobes.team.PrizmodTeam.indexOf(player, s.getUUID()) < 0, "Il ne devrait plus être dans l'équipe");
+        helper.assertTrue(!s.isAlive(), "Il ne devrait plus être dans le monde");
+        helper.succeed();
+    }
+
     /** /dirtrobes spawn komainu : le Komainu Corona, pas une lignée secrète qui porte le même nom. */
     @GameTest(template = "platform")
     public static void speciesLookupById(GameTestHelper helper) {

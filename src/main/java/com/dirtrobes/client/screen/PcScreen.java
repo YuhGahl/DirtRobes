@@ -44,6 +44,10 @@ public class PcScreen extends Screen {
     /** Boutons du pont Cobblemon (seulement si Cobblemon est installé). */
     @Nullable
     private Button toCobblemon;
+    /** Bouton « Relâcher » : un premier clic arme, un second confirme. */
+    @Nullable
+    private Button releaseButton;
+    private boolean releaseArmed;
 
     public PcScreen() {
         super(Component.translatable("gui.dirtrobes.pc.title"));
@@ -83,11 +87,35 @@ public class PcScreen extends Screen {
                     .bounds(bx, by + 17, 64, 14).tooltip(net.minecraft.client.gui.components.Tooltip.create(
                             Component.translatable("gui.dirtrobes.pc.from_cobblemon.tooltip"))).build());
         }
+        int ry = gridY() + 3 * CELL + 18 + (toCobblemon != null ? 34 : 0);
+        releaseArmed = false;
+        releaseButton = addRenderableWidget(Button.builder(Component.translatable("gui.dirtrobes.pc.release"), b -> release())
+                .bounds(teamX() - 2, ry, 64, 14).tooltip(net.minecraft.client.gui.components.Tooltip.create(
+                        Component.translatable("gui.dirtrobes.pc.release.tooltip"))).build());
+        releaseButton.active = heldArea >= 0;
         if (data.kind() == LabNetwork.KIND_TERMINAL) {
             addRenderableWidget(Button.builder(Component.translatable("gui.dirtrobes.pc.pen_button"), b -> {
                 if (minecraft != null && data != null) minecraft.setScreen(new PenScreen(this, data.pos(), data.pen()));
             }).bounds(left + W - 78, top + 6, 70, 14).build());
         }
+    }
+
+    private void release() {
+        if (data == null || heldArea < 0) return;
+        if (!releaseArmed) {
+            releaseArmed = true;
+            if (releaseButton != null) releaseButton.setMessage(Component.translatable("gui.dirtrobes.pc.release_confirm")
+                    .withStyle(net.minecraft.ChatFormatting.RED));
+            return;
+        }
+        PacketDistributor.sendToServer(new LabNetwork.PcReleasePayload(data.kind(), data.pos(), heldArea, heldIndex, data.box()));
+        heldArea = -1;
+        disarmRelease();
+    }
+
+    private void disarmRelease() {
+        releaseArmed = false;
+        if (releaseButton != null) releaseButton.setMessage(Component.translatable("gui.dirtrobes.pc.release"));
     }
 
     private void bridge(int action) {
@@ -205,6 +233,10 @@ public class PcScreen extends Screen {
     @Override
     public void render(GuiGraphics g, int mouseX, int mouseY, float partialTick) {
         if (toCobblemon != null) toCobblemon.active = heldArea >= 0;
+        if (releaseButton != null) {
+            releaseButton.active = heldArea >= 0;
+            if (heldArea < 0 && releaseArmed) disarmRelease();
+        }
         super.render(g, mouseX, mouseY, partialTick);
         if (data == null) return;
         g.drawString(font, Component.translatable(data.kind() == LabNetwork.KIND_PC ? "gui.dirtrobes.pc.title_pc" : "gui.dirtrobes.pc.title"),

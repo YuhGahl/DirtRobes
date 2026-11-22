@@ -130,8 +130,56 @@ public final class LabNetwork {
         }
     }
 
+    /** Relâcher définitivement un Spectrobe depuis le PC ou le terminal (le client a déjà demandé confirmation). */
+    public record PcReleasePayload(int kind, BlockPos pos, int area, int index, int box) implements CustomPacketPayload {
+        public static final Type<PcReleasePayload> TYPE = new Type<>(DirtRobes.id("pc_release"));
+        public static final StreamCodec<FriendlyByteBuf, PcReleasePayload> STREAM_CODEC = StreamCodec.of(
+                (buf, p) -> {
+                    buf.writeVarInt(p.kind);
+                    buf.writeBlockPos(p.pos);
+                    buf.writeVarInt(p.area);
+                    buf.writeVarInt(p.index);
+                    buf.writeVarInt(p.box);
+                },
+                buf -> new PcReleasePayload(buf.readVarInt(), buf.readBlockPos(), buf.readVarInt(), buf.readVarInt(), buf.readVarInt()));
+
+        @Override
+        public Type<? extends CustomPacketPayload> type() {
+            return TYPE;
+        }
+    }
+
+    /** Relâche le Spectrobe : sa sauvegarde est supprimée (irréversible). */
+    public static boolean release(ServerPlayer player, com.dirtrobes.storage.SpectrobeStorage storage, int area, int index) {
+        CompoundTag record;
+        if (area == com.dirtrobes.storage.StorageOps.AREA_TEAM) {
+            if (PrizmodTeam.blockedByLeader(player)) {
+                player.displayClientMessage(net.minecraft.network.chat.Component.translatable("message.dirtrobes.team_leader_block")
+                        .withStyle(net.minecraft.ChatFormatting.RED), true);
+                return false;
+            }
+            record = PrizmodTeam.peekRecord(player, index);
+            if (record == null) return false;
+            PrizmodTeam.putRecord(player, index, null);
+            PrizmodTeam.sync(player, false);
+        } else {
+            record = storage.get(player.getUUID(), index);
+            if (record == null) return false;
+            storage.set(player.getUUID(), index, null);
+        }
+        player.displayClientMessage(net.minecraft.network.chat.Component.translatable("message.dirtrobes.released",
+                net.minecraft.network.chat.Component.translatable("species." + record.getString("Species").replace(':', '.'))), true);
+        return true;
+    }
+
     public static void register(RegisterPayloadHandlersEvent event) {
         event.registrar("lab3")
+                .playToServer(PcReleasePayload.TYPE, PcReleasePayload.STREAM_CODEC, (p, ctx) -> ctx.enqueueWork(() -> {
+                    if (!(ctx.player() instanceof ServerPlayer player) || !near(player, p.pos())) return;
+                    com.dirtrobes.storage.SpectrobeStorage storage = storage(player, p.kind(), p.pos());
+                    if (storage != null) release(player, storage, p.area(), p.index());
+                    sendStorage(player, p.kind(), p.pos(), p.box(), false);
+                }))
                 .playToServer(PenEditPayload.TYPE, PenEditPayload.STREAM_CODEC, (p, ctx) -> ctx.enqueueWork(() -> {
                     if (!(ctx.player() instanceof ServerPlayer player) || !near(player, p.pos())) return;
                     if (player.level().getBlockEntity(p.pos()) instanceof LabTerminalBlockEntity terminal) {
