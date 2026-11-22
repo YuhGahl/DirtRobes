@@ -2,7 +2,8 @@
   "animations": {
     "cry": "q.bedrock_stateful('cb_hikodrake', 'cry')",
     "faint": "q.bedrock_primary('placeholder_adult', 'faint', q.curve('one'))",
-    "recoil": "q.bedrock_stateful('placeholder_adult', 'recoil')"
+    "recoil": "q.bedrock_stateful('placeholder_adult', 'recoil')",
+    "jump": "q.bedrock_stateful('placeholder_adult', 'jump')"
   },
   "portraitScale": 1.5,
   "portraitTranslation": [

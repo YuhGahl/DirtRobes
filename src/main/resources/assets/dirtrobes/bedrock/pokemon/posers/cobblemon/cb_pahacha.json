@@ -2,7 +2,8 @@
   "animations": {
     "cry": "q.bedrock_stateful('cb_pahacha', 'cry')",
     "faint": "q.bedrock_primary('placeholder_child', 'faint', q.curve('one'))",
-    "recoil": "q.bedrock_stateful('placeholder_child', 'recoil')"
+    "recoil": "q.bedrock_stateful('placeholder_child', 'recoil')",
+    "jump": "q.bedrock_stateful('placeholder_child', 'jump')"
   },
   "portraitScale": 1.5,
   "portraitTranslation": [
@@ -68,6 +69,19 @@
       ],
       "poseTypes": [
         "SLEEP"
+      ]
+    },
+    "shoulder": {
+      "animations": [
+        "q.look('head')",
+        "q.bedrock('placeholder_child', 'shoulder')"
+      ],
+      "poseTypes": [
+        "SHOULDER_LEFT",
+        "SHOULDER_RIGHT"
+      ],
+      "quirks": [
+        "q.bedrock_quirk('placeholder_child', 'blink')"
       ]
     }
   }
