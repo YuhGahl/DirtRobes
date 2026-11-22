@@ -183,7 +183,7 @@ public class SpectrobeEntity extends TamableAnimal implements BedrockPosable, ne
     @Override
     protected net.minecraft.world.entity.EntityDimensions getDefaultDimensions(net.minecraft.world.entity.Pose pose) {
         org.joml.Vector3f hb = this.entityData.get(DATA_HITBOX);
-        return net.minecraft.world.entity.EntityDimensions.scalable(hb.x, hb.y).withEyeHeight(hb.y * 0.8f);
+        return net.minecraft.world.entity.EntityDimensions.scalable(hb.x, hb.y);
     }
 
     @Override
