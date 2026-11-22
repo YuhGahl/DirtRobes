@@ -1,16 +1,15 @@
 {
   "values": [
-    "dirtrobes:power_c",
-    "dirtrobes:power_b",
-    "dirtrobes:power_a",
-    "dirtrobes:power_a_plus",
-    "dirtrobes:defence_c",
-    "dirtrobes:defence_b",
-    "dirtrobes:defence_a",
-    "dirtrobes:defence_a_plus",
-    "dirtrobes:health_c",
-    "dirtrobes:health_b",
-    "dirtrobes:health_a",
-    "dirtrobes:health_a_plus"
+    "dirtrobes:blue_exp_mineral",
+    "dirtrobes:green_exp_mineral",
+    "dirtrobes:yellow_exp_mineral",
+    "dirtrobes:orange_exp_mineral",
+    "dirtrobes:pink_exp_mineral",
+    "dirtrobes:red_exp_mineral",
+    "dirtrobes:purple_exp_mineral",
+    "dirtrobes:attack_mineral",
+    "dirtrobes:guard_mineral",
+    "dirtrobes:life_mineral",
+    "dirtrobes:super_mineral"
   ]
 }

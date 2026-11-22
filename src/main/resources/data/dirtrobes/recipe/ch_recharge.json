@@ -3,10 +3,10 @@
   "category": "misc",
   "ingredients": [
     {
-      "item": "dirtrobes:power_c"
+      "item": "dirtrobes:attack_mineral"
     },
     {
-      "item": "dirtrobes:defence_c"
+      "item": "dirtrobes:guard_mineral"
     },
     {
       "item": "minecraft:amethyst_shard"

@@ -243,8 +243,6 @@ public final class ModRegistry {
 
     /** Un fossile par propriété (Prisma n'a pas de fossile). */
     public static final Map<Property, DeferredItem<FossilItem>> FOSSILS = new EnumMap<>(Property.class);
-    /** Minéraux façon Spectrobes : Power (ATQ), Defence (DÉF), Health (PV), de C à A+. */
-    public static final List<DeferredItem<MineralItem>> MINERALS = new ArrayList<>();
     /** Minéraux de Spectrobes Origins (EXP, stats, évolution). */
     public static final java.util.Map<com.dirtrobes.item.OriginsMineralItem.Kind, DeferredItem<com.dirtrobes.item.OriginsMineralItem>> ORIGINS_MINERALS =
             new java.util.EnumMap<>(com.dirtrobes.item.OriginsMineralItem.Kind.class);
@@ -270,10 +268,11 @@ public final class ModRegistry {
             if (p == Property.PRISMA) continue;
             FOSSILS.put(p, ITEMS.registerItem(p.id() + "_fossil", props -> new FossilItem(p, props), new Item.Properties().stacksTo(16)));
         }
-        for (MineralItem.Stat stat : MineralItem.Stat.values()) {
-            for (MineralItem.Grade grade : MineralItem.Grade.values()) {
-                String name = stat.id() + "_" + grade.id();
-                MINERALS.add(ITEMS.registerItem(name, props -> new MineralItem(stat, grade, props), new Item.Properties()));
+        // anciens minéraux S1 (retirés) : ceux restés dans les mondes deviennent les minéraux d'Origins équivalents
+        String[][] legacy = {{"power", "attack_mineral"}, {"defence", "guard_mineral"}, {"health", "life_mineral"}};
+        for (String[] l : legacy) {
+            for (String grade : new String[]{"c", "b", "a", "a_plus"}) {
+                ITEMS.addAlias(DirtRobes.id(l[0] + "_" + grade), DirtRobes.id(l[1]));
             }
         }
     }
@@ -311,7 +310,6 @@ public final class ModRegistry {
                 output.accept(CHROMA_3.get());
                 output.accept(KRAWL_SPAWN_EGG.get());
                 FOSSILS.values().forEach(f -> output.accept(f.get()));
-                MINERALS.forEach(m -> output.accept(m.get()));
             }).build());
 
     public static void register(IEventBus modBus) {

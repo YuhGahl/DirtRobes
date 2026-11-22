@@ -510,7 +510,10 @@ public class DirtRobesGameTests {
         ServerPlayer player = placePlayer(helper, 10.5, 10.5);
         var rm = helper.getLevel().getRecipeManager();
         var reg = helper.getLevel().registryAccess();
-        ItemStack mineral = new ItemStack(ModRegistry.MINERALS.get(0).get());
+        ItemStack mineral = new ItemStack(ModRegistry.ORIGINS_MINERALS.get(com.dirtrobes.item.OriginsMineralItem.Kind.ATTACK).get());
+        // anciens minéraux S1 retirés : ils pointent vers les minéraux d'Origins
+        helper.assertTrue(net.minecraft.core.registries.BuiltInRegistries.ITEM.get(DirtRobes.id("power_a_plus")) == mineral.getItem(),
+                "power_a_plus devrait être converti en minéral d'Attaque");
         // 1) module d'extraction
         var in1 = new net.minecraft.world.item.crafting.SmithingRecipeInput(new ItemStack(ModRegistry.MODULE_EXTRACTOR.get()), new ItemStack(ModRegistry.GAUNTLET.get()), mineral);
         var r1 = rm.getRecipeFor(net.minecraft.world.item.crafting.RecipeType.SMITHING, in1, helper.getLevel());

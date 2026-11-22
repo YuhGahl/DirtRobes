@@ -3,10 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "item": "dirtrobes:health_c"
-    },
-    {
-      "item": "dirtrobes:health_c"
+      "item": "dirtrobes:life_mineral"
     },
     {
       "item": "minecraft:glass_bottle"

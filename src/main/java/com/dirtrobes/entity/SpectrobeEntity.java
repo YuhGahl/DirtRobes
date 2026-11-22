@@ -667,15 +667,6 @@ public class SpectrobeEntity extends TamableAnimal implements BedrockPosable, ne
         return hit;
     }
 
-    public void feedMineral(MineralItem mineral, Player player) {
-        addEv(mineral.stat(), mineral.grade().ev);
-        addXp(mineral.grade().xp);
-        if (level() instanceof ServerLevel server) {
-            server.sendParticles(ParticleTypes.HAPPY_VILLAGER, getX(), getY() + getBbHeight(), getZ(), 8, 0.4, 0.3, 0.4, 0.0);
-        }
-        level().playSound(null, blockPosition(), SoundEvents.GENERIC_EAT, SoundSource.NEUTRAL, 0.8f, 1.3f);
-    }
-
     /** Appelé quand ce Spectrobe met un ennemi K.O. */
     public void onKill(LivingEntity victim) {
         int gained = Math.max(10, Math.round(victim.getMaxHealth() * 5));
