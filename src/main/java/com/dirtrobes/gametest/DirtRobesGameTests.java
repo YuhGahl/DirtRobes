@@ -160,9 +160,10 @@ public class DirtRobesGameTests {
     public static void spectrobeDefeatsKrawl(GameTestHelper helper) {
         ServerPlayer player = placePlayer(helper, 2.5, 2.5);
         Species adult = SpeciesManager.all().stream().filter(s -> s.stage() == Stage.ADULT).findFirst().orElseThrow();
-        SpectrobeEntity spectrobe = SpectrobeEntity.create(helper.getLevel(), adult, 30, player, helper.absoluteVec(new Vec3(8.5, 1, 10.5)));
+        // y = 2 : sur la dalle de pierre (couche 1 du gabarit), pas dedans
+        SpectrobeEntity spectrobe = SpectrobeEntity.create(helper.getLevel(), adult, 30, player, helper.absoluteVec(new Vec3(8.5, 2, 10.5)));
         int xpBefore = spectrobe.getXp();
-        KrawlEntity krawl = KrawlEntity.create(helper.getLevel(), KrawlManager.byName("swar"), 2, helper.absoluteVec(new Vec3(12.5, 1, 10.5)));
+        KrawlEntity krawl = KrawlEntity.create(helper.getLevel(), KrawlManager.byName("swar"), 2, helper.absoluteVec(new Vec3(12.5, 2, 10.5)));
         krawl.setTarget(spectrobe);
         helper.succeedWhen(() -> {
             helper.assertTrue(!krawl.isAlive(), "Le Krawl est encore en vie (" + krawl.getHealth() + " PV) ; Krawl en "
