@@ -776,7 +776,7 @@
   "spectrobe.komainu_bombzar.cry": {
     "sounds": [
       {
-        "name": "dirtrobes:spectrobe/komainu_bombzar_cry",
+        "name": "dirtrobes:spectrobe/komainu_cry",
         "volume": 0.8
       }
     ],
@@ -785,7 +785,7 @@
   "spectrobe.komainu_flamerax.cry": {
     "sounds": [
       {
-        "name": "dirtrobes:spectrobe/komainu_flamerax_cry",
+        "name": "dirtrobes:spectrobe/komainu_cry",
         "volume": 0.8
       }
     ],
@@ -794,7 +794,7 @@
   "spectrobe.komainu_mizusar.cry": {
     "sounds": [
       {
-        "name": "dirtrobes:spectrobe/komainu_mizusar_cry",
+        "name": "dirtrobes:spectrobe/komainu_cry",
         "volume": 0.8
       }
     ],
@@ -803,7 +803,7 @@
   "spectrobe.komainu_optoger.cry": {
     "sounds": [
       {
-        "name": "dirtrobes:spectrobe/komainu_optoger_cry",
+        "name": "dirtrobes:spectrobe/komainu_cry",
         "volume": 0.8
       }
     ],
@@ -812,7 +812,7 @@
   "spectrobe.komainu_scarazook.cry": {
     "sounds": [
       {
-        "name": "dirtrobes:spectrobe/komainu_scarazook_cry",
+        "name": "dirtrobes:spectrobe/komainu_cry",
         "volume": 0.8
       }
     ],

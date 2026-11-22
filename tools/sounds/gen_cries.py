@@ -25,6 +25,9 @@ SPECIES = os.path.join(ROOT, "src/main/resources/data/dirtrobes/spectrobes/speci
 OUT = os.path.join(ASSETS, "sounds/spectrobe")
 MANIFEST = os.path.join(os.path.dirname(os.path.abspath(__file__)), "generated.json")
 SR = 22050
+# espèces qui reprennent le cri d'une autre (même Spectrobe, autre couleur)
+SAME_CRY = {"komainu_flamerax": "komainu", "komainu_mizusar": "komainu", "komainu_bombzar": "komainu",
+            "komainu_optoger": "komainu", "komainu_scarazook": "komainu"}
 
 STAGE = {"child": (880, 0.45), "adult": (600, 0.65), "evolved": (400, 0.85), "secret": (340, 0.95), "special": (300, 1.0)}
 
@@ -114,6 +117,15 @@ def main():
         sid = os.path.basename(f)[:-5]
         d = json.load(open(f, encoding="utf-8"))
         out = os.path.join(OUT, f"{sid}_cry.ogg")
+        if sid in SAME_CRY:
+            # pas de fichier à lui : il joue le cri de l'espèce indiquée (on retire un ancien cri généré)
+            if os.path.exists(out) and manifest.get(sid) == sha(out):
+                os.remove(out)
+                manifest.pop(sid, None)
+            src = SAME_CRY[sid]
+            sounds[f"spectrobe.{sid}.cry"] = {"sounds": [{"name": f"dirtrobes:spectrobe/{src}_cry", "volume": 0.8}],
+                                              "subtitle": "subtitles.dirtrobes.spectrobe.cry"}
+            continue
         if os.path.exists(out) and manifest.get(sid) != sha(out):
             kept += 1  # cri fourni par l'utilisateur : on n'y touche pas
         elif not os.path.exists(out):
