@@ -764,6 +764,12 @@ public class SpectrobeEntity extends TamableAnimal implements BedrockPosable, ne
     }
 
     @Override
+    protected void removePassenger(Entity passenger) {
+        super.removePassenger(passenger);
+        riddenFlight = false;
+    }
+
+    @Override
     public void rideTick() {
         super.rideTick();
         if (getVehicle() instanceof Player p) {
@@ -833,12 +839,52 @@ public class SpectrobeEntity extends TamableAnimal implements BedrockPosable, ne
         super.tickRidden(player, input);
         setRot(player.getYRot(), player.getXRot() * 0.5f);
         yRotO = yBodyRot = yHeadRot = getYRot();
-        if (pendingJump > 0 && onGround()) {
+        player.fallDistance = 0;
+        if (isFlyer()) {
+            tickRiddenFlight(player);
+        } else if (pendingJump > 0 && onGround()) {
             Vec3 v = getDeltaMovement();
             setDeltaMovement(v.x, 0.35 + 0.35 * pendingJump, v.z);
             hasImpulse = true;
         }
         pendingJump = 0;
+    }
+
+    /** En vol avec un cavalier : pas de gravité (lu des deux côtés, client qui pilote et serveur). */
+    private boolean riddenFlight;
+
+    public boolean isRiddenFlight() {
+        return riddenFlight;
+    }
+
+    /**
+     * Monture volante : le saut (barre chargée) fait décoller ou monter d'un coup d'aile ; en vol on va où l'on
+     * regarde en avançant (regarder en bas = descendre), sans avancer il fait du sur-place.
+     * Il se pose quand il touche le sol sans qu'on le fasse monter.
+     */
+    private void tickRiddenFlight(Player player) {
+        Vec3 v = getDeltaMovement();
+        if (pendingJump > 0) {
+            riddenFlight = true;
+            setDeltaMovement(v.x, Math.max(v.y, 0) + 0.3 + 0.35 * pendingJump, v.z);
+            hasImpulse = true;
+            return;
+        }
+        if (!riddenFlight) return;
+        double target = player.zza > 0 ? -Math.sin(Math.toRadians(player.getXRot())) * 0.6 : 0;
+        setDeltaMovement(v.x, v.y + (target - v.y) * 0.3, v.z);
+        if (onGround() && target <= 0.05) riddenFlight = false;
+    }
+
+    /** En vol monté, aussi rapide qu'au sol (sinon l'air freine 2 à 3 fois plus). */
+    @Override
+    protected float getFlyingSpeed() {
+        return riddenFlight && isVehicle() ? getSpeed() * 0.25f : super.getFlyingSpeed();
+    }
+
+    @Override
+    protected double getDefaultGravity() {
+        return riddenFlight && isVehicle() ? 0.0 : super.getDefaultGravity();
     }
 
     @Override
