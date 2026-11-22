@@ -16,7 +16,7 @@
   "evolves_into": "dirtrobes:gejigage",
   "evolution_level": 30,
   "hitbox": {
-    "width": 1.35,
+    "width": 1.05,
     "height": 1.55
   }
 }

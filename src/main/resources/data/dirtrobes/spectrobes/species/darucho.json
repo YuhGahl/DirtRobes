@@ -16,7 +16,7 @@
   "evolves_into": "dirtrobes:darutori",
   "evolution_level": 10,
   "hitbox": {
-    "width": 0.9,
+    "width": 0.85,
     "height": 1.0
   }
 }

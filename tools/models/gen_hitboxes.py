@@ -8,8 +8,8 @@ Pour chaque espèce de data/dirtrobes/spectrobes/species : on prend le modèle d
 (le sien, sinon celui par défaut de son stade), on mesure ses cubes au repos et on écrit dans la fiche :
   "hitbox": {"width": …, "height": …}   (en blocs, avant la taille de l'espèce « scale »)
 - hauteur = hauteur du modèle ;
-- largeur = moyenne géométrique largeur × longueur (une boîte Minecraft est carrée : un animal long
-  n'a pas une boîte aussi longue que lui, comme chez Cobblemon) ;
+- largeur = moyenne géométrique largeur × longueur, plafonnée à 1,5 × la largeur (une boîte Minecraft est
+  carrée : un animal long n'a pas une boîte aussi longue que lui, comme chez Cobblemon) ;
 le tout multiplié par le « scale » du resolver (la taille d'affichage du modèle).
 Une fiche avec "hitbox_manual": true n'est jamais modifiée.
 """
@@ -72,7 +72,7 @@ def main():
         r = res.get(f"dirtrobes:{sid}") or res.get(f"default:{d.get('stage', 'child')}") or res["default:adult"]
         sx, sy, sz = bounds(model_file(r["model"]))
         k = r.get("scale", 1.0)
-        hb = {"width": r05(math.sqrt(sx * sz) * k), "height": r05(sy * k)}
+        hb = {"width": r05(min(math.sqrt(sx * sz), 1.5 * sx) * k), "height": r05(sy * k)}
         if d.get("hitbox") != hb:
             d["hitbox"] = hb
             with open(f, "w", encoding="utf-8") as fh:
