@@ -186,6 +186,14 @@ public class SpectrobeEntity extends TamableAnimal implements BedrockPosable, ne
         return net.minecraft.world.entity.EntityDimensions.scalable(hb.x, hb.y);
     }
 
+    /** Le cavalier s'assoit sur le dos (hauteur mesurée sur le modèle), pas au sommet des cornes. */
+    @Override
+    protected Vec3 getPassengerAttachmentPoint(Entity passenger, net.minecraft.world.entity.EntityDimensions dimensions, float scale) {
+        org.joml.Vector3f hb = this.entityData.get(DATA_HITBOX);
+        if (hb.z <= 0 || hb.y <= 0) return super.getPassengerAttachmentPoint(passenger, dimensions, scale);
+        return new Vec3(0, dimensions.height() * Math.min(1f, hb.z / hb.y), 0);
+    }
+
     @Override
     public void onSyncedDataUpdated(EntityDataAccessor<?> key) {
         super.onSyncedDataUpdated(key);
@@ -194,7 +202,7 @@ public class SpectrobeEntity extends TamableAnimal implements BedrockPosable, ne
 
     private void applyHitbox(@Nullable Species species) {
         if (species == null) return;
-        org.joml.Vector3f hb = new org.joml.Vector3f(species.hitboxWidth(), species.hitboxHeight(), 0f);
+        org.joml.Vector3f hb = new org.joml.Vector3f(species.hitboxWidth(), species.hitboxHeight(), species.seatHeight());
         if (!hb.equals(this.entityData.get(DATA_HITBOX))) this.entityData.set(DATA_HITBOX, hb);
     }
 

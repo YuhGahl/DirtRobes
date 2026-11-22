@@ -41,6 +41,17 @@ def model_file(model_id):
 
 
 _BOUNDS = {}
+_SEAT = {}
+BACK = ("body", "torso", "waist")
+
+
+def seat(path):
+    """Haut du dos : le plus haut des cubes posés directement dans les os du tronc (body, torso, waist)."""
+    if path not in _SEAT:
+        g = json.load(open(path, encoding="utf-8"))["minecraft:geometry"][0]
+        tops = [c["origin"][1] + c["size"][1] for b in g["bones"] if b["name"] in BACK for c in b.get("cubes", [])]
+        _SEAT[path] = max(tops) / 16 if tops else 0
+    return _SEAT[path]
 
 
 def bounds(path):
@@ -73,6 +84,9 @@ def main():
         sx, sy, sz = bounds(model_file(r["model"]))
         k = r.get("scale", 1.0)
         hb = {"width": r05(min(math.sqrt(sx * sz), 1.5 * sx) * k), "height": r05(sy * k)}
+        st = seat(model_file(r["model"]))
+        if d.get("stage") in ("evolved", "secret", "special") and st > 0:
+            hb["seat"] = round(min(st * k, hb["height"]), 2)  # montures : hauteur de la selle
         if d.get("hitbox") != hb:
             d["hitbox"] = hb
             with open(f, "w", encoding="utf-8") as fh:

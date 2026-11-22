@@ -30,13 +30,14 @@ public record Species(
         @Nullable ResourceLocation rareEvolution,
         float rareEvolutionChance,
         float hitboxWidth,
-        float hitboxHeight
+        float hitboxHeight,
+        float seatHeight
 ) {
     /** Copie avec un autre mode de déplacement (tests, commandes). */
     public Species withFlying(boolean value) {
         return new Species(id, name, property, stage, family, evolvesInto, evolutionLevel, searchRange,
                 baseHp, baseAttack, baseDefense, baseSpeed, scale, fromFossil, value, rarity, rareEvolution, rareEvolutionChance,
-                hitboxWidth, hitboxHeight);
+                hitboxWidth, hitboxHeight, seatHeight);
     }
 
     public static Species fromJson(ResourceLocation id, JsonObject json) {
@@ -76,7 +77,9 @@ public record Species(
                 rareEvo,
                 rareChance,
                 GsonHelper.getAsFloat(hb, "width", 0.7f),
-                GsonHelper.getAsFloat(hb, "height", 0.9f)
+                GsonHelper.getAsFloat(hb, "height", 0.9f),
+                // hauteur du dos (selle), mesurée sur le modèle ; 0 = haut de la hitbox
+                GsonHelper.getAsFloat(hb, "seat", 0f)
         );
     }
 

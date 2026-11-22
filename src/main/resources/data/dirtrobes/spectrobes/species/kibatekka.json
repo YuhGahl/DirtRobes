@@ -16,6 +16,7 @@
   "from_fossil": true,
   "hitbox": {
     "width": 1.05,
-    "height": 1.55
+    "height": 1.55,
+    "seat": 1.0
   }
 }

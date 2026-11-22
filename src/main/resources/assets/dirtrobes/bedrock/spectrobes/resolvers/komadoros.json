@@ -1,0 +1,8 @@
+{
+  "species": "dirtrobes:komadoros",
+  "model": "dirtrobes:komadoros",
+  "texture": "dirtrobes:textures/spectrobes/komadoros.png",
+  "poser": "dirtrobes:komadoros",
+  "tint": false,
+  "scale": 0.55
+}
