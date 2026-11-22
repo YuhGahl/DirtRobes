@@ -16,7 +16,7 @@
   "evolves_into": "dirtrobes:komadoros",
   "evolution_level": 30,
   "hitbox": {
-    "width": 1.55,
-    "height": 1.55
+    "width": 2.0,
+    "height": 2.0
   }
 }
