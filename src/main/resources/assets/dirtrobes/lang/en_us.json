@@ -735,6 +735,10 @@
   "message.dirtrobes.wheel.knocked_out": "%s is knocked out.",
   "message.dirtrobes.wheel.not_in_team": "%s is not in your Prizmod team.",
   "subtitles.dirtrobes.spectrobe.cry": "Spectrobe cries",
+  "gui.dirtrobes.pc.release": "Release",
+  "gui.dirtrobes.pc.release_confirm": "Sure? Click",
+  "gui.dirtrobes.pc.release.tooltip": "Releases the selected Spectrobe for good: it will not come back. Click twice to confirm.",
+  "message.dirtrobes.released": "%s was released. Goodbye!",
   "dirtrobes.species.anuberos.name": "Anuberos",
   "dirtrobes.species.anuberos.desc": "",
   "dirtrobes.species.anubi.name": "Anubi",
@@ -1224,9 +1228,5 @@
   "dirtrobes.species.zyrdrake.name": "Zyrdrake",
   "dirtrobes.species.zyrdrake.desc": "",
   "dirtrobes.species.zyrgazelle.name": "Zyrgazelle",
-  "dirtrobes.species.zyrgazelle.desc": "",
-  "gui.dirtrobes.pc.release": "Release",
-  "gui.dirtrobes.pc.release_confirm": "Sure? Click",
-  "gui.dirtrobes.pc.release.tooltip": "Releases the selected Spectrobe for good: it will not come back. Click twice to confirm.",
-  "message.dirtrobes.released": "%s was released. Goodbye!"
+  "dirtrobes.species.zyrgazelle.desc": ""
 }

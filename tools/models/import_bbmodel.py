@@ -2,7 +2,7 @@
 """
 Importe un modèle Blockbench (.bbmodel, format Bedrock, UV en boîte) dans DirtRobes.
 
-  python3 tools/models/import_bbmodel.py <spec.json> [chemin du .bbmodel]
+  python3 tools/models/import_bbmodel.py <spec.json> [chemin du .bbmodel] [--texture=texture.png]
 
 Le fichier spec (tools/models/specs/<espèce>.json) dit :
   - "source"  : le .bbmodel de l'utilisateur (non modifié) ;
@@ -35,7 +35,8 @@ def shade(hex_color, f):
 
 def main(spec_path):
     spec = json.load(open(spec_path, encoding="utf-8"))
-    src = sys.argv[2] if len(sys.argv) > 2 else os.path.join(os.path.dirname(os.path.abspath(spec_path)), spec["source"])
+    args = [a for a in sys.argv[1:] if not a.startswith("--")]
+    src = args[1] if len(args) > 1 else os.path.join(os.path.dirname(os.path.abspath(spec_path)), spec["source"])
     bb = json.load(open(src, encoding="utf-8"))
     mid = spec["id"]
     elements = [e for e in bb["elements"] if e.get("type", "cube") == "cube"]
@@ -102,6 +103,10 @@ def main(spec_path):
                 px[u + i, v + j] = c
     tex_path = os.path.join(ASSETS, "textures/spectrobes", f"{mid}.png")
     os.makedirs(os.path.dirname(tex_path), exist_ok=True)
+    # texture peinte par l'utilisateur (--texture chemin.png) : on la prend telle quelle, sinon texture provisoire
+    user_tex = next((a.split("=", 1)[1] for a in sys.argv if a.startswith("--texture=")), None)
+    if user_tex:
+        img = Image.open(user_tex).convert("RGBA")
     img.save(tex_path)
 
     # ---- géométrie Bedrock (x miroir comme l'export Blockbench) ----
@@ -195,7 +200,7 @@ def main(spec_path):
     out["outliner"] = roots
     buf = io.BytesIO()
     img.save(buf, format="PNG")
-    out["textures"] = [{"name": f"{mid}.png", "id": "0", "width": TEX, "height": texh, "uv_width": TEX, "uv_height": texh,
+    out["textures"] = [{"name": f"{mid}.png", "id": "0", "width": img.width, "height": img.height, "uv_width": TEX, "uv_height": texh,
                         "particle": False, "render_mode": "default", "render_sides": "auto", "visible": True, "mode": "bitmap",
                         "saved": False, "uuid": str(uuid.uuid4()), "relative_path": f"{mid}.png",
                         "source": "data:image/png;base64," + base64.b64encode(buf.getvalue()).decode()}]
@@ -204,10 +209,10 @@ def main(spec_path):
     bb_out = os.path.join(os.path.dirname(src), f"{mid}_dirtrobes.bbmodel")
     with open(bb_out, "w", encoding="utf-8") as fh:
         json.dump(out, fh)
-    if keep_uv:
+    if keep_uv and not user_tex:
         img.save(os.path.join(os.path.dirname(src), f"{mid}.png"))
     print("modèle :", geo_path, "\ntexture :", tex_path, "\nBlockbench :", bb_out)
 
 
 if __name__ == "__main__":
-    main(sys.argv[1])
+    main([a for a in sys.argv[1:] if not a.startswith("--")][0])
