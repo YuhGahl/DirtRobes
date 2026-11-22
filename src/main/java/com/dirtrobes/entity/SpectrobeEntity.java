@@ -520,6 +520,7 @@ public class SpectrobeEntity extends TamableAnimal implements BedrockPosable, ne
         setBase(Attributes.MOVEMENT_SPEED, StatCalc.toMovementSpeed(speedStat()));
         setBase(Attributes.FLYING_SPEED, StatCalc.toMovementSpeed(speedStat()) * 1.6);
         setBase(Attributes.SCALE, s.scale());
+        refreshDimensions();
         if (fullHeal) setHealth(getMaxHealth());
         else setHealth(Math.min(getHealth(), getMaxHealth()));
     }

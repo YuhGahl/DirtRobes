@@ -165,7 +165,10 @@ public class DirtRobesGameTests {
         KrawlEntity krawl = KrawlEntity.create(helper.getLevel(), KrawlManager.byName("swar"), 2, helper.absoluteVec(new Vec3(12.5, 1, 10.5)));
         krawl.setTarget(spectrobe);
         helper.succeedWhen(() -> {
-            helper.assertTrue(!krawl.isAlive(), "Le Krawl est encore en vie (" + krawl.getHealth() + " PV)");
+            helper.assertTrue(!krawl.isAlive(), "Le Krawl est encore en vie (" + krawl.getHealth() + " PV) ; Krawl en "
+                    + helper.relativeVec(krawl.position()) + ", Spectrobe en " + helper.relativeVec(spectrobe.position())
+                    + " (" + spectrobe.getHealth() + " PV, K.O. " + spectrobe.isKnockedOut() + ", cible " + spectrobe.getTarget()
+                    + ", boîte " + spectrobe.getBbWidth() + " × " + spectrobe.getBbHeight() + ")");
             helper.assertTrue(spectrobe.getXp() > xpBefore, "Le Spectrobe aurait dû gagner de l'XP");
             log("Krawl vaincu, XP du Spectrobe : {} → {}", xpBefore, spectrobe.getXp());
         });
