@@ -55,7 +55,7 @@ public class CogIncubatorBlock extends KineticBlock implements ICogWheel, IBE<Co
     }
 
     @Override
-    protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
         if (!state.is(newState.getBlock())) {
             IncubatorBlockEntity incubator = IncubatorBlockEntity.at(level, pos);
             if (incubator != null) Containers.dropContents(level, pos, incubator.inventory());
