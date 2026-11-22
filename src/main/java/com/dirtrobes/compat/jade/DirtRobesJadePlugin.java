@@ -12,11 +12,12 @@ import snownee.jade.api.WailaPlugin;
 public class DirtRobesJadePlugin implements IWailaPlugin {
     @Override
     public void register(IWailaCommonRegistration registration) {
-        registration.registerBlockDataProvider(IncubatorProvider.INSTANCE, IncubatorBlockEntity.class);
+        // toutes les entités de bloc : l'incubateur, et l'incubateur à engrenage de Create qui en porte un
+        registration.registerBlockDataProvider(IncubatorProvider.INSTANCE, net.minecraft.world.level.block.entity.BlockEntity.class);
     }
 
     @Override
     public void registerClient(IWailaClientRegistration registration) {
-        registration.registerBlockComponent(IncubatorProvider.INSTANCE, IncubatorBlock.class);
+        registration.registerBlockComponent(IncubatorProvider.INSTANCE, net.minecraft.world.level.block.Block.class);
     }
 }

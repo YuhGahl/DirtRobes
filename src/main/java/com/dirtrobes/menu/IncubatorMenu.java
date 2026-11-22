@@ -94,7 +94,7 @@ public class IncubatorMenu extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(Player player) {
-        return player.level().getBlockState(pos).is(ModRegistry.INCUBATOR.get())
+        return com.dirtrobes.block.IncubatorBlockEntity.at(player.level(), pos) != null
                 && player.distanceToSqr(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5) <= 64.0;
     }
 }

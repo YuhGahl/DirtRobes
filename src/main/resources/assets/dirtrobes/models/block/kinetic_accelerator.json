@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column",
-  "textures": {
-    "end": "dirtrobes:block/kinetic_accelerator_end",
-    "side": "dirtrobes:block/kinetic_accelerator_side"
-  }
-}

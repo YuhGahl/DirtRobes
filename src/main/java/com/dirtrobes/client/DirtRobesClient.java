@@ -69,6 +69,7 @@ public class DirtRobesClient {
     }
 
     private static void onRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        if (net.neoforged.fml.ModList.get().isLoaded("create")) com.dirtrobes.compat.create.CreateClientCompat.registerRenderers(event);
         event.registerEntityRenderer(ModRegistry.SPECTROBE.get(), BedrockEntityRenderer::new);
         event.registerEntityRenderer(ModRegistry.KRAWL.get(), BedrockEntityRenderer::new);
         event.registerEntityRenderer(ModRegistry.GAUNTLET_SHOT.get(), net.minecraft.client.renderer.entity.ThrownItemRenderer::new);

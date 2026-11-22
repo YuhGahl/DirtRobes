@@ -120,6 +120,34 @@ public class IncubatorBlockEntity extends BlockEntity implements MenuProvider {
         super(ModRegistry.INCUBATOR_BE.get(), pos, state);
     }
 
+    /** L'incubateur à cette position : le bloc incubateur, ou celui porté par un autre bloc (incubateur à engrenage). */
+    @Nullable
+    public static IncubatorBlockEntity at(net.minecraft.world.level.BlockGetter level, BlockPos pos) {
+        BlockEntity be = level.getBlockEntity(pos);
+        if (be instanceof IncubatorBlockEntity i) return i;
+        if (be instanceof IncubatorHolder h) return h.incubator();
+        return null;
+    }
+
+    /** Tout l'état de l'incubateur (contenu compris), pour le porter dans un autre bloc. */
+    public CompoundTag writeData(HolderLookup.Provider registries) {
+        CompoundTag tag = new CompoundTag();
+        saveAdditional(tag, registries);
+        return tag;
+    }
+
+    public void readData(CompoundTag tag, HolderLookup.Provider registries) {
+        loadAdditional(tag, registries);
+    }
+
+    /** Allume ou éteint le bloc réellement posé à cette position (incubateur ou incubateur à engrenage). */
+    private void setActiveState(boolean active) {
+        if (level == null) return;
+        BlockState state = level.getBlockState(worldPosition);
+        if (state.hasProperty(IncubatorBlock.ACTIVE) && state.getValue(IncubatorBlock.ACTIVE) != active)
+            level.setBlock(worldPosition, state.setValue(IncubatorBlock.ACTIVE, active), 3);
+    }
+
     public SimpleContainer inventory() {
         return inventory;
     }
@@ -188,7 +216,7 @@ public class IncubatorBlockEntity extends BlockEntity implements MenuProvider {
         this.integrity = integrity;
         this.speciesId = null;
         if (level != null) {
-            level.setBlock(worldPosition, getBlockState().setValue(IncubatorBlock.ACTIVE, true), 3);
+            setActiveState(true);
             level.playSound(null, worldPosition, SoundEvents.BEACON_ACTIVATE, SoundSource.BLOCKS, 0.6f, 1.6f);
         }
         setChanged();
@@ -198,7 +226,8 @@ public class IncubatorBlockEntity extends BlockEntity implements MenuProvider {
         if (be.property == null || !(level instanceof ServerLevel server)) return;
         float speed = 1f;
         if (be.energy.consume(FE_PER_TICK)) speed += FE_BONUS;
-        // accélérateurs voisins (ex. : accélérateur cinétique de Create)
+        // accélération portée par le bloc lui-même (engrenage de Create) ou par un voisin
+        if (level.getBlockEntity(pos) instanceof IncubatorBooster self) speed += Math.max(0f, self.incubatorBonus());
         for (net.minecraft.core.Direction d : net.minecraft.core.Direction.values()) {
             if (level.getBlockEntity(pos.relative(d)) instanceof IncubatorBooster booster) speed += Math.max(0f, booster.incubatorBonus());
         }
@@ -236,7 +265,7 @@ public class IncubatorBlockEntity extends BlockEntity implements MenuProvider {
         owner = null;
         progress = 0;
         integrity = 0;
-        server.setBlock(worldPosition, getBlockState().setValue(IncubatorBlock.ACTIVE, false), 3);
+        setActiveState(false);
     }
 
     // ----- Interface -----

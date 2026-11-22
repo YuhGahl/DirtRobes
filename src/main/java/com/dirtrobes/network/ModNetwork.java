@@ -178,7 +178,8 @@ public final class ModNetwork {
             if (!(context.player() instanceof ServerPlayer player)) return;
             BlockPos pos = payload.pos();
             if (player.distanceToSqr(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5) > 8 * 8) return;
-            if (player.level().getBlockEntity(pos) instanceof IncubatorBlockEntity incubator) {
+            IncubatorBlockEntity incubator = IncubatorBlockEntity.at(player.level(), pos);
+            if (incubator != null) {
                 incubator.finishExcavation(player, Math.max(0, Math.min(100, payload.integrity())));
             }
         });

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "active=false": {
+      "model": "dirtrobes:block/incubator_cog"
+    },
+    "active=true": {
+      "model": "dirtrobes:block/incubator_cog_on"
+    }
+  }
+}

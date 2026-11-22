@@ -1,0 +1,8 @@
+{
+  "neoforge:conditions": [{"type": "neoforge:mod_loaded", "modid": "create"}],
+  "type": "minecraft:block",
+  "pools": [
+    {"rolls": 1, "entries": [{"type": "minecraft:item", "name": "dirtrobes:incubator"}], "conditions": [{"condition": "minecraft:survives_explosion"}]},
+    {"rolls": 1, "entries": [{"type": "minecraft:item", "name": "create:cogwheel"}], "conditions": [{"condition": "minecraft:survives_explosion"}]}
+  ]
+}

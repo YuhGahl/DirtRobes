@@ -430,9 +430,7 @@
   "rarity.dirtrobes.epic": "Epic",
   "rarity.dirtrobes.secret": "Secret",
   "jade.dirtrobes.incubator.speed": "Speed ×%s",
-  "block.dirtrobes.kinetic_accelerator": "Kinetic Accelerator",
-  "jei.dirtrobes.info.incubator": "Awakening a fossil: 2 minutes. Electricity (FE, e.g. Create: New Age) speeds it up: +2 speed for %s FE/tick. With Create, a kinetic accelerator touching the incubator adds +1 speed per %s RPM. Bonuses stack.",
-  "jei.dirtrobes.info.kinetic_accelerator": "Place it against an incubator and connect a Create shaft: +1 awakening speed per %s RPM (uses %s stress per RPM). No effect when overstressed.",
+  "jei.dirtrobes.info.incubator": "Awakening a fossil: 2 minutes. Electricity (FE, e.g. Create: New Age) speeds it up: +2 speed for %s FE/tick. With Create, right-click with a cogwheel to fit it into the incubator: meshed with another cogwheel, it adds +1 speed per %s RPM. Bonuses stack.",
   "item.dirtrobes.blue_exp_mineral": "Blue Mineral",
   "item.dirtrobes.green_exp_mineral": "Green Mineral",
   "item.dirtrobes.yellow_exp_mineral": "Yellow Mineral",
@@ -1229,5 +1227,7 @@
   "dirtrobes.species.zyrdrake.name": "Zyrdrake",
   "dirtrobes.species.zyrdrake.desc": "",
   "dirtrobes.species.zyrgazelle.name": "Zyrgazelle",
-  "dirtrobes.species.zyrgazelle.desc": ""
+  "dirtrobes.species.zyrgazelle.desc": "",
+  "block.dirtrobes.incubator_cog": "Geared Incubator",
+  "message.dirtrobes.cog_inserted": "Cogwheel fitted: mesh it with another cogwheel to speed up awakening."
 }

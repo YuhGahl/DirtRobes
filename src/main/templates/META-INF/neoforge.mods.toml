@@ -139,7 +139,7 @@ config="${mod_id}.mixins.json"
     ordering="NONE"
     side="BOTH"
 
-# Create : accélérateur cinétique pour l'incubateur (optionnel)
+# Create : engrenage à insérer dans l'incubateur pour accélérer l'éveil (optionnel)
 [[dependencies.${mod_id}]]
     modId="create"
     type="optional"

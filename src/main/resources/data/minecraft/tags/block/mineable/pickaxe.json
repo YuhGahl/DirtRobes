@@ -9,7 +9,7 @@
     "dirtrobes:lab_terminal",
     "dirtrobes:spectrobe_pc",
     {
-      "id": "dirtrobes:kinetic_accelerator",
+      "id": "dirtrobes:incubator_cog",
       "required": false
     }
   ]

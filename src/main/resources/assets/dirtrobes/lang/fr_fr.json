@@ -430,9 +430,7 @@
   "rarity.dirtrobes.epic": "Épique",
   "rarity.dirtrobes.secret": "Secret",
   "jade.dirtrobes.incubator.speed": "Vitesse ×%s",
-  "block.dirtrobes.kinetic_accelerator": "Accélérateur cinétique",
-  "jei.dirtrobes.info.incubator": "Éveil d'un fossile : 2 minutes. L'électricité (FE, par ex. Create: New Age) l'accélère : +2 vitesse pour %s FE/tick. Avec Create, un accélérateur cinétique collé à l'incubateur ajoute +1 vitesse par %s tr/min. Les bonus se cumulent.",
-  "jei.dirtrobes.info.kinetic_accelerator": "À coller à un incubateur et à brancher sur un axe Create : +1 vitesse d'éveil par %s tr/min (consomme %s de contrainte par tr/min). Sans effet en surcharge.",
+  "jei.dirtrobes.info.incubator": "Éveil d'un fossile : 2 minutes. L'électricité (FE, par ex. Create: New Age) l'accélère : +2 vitesse pour %s FE/tick. Avec Create, clic droit avec un engrenage pour l'insérer dans l'incubateur : branché à un autre engrenage, il ajoute +1 vitesse par %s tr/min. Les bonus se cumulent.",
   "item.dirtrobes.blue_exp_mineral": "Minéral bleu",
   "item.dirtrobes.green_exp_mineral": "Minéral vert",
   "item.dirtrobes.yellow_exp_mineral": "Minéral jaune",
@@ -1229,5 +1227,7 @@
   "dirtrobes.species.zyrdrake.name": "Zyrdrake",
   "dirtrobes.species.zyrdrake.desc": "",
   "dirtrobes.species.zyrgazelle.name": "Zyrgazelle",
-  "dirtrobes.species.zyrgazelle.desc": ""
+  "dirtrobes.species.zyrgazelle.desc": "",
+  "block.dirtrobes.incubator_cog": "Incubateur à engrenage",
+  "message.dirtrobes.cog_inserted": "Engrenage inséré : branche-le à un autre engrenage pour accélérer l'éveil."
 }

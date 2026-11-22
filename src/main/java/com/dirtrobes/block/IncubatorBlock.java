@@ -55,6 +55,18 @@ public class IncubatorBlock extends BaseEntityBlock {
         return new IncubatorBlockEntity(pos, state);
     }
 
+    /** Avec Create : un engrenage (petit) inséré dans l'incubateur le transforme en incubateur à engrenage. */
+    @Override
+    protected net.minecraft.world.ItemInteractionResult useItemOn(net.minecraft.world.item.ItemStack stack, BlockState state, Level level,
+                                                                 BlockPos pos, Player player, net.minecraft.world.InteractionHand hand, BlockHitResult hit) {
+        if (net.neoforged.fml.ModList.get().isLoaded("create")
+                && net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(stack.getItem()).toString().equals("create:cogwheel")) {
+            if (!level.isClientSide) com.dirtrobes.compat.create.CreateCompat.insertCog(level, pos, player, stack);
+            return net.minecraft.world.ItemInteractionResult.sidedSuccess(level.isClientSide);
+        }
+        return super.useItemOn(stack, state, level, pos, player, hand, hit);
+    }
+
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
         if (level.isClientSide) return InteractionResult.SUCCESS;

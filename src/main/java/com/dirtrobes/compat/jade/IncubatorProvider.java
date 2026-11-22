@@ -23,7 +23,8 @@ public enum IncubatorProvider implements IBlockComponentProvider, IServerDataPro
 
     @Override
     public void appendServerData(CompoundTag data, BlockAccessor accessor) {
-        if (!(accessor.getBlockEntity() instanceof IncubatorBlockEntity be)) return;
+        IncubatorBlockEntity be = IncubatorBlockEntity.at(accessor.getLevel(), accessor.getPosition());
+        if (be == null) return;
         data.putBoolean("Active", be.isBusy());
         data.putInt("Progress", be.progress());
         data.putInt("Integrity", be.integrity());
