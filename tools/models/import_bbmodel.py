@@ -39,6 +39,12 @@ def main(spec_path):
     bb = json.load(open(src, encoding="utf-8"))
     mid = spec["id"]
     elements = [e for e in bb["elements"] if e.get("type", "cube") == "cube"]
+    # « keep_uv » : on garde les UV dessinées dans Blockbench (sinon on les range en 64×64)
+    keep_uv = spec.get("keep_uv", False)
+    global TEX
+    if keep_uv:
+        TEX = bb.get("resolution", {}).get("width", 64)
+    texh = bb.get("resolution", {}).get("height", TEX) if keep_uv else TEX
 
     def bone_of(name):
         for pat, bone in spec["rules"]:
@@ -55,7 +61,7 @@ def main(spec_path):
     # ---- rangement des UV (patron de boîte : largeur 2(p+l), hauteur p+h) ----
     x = y = row_h = 0
     layout = {}
-    for e in sorted(elements, key=lambda e: -(math.ceil(e["to"][1] - e["from"][1]) + math.ceil(e["to"][2] - e["from"][2]))):
+    for e in ([] if keep_uv else sorted(elements, key=lambda e: -(math.ceil(e["to"][1] - e["from"][1]) + math.ceil(e["to"][2] - e["from"][2])))):
         w, h, d = (max(1, math.ceil(e["to"][i] - e["from"][i] - 1e-6)) for i in range(3))
         W, H = 2 * (d + w), d + h
         if x + W > TEX:
@@ -67,9 +73,24 @@ def main(spec_path):
         row_h = max(row_h, H)
 
     # ---- texture provisoire ----
-    img = Image.new("RGBA", (TEX, TEX), (0, 0, 0, 0))
+    img = Image.new("RGBA", (TEX, texh), (0, 0, 0, 0))
     px = img.load()
-    for e in elements:
+    if keep_uv:
+        # chaque face peinte à l'endroit défini dans Blockbench (dessus plus clair, dessous plus sombre)
+        for e in elements:
+            col = color_of(e["name"])
+            for face, f in e["faces"].items():
+                if f.get("texture") is None or "uv" not in f:
+                    continue
+                u0, v0, u1, v1 = f["uv"]
+                c = shade(col, {"up": 1.18, "down": 0.8}.get(face, 1.0 if face in ("north", "south") else 0.92))
+                iu0, iu1 = math.floor(min(u0, u1)), max(math.ceil(max(u0, u1)), math.floor(min(u0, u1)) + 1)
+                iv0, iv1 = math.floor(min(v0, v1)), max(math.ceil(max(v0, v1)), math.floor(min(v0, v1)) + 1)
+                for i in range(iu0, iu1):
+                    for j in range(iv0, iv1):
+                        if 0 <= i < TEX and 0 <= j < texh:
+                            px[i, j] = c
+    for e in ([] if keep_uv else elements):
         u, v, w, h, d = layout[e["uuid"]]
         col = color_of(e["name"])
         for i in range(2 * (d + w)):
@@ -94,8 +115,25 @@ def main(spec_path):
     by_name = {b["name"]: b for b in bones_out}
     for e in elements:
         f, t = e["from"], e["to"]
-        u, v, *_ = layout[e["uuid"]]
-        cube = {"origin": [round(-t[0], 4), f[1], f[2]], "size": [round(t[i] - f[i], 4) for i in range(3)], "uv": [u, v]}
+        cube = {"origin": [round(-t[0], 4), f[1], f[2]], "size": [round(t[i] - f[i], 4) for i in range(3)]}
+        if keep_uv:
+            # UV par face, comme l'export Bedrock de Blockbench (dessus et dessous retournés)
+            faces = {}
+            for name, fc in e["faces"].items():
+                if fc.get("texture") is None or "uv" not in fc:
+                    continue
+                a, b, c2, d2 = fc["uv"]
+                uv, size = [a, b], [c2 - a, d2 - b]
+                if name in ("up", "down"):
+                    uv = [uv[0] + size[0], uv[1] + size[1]]
+                    size = [-size[0], -size[1]]
+                faces[name] = {"uv": uv, "uv_size": size}
+                if fc.get("rotation"):
+                    faces[name]["uv_rotation"] = fc["rotation"]
+            cube["uv"] = faces
+        else:
+            u, v, *_ = layout[e["uuid"]]
+            cube["uv"] = [u, v]
         rot = e.get("rotation", [0, 0, 0])
         if any(rot):
             o = e.get("origin", [0, 0, 0])
@@ -103,14 +141,14 @@ def main(spec_path):
             cube["rotation"] = [-rot[0], -rot[1], rot[2]]
         if e.get("inflate"):
             cube["inflate"] = e["inflate"]
-        if e.get("mirror_uv"):
+        if e.get("mirror_uv") and not keep_uv:
             cube["mirror"] = True
         by_name[bone_of(e["name"])]["cubes"].append(cube)
     for b in bones_out:
         if not b["cubes"]:
             del b["cubes"]
     geo = {"format_version": "1.12.0", "minecraft:geometry": [{
-        "description": {"identifier": f"geometry.{mid}", "texture_width": TEX, "texture_height": TEX,
+        "description": {"identifier": f"geometry.{mid}", "texture_width": TEX, "texture_height": texh,
                         "visible_bounds_width": 3, "visible_bounds_height": 2.5, "visible_bounds_offset": [0, 0.75, 0]},
         "bones": bones_out}]}
     geo_path = os.path.join(ASSETS, "bedrock/pokemon/models", f"{mid}.geo.json")
@@ -127,6 +165,9 @@ def main(spec_path):
         groups.append(g)
         by_group[b["name"]] = {"uuid": g["uuid"], "isOpen": True, "children": []}
     for e in out["elements"]:
+        if keep_uv:
+            by_group[bone_of(e["name"])]["children"].append(e["uuid"])
+            continue
         if e["uuid"] not in layout:
             continue
         u, v, *_ = layout[e["uuid"]]
@@ -152,15 +193,17 @@ def main(spec_path):
     out["outliner"] = roots
     buf = io.BytesIO()
     img.save(buf, format="PNG")
-    out["textures"] = [{"name": f"{mid}.png", "id": "0", "width": TEX, "height": TEX, "uv_width": TEX, "uv_height": TEX,
+    out["textures"] = [{"name": f"{mid}.png", "id": "0", "width": TEX, "height": texh, "uv_width": TEX, "uv_height": texh,
                         "particle": False, "render_mode": "default", "render_sides": "auto", "visible": True, "mode": "bitmap",
                         "saved": False, "uuid": str(uuid.uuid4()), "relative_path": f"{mid}.png",
                         "source": "data:image/png;base64," + base64.b64encode(buf.getvalue()).decode()}]
     out["model_identifier"] = mid
-    out["resolution"] = {"width": TEX, "height": TEX}
+    out["resolution"] = {"width": TEX, "height": texh}
     bb_out = os.path.join(os.path.dirname(src), f"{mid}_dirtrobes.bbmodel")
     with open(bb_out, "w", encoding="utf-8") as fh:
         json.dump(out, fh)
+    if keep_uv:
+        img.save(os.path.join(os.path.dirname(src), f"{mid}.png"))
     print("modèle :", geo_path, "\ntexture :", tex_path, "\nBlockbench :", bb_out)
 
 
