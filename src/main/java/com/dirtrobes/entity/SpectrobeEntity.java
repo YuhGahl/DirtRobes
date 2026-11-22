@@ -721,8 +721,6 @@ public class SpectrobeEntity extends TamableAnimal implements BedrockPosable, ne
 
     // ----- Épaule et monture (roue d'interaction) -----
 
-    /** Ticks pendant lesquels le joueur qui le porte sur l'épaule s'accroupit (1 s = il descend). */
-    private int shoulderSneakTicks;
     /** Saut demandé par le cavalier (0 = aucun). */
     private float pendingJump;
 
@@ -747,16 +745,17 @@ public class SpectrobeEntity extends TamableAnimal implements BedrockPosable, ne
         if (getVehicle() instanceof Player p) {
             // sur l'épaule gauche du joueur, tourné comme lui
             double yaw = Math.toRadians(p.yBodyRot);
-            double side = 0.38;
-            double y = p.getY() + p.getBbHeight() * (p.isCrouching() ? 0.62 : 0.74);
+            double side = 0.4;
+            // pieds posés sur le haut de l'épaule (1,5 bloc debout)
+            double y = p.getY() + p.getBbHeight() * (p.isCrouching() ? 0.7 : 0.835);
             setPos(p.getX() + Math.cos(yaw) * side, y, p.getZ() + Math.sin(yaw) * side);
             setYRot(p.yBodyRot);
             yBodyRot = p.yBodyRot;
             yHeadRot = p.getYHeadRot();
             fallDistance = 0;
             if (!level().isClientSide) {
-                shoulderSneakTicks = p.isShiftKeyDown() ? shoulderSneakTicks + 1 : 0;
-                if (shoulderSneakTicks >= 20 || p.hurtTime > 0 || p.isInWater() || p.isSleeping() || p.isFallFlying()) jumpOffShoulder(p);
+                // pour le faire descendre : Shift + clic droit dans le vide (roue), ou s'il arrive quelque chose au joueur
+                if (p.hurtTime > 0 || p.isInWater() || p.isSleeping() || p.isFallFlying()) jumpOffShoulder(p);
             }
         }
     }
@@ -766,7 +765,6 @@ public class SpectrobeEntity extends TamableAnimal implements BedrockPosable, ne
         stopRiding();
         double yaw = Math.toRadians(p.yBodyRot);
         moveTo(p.getX() + Math.cos(yaw) * 0.8, p.getY(), p.getZ() + Math.sin(yaw) * 0.8, p.getYRot(), 0f);
-        shoulderSneakTicks = 0;
     }
 
     @Nullable

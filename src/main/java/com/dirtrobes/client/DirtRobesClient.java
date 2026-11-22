@@ -59,6 +59,9 @@ public class DirtRobesClient {
         modBus.addListener(DirtRobesClient::onLayerDefinitions);
         modBus.addListener(DirtRobesClient::onClientSetup);
         NeoForge.EVENT_BUS.addListener(DirtRobesClient::onClientTick);
+        // roue d'interaction du Spectrobe porté sur l'épaule
+        NeoForge.EVENT_BUS.addListener(com.dirtrobes.client.screen.InteractionWheelScreen::onRightClickEmpty);
+        NeoForge.EVENT_BUS.addListener(com.dirtrobes.client.screen.InteractionWheelScreen::onRightClickBlock);
         NeoForge.EVENT_BUS.addListener(com.dirtrobes.client.gauntlet.GauntletBladeRenderer::onRenderArm);
         NeoForge.EVENT_BUS.addListener(com.dirtrobes.client.gauntlet.GauntletBladeRenderer::onUseKey);
         modBus.addListener(com.dirtrobes.client.gauntlet.GauntletBladeRenderer::onAddLayers);

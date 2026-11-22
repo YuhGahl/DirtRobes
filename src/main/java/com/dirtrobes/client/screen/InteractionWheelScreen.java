@@ -45,6 +45,32 @@ public class InteractionWheelScreen extends Screen {
         Minecraft.getInstance().setScreen(new InteractionWheelScreen(target));
     }
 
+    /** Spectrobe porté sur l'épaule du joueur local, ou null. */
+    @org.jetbrains.annotations.Nullable
+    private static SpectrobeEntity shoulderSpectrobe(net.minecraft.world.entity.player.Player player) {
+        for (var e : player.getPassengers()) if (e instanceof SpectrobeEntity s && s.isOwnedBy(player)) return s;
+        return null;
+    }
+
+    /** Shift + clic droit main vide dans le vide : la roue du Spectrobe sur l'épaule (on ne peut pas le viser). */
+    public static void onRightClickEmpty(net.neoforged.neoforge.event.entity.player.PlayerInteractEvent.RightClickEmpty event) {
+        var player = event.getEntity();
+        if (!player.isShiftKeyDown() || !player.getMainHandItem().isEmpty()) return;
+        SpectrobeEntity s = shoulderSpectrobe(player);
+        if (s != null) open(s);
+    }
+
+    /** Pareil en visant un bloc (sinon on poserait / utiliserait le bloc). */
+    public static void onRightClickBlock(net.neoforged.neoforge.event.entity.player.PlayerInteractEvent.RightClickBlock event) {
+        var player = event.getEntity();
+        if (!event.getLevel().isClientSide || event.getHand() != net.minecraft.world.InteractionHand.MAIN_HAND) return;
+        if (!player.isShiftKeyDown() || !player.getMainHandItem().isEmpty()) return;
+        SpectrobeEntity s = shoulderSpectrobe(player);
+        if (s == null) return;
+        open(s);
+        event.setCanceled(true);
+    }
+
     /** Réponse du serveur à « Fiche ». */
     public static void openSummary(int slot) {
         Minecraft.getInstance().setScreen(new SpectrobeSummaryScreen(null, slot));
