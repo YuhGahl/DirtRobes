@@ -40,6 +40,9 @@ public class DirtRobes {
         modBus.addListener(com.dirtrobes.lab.LabNetwork::register);
         // Cobblemon (optionnel) : les Spectrobes peuvent passer dans l'équipe Cobblemon et revenir
         modBus.addListener(com.dirtrobes.compat.cobblemon.CobblemonNetwork::register);
+        // roue d'interaction des Spectrobes (Shift + clic droit)
+        modBus.addListener(com.dirtrobes.interaction.SpectrobeActions::register);
+        container.registerConfig(net.neoforged.fml.config.ModConfig.Type.CLIENT, com.dirtrobes.interaction.ClientConfig.SPEC);
         if (net.neoforged.fml.ModList.get().isLoaded("cobblemon")) com.dirtrobes.compat.cobblemon.CobblemonCompat.register(NeoForge.EVENT_BUS);
         modBus.addListener((RegisterGameTestsEvent event) -> event.register(DirtRobesGameTests.class));
         CommonEvents.registerGameEvents(NeoForge.EVENT_BUS);

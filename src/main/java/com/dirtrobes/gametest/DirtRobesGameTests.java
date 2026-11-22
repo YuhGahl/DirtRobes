@@ -699,4 +699,44 @@ public class DirtRobesGameTests {
         helper.assertTrue(slow.isOver(), "La partie aurait dû se terminer à la fin du temps");
         helper.succeed();
     }
+
+    /** Roue d'interaction : un enfant monte sur l'épaule et en redescend, on chevauche un évolué ; ils restent « dehors » dans l'équipe. */
+    @GameTest(template = "platform")
+    public static void wheelShoulderAndRide(GameTestHelper helper) {
+        ServerPlayer player = placePlayer(helper, 10.5, 10.5);
+        Species child = SpeciesManager.all().stream().filter(s -> s.stage() == Stage.CHILD).findFirst().orElseThrow();
+        Species evolved = SpeciesManager.all().stream().filter(s -> s.stage() == Stage.EVOLVED).findFirst().orElseThrow();
+        SpectrobeEntity small = SpectrobeEntity.create(helper.getLevel(), child, 5, player, helper.absoluteVec(new Vec3(9.5, 1, 10.5)));
+        SpectrobeEntity big = SpectrobeEntity.create(helper.getLevel(), evolved, 40, player, helper.absoluteVec(new Vec3(12.5, 1, 10.5)));
+
+        // l'enfant sur l'épaule
+        helper.assertTrue(com.dirtrobes.interaction.SpectrobeActions.apply(player, small, com.dirtrobes.interaction.SpectrobeActions.SHOULDER),
+                "L'enfant aurait dû monter sur l'épaule");
+        helper.assertTrue(small.getVehicle() == player && small.isOnShoulder(), "L'enfant devrait être sur l'épaule du joueur");
+        int slot = com.dirtrobes.team.PrizmodTeam.indexOf(player, small.getUUID());
+        helper.assertTrue(slot >= 0 && com.dirtrobes.team.PrizmodTeam.team(player).entries.get(slot).isOut(),
+                "Sur l'épaule, il doit rester « dehors » dans l'équipe");
+        // un évolué ne monte pas sur l'épaule, un enfant ne se chevauche pas
+        helper.assertFalse(com.dirtrobes.interaction.SpectrobeActions.apply(player, big, com.dirtrobes.interaction.SpectrobeActions.SHOULDER),
+                "Un évolué ne doit pas tenir sur l'épaule");
+        helper.assertFalse(com.dirtrobes.interaction.SpectrobeActions.apply(player, small, com.dirtrobes.interaction.SpectrobeActions.RIDE),
+                "Un enfant ne doit pas pouvoir être monté");
+        // il redescend
+        com.dirtrobes.interaction.SpectrobeActions.apply(player, small, com.dirtrobes.interaction.SpectrobeActions.SHOULDER);
+        helper.assertTrue(small.getVehicle() == null, "L'enfant aurait dû descendre de l'épaule");
+
+        // on chevauche l'évolué
+        helper.assertTrue(com.dirtrobes.interaction.SpectrobeActions.apply(player, big, com.dirtrobes.interaction.SpectrobeActions.RIDE),
+                "Le joueur aurait dû monter sur l'évolué");
+        helper.assertTrue(player.getVehicle() == big && big.getControllingPassenger() == player, "Le joueur devrait diriger sa monture");
+        helper.assertFalse(big.canFight(), "Une monture ne se bat pas");
+        com.dirtrobes.interaction.SpectrobeActions.apply(player, big, com.dirtrobes.interaction.SpectrobeActions.RIDE);
+        helper.assertTrue(player.getVehicle() == null, "Le joueur aurait dû descendre");
+
+        // Reste ici / Suis-moi
+        boolean before = small.isOrderedToSit();
+        com.dirtrobes.interaction.SpectrobeActions.apply(player, small, com.dirtrobes.interaction.SpectrobeActions.STAY_FOLLOW);
+        helper.assertTrue(small.isOrderedToSit() != before, "Reste ici / Suis-moi aurait dû basculer");
+        helper.succeed();
+    }
 }

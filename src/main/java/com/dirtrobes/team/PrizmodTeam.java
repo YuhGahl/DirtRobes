@@ -152,6 +152,13 @@ public final class PrizmodTeam {
         spectrobe.discard();
     }
 
+    /** Place du Spectrobe dans l'équipe du joueur, ou -1. */
+    public static int indexOf(ServerPlayer player, UUID spectrobe) {
+        List<Entry> entries = team(player).entries;
+        for (int i = 0; i < entries.size(); i++) if (entries.get(i).uuid.equals(spectrobe)) return i;
+        return -1;
+    }
+
     /** Range (si dehors) ou fait sortir (si rangé) le membre n°index. */
     public static boolean toggle(ServerPlayer player, int index) {
         Team team = team(player);

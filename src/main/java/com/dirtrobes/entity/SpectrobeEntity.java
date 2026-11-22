@@ -29,6 +29,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.TamableAnimal;
@@ -57,7 +58,7 @@ import javax.annotation.Nullable;
  * Le Spectrobe. Une seule entité pour toutes les espèces : l'espèce, le niveau, la propriété
  * et le stade sont des données synchronisées (même approche que Cobblemon).
  */
-public class SpectrobeEntity extends TamableAnimal implements BedrockPosable {
+public class SpectrobeEntity extends TamableAnimal implements BedrockPosable, net.minecraft.world.entity.PlayerRideableJumping {
     private static final EntityDataAccessor<String> DATA_SPECIES = SynchedEntityData.defineId(SpectrobeEntity.class, EntityDataSerializers.STRING);
     private static final EntityDataAccessor<Integer> DATA_LEVEL = SynchedEntityData.defineId(SpectrobeEntity.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Byte> DATA_PROPERTY = SynchedEntityData.defineId(SpectrobeEntity.class, EntityDataSerializers.BYTE);
@@ -403,7 +404,7 @@ public class SpectrobeEntity extends TamableAnimal implements BedrockPosable {
 
     public boolean canFight() {
         if (isPenResident()) return false;
-        return getStage().fights() && !isKnockedOut() && !isInSittingPose();
+        return getStage().fights() && !isKnockedOut() && !isInSittingPose() && !isPassenger() && getControllingPassenger() == null;
     }
 
     // =====================================================================
@@ -725,8 +726,115 @@ public class SpectrobeEntity extends TamableAnimal implements BedrockPosable {
         }
     }
 
+    // ----- Épaule et monture (roue d'interaction) -----
+
+    /** Ticks pendant lesquels le joueur qui le porte sur l'épaule s'accroupit (1 s = il descend). */
+    private int shoulderSneakTicks;
+    /** Saut demandé par le cavalier (0 = aucun). */
+    private float pendingJump;
+
+    /** Les petits (stade enfant) montent sur l'épaule. */
+    public boolean canSitOnShoulder() {
+        return getStage() == Stage.CHILD;
+    }
+
+    /** Les gros (évolués, secrets, spéciaux) se chevauchent. */
+    public boolean canBeRidden() {
+        Stage st = getStage();
+        return st == Stage.EVOLVED || st == Stage.SECRET || st == Stage.SPECIAL;
+    }
+
+    public boolean isOnShoulder() {
+        return getVehicle() instanceof Player;
+    }
+
+    @Override
+    public void rideTick() {
+        super.rideTick();
+        if (getVehicle() instanceof Player p) {
+            // sur l'épaule gauche du joueur, tourné comme lui
+            double yaw = Math.toRadians(p.yBodyRot);
+            double side = 0.38;
+            double y = p.getY() + p.getBbHeight() * (p.isCrouching() ? 0.62 : 0.74);
+            setPos(p.getX() + Math.cos(yaw) * side, y, p.getZ() + Math.sin(yaw) * side);
+            setYRot(p.yBodyRot);
+            yBodyRot = p.yBodyRot;
+            yHeadRot = p.getYHeadRot();
+            fallDistance = 0;
+            if (!level().isClientSide) {
+                shoulderSneakTicks = p.isShiftKeyDown() ? shoulderSneakTicks + 1 : 0;
+                if (shoulderSneakTicks >= 20 || p.hurtTime > 0 || p.isInWater() || p.isSleeping() || p.isFallFlying()) jumpOffShoulder(p);
+            }
+        }
+    }
+
+    /** Descend de l'épaule et se pose à côté du joueur. */
+    public void jumpOffShoulder(Player p) {
+        stopRiding();
+        double yaw = Math.toRadians(p.yBodyRot);
+        moveTo(p.getX() + Math.cos(yaw) * 0.8, p.getY(), p.getZ() + Math.sin(yaw) * 0.8, p.getYRot(), 0f);
+        shoulderSneakTicks = 0;
+    }
+
+    @Nullable
+    @Override
+    public LivingEntity getControllingPassenger() {
+        return canBeRidden() && getFirstPassenger() instanceof Player p && isOwnedBy(p) ? p : null;
+    }
+
+    @Override
+    protected boolean canAddPassenger(Entity passenger) {
+        return canBeRidden() && getPassengers().isEmpty() && passenger instanceof Player p && isOwnedBy(p);
+    }
+
+    @Override
+    protected void tickRidden(Player player, Vec3 input) {
+        super.tickRidden(player, input);
+        setRot(player.getYRot(), player.getXRot() * 0.5f);
+        yRotO = yBodyRot = yHeadRot = getYRot();
+        if (pendingJump > 0 && onGround()) {
+            Vec3 v = getDeltaMovement();
+            setDeltaMovement(v.x, 0.35 + 0.35 * pendingJump, v.z);
+            hasImpulse = true;
+        }
+        pendingJump = 0;
+    }
+
+    @Override
+    protected Vec3 getRiddenInput(Player player, Vec3 input) {
+        float strafe = player.xxa * 0.5f;
+        float forward = player.zza;
+        if (forward <= 0) forward *= 0.25f;
+        return new Vec3(strafe, 0, forward);
+    }
+
+    /** Vitesse en selle : celle du Spectrobe (sa VIT), un peu plus rapide qu'à pied. */
+    @Override
+    protected float getRiddenSpeed(Player player) {
+        return (float) getAttributeValue(Attributes.MOVEMENT_SPEED) * 1.25f;
+    }
+
+    @Override
+    public void onPlayerJump(int power) {
+        pendingJump = power >= 90 ? 1f : 0.4f + 0.6f * Math.max(0, power) / 90f;
+    }
+
+    @Override
+    public boolean canJump() {
+        return canBeRidden();
+    }
+
+    @Override
+    public void handleStartJump(int power) {
+    }
+
+    @Override
+    public void handleStopJump() {
+    }
+
     @Override
     public boolean hurt(DamageSource source, float amount) {
+        if (isOnShoulder() && source.is(net.minecraft.world.damagesource.DamageTypes.IN_WALL)) return false;
         if (isPenResident() && !source.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) return false;
         if (isKnockedOut() && !source.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) return false;
         if (!level().isClientSide && isTame() && !source.is(DamageTypeTags.BYPASSES_INVULNERABILITY) && amount >= getHealth()) {
@@ -762,7 +870,9 @@ public class SpectrobeEntity extends TamableAnimal implements BedrockPosable {
             return InteractionResult.sidedSuccess(level().isClientSide);
         }
         if (isOwnedBy(player) && stack.isEmpty() && player.isShiftKeyDown()) {
-            if (!level().isClientSide) toggleSit(player);
+            // Shift + clic droit : la roue d'interaction s'ouvre côté client, qui envoie ensuite l'action choisie
+            // (ou directement « Reste ici / Suis-moi » si la roue est désactivée dans la configuration).
+            if (level().isClientSide) com.dirtrobes.client.screen.InteractionWheelScreen.open(this);
             return InteractionResult.sidedSuccess(level().isClientSide);
         }
         return InteractionResult.PASS;

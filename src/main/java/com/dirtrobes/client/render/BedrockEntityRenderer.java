@@ -61,6 +61,8 @@ public class BedrockEntityRenderer<T extends LivingEntity & BedrockPosable> exte
             float bodyYaw = Mth.rotLerp(partialTick, entity.yBodyRotO, entity.yBodyRot);
             poseStack.mulPose(Axis.YP.rotationDegrees(180f - bodyYaw));
             float scale = entity.getScale() / 16f * resolver.scale();
+            // sur l'épaule du joueur : en plus petit
+            if (entity.getVehicle() instanceof net.minecraft.world.entity.player.Player) scale *= 0.6f;
             poseStack.scale(scale, scale, scale);
 
             int overlay = LivingEntityRenderer.getOverlayCoords(entity, 0f);
