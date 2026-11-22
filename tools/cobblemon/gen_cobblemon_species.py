@@ -240,7 +240,8 @@ def cobblemon_model(model_id, textures):
             boxes = {"north": (bu + d, bv + d, w, h), "south": (bu + 2 * d + w, bv + d, w, h), "west": (bu, bv + d, d, h),
                      "east": (bu + d + w, bv + d, d, h), "up": (bu + d, bv, w, d), "down": (bu + d + w, bv, w, d)}
             for face, (du, dv, dw, dh) in boxes.items():
-                f = c["uv"].get(face)
+                # emplacement « west » du patron de boîte = côté +X = face « east » de Blockbench (et inversement)
+                f = c["uv"].get({"east": "west", "west": "east"}.get(face, face))
                 if not f or dw <= 0 or dh <= 0:
                     continue
                 fu, fv = f["uv"]

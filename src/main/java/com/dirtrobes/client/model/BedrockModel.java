@@ -139,8 +139,11 @@ public final class BedrockModel {
                              float x0, float x1, float y0, float y1, float z0, float z1, boolean mirror, float[][] cubeRot) {
         float fu, fv, fw, fh;
         if (faceUv != null) {
-            if (!faceUv.has(name)) return;
-            JsonObject f = faceUv.getAsJsonObject(name);
+            // Les noms de faces des UV par face sont ceux de Blockbench, où l'est est le côté +X de l'espace Java
+            // (ici, la face « west » du patron de boîte est le côté +X) : on inverse est et ouest.
+            String key = name.equals("east") ? "west" : name.equals("west") ? "east" : name;
+            if (!faceUv.has(key)) return;
+            JsonObject f = faceUv.getAsJsonObject(key);
             JsonArray uv = GsonHelper.getAsJsonArray(f, "uv");
             JsonArray size = GsonHelper.getAsJsonArray(f, "uv_size", null);
             fu = uv.get(0).getAsFloat();
