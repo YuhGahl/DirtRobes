@@ -12,5 +12,9 @@
     "special_attack": 104,
     "special_defense": 72,
     "speed": 99
+  },
+  "hitbox": {
+    "width": 1.35,
+    "height": 1.55
   }
 }

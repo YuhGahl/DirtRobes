@@ -62,6 +62,8 @@ import javax.annotation.Nullable;
 public class SpectrobeEntity extends TamableAnimal implements BedrockPosable, net.minecraft.world.entity.PlayerRideableJumping {
     private static final EntityDataAccessor<String> DATA_SPECIES = SynchedEntityData.defineId(SpectrobeEntity.class, EntityDataSerializers.STRING);
     private static final EntityDataAccessor<Integer> DATA_LEVEL = SynchedEntityData.defineId(SpectrobeEntity.class, EntityDataSerializers.INT);
+    /** Taille de la hitbox de l'espèce (avant « scale »), envoyée au client : il n'a pas les fiches des espèces. */
+    private static final EntityDataAccessor<org.joml.Vector3f> DATA_HITBOX = SynchedEntityData.defineId(SpectrobeEntity.class, EntityDataSerializers.VECTOR3);
     private static final EntityDataAccessor<Byte> DATA_PROPERTY = SynchedEntityData.defineId(SpectrobeEntity.class, EntityDataSerializers.BYTE);
     private static final EntityDataAccessor<Byte> DATA_STAGE = SynchedEntityData.defineId(SpectrobeEntity.class, EntityDataSerializers.BYTE);
     private static final EntityDataAccessor<Byte> DATA_COLOR = SynchedEntityData.defineId(SpectrobeEntity.class, EntityDataSerializers.BYTE);
@@ -174,6 +176,26 @@ public class SpectrobeEntity extends TamableAnimal implements BedrockPosable, ne
         builder.define(DATA_STAGE, (byte) Stage.CHILD.ordinal());
         builder.define(DATA_COLOR, (byte) 0);
         builder.define(DATA_FLAGS, (byte) 0);
+        builder.define(DATA_HITBOX, new org.joml.Vector3f(0.7f, 0.9f, 0f));
+    }
+
+    /** Hitbox à la taille du modèle de l'espèce (comme Cobblemon), puis × « scale » via l'attribut SCALE. */
+    @Override
+    protected net.minecraft.world.entity.EntityDimensions getDefaultDimensions(net.minecraft.world.entity.Pose pose) {
+        org.joml.Vector3f hb = this.entityData.get(DATA_HITBOX);
+        return net.minecraft.world.entity.EntityDimensions.scalable(hb.x, hb.y).withEyeHeight(hb.y * 0.8f);
+    }
+
+    @Override
+    public void onSyncedDataUpdated(EntityDataAccessor<?> key) {
+        super.onSyncedDataUpdated(key);
+        if (DATA_HITBOX.equals(key)) refreshDimensions();
+    }
+
+    private void applyHitbox(@Nullable Species species) {
+        if (species == null) return;
+        org.joml.Vector3f hb = new org.joml.Vector3f(species.hitboxWidth(), species.hitboxHeight(), 0f);
+        if (!hb.equals(this.entityData.get(DATA_HITBOX))) this.entityData.set(DATA_HITBOX, hb);
     }
 
     @Override
@@ -373,6 +395,7 @@ public class SpectrobeEntity extends TamableAnimal implements BedrockPosable, ne
         this.entityData.set(DATA_SPECIES, species.id().toString());
         this.entityData.set(DATA_PROPERTY, (byte) species.property().ordinal());
         this.entityData.set(DATA_STAGE, (byte) species.stage().ordinal());
+        applyHitbox(species);
         applyMovementMode(species.flying());
         recomputeStats(fullHeal);
     }

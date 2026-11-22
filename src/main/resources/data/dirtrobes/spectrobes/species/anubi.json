@@ -14,5 +14,9 @@
     "speed": 47
   },
   "evolves_into": "dirtrobes:anubos",
-  "evolution_level": 10
+  "evolution_level": 10,
+  "hitbox": {
+    "width": 0.9,
+    "height": 1.0
+  }
 }

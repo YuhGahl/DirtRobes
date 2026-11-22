@@ -14,5 +14,9 @@
     "speed": 53
   },
   "evolves_into": "dirtrobes:shimanoto",
-  "evolution_level": 10
+  "evolution_level": 10,
+  "hitbox": {
+    "width": 0.9,
+    "height": 1.0
+  }
 }

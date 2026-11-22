@@ -14,5 +14,9 @@
     "speed": 50
   },
   "evolves_into": "dirtrobes:boma_boma",
-  "evolution_level": 10
+  "evolution_level": 10,
+  "hitbox": {
+    "width": 0.9,
+    "height": 1.0
+  }
 }

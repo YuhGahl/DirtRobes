@@ -137,6 +137,16 @@ def dirtrobes_resolver(sid, stage):
     return _DR.get(f"dirtrobes:{sid}") or _DR.get(f"default:{stage}") or _DR["default:adult"]
 
 
+def cobblemon_hitbox(d, sid, stage, w, h):
+    """Même hitbox qu'en DirtRobes (fiche « hitbox », mesurée sur le modèle par tools/models/gen_hitboxes.py).
+    Cobblemon la multiplie par baseScale, qui contient déjà le « scale » du resolver : on l'enlève ici."""
+    hb = d.get("hitbox")
+    if not hb:
+        return {"width": w, "height": h, "fixed": False}
+    k = dirtrobes_resolver(sid, stage).get("scale", 1.0)
+    return {"width": round(hb["width"] / k, 3), "height": round(hb["height"] / k, 3), "fixed": False}
+
+
 def _tint_rgb(rgb, amount):
     r, g, b = (rgb >> 16) & 255, (rgb >> 8) & 255, rgb & 255
     return tuple(int(c + (255 - c) * amount) for c in (r, g, b))
@@ -420,7 +430,7 @@ def main():
             "pokedex": [],
             "evolutions": evolutions,
             "baseScale": round(d.get("scale", STAGE_SCALE[stage]) * dirtrobes_resolver(sid, stage).get("scale", 1.0), 3),
-            "hitbox": {"width": w, "height": h, "fixed": False},
+            "hitbox": cobblemon_hitbox(d, sid, stage, w, h),
             "height": height,
             "weight": weight,
             "behaviour": {"resting": {"canSleep": True, "willSleepOnBed": True}},

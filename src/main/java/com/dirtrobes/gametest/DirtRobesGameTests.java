@@ -729,6 +729,17 @@ public class DirtRobesGameTests {
         helper.succeed();
     }
 
+    /** Hitbox à la taille du modèle : Komainu (fiche 0,65 × 0,95, taille 0,8) mesure 0,52 × 0,76 bloc. */
+    @GameTest(template = "platform")
+    public static void hitboxFromModel(GameTestHelper helper) {
+        Species k = SpeciesManager.byName("komainu");
+        SpectrobeEntity e = SpectrobeEntity.create(helper.getLevel(), k, 5, null, helper.absoluteVec(new Vec3(10.5, 1, 10.5)));
+        float w = k.hitboxWidth() * k.scale(), h = k.hitboxHeight() * k.scale();
+        helper.assertTrue(Math.abs(e.getBbWidth() - w) < 0.01f && Math.abs(e.getBbHeight() - h) < 0.01f,
+                "hitbox attendue " + w + " × " + h + ", obtenue " + e.getBbWidth() + " × " + e.getBbHeight());
+        helper.succeed();
+    }
+
     /** Roue d'interaction : un enfant monte sur l'épaule et en redescend, on chevauche un évolué ; ils restent « dehors » dans l'équipe. */
     @GameTest(template = "platform")
     public static void wheelShoulderAndRide(GameTestHelper helper) {

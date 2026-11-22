@@ -14,5 +14,9 @@
     "speed": 72
   },
   "evolves_into": "dirtrobes:mossarito",
-  "evolution_level": 10
+  "evolution_level": 10,
+  "hitbox": {
+    "width": 0.9,
+    "height": 1.0
+  }
 }

@@ -14,5 +14,9 @@
     "speed": 39
   },
   "evolves_into": "dirtrobes:darutori",
-  "evolution_level": 10
+  "evolution_level": 10,
+  "hitbox": {
+    "width": 0.9,
+    "height": 1.0
+  }
 }

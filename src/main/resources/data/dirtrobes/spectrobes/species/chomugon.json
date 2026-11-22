@@ -14,5 +14,9 @@
     "speed": 72
   },
   "evolves_into": "dirtrobes:gekimugon",
-  "evolution_level": 30
+  "evolution_level": 30,
+  "hitbox": {
+    "width": 1.35,
+    "height": 1.55
+  }
 }

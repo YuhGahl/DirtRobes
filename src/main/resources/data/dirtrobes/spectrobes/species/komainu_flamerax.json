@@ -14,5 +14,9 @@
     "speed": 55
   },
   "evolves_into": "dirtrobes:komanoto_flamerax",
-  "evolution_level": 10
+  "evolution_level": 10,
+  "hitbox": {
+    "width": 0.65,
+    "height": 0.95
+  }
 }

@@ -28,12 +28,15 @@ public record Species(
         boolean flying,
         Rarity rarity,
         @Nullable ResourceLocation rareEvolution,
-        float rareEvolutionChance
+        float rareEvolutionChance,
+        float hitboxWidth,
+        float hitboxHeight
 ) {
     /** Copie avec un autre mode de déplacement (tests, commandes). */
     public Species withFlying(boolean value) {
         return new Species(id, name, property, stage, family, evolvesInto, evolutionLevel, searchRange,
-                baseHp, baseAttack, baseDefense, baseSpeed, scale, fromFossil, value, rarity, rareEvolution, rareEvolutionChance);
+                baseHp, baseAttack, baseDefense, baseSpeed, scale, fromFossil, value, rarity, rareEvolution, rareEvolutionChance,
+                hitboxWidth, hitboxHeight);
     }
 
     public static Species fromJson(ResourceLocation id, JsonObject json) {
@@ -54,6 +57,8 @@ public record Species(
             rareEvo = ResourceLocation.parse(GsonHelper.getAsString(rare, "species"));
             rareChance = GsonHelper.getAsFloat(rare, "chance", 0.05f);
         }
+        // hitbox mesurée sur le modèle (tools/models/gen_hitboxes.py), en blocs avant « scale »
+        JsonObject hb = GsonHelper.getAsJsonObject(json, "hitbox", new JsonObject());
         return new Species(
                 id,
                 GsonHelper.getAsString(json, "name", id.getPath()),
@@ -69,7 +74,9 @@ public record Species(
                 GsonHelper.getAsBoolean(json, "flying", false),
                 rarity,
                 rareEvo,
-                rareChance
+                rareChance,
+                GsonHelper.getAsFloat(hb, "width", 0.7f),
+                GsonHelper.getAsFloat(hb, "height", 0.9f)
         );
     }
 

@@ -14,5 +14,9 @@
     "speed": 64
   },
   "evolves_into": "dirtrobes:dongiga",
-  "evolution_level": 30
+  "evolution_level": 30,
+  "hitbox": {
+    "width": 1.35,
+    "height": 1.55
+  }
 }

@@ -13,5 +13,9 @@
     "special_defense": 176,
     "speed": 36
   },
-  "from_fossil": true
+  "from_fossil": true,
+  "hitbox": {
+    "width": 1.35,
+    "height": 1.55
+  }
 }

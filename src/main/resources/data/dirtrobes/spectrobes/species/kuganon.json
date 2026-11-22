@@ -14,5 +14,9 @@
     "speed": 70
   },
   "evolves_into": "dirtrobes:kugaster",
-  "evolution_level": 30
+  "evolution_level": 30,
+  "hitbox": {
+    "width": 1.35,
+    "height": 1.55
+  }
 }

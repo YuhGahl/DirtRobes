@@ -15,5 +15,9 @@
   },
   "evolves_into": "dirtrobes:mizusar",
   "evolution_level": 30,
-  "from_fossil": false
+  "from_fossil": false,
+  "hitbox": {
+    "width": 1.35,
+    "height": 1.55
+  }
 }
