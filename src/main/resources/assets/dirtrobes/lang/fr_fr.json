@@ -738,6 +738,8 @@
   "gui.dirtrobes.pc.release.tooltip": "Relâche définitivement le Spectrobe sélectionné : il ne reviendra pas. Clique deux fois pour confirmer.",
   "message.dirtrobes.released": "%s a été relâché. Au revoir !",
   "subtitles.dirtrobes.spectrobe.hurt": "Un Spectrobe glapit de douleur",
+  "block.dirtrobes.incubator_cog": "Incubateur à engrenage",
+  "message.dirtrobes.cog_inserted": "Engrenage inséré : branche-le à un autre engrenage pour accélérer l'éveil.",
   "dirtrobes.species.anuberos.name": "Anuberos",
   "dirtrobes.species.anuberos.desc": "",
   "dirtrobes.species.anubi.name": "Anubi",
@@ -1227,7 +1229,5 @@
   "dirtrobes.species.zyrdrake.name": "Zyrdrake",
   "dirtrobes.species.zyrdrake.desc": "",
   "dirtrobes.species.zyrgazelle.name": "Zyrgazelle",
-  "dirtrobes.species.zyrgazelle.desc": "",
-  "block.dirtrobes.incubator_cog": "Incubateur à engrenage",
-  "message.dirtrobes.cog_inserted": "Engrenage inséré : branche-le à un autre engrenage pour accélérer l'éveil."
+  "dirtrobes.species.zyrgazelle.desc": ""
 }

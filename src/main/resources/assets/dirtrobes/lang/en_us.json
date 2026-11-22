@@ -738,6 +738,8 @@
   "gui.dirtrobes.pc.release.tooltip": "Releases the selected Spectrobe for good: it will not come back. Click twice to confirm.",
   "message.dirtrobes.released": "%s was released. Goodbye!",
   "subtitles.dirtrobes.spectrobe.hurt": "Spectrobe yelps",
+  "block.dirtrobes.incubator_cog": "Geared Incubator",
+  "message.dirtrobes.cog_inserted": "Cogwheel fitted: mesh it with another cogwheel to speed up awakening.",
   "dirtrobes.species.anuberos.name": "Anuberos",
   "dirtrobes.species.anuberos.desc": "",
   "dirtrobes.species.anubi.name": "Anubi",
@@ -1227,7 +1229,5 @@
   "dirtrobes.species.zyrdrake.name": "Zyrdrake",
   "dirtrobes.species.zyrdrake.desc": "",
   "dirtrobes.species.zyrgazelle.name": "Zyrgazelle",
-  "dirtrobes.species.zyrgazelle.desc": "",
-  "block.dirtrobes.incubator_cog": "Geared Incubator",
-  "message.dirtrobes.cog_inserted": "Cogwheel fitted: mesh it with another cogwheel to speed up awakening."
+  "dirtrobes.species.zyrgazelle.desc": ""
 }
