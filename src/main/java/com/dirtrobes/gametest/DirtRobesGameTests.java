@@ -43,7 +43,7 @@ public class DirtRobesGameTests {
 
     private static ServerPlayer placePlayer(GameTestHelper helper, double x, double z) {
         ServerPlayer player = helper.makeMockServerPlayerInLevel();
-        Vec3 pos = helper.absoluteVec(new Vec3(x, 1, z));
+        Vec3 pos = helper.absoluteVec(new Vec3(x, 2, z)); // y = 2 : sur la dalle (y = 1 est la pierre)
         player.moveTo(pos.x, pos.y, pos.z, 0f, 0f);
         return player;
     }
@@ -102,7 +102,7 @@ public class DirtRobesGameTests {
     public static void followerKeepsItsDistance(GameTestHelper helper) {
         ServerPlayer player = placePlayer(helper, 10.5, 10.5);
         Species adult = SpeciesManager.all().stream().filter(s -> s.stage() == Stage.ADULT).findFirst().orElseThrow();
-        SpectrobeEntity s = SpectrobeEntity.create(helper.getLevel(), adult, 15, player, helper.absoluteVec(new Vec3(15.0, 1, 10.5)));
+        SpectrobeEntity s = SpectrobeEntity.create(helper.getLevel(), adult, 15, player, helper.absoluteVec(new Vec3(15.0, 2, 10.5)));
         double[] closest = {s.distanceTo(player)};
         for (int t = 1; t <= 120; t++) {
             helper.runAfterDelay(t, () -> closest[0] = Math.min(closest[0], s.distanceTo(player)));
@@ -130,8 +130,8 @@ public class DirtRobesGameTests {
 
         ServerPlayer player = placePlayer(helper, 10.5, 10.5);
         Species adult = SpeciesManager.all().stream().filter(s -> s.stage() == Stage.ADULT).findFirst().orElseThrow();
-        SpectrobeEntity perfect = SpectrobeEntity.create(helper.getLevel(), adult, 50, StatCalc.perfectIvs(), player, helper.absoluteVec(new Vec3(4.5, 1, 4.5)));
-        SpectrobeEntity damaged = SpectrobeEntity.create(helper.getLevel(), adult, 50, new int[6], player, helper.absoluteVec(new Vec3(15.5, 1, 15.5)));
+        SpectrobeEntity perfect = SpectrobeEntity.create(helper.getLevel(), adult, 50, StatCalc.perfectIvs(), player, helper.absoluteVec(new Vec3(4.5, 2, 4.5)));
+        SpectrobeEntity damaged = SpectrobeEntity.create(helper.getLevel(), adult, 50, new int[6], player, helper.absoluteVec(new Vec3(15.5, 2, 15.5)));
         perfect.setNature(Nature.BALANCED);
         damaged.setNature(Nature.BALANCED);
         log("IV 31 : PV {} ATQ {} DÉF {} · IV 0 : PV {} ATQ {} DÉF {}", perfect.hpStat(), perfect.attackStat(), perfect.defenseStat(),
@@ -147,8 +147,8 @@ public class DirtRobesGameTests {
     public static void krawlHasSpeciesAndStats(GameTestHelper helper) {
         KrawlSpecies swar = KrawlManager.byName("swar");
         helper.assertTrue(swar != null, "Le Krawl « swar » devrait être chargé (" + KrawlManager.all().size() + " Krawl)");
-        KrawlEntity weak = KrawlEntity.create(helper.getLevel(), swar, 2, helper.absoluteVec(new Vec3(4.5, 1, 4.5)));
-        KrawlEntity strong = KrawlEntity.create(helper.getLevel(), swar, 20, helper.absoluteVec(new Vec3(15.5, 1, 15.5)));
+        KrawlEntity weak = KrawlEntity.create(helper.getLevel(), swar, 2, helper.absoluteVec(new Vec3(4.5, 2, 4.5)));
+        KrawlEntity strong = KrawlEntity.create(helper.getLevel(), swar, 20, helper.absoluteVec(new Vec3(15.5, 2, 15.5)));
         log("Swar niv. 2 : {} PV / niv. 20 : {} PV, propriété {}", weak.getMaxHealth(), strong.getMaxHealth(), weak.getProperty());
         helper.assertTrue(swar.equals(weak.getSpecies()), "Espèce attendue : swar");
         helper.assertTrue(strong.getMaxHealth() > weak.getMaxHealth(), "Un Krawl de plus haut niveau devrait avoir plus de PV");
@@ -203,8 +203,8 @@ public class DirtRobesGameTests {
     public static void chGaugeFillsAndPaysForSpecial(GameTestHelper helper) {
         ServerPlayer player = placePlayer(helper, 2.5, 2.5);
         Species adult = SpeciesManager.all().stream().filter(s -> s.stage() == Stage.ADULT).findFirst().orElseThrow();
-        SpectrobeEntity spectrobe = SpectrobeEntity.create(helper.getLevel(), adult, 30, player, helper.absoluteVec(new Vec3(8.5, 1, 10.5)));
-        KrawlEntity krawl = KrawlEntity.create(helper.getLevel(), KrawlManager.byName("otorso"), 40, helper.absoluteVec(new Vec3(11.5, 1, 10.5)));
+        SpectrobeEntity spectrobe = SpectrobeEntity.create(helper.getLevel(), adult, 30, player, helper.absoluteVec(new Vec3(8.5, 2, 10.5)));
+        KrawlEntity krawl = KrawlEntity.create(helper.getLevel(), KrawlManager.byName("otorso"), 40, helper.absoluteVec(new Vec3(11.5, 2, 10.5)));
         ChGauge.set(player, 0);
         helper.assertTrue(ModNetwork.triggerSpecialAttack(player, krawl) == 0, "L'attaque spéciale ne devrait pas partir avec une jauge vide");
         krawl.setTarget(spectrobe);
@@ -226,9 +226,9 @@ public class DirtRobesGameTests {
     public static void prizmodTeamStoresAndSendsOut(GameTestHelper helper) {
         ServerPlayer player = placePlayer(helper, 10.5, 10.5);
         Species adult = SpeciesManager.all().stream().filter(s -> s.stage() == Stage.ADULT).findFirst().orElseThrow();
-        SpectrobeEntity a = SpectrobeEntity.create(helper.getLevel(), adult, 12, player, helper.absoluteVec(new Vec3(4.5, 1, 4.5)));
-        SpectrobeEntity b = SpectrobeEntity.create(helper.getLevel(), adult, 13, player, helper.absoluteVec(new Vec3(6.5, 1, 4.5)));
-        SpectrobeEntity c = SpectrobeEntity.create(helper.getLevel(), adult, 14, player, helper.absoluteVec(new Vec3(8.5, 1, 4.5)));
+        SpectrobeEntity a = SpectrobeEntity.create(helper.getLevel(), adult, 12, player, helper.absoluteVec(new Vec3(4.5, 2, 4.5)));
+        SpectrobeEntity b = SpectrobeEntity.create(helper.getLevel(), adult, 13, player, helper.absoluteVec(new Vec3(6.5, 2, 4.5)));
+        SpectrobeEntity c = SpectrobeEntity.create(helper.getLevel(), adult, 14, player, helper.absoluteVec(new Vec3(8.5, 2, 4.5)));
         PrizmodTeam.Team team = PrizmodTeam.team(player);
         helper.assertTrue(team.entries.size() == 3, "3 membres attendus, " + team.entries.size());
         helper.assertTrue(team.outCount() == 2, "2 dehors attendus, " + team.outCount());
@@ -252,7 +252,7 @@ public class DirtRobesGameTests {
     public static void childFindsFossilsAndMinerals(GameTestHelper helper) {
         ServerPlayer player = placePlayer(helper, 10.5, 12.5);
         Species child = SpeciesManager.all().stream().filter(s -> s.stage() == Stage.CHILD).findFirst().orElseThrow();
-        SpectrobeEntity s = SpectrobeEntity.create(helper.getLevel(), child, 5, player, helper.absoluteVec(new Vec3(10.5, 1, 10.5)));
+        SpectrobeEntity s = SpectrobeEntity.create(helper.getLevel(), child, 5, player, helper.absoluteVec(new Vec3(10.5, 2, 10.5)));
         helper.setBlock(new BlockPos(13, 1, 10), ModRegistry.FOSSIL_STONE.get());
         helper.setBlock(new BlockPos(6, 1, 9), ModRegistry.MINERAL_DEPOSIT.get());
         helper.setBlock(new BlockPos(8, 1, 10), ModRegistry.DEEPSLATE_MINERAL_DEPOSIT.get());
@@ -268,7 +268,7 @@ public class DirtRobesGameTests {
     public static void storedSpectrobesRecover(GameTestHelper helper) {
         ServerPlayer player = placePlayer(helper, 10.5, 10.5);
         Species adult = SpeciesManager.all().stream().filter(s -> s.stage() == Stage.ADULT).findFirst().orElseThrow();
-        SpectrobeEntity s = SpectrobeEntity.create(helper.getLevel(), adult, 20, player, helper.absoluteVec(new Vec3(5.5, 1, 5.5)));
+        SpectrobeEntity s = SpectrobeEntity.create(helper.getLevel(), adult, 20, player, helper.absoluteVec(new Vec3(5.5, 2, 5.5)));
         s.setHealth(s.getMaxHealth() * 0.2f);
         helper.assertTrue(PrizmodTeam.toggle(player, 0), "Ranger devrait marcher");
         float before = PrizmodTeam.summaries(player).get(0).health();
@@ -284,9 +284,9 @@ public class DirtRobesGameTests {
     public static void krawlLeaderRalliesAndBlocksStoring(GameTestHelper helper) {
         ServerPlayer player = placePlayer(helper, 2.5, 2.5);
         Species adult = SpeciesManager.all().stream().filter(s -> s.stage() == Stage.ADULT).findFirst().orElseThrow();
-        SpectrobeEntity.create(helper.getLevel(), adult, 20, player, helper.absoluteVec(new Vec3(4.5, 1, 4.5)));
-        KrawlEntity leader = KrawlEntity.create(helper.getLevel(), KrawlManager.byName("otorso"), 30, helper.absoluteVec(new Vec3(15.5, 1, 15.5)));
-        KrawlEntity minion = KrawlEntity.create(helper.getLevel(), KrawlManager.byName("swar"), 5, helper.absoluteVec(new Vec3(13.5, 1, 15.5)));
+        SpectrobeEntity.create(helper.getLevel(), adult, 20, player, helper.absoluteVec(new Vec3(4.5, 2, 4.5)));
+        KrawlEntity leader = KrawlEntity.create(helper.getLevel(), KrawlManager.byName("otorso"), 30, helper.absoluteVec(new Vec3(15.5, 2, 15.5)));
+        KrawlEntity minion = KrawlEntity.create(helper.getLevel(), KrawlManager.byName("swar"), 5, helper.absoluteVec(new Vec3(13.5, 2, 15.5)));
         helper.assertTrue(leader.isLeader(), "Otorso devrait être un chef");
         helper.assertTrue(PrizmodTeam.toggle(player, 0) && PrizmodTeam.toggle(player, 0), "Un chef qui ne combat pas ne bloque rien");
         leader.setTarget(player);
@@ -299,8 +299,8 @@ public class DirtRobesGameTests {
     public static void speedAndNatures(GameTestHelper helper) {
         ServerPlayer player = placePlayer(helper, 10.5, 10.5);
         Species adult = SpeciesManager.all().stream().filter(s -> s.stage() == Stage.ADULT).findFirst().orElseThrow();
-        SpectrobeEntity neutral = SpectrobeEntity.create(helper.getLevel(), adult, 50, player, helper.absoluteVec(new Vec3(4.5, 1, 4.5)));
-        SpectrobeEntity nimble = SpectrobeEntity.create(helper.getLevel(), adult, 50, player, helper.absoluteVec(new Vec3(15.5, 1, 4.5)));
+        SpectrobeEntity neutral = SpectrobeEntity.create(helper.getLevel(), adult, 50, player, helper.absoluteVec(new Vec3(4.5, 2, 4.5)));
+        SpectrobeEntity nimble = SpectrobeEntity.create(helper.getLevel(), adult, 50, player, helper.absoluteVec(new Vec3(15.5, 2, 4.5)));
         neutral.setNature(Nature.BALANCED);
         nimble.setNature(Nature.NIMBLE);
         log("{} niv. 50 : VIT {} (neutre) / {} (Agile), ATQ {} / {}, vitesse MC {} / {}", adult.name(), neutral.speedStat(), nimble.speedStat(),
@@ -318,7 +318,7 @@ public class DirtRobesGameTests {
     public static void gemsRaiseAndLowerEvs(GameTestHelper helper) {
         ServerPlayer player = placePlayer(helper, 10.5, 10.5);
         Species adult = SpeciesManager.all().stream().filter(s -> s.stage() == Stage.ADULT).findFirst().orElseThrow();
-        SpectrobeEntity s = SpectrobeEntity.create(helper.getLevel(), adult, 30, player, helper.absoluteVec(new Vec3(4.5, 1, 4.5)));
+        SpectrobeEntity s = SpectrobeEntity.create(helper.getLevel(), adult, 30, player, helper.absoluteVec(new Vec3(4.5, 2, 4.5)));
         int spd0 = s.speedStat();
         s.feedGem(ModRegistry.TOPAZ.get(), player);
         s.feedGem(ModRegistry.TOPAZ.get(), player);
@@ -340,7 +340,7 @@ public class DirtRobesGameTests {
                 "Chaque nature doit avoir sa propre gemme");
         ServerPlayer player = placePlayer(helper, 10.5, 10.5);
         Species adult = SpeciesManager.all().stream().filter(s -> s.stage() == Stage.ADULT).findFirst().orElseThrow();
-        SpectrobeEntity s = SpectrobeEntity.create(helper.getLevel(), adult, 40, player, helper.absoluteVec(new Vec3(4.5, 1, 4.5)));
+        SpectrobeEntity s = SpectrobeEntity.create(helper.getLevel(), adult, 40, player, helper.absoluteVec(new Vec3(4.5, 2, 4.5)));
         s.setNature(Nature.BALANCED);
         int spd = s.speedStat();
         helper.assertTrue(s.feedNatureGem(ModRegistry.SYLVITE.get(), player), "La Sylvite devrait changer la nature");
@@ -355,7 +355,7 @@ public class DirtRobesGameTests {
     public static void chromaChangesColour(GameTestHelper helper) {
         ServerPlayer player = placePlayer(helper, 10.5, 10.5);
         Species adult = SpeciesManager.all().stream().filter(s -> s.stage() == Stage.ADULT).findFirst().orElseThrow();
-        SpectrobeEntity s = SpectrobeEntity.create(helper.getLevel(), adult, 20, player, helper.absoluteVec(new Vec3(4.5, 1, 4.5)));
+        SpectrobeEntity s = SpectrobeEntity.create(helper.getLevel(), adult, 20, player, helper.absoluteVec(new Vec3(4.5, 2, 4.5)));
         helper.assertTrue(s.colorVariant() == 0, "Couleur normale au départ");
         helper.assertTrue(s.feedChroma(2, player), "Chroma 3 devrait changer la couleur");
         helper.assertTrue(PrizmodTeam.toggle(player, 0) && PrizmodTeam.toggle(player, 0), "Ranger puis ressortir");
@@ -372,8 +372,8 @@ public class DirtRobesGameTests {
         ServerPlayer player = placePlayer(helper, 10.5, 10.5);
         Species adult = SpeciesManager.all().stream().filter(s -> s.stage() == Stage.ADULT).findFirst().orElseThrow();
         Species corona = SpeciesManager.all().stream().filter(s -> s.property() == com.dirtrobes.species.Property.CORONA).findFirst().orElseThrow();
-        SpectrobeEntity fighter = SpectrobeEntity.create(helper.getLevel(), adult, 30, player, helper.absoluteVec(new Vec3(4.5, 1, 4.5)));
-        SpectrobeEntity.create(helper.getLevel(), corona, 30, player, helper.absoluteVec(new Vec3(6.5, 1, 4.5)));
+        SpectrobeEntity fighter = SpectrobeEntity.create(helper.getLevel(), adult, 30, player, helper.absoluteVec(new Vec3(4.5, 2, 4.5)));
+        SpectrobeEntity.create(helper.getLevel(), corona, 30, player, helper.absoluteVec(new Vec3(6.5, 2, 4.5)));
         double before = fighter.getAttributeValue(Attributes.ATTACK_DAMAGE);
         helper.assertTrue(PrizmodTeam.toggle(player, 1), "Ranger le Corona");
         com.dirtrobes.combat.Support sup = PrizmodTeam.applySupport(player);
@@ -389,9 +389,9 @@ public class DirtRobesGameTests {
     public static void comboAttackHitsHard(GameTestHelper helper) {
         ServerPlayer player = placePlayer(helper, 2.5, 2.5);
         Species adult = SpeciesManager.all().stream().filter(s -> s.stage() == Stage.ADULT).findFirst().orElseThrow();
-        SpectrobeEntity.create(helper.getLevel(), adult, 40, player, helper.absoluteVec(new Vec3(9.5, 1, 9.5)));
-        SpectrobeEntity.create(helper.getLevel(), adult, 40, player, helper.absoluteVec(new Vec3(11.5, 1, 9.5)));
-        KrawlEntity krawl = KrawlEntity.create(helper.getLevel(), KrawlManager.byName("otorso"), 60, helper.absoluteVec(new Vec3(10.5, 1, 12.5)));
+        SpectrobeEntity.create(helper.getLevel(), adult, 40, player, helper.absoluteVec(new Vec3(9.5, 2, 9.5)));
+        SpectrobeEntity.create(helper.getLevel(), adult, 40, player, helper.absoluteVec(new Vec3(11.5, 2, 9.5)));
+        KrawlEntity krawl = KrawlEntity.create(helper.getLevel(), KrawlManager.byName("otorso"), 60, helper.absoluteVec(new Vec3(10.5, 2, 12.5)));
         float hp = krawl.getHealth();
         ChGauge.set(player, 20);
         helper.assertTrue(!ComboAttack.trigger(player, krawl), "Pas de combo avec 20 CH");
@@ -409,7 +409,7 @@ public class DirtRobesGameTests {
     public static void combatItemsWork(GameTestHelper helper) {
         ServerPlayer player = placePlayer(helper, 10.5, 10.5);
         Species adult = SpeciesManager.all().stream().filter(s -> s.stage() == Stage.ADULT).findFirst().orElseThrow();
-        SpectrobeEntity s = SpectrobeEntity.create(helper.getLevel(), adult, 30, player, helper.absoluteVec(new Vec3(4.5, 1, 4.5)));
+        SpectrobeEntity s = SpectrobeEntity.create(helper.getLevel(), adult, 30, player, helper.absoluteVec(new Vec3(4.5, 2, 4.5)));
         helper.assertTrue(!s.useCombatItem(com.dirtrobes.item.CombatItem.Kind.SERUM, player), "Sérum inutile si PV pleins");
         s.setHealth(s.getMaxHealth() * 0.2f);
         helper.assertTrue(s.useCombatItem(com.dirtrobes.item.CombatItem.Kind.SERUM, player), "Le sérum devrait soigner");
@@ -439,7 +439,7 @@ public class DirtRobesGameTests {
                 && tooBig.containsBlock(tooBig.spawn()), "Les réglages hors limites doivent être ramenés dans les limites");
         terminal.setPen(pen);
         Species adult = SpeciesManager.all().stream().filter(s -> s.stage() == Stage.ADULT).findFirst().orElseThrow();
-        SpectrobeEntity s = SpectrobeEntity.create(helper.getLevel(), adult, 25, player, helper.absoluteVec(new Vec3(4.5, 1, 4.5)));
+        SpectrobeEntity s = SpectrobeEntity.create(helper.getLevel(), adult, 25, player, helper.absoluteVec(new Vec3(4.5, 2, 4.5)));
         java.util.UUID id = s.getUUID();
         helper.assertTrue(terminal.move(player, com.dirtrobes.lab.LabTerminalBlockEntity.AREA_TEAM, 0, com.dirtrobes.lab.LabTerminalBlockEntity.AREA_BOX, 0),
                 "Ranger au PC devrait marcher");
@@ -496,14 +496,14 @@ public class DirtRobesGameTests {
         java.util.UUID me = player.getUUID();
         Species adult = SpeciesManager.all().stream().filter(s -> s.stage() == Stage.ADULT).findFirst().orElseThrow();
         // envoi direct depuis l'équipe
-        SpectrobeEntity first = SpectrobeEntity.create(helper.getLevel(), adult, 10, player, helper.absoluteVec(new Vec3(4.5, 1, 4.5)));
+        SpectrobeEntity first = SpectrobeEntity.create(helper.getLevel(), adult, 10, player, helper.absoluteVec(new Vec3(4.5, 2, 4.5)));
         helper.assertTrue(com.dirtrobes.lab.LabNetwork.teamToPc(player, 0), "Envoi direct au PC");
         helper.assertTrue(first.isRemoved() && PrizmodTeam.team(player).entries.isEmpty() && pc.count(me) == 1, "Le Spectrobe devrait être au PC");
         // équipe pleine → PC
         for (int i = 0; i < PrizmodTeam.MAX; i++) {
             SpectrobeEntity.create(helper.getLevel(), adult, 5 + i, player, helper.absoluteVec(new Vec3(2.5 + i * 2, 1, 8.5)));
         }
-        SpectrobeEntity extra = SpectrobeEntity.create(helper.getLevel(), adult, 30, player, helper.absoluteVec(new Vec3(10.5, 1, 14.5)));
+        SpectrobeEntity extra = SpectrobeEntity.create(helper.getLevel(), adult, 30, player, helper.absoluteVec(new Vec3(10.5, 2, 14.5)));
         helper.assertTrue(extra.isRemoved() && PrizmodTeam.team(player).entries.size() == PrizmodTeam.MAX && pc.count(me) == 2,
                 "Le 7e Spectrobe devrait partir au PC (PC : " + pc.count(me) + ")");
         // terminal cassé → PC
@@ -723,7 +723,7 @@ public class DirtRobesGameTests {
     public static void pcRelease(GameTestHelper helper) {
         ServerPlayer player = placePlayer(helper, 10.5, 10.5);
         Species child = SpeciesManager.all().stream().filter(s -> s.stage() == Stage.CHILD).findFirst().orElseThrow();
-        SpectrobeEntity s = SpectrobeEntity.create(helper.getLevel(), child, 5, player, helper.absoluteVec(new Vec3(9.5, 1, 10.5)));
+        SpectrobeEntity s = SpectrobeEntity.create(helper.getLevel(), child, 5, player, helper.absoluteVec(new Vec3(9.5, 2, 10.5)));
         int slot = com.dirtrobes.team.PrizmodTeam.indexOf(player, s.getUUID());
         helper.assertTrue(slot >= 0, "Le Spectrobe devrait être dans l'équipe");
         helper.assertTrue(com.dirtrobes.lab.LabNetwork.release(player, com.dirtrobes.storage.GlobalPc.get(helper.getLevel().getServer()),
@@ -748,7 +748,7 @@ public class DirtRobesGameTests {
     @GameTest(template = "platform")
     public static void hitboxFromModel(GameTestHelper helper) {
         Species k = SpeciesManager.byName("komainu");
-        SpectrobeEntity e = SpectrobeEntity.create(helper.getLevel(), k, 5, null, helper.absoluteVec(new Vec3(10.5, 1, 10.5)));
+        SpectrobeEntity e = SpectrobeEntity.create(helper.getLevel(), k, 5, null, helper.absoluteVec(new Vec3(10.5, 2, 10.5)));
         float w = k.hitboxWidth() * k.scale(), h = k.hitboxHeight() * k.scale();
         helper.assertTrue(Math.abs(e.getBbWidth() - w) < 0.01f && Math.abs(e.getBbHeight() - h) < 0.01f,
                 "hitbox attendue " + w + " × " + h + ", obtenue " + e.getBbWidth() + " × " + e.getBbHeight());
@@ -761,8 +761,8 @@ public class DirtRobesGameTests {
         ServerPlayer player = placePlayer(helper, 10.5, 10.5);
         Species child = SpeciesManager.all().stream().filter(s -> s.stage() == Stage.CHILD).findFirst().orElseThrow();
         Species evolved = SpeciesManager.all().stream().filter(s -> s.stage() == Stage.EVOLVED).findFirst().orElseThrow();
-        SpectrobeEntity small = SpectrobeEntity.create(helper.getLevel(), child, 5, player, helper.absoluteVec(new Vec3(9.5, 1, 10.5)));
-        SpectrobeEntity big = SpectrobeEntity.create(helper.getLevel(), evolved, 40, player, helper.absoluteVec(new Vec3(12.5, 1, 10.5)));
+        SpectrobeEntity small = SpectrobeEntity.create(helper.getLevel(), child, 5, player, helper.absoluteVec(new Vec3(9.5, 2, 10.5)));
+        SpectrobeEntity big = SpectrobeEntity.create(helper.getLevel(), evolved, 40, player, helper.absoluteVec(new Vec3(12.5, 2, 10.5)));
 
         // l'enfant sur l'épaule
         helper.assertTrue(com.dirtrobes.interaction.SpectrobeActions.apply(player, small, com.dirtrobes.interaction.SpectrobeActions.SHOULDER),

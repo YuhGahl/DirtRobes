@@ -183,16 +183,17 @@ public final class PrizmodTeam {
                 player.displayClientMessage(Component.translatable("message.dirtrobes.team_max_out", MAX_OUT), true);
                 return false;
             }
-            ok = sendOut(player, entry);
+            ok = sendOut(player, entry) != null;
         }
         changed(player);
         if (ok) com.dirtrobes.network.PlayerAnims.play(player, com.dirtrobes.network.PlayerAnims.PRIZMOD);
         return ok;
     }
 
-    private static boolean sendOut(ServerPlayer player, Entry entry) {
+    @Nullable
+    private static SpectrobeEntity sendOut(ServerPlayer player, Entry entry) {
         SpectrobeEntity s = ModRegistry.SPECTROBE.get().create(player.serverLevel());
-        if (s == null || entry.data == null) return false;
+        if (s == null || entry.data == null) return null;
         s.load(entry.data);
         double angle = player.getRandom().nextDouble() * Math.PI * 2;
         s.moveTo(player.getX() + Math.cos(angle) * 1.5, player.getY(), player.getZ() + Math.sin(angle) * 1.5, player.getYRot(), 0f);
@@ -200,12 +201,35 @@ public final class PrizmodTeam {
         s.setInSittingPose(false);
         s.setDeltaMovement(0, 0, 0);
         s.fallDistance = 0;
-        if (!player.serverLevel().addFreshEntity(s)) return false;
+        if (!player.serverLevel().addFreshEntity(s)) return null;
         entry.data = null;
         player.serverLevel().sendParticles(ParticleTypes.END_ROD, s.getX(), s.getY() + s.getBbHeight() / 2, s.getZ(), 30, 0.3, 0.5, 0.3, 0.08);
         player.level().playSound(null, s.blockPosition(), SoundEvents.BEACON_ACTIVATE, SoundSource.PLAYERS, 0.5f, 1.8f);
         player.serverLevel().broadcastEntityEvent(s, SpectrobeEntity.EVENT_CRY);
-        return true;
+        return s;
+    }
+
+    /**
+     * Le joueur a changé de dimension : ses Spectrobes sortis qui le suivaient le rejoignent (ceux à qui on a dit
+     * « Reste ici » restent). Ceux qui étaient sur son épaule y remontent.
+     */
+    public static void followAcrossDimension(ServerPlayer player, java.util.Set<UUID> onShoulder) {
+        boolean any = false;
+        for (Entry entry : team(player).entries) {
+            if (!entry.isOut()) continue;
+            SpectrobeEntity s = findLoaded(player, entry.uuid);
+            if (s == null || s.level() == player.level() || s.isOrderedToSit()) continue;
+            store(player, entry, s);
+            SpectrobeEntity back = sendOut(player, entry);
+            if (back == null) continue;
+            any = true;
+            if (onShoulder.contains(entry.uuid) && back.canSitOnShoulder() && player.getPassengers().isEmpty())
+                back.startRiding(player, true);
+        }
+        if (any) {
+            changed(player);
+            sync(player, false);
+        }
     }
 
     // ----- Échanges avec le PC -----

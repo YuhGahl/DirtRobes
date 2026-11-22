@@ -69,6 +69,8 @@ public final class CommonEvents {
         bus.addListener(CommonEvents::onReload);
         bus.addListener(CommonEvents::onIncomingDamage);
         bus.addListener(CommonEvents::onDeath);
+        bus.addListener(CommonEvents::onTravelToDimension);
+        bus.addListener(CommonEvents::onChangedDimension);
         bus.addListener(CommonEvents::onCommands);
         bus.addListener(CommonEvents::onPlayerTick);
         bus.addListener(CommonEvents::onLogin);
@@ -172,6 +174,23 @@ public final class CommonEvents {
 
     private static void onGauntletDamagePost(net.neoforged.neoforge.event.entity.living.LivingDamageEvent.Post event) {
         com.dirtrobes.gauntlet.GauntletCombat.afterHit(event.getEntity(), event.getSource());
+    }
+
+    /** Spectrobes sur l'épaule au moment de changer de dimension (le jeu les fait descendre avant le voyage). */
+    private static final java.util.Map<java.util.UUID, java.util.Set<java.util.UUID>> SHOULDER_BEFORE_TRAVEL = new java.util.HashMap<>();
+
+    private static void onTravelToDimension(net.neoforged.neoforge.event.entity.EntityTravelToDimensionEvent event) {
+        if (!(event.getEntity() instanceof ServerPlayer player)) return;
+        java.util.Set<java.util.UUID> set = new java.util.HashSet<>();
+        for (net.minecraft.world.entity.Entity p : player.getPassengers())
+            if (p instanceof SpectrobeEntity s && s.isOwnedBy(player)) set.add(s.getUUID());
+        SHOULDER_BEFORE_TRAVEL.put(player.getUUID(), set);
+    }
+
+    private static void onChangedDimension(PlayerEvent.PlayerChangedDimensionEvent event) {
+        if (!(event.getEntity() instanceof ServerPlayer player)) return;
+        java.util.Set<java.util.UUID> shoulder = SHOULDER_BEFORE_TRAVEL.remove(player.getUUID());
+        PrizmodTeam.followAcrossDimension(player, shoulder == null ? java.util.Set.of() : shoulder);
     }
 
     private static void onLogout(PlayerEvent.PlayerLoggedOutEvent event) {
