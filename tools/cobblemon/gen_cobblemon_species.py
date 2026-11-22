@@ -260,6 +260,41 @@ def cobblemon_model(model_id, textures):
     return f"dirtrobes:{name}.geo", out
 
 
+_CRIES = {}
+
+
+def _find_animation(key):
+    for f in glob.glob(os.path.join(ASSETS, "bedrock/pokemon/animations/**/*.animation.json"), recursive=True):
+        if os.path.basename(f) == "cobblemon_cries.animation.json":
+            continue
+        anims = json.load(open(f, encoding="utf-8"))["animations"]
+        if key in anims:
+            return anims[key]
+    return None
+
+
+def cry_poser(sid, poser_id):
+    """Poser Cobblemon propre à l'espèce : celui du modèle, dont l'animation de cri joue le cri de l'espèce
+    (« dirtrobes:spectrobe.<id>.cry », assets/dirtrobes/sounds/spectrobe/<id>_cry.ogg)."""
+    base_path = os.path.join(ASSETS, "bedrock/pokemon/posers", poser_id.split(":")[1] + ".json")
+    if not os.path.exists(base_path):
+        return poser_id
+    poser = json.load(open(base_path, encoding="utf-8"))
+    cry = poser.get("animations", {}).get("cry", "")
+    m = re.search(r"q\.bedrock_stateful\('([^']+)',\s*'cry'\)", cry)
+    base_anim = _find_animation(f"animation.{m.group(1)}.cry") if m else None
+    anim = json.loads(json.dumps(base_anim)) if base_anim else {"animation_length": 1.0, "bones": {}}
+    anim["sound_effects"] = {"0.0": {"effect": f"dirtrobes:spectrobe.{sid}.cry"}}
+    group = f"cb_{sid}"
+    _CRIES[f"animation.{group}.cry"] = anim
+    poser.setdefault("animations", {})["cry"] = f"q.bedrock_stateful('{group}', 'cry')"
+    out = os.path.join(ASSETS, "bedrock/pokemon/posers/cobblemon", f"{group}.json")
+    os.makedirs(os.path.dirname(out), exist_ok=True)
+    with open(out, "w", encoding="utf-8") as fh:
+        json.dump(poser, fh, indent=2)
+    return f"dirtrobes:{group}"
+
+
 def cobblemon_resolver(sid, d):
     """Resolver Cobblemon qui reprend le modèle, le poser et la texture du Spectrobe dans DirtRobes.
     Modèles, animations et posers sont partagés (assets/dirtrobes/bedrock/pokemon/…) : rien n'est copié.
@@ -278,7 +313,7 @@ def cobblemon_resolver(sid, d):
         glow = _tinted(glow, prop, 0, True)
     elif glow:
         glow = remap.get(glow, glow)
-    base = {"aspects": [], "poser": r["poser"], "model": model, "texture": tex,
+    base = {"aspects": [], "poser": cry_poser(sid, r["poser"]), "model": model, "texture": tex,
             "layers": [{"name": "glow", "emissive": True, "texture": glow}] if glow else []}
     variations = [base]
     # Chroma 2 de DirtRobes = chromatique (« shiny ») de Cobblemon
@@ -410,6 +445,9 @@ def main():
         with open(p, "w", encoding="utf-8") as fh:
             json.dump(lang, fh, ensure_ascii=False, indent=2)
             fh.write("\n")
+    cries = os.path.join(ASSETS, "bedrock/pokemon/animations/cobblemon_cries.animation.json")
+    with open(cries, "w", encoding="utf-8") as fh:
+        json.dump({"format_version": "1.8.0", "animations": _CRIES}, fh, indent=1)
     # garde-fou : un resolver Cobblemon qui pointe vers un modèle absent ou illisible fait échouer TOUT le
     # rechargement des ressources du jeu (les packs de ressources du joueur sont alors désactivés)
     for f in glob.glob(os.path.join(CB_RESOLVERS, "*.json")):

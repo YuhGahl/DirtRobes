@@ -4,7 +4,7 @@
   "variations": [
     {
       "aspects": [],
-      "poser": "dirtrobes:placeholder_adult",
+      "poser": "dirtrobes:cb_makanoto",
       "model": "dirtrobes:placeholder_adult.geo",
       "texture": "dirtrobes:textures/spectrobes/cobblemon/placeholder_adult_corona.png",
       "layers": [

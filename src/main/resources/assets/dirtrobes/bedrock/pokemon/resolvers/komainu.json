@@ -4,7 +4,7 @@
   "variations": [
     {
       "aspects": [],
-      "poser": "dirtrobes:komainu",
+      "poser": "dirtrobes:cb_komainu",
       "model": "dirtrobes:komainu_cobblemon.geo",
       "texture": "dirtrobes:textures/spectrobes/cobblemon/komainu_cobblemon.png",
       "layers": []

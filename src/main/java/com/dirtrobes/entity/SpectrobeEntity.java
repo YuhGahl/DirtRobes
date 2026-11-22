@@ -20,6 +20,7 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.DamageTypeTags;
@@ -94,6 +95,7 @@ public class SpectrobeEntity extends TamableAnimal implements BedrockPosable, ne
     public Object clientAnimState;
     /** Tick client du dernier cri / attaque spéciale reçu (pour les animations ponctuelles). */
     public int lastCryTick = -1000;
+    private int lastCrySound = -1000;
 
     private final net.minecraft.world.entity.ai.navigation.PathNavigation groundNavigation;
     private final net.minecraft.world.entity.ai.control.MoveControl groundMoveControl;
@@ -843,6 +845,30 @@ public class SpectrobeEntity extends TamableAnimal implements BedrockPosable, ne
         setTarget(null);
         strikeTarget = null;
         notifyOwner(Component.translatable("message.dirtrobes.knocked_out", getDisplayName()).withStyle(ChatFormatting.RED));
+        SoundEvent cry = crySound();
+        if (cry != null) level().playSound(null, blockPosition(), cry, SoundSource.NEUTRAL, 0.9f, 0.7f);
+    }
+
+    // ----- Cris (sons originaux provisoires : tools/sounds/gen_cries.py, assets/dirtrobes/sounds/spectrobe/) -----
+
+    /** Cri de l'espèce (« dirtrobes:spectrobe.<espèce>.cry »), ou null sans espèce. */
+    @Nullable
+    public SoundEvent crySound() {
+        ResourceLocation id = getSpeciesId();
+        return id == null ? null : SoundEvent.createVariableRangeEvent(
+                ResourceLocation.fromNamespaceAndPath(id.getNamespace(), "spectrobe." + id.getPath() + ".cry"));
+    }
+
+    @Nullable
+    @Override
+    protected SoundEvent getAmbientSound() {
+        if (isPenResident() || isKnockedOut() || isOnShoulder() && getRandom().nextInt(3) > 0) return null;
+        return getFlag(FLAG_SLEEPING) ? null : crySound();
+    }
+
+    @Override
+    public int getAmbientSoundInterval() {
+        return 600;
     }
 
     @Override
@@ -1068,6 +1094,13 @@ public class SpectrobeEntity extends TamableAnimal implements BedrockPosable, ne
     public void handleEntityEvent(byte id) {
         if (id == EVENT_CRY || id == EVENT_SPECIAL) {
             lastCryTick = tickCount;
+            SoundEvent cry = crySound();
+            // pas plus d'un cri toutes les 5 s (la recherche de trésors en déclenche souvent)
+            if (cry != null && (id == EVENT_SPECIAL || tickCount - lastCrySound > 100)) {
+                lastCrySound = tickCount;
+                level().playLocalSound(getX(), getY(), getZ(), cry, SoundSource.NEUTRAL, 0.9f,
+                    id == EVENT_SPECIAL ? 1.15f : 1f, false);
+            }
         } else {
             super.handleEntityEvent(id);
         }

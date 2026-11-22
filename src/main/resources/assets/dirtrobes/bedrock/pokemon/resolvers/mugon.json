@@ -4,7 +4,7 @@
   "variations": [
     {
       "aspects": [],
-      "poser": "dirtrobes:placeholder_child",
+      "poser": "dirtrobes:cb_mugon",
       "model": "dirtrobes:placeholder_child.geo",
       "texture": "dirtrobes:textures/spectrobes/cobblemon/placeholder_child_flash.png",
       "layers": [

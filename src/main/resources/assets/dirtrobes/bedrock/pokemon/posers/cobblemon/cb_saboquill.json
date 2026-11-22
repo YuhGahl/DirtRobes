@@ -1,0 +1,74 @@
+{
+  "animations": {
+    "cry": "q.bedrock_stateful('cb_saboquill', 'cry')",
+    "faint": "q.bedrock_primary('placeholder_adult', 'faint', q.curve('one'))",
+    "recoil": "q.bedrock_stateful('placeholder_adult', 'recoil')"
+  },
+  "portraitScale": 1.5,
+  "portraitTranslation": [
+    0,
+    0,
+    0
+  ],
+  "profileScale": 1.0,
+  "profileTranslation": [
+    0,
+    0,
+    0
+  ],
+  "rootBone": "placeholder_adult",
+  "poses": {
+    "battle-standing": {
+      "animations": [
+        "q.look('head')",
+        "q.bedrock('placeholder_adult', 'battle_idle')"
+      ],
+      "isBattle": true,
+      "poseTypes": [
+        "STAND"
+      ],
+      "quirks": [
+        "q.bedrock_quirk('placeholder_adult', 'blink')"
+      ]
+    },
+    "standing": {
+      "animations": [
+        "q.look('head')",
+        "q.bedrock('placeholder_adult', 'ground_idle')"
+      ],
+      "isBattle": false,
+      "poseTypes": [
+        "STAND",
+        "NONE",
+        "PORTRAIT",
+        "PROFILE",
+        "FLOAT"
+      ],
+      "quirks": [
+        "q.bedrock_quirk('placeholder_adult', 'blink')"
+      ]
+    },
+    "walking": {
+      "animations": [
+        "q.look('head')",
+        "q.bedrock('placeholder_adult', 'ground_idle')",
+        "q.quadruped_walk(0.66, 1.4, 'front_leg_left', 'front_leg_right', 'back_leg_left', 'back_leg_right')"
+      ],
+      "poseTypes": [
+        "WALK",
+        "SWIM"
+      ],
+      "quirks": [
+        "q.bedrock_quirk('placeholder_adult', 'blink')"
+      ]
+    },
+    "sleep": {
+      "animations": [
+        "q.bedrock('placeholder_adult', 'sleep')"
+      ],
+      "poseTypes": [
+        "SLEEP"
+      ]
+    }
+  }
+}
