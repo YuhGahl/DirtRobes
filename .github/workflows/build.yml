@@ -29,6 +29,7 @@ jobs:
           pip install --quiet pillow numpy
           command -v ffmpeg >/dev/null || (sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg)
           python3 tools/sounds/gen_cries.py
+          python3 tools/models/recolor_variants.py
           python3 tools/cobblemon/gen_cobblemon_species.py
           git status --short
 

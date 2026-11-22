@@ -1,0 +1,8 @@
+{
+  "species": "dirtrobes:komainu_flamerax",
+  "model": "dirtrobes:komainu",
+  "texture": "dirtrobes:textures/spectrobes/komainu_flamerax.png",
+  "poser": "dirtrobes:komainu",
+  "tint": false,
+  "scale": 1.6
+}

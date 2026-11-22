@@ -1,0 +1,8 @@
+{
+  "species": "dirtrobes:komainu_optoger",
+  "model": "dirtrobes:komainu",
+  "texture": "dirtrobes:textures/spectrobes/komainu_optoger.png",
+  "poser": "dirtrobes:komainu",
+  "tint": false,
+  "scale": 1.6
+}

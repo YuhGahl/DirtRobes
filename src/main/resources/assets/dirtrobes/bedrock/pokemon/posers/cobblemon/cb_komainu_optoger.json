@@ -1,40 +1,40 @@
 {
   "animations": {
     "cry": "q.bedrock_stateful('cb_komainu_optoger', 'cry')",
-    "faint": "q.bedrock_primary('placeholder_child', 'faint', q.curve('one'))",
-    "recoil": "q.bedrock_stateful('placeholder_child', 'recoil')"
+    "faint": "q.bedrock_primary('komainu', 'faint', q.curve('one'))",
+    "recoil": "q.bedrock_stateful('komainu', 'recoil')"
   },
-  "portraitScale": 1.5,
+  "portraitScale": 2.6,
   "portraitTranslation": [
     0,
-    0,
+    -0.35,
     0
   ],
-  "profileScale": 1.0,
+  "profileScale": 1.6,
   "profileTranslation": [
     0,
     0,
     0
   ],
-  "rootBone": "placeholder_child",
+  "rootBone": "komainu",
   "poses": {
     "battle-standing": {
       "animations": [
         "q.look('head')",
-        "q.bedrock('placeholder_child', 'battle_idle')"
+        "q.bedrock('komainu', 'battle_idle')"
       ],
       "isBattle": true,
       "poseTypes": [
         "STAND"
       ],
       "quirks": [
-        "q.bedrock_quirk('placeholder_child', 'blink')"
+        "q.bedrock_quirk('komainu', 'blink')"
       ]
     },
     "standing": {
       "animations": [
         "q.look('head')",
-        "q.bedrock('placeholder_child', 'ground_idle')"
+        "q.bedrock('komainu', 'ground_idle')"
       ],
       "isBattle": false,
       "poseTypes": [
@@ -45,13 +45,13 @@
         "FLOAT"
       ],
       "quirks": [
-        "q.bedrock_quirk('placeholder_child', 'blink')"
+        "q.bedrock_quirk('komainu', 'blink')"
       ]
     },
     "walking": {
       "animations": [
         "q.look('head')",
-        "q.bedrock('placeholder_child', 'ground_idle')",
+        "q.bedrock('komainu', 'ground_idle')",
         "q.quadruped_walk(0.66, 1.4, 'front_leg_left', 'front_leg_right', 'back_leg_left', 'back_leg_right')"
       ],
       "poseTypes": [
@@ -59,12 +59,12 @@
         "SWIM"
       ],
       "quirks": [
-        "q.bedrock_quirk('placeholder_child', 'blink')"
+        "q.bedrock_quirk('komainu', 'blink')"
       ]
     },
     "sleep": {
       "animations": [
-        "q.bedrock('placeholder_child', 'sleep')"
+        "q.bedrock('komainu', 'sleep')"
       ],
       "poseTypes": [
         "SLEEP"

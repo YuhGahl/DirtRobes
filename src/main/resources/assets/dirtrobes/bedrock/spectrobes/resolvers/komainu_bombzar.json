@@ -1,0 +1,8 @@
+{
+  "species": "dirtrobes:komainu_bombzar",
+  "model": "dirtrobes:komainu",
+  "texture": "dirtrobes:textures/spectrobes/komainu_bombzar.png",
+  "poser": "dirtrobes:komainu",
+  "tint": false,
+  "scale": 1.6
+}

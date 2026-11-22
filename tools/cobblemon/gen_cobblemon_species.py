@@ -302,9 +302,9 @@ def cobblemon_resolver(sid, d):
     stage, prop = d["stage"], d["property"]
     r = dirtrobes_resolver(sid, stage)
     tint = r.get("tint", False)
-    key = r["model"]
+    texs = [r["texture"], r.get("emissive")] + (r.get("variant_textures") or []) + (r.get("variant_emissives") or [])
+    key = (r["model"], tuple(t for t in texs if t))  # chaque texture doit être remappée pour le modèle Cobblemon
     if key not in _CB_MODELS:
-        texs = [r["texture"], r.get("emissive")] + (r.get("variant_textures") or []) + (r.get("variant_emissives") or [])
         _CB_MODELS[key] = cobblemon_model(r["model"], texs)
     model, remap = _CB_MODELS[key]
     tex = _tinted(r["texture"], prop, 0, False) if tint else remap.get(r["texture"], r["texture"])
