@@ -17,10 +17,14 @@ import java.util.Map;
 /**
  * Charge les modèles, animations, posers et resolvers depuis les resource packs :
  * assets/&lt;ns&gt;/bedrock/spectrobes/{models,animations,posers,resolvers}/...
+ * Les modèles, animations et posers des Spectrobes sont rangés dans assets/dirtrobes/bedrock/pokemon/… : le même
+ * fichier sert à DirtRobes et à Cobblemon (qui ne lit que ce dossier). Seul l'espace « dirtrobes » y est lu ici.
  * Un resource pack peut donc ajouter ou remplacer le modèle d'un Spectrobe sans toucher au code.
  */
 public class ModelRepository extends SimplePreparableReloadListener<ModelRepository.Data> {
     private static final String ROOT = "bedrock/spectrobes/";
+    /** Dossier partagé avec Cobblemon. */
+    private static final String SHARED = "bedrock/pokemon/";
     private static Data current = new Data();
 
     public static final class Data {
@@ -33,10 +37,13 @@ public class ModelRepository extends SimplePreparableReloadListener<ModelReposit
     @Override
     protected Data prepare(ResourceManager manager, ProfilerFiller profiler) {
         Data data = new Data();
-        load(manager, "models", ".geo.json", (id, json) -> data.models.put(id, BedrockModel.parse(json)));
-        load(manager, "animations", ".animation.json", (id, json) -> data.animations.putAll(BedrockAnimation.parseFile(json)));
-        load(manager, "posers", ".json", (id, json) -> data.posers.put(id, Poser.parse(json)));
-        load(manager, "resolvers", ".json", (id, json) -> {
+        for (String root : new String[]{ROOT, SHARED}) {
+            boolean shared = root.equals(SHARED);
+            load(manager, root, shared, "models", ".geo.json", (id, json) -> data.models.put(id, BedrockModel.parse(json)));
+            load(manager, root, shared, "animations", ".animation.json", (id, json) -> data.animations.putAll(BedrockAnimation.parseFile(json)));
+            load(manager, root, shared, "posers", ".json", (id, json) -> data.posers.put(id, Poser.parse(json)));
+        }
+        load(manager, ROOT, false, "resolvers", ".json", (id, json) -> {
             Resolver r = Resolver.parse(json, id.toString());
             data.resolvers.put(r.key(), r);
         });
@@ -54,8 +61,9 @@ public class ModelRepository extends SimplePreparableReloadListener<ModelReposit
         void accept(ResourceLocation id, JsonObject json);
     }
 
-    private static void load(ResourceManager manager, String folder, String suffix, Loader loader) {
-        Map<ResourceLocation, Resource> found = manager.listResources(ROOT + folder, rl -> rl.getPath().endsWith(suffix));
+    private static void load(ResourceManager manager, String root, boolean onlyOurs, String folder, String suffix, Loader loader) {
+        Map<ResourceLocation, Resource> found = manager.listResources(root + folder, rl -> rl.getPath().endsWith(suffix)
+                && (!onlyOurs || rl.getNamespace().equals(DirtRobes.MODID)));
         for (Map.Entry<ResourceLocation, Resource> e : found.entrySet()) {
             ResourceLocation file = e.getKey();
             String path = file.getPath();

@@ -1,0 +1,32 @@
+{
+  "order": 0,
+  "species": "dirtrobes:gekikro",
+  "variations": [
+    {
+      "aspects": [],
+      "poser": "dirtrobes:placeholder_adult",
+      "model": "dirtrobes:placeholder_adult.geo",
+      "texture": "dirtrobes:textures/spectrobes/cobblemon/placeholder_adult_corona.png",
+      "layers": [
+        {
+          "name": "glow",
+          "emissive": true,
+          "texture": "dirtrobes:textures/spectrobes/cobblemon/placeholder_adult_emissive_corona.png"
+        }
+      ]
+    },
+    {
+      "aspects": [
+        "shiny"
+      ],
+      "texture": "dirtrobes:textures/spectrobes/cobblemon/placeholder_adult_corona_chroma1.png",
+      "layers": [
+        {
+          "name": "glow",
+          "emissive": true,
+          "texture": "dirtrobes:textures/spectrobes/cobblemon/placeholder_adult_emissive_corona_chroma1.png"
+        }
+      ]
+    }
+  ]
+}

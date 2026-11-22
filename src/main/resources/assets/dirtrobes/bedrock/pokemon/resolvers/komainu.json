@@ -1,0 +1,13 @@
+{
+  "order": 0,
+  "species": "dirtrobes:komainu",
+  "variations": [
+    {
+      "aspects": [],
+      "poser": "dirtrobes:komainu",
+      "model": "dirtrobes:komainu.geo",
+      "texture": "dirtrobes:textures/spectrobes/komainu.png",
+      "layers": []
+    }
+  ]
+}

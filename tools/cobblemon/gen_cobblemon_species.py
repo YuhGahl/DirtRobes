@@ -22,11 +22,18 @@ import json
 import glob
 import os
 import re
+import colorsys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 SRC = os.path.join(ROOT, "src/main/resources/data/dirtrobes/spectrobes/species")
 OUT = os.path.join(ROOT, "src/main/resources/data/dirtrobes/species")
 LANG = os.path.join(ROOT, "src/main/resources/assets/dirtrobes/lang")
+ASSETS = os.path.join(ROOT, "src/main/resources/assets/dirtrobes")
+DR_RESOLVERS = os.path.join(ASSETS, "bedrock/spectrobes/resolvers")
+CB_RESOLVERS = os.path.join(ASSETS, "bedrock/pokemon/resolvers")
+TINT_DIR = "textures/spectrobes/cobblemon"   # textures provisoires teintées, générées
+STAGE_SCALE = {"child": 0.8, "adult": 1.0, "evolved": 1.25, "secret": 1.35, "special": 1.35}
+PROPERTY_COLOR = {"corona": 0xF08A3C, "aurora": 0x6BC56B, "flash": 0x4A9BE8, "eclipse": 0xB08A5A, "halo": 0xF2D64B, "prisma": 0xD9D9E6}
 SHOWDOWN = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "showdown_ids.json")))
 
 PRIMARY = {"corona": "fire", "aurora": "grass", "flash": "water", "eclipse": "ground", "halo": "flying", "prisma": "normal"}
@@ -116,6 +123,80 @@ def cobblemon_name(species_id, display):
     return " ".join(w.capitalize() for w in species_id.split("_"))
 
 
+_DR = None
+
+
+def dirtrobes_resolver(sid, stage):
+    """Resolver DirtRobes de l'espèce, sinon celui par défaut de son stade (même règle que ModelRepository)."""
+    global _DR
+    if _DR is None:
+        _DR = {}
+        for f in glob.glob(os.path.join(DR_RESOLVERS, "*.json")):
+            r = json.load(open(f, encoding="utf-8"))
+            _DR[r.get("species", "dirtrobes:" + os.path.basename(f)[:-5])] = r
+    return _DR.get(f"dirtrobes:{sid}") or _DR.get(f"default:{stage}") or _DR["default:adult"]
+
+
+def _tint_rgb(rgb, amount):
+    r, g, b = (rgb >> 16) & 255, (rgb >> 8) & 255, rgb & 255
+    return tuple(int(c + (255 - c) * amount) for c in (r, g, b))
+
+
+def _shift(rgb, variant):
+    if variant <= 0:
+        return rgb
+    h, s_, v = colorsys.rgb_to_hsv(((rgb >> 16) & 255) / 255, ((rgb >> 8) & 255) / 255, (rgb & 255) / 255)
+    r, g, b = colorsys.hsv_to_rgb((h + variant / 3) % 1, s_, v)
+    return (int(r * 255) << 16) | (int(g * 255) << 8) | int(b * 255)
+
+
+def _tinted(texture, prop, variant, emissive):
+    """Texture provisoire teintée comme le fait DirtRobes à l'affichage (Cobblemon ne sait pas teinter)."""
+    from PIL import Image
+    ns, path = texture.split(":")
+    name = os.path.basename(path)[:-4] + f"_{prop}" + (f"_chroma{variant}" if variant else "") + ".png"
+    out = os.path.join(ASSETS, TINT_DIR, name)
+    color = _shift(PROPERTY_COLOR[prop], variant)
+    mult = (color >> 16 & 255, color >> 8 & 255, color & 255) if emissive else _tint_rgb(color, 0.45)
+    img = Image.open(os.path.join(ASSETS, path)).convert("RGBA")
+    px = img.load()
+    for x in range(img.width):
+        for y in range(img.height):
+            r, g, b, a = px[x, y]
+            px[x, y] = (r * mult[0] // 255, g * mult[1] // 255, b * mult[2] // 255, a)
+    os.makedirs(os.path.dirname(out), exist_ok=True)
+    img.save(out)
+    return f"dirtrobes:{TINT_DIR}/{name}"
+
+
+def cobblemon_resolver(sid, d):
+    """Resolver Cobblemon qui reprend le modèle, le poser et la texture du Spectrobe dans DirtRobes.
+    Modèles, animations et posers sont partagés (assets/dirtrobes/bedrock/pokemon/…) : rien n'est copié.
+    Seules les textures provisoires teintées par propriété sont générées (Cobblemon ne teinte pas)."""
+    stage, prop = d["stage"], d["property"]
+    r = dirtrobes_resolver(sid, stage)
+    model = r["model"] + ".geo"
+    tint = r.get("tint", False)
+    tex = _tinted(r["texture"], prop, 0, False) if tint else r["texture"]
+    glow = r.get("emissive")
+    if glow and tint:
+        glow = _tinted(glow, prop, 0, True)
+    base = {"aspects": [], "poser": r["poser"], "model": model, "texture": tex,
+            "layers": [{"name": "glow", "emissive": True, "texture": glow}] if glow else []}
+    variations = [base]
+    # Chroma 2 de DirtRobes = chromatique (« shiny ») de Cobblemon
+    shiny = (r.get("variant_textures") or [None])[0]
+    if shiny is None and tint:
+        shiny = _tinted(r["texture"], prop, 1, False)
+    if shiny:
+        v = {"aspects": ["shiny"], "texture": shiny}
+        shiny_glow = (r.get("variant_emissives") or [None])[0] or (_tinted(r["emissive"], prop, 1, True) if tint and r.get("emissive") else None)
+        if shiny_glow:
+            v["layers"] = [{"name": "glow", "emissive": True, "texture": shiny_glow}]
+        variations.append(v)
+    return {"order": 0, "species": f"dirtrobes:{sid}", "variations": variations}
+
+
 def learnset(t1, t2, stage):
     top = STAGE_MAX_LEVEL[stage]
     moves = [f"1:{m}" for m in STARTERS]
@@ -203,7 +284,7 @@ def main():
             "aspects": [],
             "pokedex": [],
             "evolutions": evolutions,
-            "baseScale": 1.0,
+            "baseScale": round(d.get("scale", STAGE_SCALE[stage]) * dirtrobes_resolver(sid, stage).get("scale", 1.0), 3),
             "hitbox": {"width": w, "height": h, "fixed": False},
             "height": height,
             "weight": weight,
@@ -213,6 +294,10 @@ def main():
             out["behaviour"]["moving"] = {"fly": {"canFly": True}}
         with open(os.path.join(OUT, f"{sid}.json"), "w", encoding="utf-8") as fh:
             json.dump(out, fh, ensure_ascii=False, indent=2)
+            fh.write("\n")
+        os.makedirs(CB_RESOLVERS, exist_ok=True)
+        with open(os.path.join(CB_RESOLVERS, f"{sid}.json"), "w", encoding="utf-8") as fh:
+            json.dump(cobblemon_resolver(sid, d), fh, ensure_ascii=False, indent=2)
             fh.write("\n")
         lang_keys[f"dirtrobes.species.{showdown_id(names[sid])}.name"] = d["name"]
         lang_keys[f"dirtrobes.species.{showdown_id(names[sid])}.desc"] = ""

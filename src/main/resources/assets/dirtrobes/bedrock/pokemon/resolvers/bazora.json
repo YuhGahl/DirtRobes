@@ -1,0 +1,32 @@
+{
+  "order": 0,
+  "species": "dirtrobes:bazora",
+  "variations": [
+    {
+      "aspects": [],
+      "poser": "dirtrobes:placeholder_adult",
+      "model": "dirtrobes:placeholder_adult.geo",
+      "texture": "dirtrobes:textures/spectrobes/cobblemon/placeholder_adult_halo.png",
+      "layers": [
+        {
+          "name": "glow",
+          "emissive": true,
+          "texture": "dirtrobes:textures/spectrobes/cobblemon/placeholder_adult_emissive_halo.png"
+        }
+      ]
+    },
+    {
+      "aspects": [
+        "shiny"
+      ],
+      "texture": "dirtrobes:textures/spectrobes/cobblemon/placeholder_adult_halo_chroma1.png",
+      "layers": [
+        {
+          "name": "glow",
+          "emissive": true,
+          "texture": "dirtrobes:textures/spectrobes/cobblemon/placeholder_adult_emissive_halo_chroma1.png"
+        }
+      ]
+    }
+  ]
+}

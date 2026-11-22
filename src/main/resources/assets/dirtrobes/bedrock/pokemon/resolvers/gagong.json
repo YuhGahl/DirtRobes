@@ -1,0 +1,32 @@
+{
+  "order": 0,
+  "species": "dirtrobes:gagong",
+  "variations": [
+    {
+      "aspects": [],
+      "poser": "dirtrobes:placeholder_child",
+      "model": "dirtrobes:placeholder_child.geo",
+      "texture": "dirtrobes:textures/spectrobes/cobblemon/placeholder_child_aurora.png",
+      "layers": [
+        {
+          "name": "glow",
+          "emissive": true,
+          "texture": "dirtrobes:textures/spectrobes/cobblemon/placeholder_child_emissive_aurora.png"
+        }
+      ]
+    },
+    {
+      "aspects": [
+        "shiny"
+      ],
+      "texture": "dirtrobes:textures/spectrobes/cobblemon/placeholder_child_aurora_chroma1.png",
+      "layers": [
+        {
+          "name": "glow",
+          "emissive": true,
+          "texture": "dirtrobes:textures/spectrobes/cobblemon/placeholder_child_emissive_aurora_chroma1.png"
+        }
+      ]
+    }
+  ]
+}

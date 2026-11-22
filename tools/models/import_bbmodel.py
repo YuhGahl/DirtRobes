@@ -12,7 +12,7 @@ Le fichier spec (tools/models/specs/<espèce>.json) dit :
   - "colors"  : [motif regex, couleur #RRGGBB] pour la texture provisoire.
 
 Sorties :
-  - assets/dirtrobes/bedrock/spectrobes/models/<id>.geo.json (os renommés pour les animations : head, body,
+  - assets/dirtrobes/bedrock/pokemon/models/<id>.geo.json (os renommés pour les animations : head, body,
     ear_left, front_leg_left…) ;
   - assets/dirtrobes/textures/spectrobes/<id>.png : texture PROVISOIRE (aplats de couleur) avec des UV
     rangées proprement en 64×64 ;
@@ -113,7 +113,7 @@ def main(spec_path):
         "description": {"identifier": f"geometry.{mid}", "texture_width": TEX, "texture_height": TEX,
                         "visible_bounds_width": 3, "visible_bounds_height": 2.5, "visible_bounds_offset": [0, 0.75, 0]},
         "bones": bones_out}]}
-    geo_path = os.path.join(ASSETS, "bedrock/spectrobes/models", f"{mid}.geo.json")
+    geo_path = os.path.join(ASSETS, "bedrock/pokemon/models", f"{mid}.geo.json")
     with open(geo_path, "w", encoding="utf-8") as fh:
         json.dump(geo, fh, indent=2)
 
