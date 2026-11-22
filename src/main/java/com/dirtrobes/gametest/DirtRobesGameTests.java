@@ -172,10 +172,17 @@ public class DirtRobesGameTests {
                     + ", a touché " + spectrobe.getLastHurtMob() + ", Krawl PV max " + krawl.getMaxHealth()
                     + ", Krawl touché par " + krawl.getLastHurtByMob() + ", vue " + spectrobe.hasLineOfSight(krawl)
                     + ", portée " + spectrobe.isWithinMeleeAttackRange(krawl) + ", y abs " + spectrobe.getY() + "/" + krawl.getY()
-                    + ", bloc sous " + helper.getLevel().getBlockState(spectrobe.blockPosition()) + ")");
+                    + ", rayon " + describeClip(helper, spectrobe, krawl) + ")");
             helper.assertTrue(spectrobe.getXp() > xpBefore, "Le Spectrobe aurait dû gagner de l'XP");
             log("Krawl vaincu, XP du Spectrobe : {} → {}", xpBefore, spectrobe.getXp());
         });
+    }
+
+    private static String describeClip(GameTestHelper helper, net.minecraft.world.entity.LivingEntity a, net.minecraft.world.entity.Entity b) {
+        Vec3 from = new Vec3(a.getX(), a.getEyeY(), a.getZ()), to = new Vec3(b.getX(), b.getEyeY(), b.getZ());
+        net.minecraft.world.phys.BlockHitResult r = helper.getLevel().clip(new net.minecraft.world.level.ClipContext(from, to,
+                net.minecraft.world.level.ClipContext.Block.COLLIDER, net.minecraft.world.level.ClipContext.Fluid.NONE, a));
+        return from + " -> " + to + " : " + r.getType() + " " + r.getBlockPos() + " " + helper.getLevel().getBlockState(r.getBlockPos());
     }
 
     /** Le vortex fait apparaître un Krawl quand un joueur est à proximité. */
