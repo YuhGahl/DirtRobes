@@ -607,6 +607,12 @@ public class DirtRobesGameTests {
         helper.assertTrue(com.dirtrobes.species.SpeciesManager.get(DirtRobes.id("zappi")).rarity() == com.dirtrobes.species.Rarity.EPIC, "Zappi : 90 → Épique");
         helper.assertTrue(com.dirtrobes.species.SpeciesManager.get(DirtRobes.id("komainu")).rarity() == com.dirtrobes.species.Rarity.RARE, "Komainu : 60 → Rare");
         helper.assertTrue(com.dirtrobes.species.SpeciesManager.get(DirtRobes.id("zaza")).rarity() == com.dirtrobes.species.Rarity.COMMON, "Zaza : 30 → Commun");
+        // Zaza et Zazane sont des doublons de Zoza et Zozane : Zazanero devient l'évolution rare de Zozane
+        var zozane = com.dirtrobes.species.SpeciesManager.get(DirtRobes.id("zozane"));
+        helper.assertTrue(DirtRobes.id("zozanero").equals(zozane.evolvesInto()) && DirtRobes.id("zazanero").equals(zozane.rareEvolution())
+                && zozane.rareEvolutionChance() > 0f, "Zozane évolue en Zozanero, ou en Zazanero (rare)");
+        helper.assertTrue(!com.dirtrobes.species.SpeciesManager.get(DirtRobes.id("zaza")).fromFossil(), "Zaza ne sort plus des fossiles");
+        helper.assertTrue(com.dirtrobes.species.SpeciesManager.get(DirtRobes.id("zazanero")).rarity() == com.dirtrobes.species.Rarity.RARE, "Zazanero est rare");
         // lignée secrète d'Origins : Komainu spécial → Komanoto spécial → Flamerax
         var sk = com.dirtrobes.species.SpeciesManager.get(DirtRobes.id("komainu_flamerax"));
         helper.assertTrue(sk != null && sk.rarity() == com.dirtrobes.species.Rarity.SECRET && sk.fromFossil()

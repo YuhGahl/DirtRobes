@@ -18,5 +18,9 @@
   "hitbox": {
     "width": 1.05,
     "height": 1.55
+  },
+  "rare_evolution": {
+    "species": "dirtrobes:zazanero",
+    "chance": 0.15
   }
 }

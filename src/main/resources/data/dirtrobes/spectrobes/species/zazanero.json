@@ -3,15 +3,15 @@
   "property": "corona",
   "stage": "evolved",
   "family": "zaza",
-  "rarity": "common",
+  "rarity": "rare",
   "search_range": 3,
   "base_stats": {
-    "hp": 89,
-    "attack": 74,
-    "defense": 76,
-    "special_attack": 63,
-    "special_defense": 68,
-    "speed": 105
+    "hp": 101,
+    "attack": 84,
+    "defense": 86,
+    "special_attack": 72,
+    "special_defense": 77,
+    "speed": 119
   },
   "hitbox": {
     "width": 1.05,

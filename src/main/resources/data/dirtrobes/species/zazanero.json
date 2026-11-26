@@ -10,12 +10,12 @@
     "h:swarm"
   ],
   "baseStats": {
-    "hp": 89,
-    "attack": 74,
-    "defence": 76,
-    "special_attack": 63,
-    "special_defence": 68,
-    "speed": 105
+    "hp": 101,
+    "attack": 84,
+    "defence": 86,
+    "special_attack": 72,
+    "special_defence": 77,
+    "speed": 119
   },
   "evYield": {
     "hp": 0,
@@ -26,7 +26,7 @@
     "speed": 3
   },
   "baseExperienceYield": 236,
-  "experienceGroup": "medium_fast",
+  "experienceGroup": "medium_slow",
   "catchRate": 45,
   "baseFriendship": 70,
   "maleRatio": -1,

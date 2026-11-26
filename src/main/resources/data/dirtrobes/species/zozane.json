@@ -89,6 +89,20 @@
           "minLevel": 30
         }
       ]
+    },
+    {
+      "id": "zozane_zazanero",
+      "variant": "item_interact",
+      "result": "dirtrobes:zazanero",
+      "requiredContext": "dirtrobes:evolve_mineral",
+      "consumeHeldItem": false,
+      "learnableMoves": [],
+      "requirements": [
+        {
+          "variant": "level",
+          "minLevel": 30
+        }
+      ]
     }
   ],
   "baseScale": 1.0,
