@@ -342,6 +342,43 @@ def cobblemon_resolver(sid, d):
     return {"order": 0, "species": f"dirtrobes:{sid}", "variations": variations}
 
 
+_DONORS = None
+
+
+def donor_moves(sid):
+    """Movepool du Pokémon d'Insurgence qui sert de modèle (tools/cobblemon/insurgence_donors.py)."""
+    global _DONORS
+    if _DONORS is None:
+        p = os.path.join(os.path.dirname(os.path.abspath(__file__)), "insurgence_movepools.json")
+        _DONORS = json.load(open(p, encoding="utf-8")) if os.path.exists(p) else {}
+    return _DONORS.get(sid)
+
+
+def enrich(base, sid):
+    """Movepool de base du Spectrobe + celui de son Pokémon modèle (niveau, CT, tuteur, œuf), sans doublons."""
+    d = donor_moves(sid)
+    if not d:
+        return base
+    level, tms = {}, []
+    for m in base:
+        a, b = m.split(":", 1)
+        if a.isdigit():
+            level[b] = min(level.get(b, 999), int(a))
+        else:
+            tms.append(m)
+    for l, m in d["level"]:
+        if valid_move(m):
+            level[m] = min(level.get(m, 999), l)
+    out = [f"{l}:{m}" for m, l in sorted(level.items(), key=lambda kv: (kv[1], kv[0]))]
+    seen = {m.split(":", 1)[1] for m in tms}
+    for pre, key in (("tm", "tm"), ("tutor", "tutor"), ("egg", "egg")):
+        for m in d[key]:
+            if valid_move(m) and m not in seen:
+                tms.append(f"{pre}:{m}")
+                seen.add(m)
+    return out + tms
+
+
 def learnset(t1, t2, stage):
     top = STAGE_MAX_LEVEL[stage]
     moves = [f"1:{m}" for m in STARTERS]
@@ -424,7 +461,7 @@ def main():
             "maleRatio": -1,
             "eggCycles": 40,
             "eggGroups": ["undiscovered"],
-            "moves": learnset(t1, t2, stage),
+            "moves": enrich(learnset(t1, t2, stage), sid),
             "labels": ["dirtrobes", "spectrobe", stage],
             "aspects": [],
             "pokedex": [],
@@ -494,7 +531,8 @@ def export_doc_table():
     evn = {"hp": "PV", "attack": "ATQ", "defence": "DÉF", "special_attack": "Atq. Spé", "special_defence": "Déf. Spé", "speed": "VIT"}
     src = {os.path.basename(f)[:-5]: json.load(open(f, encoding="utf-8")) for f in glob.glob(os.path.join(SRC, "*.json"))}
     lines = ["\t".join(["Nom (comme dans la liste)", "Type 1", "Type 2", "Talent 1", "Talent 2", "Talent caché",
-                        "Attaques apprises (niveau)", "CT", "EV donnés", "Courbe d'XP", "Évolution (Cobblemon)"])]
+                        "Attaques apprises (niveau)", "CT", "EV donnés", "Courbe d'XP", "Évolution (Cobblemon)",
+                        "Tuteur", "Œuf", "Movepool inspiré de (Insurgence)"])]
     for sid in sorted(src):
         d = src[sid]
         c = json.load(open(os.path.join(OUT, f"{sid}.json"), encoding="utf-8"))
@@ -503,8 +541,11 @@ def export_doc_table():
             name = f"{d['name']} (lignée {sid.split('_')[1].capitalize()})"
         normal = [A(a) for a in c["abilities"] if not a.startswith("h:")]
         hidden = [A(a[2:]) for a in c["abilities"] if a.startswith("h:")]
-        level = [m for m in c["moves"] if not m.startswith("tm:")]
+        level = [m for m in c["moves"] if m.split(":")[0].isdigit()]
         tms = [m[3:] for m in c["moves"] if m.startswith("tm:")]
+        tutor = [m[6:] for m in c["moves"] if m.startswith("tutor:")]
+        egg = [m[4:] for m in c["moves"] if m.startswith("egg:")]
+        donor = (donor_moves(sid) or {}).get("donor", "")
         evo = []
         for e in c["evolutions"]:
             res = src[e["result"].split(":")[1]]["name"]
@@ -516,7 +557,8 @@ def export_doc_table():
             ", ".join(f"{m.split(':')[0]} {M(m.split(':')[1])}" for m in level),
             ", ".join(M(t) for t in tms),
             " · ".join(f"{v} {evn[k]}" for k, v in c["evYield"].items() if v),
-            groups.get(c["experienceGroup"], c["experienceGroup"]), " · ".join(evo) or "—"]))
+            groups.get(c["experienceGroup"], c["experienceGroup"]), " · ".join(evo) or "—",
+            ", ".join(M(t) for t in tutor), ", ".join(M(t) for t in egg), donor]))
     path = os.path.join(ROOT, "docs", "cobblemon_fiches.tsv")
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8") as fh:
