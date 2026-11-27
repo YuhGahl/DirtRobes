@@ -8,10 +8,10 @@
   "base_stats": {
     "hp": 83,
     "attack": 84,
-    "defense": 84,
+    "defense": 78,
     "special_attack": 71,
-    "special_defense": 76,
-    "speed": 97
+    "special_defense": 72,
+    "speed": 107
   },
   "hitbox": {
     "width": 1.05,

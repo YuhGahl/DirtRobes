@@ -6,12 +6,12 @@
   "rarity": "rare",
   "search_range": 3,
   "base_stats": {
-    "hp": 101,
-    "attack": 84,
-    "defense": 86,
+    "hp": 110,
+    "attack": 92,
+    "defense": 94,
     "special_attack": 72,
-    "special_defense": 77,
-    "speed": 119
+    "special_defense": 81,
+    "speed": 90
   },
   "hitbox": {
     "width": 1.05,
