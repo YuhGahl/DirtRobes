@@ -1,0 +1,76 @@
+{
+  "portraitScale": 1.0,
+  "portraitTranslation": [
+    0,
+    0,
+    0
+  ],
+  "profileScale": 0.6,
+  "profileTranslation": [
+    0,
+    0.6,
+    0
+  ],
+  "rootBone": "vilanox",
+  "animations": {
+    "cry": "q.bedrock_stateful('vilanox', 'cry')",
+    "recoil": "q.bedrock_stateful('vilanox', 'recoil')",
+    "faint": "q.bedrock_primary('vilanox', 'faint', q.curve('one'))"
+  },
+  "poses": {
+    "battle-standing": {
+      "poseTypes": [
+        "STAND"
+      ],
+      "animations": [
+        "q.look('head_ai')",
+        "q.bedrock('vilanox', 'battle_idle')"
+      ],
+      "isBattle": true,
+      "quirks": [
+        "q.bedrock_quirk('vilanox', 'idle_quirk')"
+      ]
+    },
+    "standing": {
+      "poseTypes": [
+        "STAND",
+        "PORTRAIT",
+        "PROFILE",
+        "NONE",
+        "SHOULDER_LEFT",
+        "SHOULDER_RIGHT",
+        "FLOAT",
+        "HOVER"
+      ],
+      "animations": [
+        "q.look('head_ai')",
+        "q.bedrock('vilanox', 'ground_idle')"
+      ],
+      "isBattle": false,
+      "quirks": [
+        "q.bedrock_quirk('vilanox', 'idle_quirk')"
+      ]
+    },
+    "walking": {
+      "poseTypes": [
+        "WALK",
+        "SWIM"
+      ],
+      "animations": [
+        "q.look('head_ai')",
+        "q.bedrock('vilanox', 'ground_walk')"
+      ],
+      "quirks": [
+        "q.bedrock_quirk('vilanox', 'idle_quirk')"
+      ]
+    },
+    "sleep": {
+      "poseTypes": [
+        "SLEEP"
+      ],
+      "animations": [
+        "q.bedrock('vilanox', 'sleep')"
+      ]
+    }
+  }
+}

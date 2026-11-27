@@ -1,0 +1,8 @@
+{
+  "species": "dirtrobes:harumi",
+  "model": "dirtrobes:harumi",
+  "texture": "dirtrobes:textures/spectrobes/harumi.png",
+  "tint": false,
+  "scale": 0.834,
+  "poser": "dirtrobes:harumi"
+}

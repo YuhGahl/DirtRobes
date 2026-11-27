@@ -16,7 +16,7 @@
   "evolves_into": "dirtrobes:segulara",
   "evolution_level": 30,
   "hitbox": {
-    "width": 1.05,
-    "height": 1.55
+    "width": 2.25,
+    "height": 2.05
   }
 }

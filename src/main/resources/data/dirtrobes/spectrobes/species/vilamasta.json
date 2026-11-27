@@ -20,7 +20,7 @@
     "chance": 0.05
   },
   "hitbox": {
-    "width": 1.05,
-    "height": 1.55
+    "width": 2.0,
+    "height": 2.45
   }
 }

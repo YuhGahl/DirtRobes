@@ -5,28 +5,9 @@
     {
       "aspects": [],
       "poser": "dirtrobes:cb_harumitey",
-      "model": "dirtrobes:placeholder_adult.geo",
-      "texture": "dirtrobes:textures/spectrobes/cobblemon/placeholder_adult_flash.png",
-      "layers": [
-        {
-          "name": "glow",
-          "emissive": true,
-          "texture": "dirtrobes:textures/spectrobes/cobblemon/placeholder_adult_emissive_flash.png"
-        }
-      ]
-    },
-    {
-      "aspects": [
-        "shiny"
-      ],
-      "texture": "dirtrobes:textures/spectrobes/cobblemon/placeholder_adult_flash_chroma1.png",
-      "layers": [
-        {
-          "name": "glow",
-          "emissive": true,
-          "texture": "dirtrobes:textures/spectrobes/cobblemon/placeholder_adult_emissive_flash_chroma1.png"
-        }
-      ]
+      "model": "dirtrobes:harumitey.geo",
+      "texture": "dirtrobes:textures/spectrobes/harumitey.png",
+      "layers": []
     }
   ]
 }

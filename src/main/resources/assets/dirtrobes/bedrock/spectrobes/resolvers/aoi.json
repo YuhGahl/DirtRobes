@@ -1,0 +1,8 @@
+{
+  "species": "dirtrobes:aoi",
+  "model": "dirtrobes:aoi",
+  "texture": "dirtrobes:textures/spectrobes/aoi.png",
+  "tint": false,
+  "scale": 0.764,
+  "poser": "dirtrobes:aoi"
+}

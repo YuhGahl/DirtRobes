@@ -1,0 +1,8 @@
+{
+  "species": "dirtrobes:shakor",
+  "model": "dirtrobes:shakor",
+  "texture": "dirtrobes:textures/spectrobes/shakor.png",
+  "tint": false,
+  "scale": 0.677,
+  "poser": "dirtrobes:shakor"
+}

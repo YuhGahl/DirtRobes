@@ -91,10 +91,10 @@
       ]
     }
   ],
-  "baseScale": 1.0,
+  "baseScale": 1.06,
   "hitbox": {
-    "width": 1.05,
-    "height": 1.55,
+    "width": 2.358,
+    "height": 2.17,
     "fixed": false
   },
   "height": 12,

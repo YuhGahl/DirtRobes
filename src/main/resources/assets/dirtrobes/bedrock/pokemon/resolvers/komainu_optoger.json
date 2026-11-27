@@ -5,8 +5,8 @@
     {
       "aspects": [],
       "poser": "dirtrobes:cb_komainu_optoger",
-      "model": "dirtrobes:komainu_cobblemon.geo",
-      "texture": "dirtrobes:textures/spectrobes/cobblemon/komainu_optoger_cobblemon.png",
+      "model": "dirtrobes:komainu.geo",
+      "texture": "dirtrobes:textures/spectrobes/komainu_optoger.png",
       "layers": []
     }
   ]

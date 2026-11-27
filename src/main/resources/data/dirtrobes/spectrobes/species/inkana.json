@@ -16,7 +16,7 @@
   "evolves_into": "dirtrobes:inkanapa",
   "evolution_level": 10,
   "hitbox": {
-    "width": 0.85,
-    "height": 1.0
+    "width": 0.7,
+    "height": 1.5
   }
 }

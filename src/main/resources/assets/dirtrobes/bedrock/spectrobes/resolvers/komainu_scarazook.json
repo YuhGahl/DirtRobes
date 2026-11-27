@@ -2,7 +2,7 @@
   "species": "dirtrobes:komainu_scarazook",
   "model": "dirtrobes:komainu",
   "texture": "dirtrobes:textures/spectrobes/komainu_scarazook.png",
-  "poser": "dirtrobes:komainu",
   "tint": false,
-  "scale": 1.6
+  "scale": 0.727,
+  "poser": "dirtrobes:komainu"
 }

@@ -1,0 +1,8 @@
+{
+  "species": "dirtrobes:shakoblad",
+  "model": "dirtrobes:shakoblad",
+  "texture": "dirtrobes:textures/spectrobes/shakoblad.png",
+  "tint": false,
+  "scale": 0.513,
+  "poser": "dirtrobes:shakoblad"
+}

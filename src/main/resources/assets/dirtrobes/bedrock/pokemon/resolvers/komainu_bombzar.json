@@ -5,8 +5,8 @@
     {
       "aspects": [],
       "poser": "dirtrobes:cb_komainu_bombzar",
-      "model": "dirtrobes:komainu_cobblemon.geo",
-      "texture": "dirtrobes:textures/spectrobes/cobblemon/komainu_bombzar_cobblemon.png",
+      "model": "dirtrobes:komainu.geo",
+      "texture": "dirtrobes:textures/spectrobes/komainu_bombzar.png",
       "layers": []
     }
   ]

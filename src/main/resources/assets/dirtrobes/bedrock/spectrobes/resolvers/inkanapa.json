@@ -1,0 +1,8 @@
+{
+  "species": "dirtrobes:inkanapa",
+  "model": "dirtrobes:inkanapa",
+  "texture": "dirtrobes:textures/spectrobes/inkanapa.png",
+  "tint": false,
+  "scale": 0.821,
+  "poser": "dirtrobes:inkanapa"
+}

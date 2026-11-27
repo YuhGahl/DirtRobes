@@ -60,12 +60,12 @@ def add(path):
             return
         loc.setdefault(bone if bone in by else root["name"], {})[name] = r(pos)
 
-    body = "body" if "body" in by else root["name"]
+    body = next((n for n in ("body", "corps") if n in by), root["name"])
     put(root["name"], "root", [0, 0, 0])
     put(body, "middle", mid)
     put(body, "target", mid)
     put(body, "top", [mid[0], hi[1], mid[2]])
-    hb = next((n for n in ("head_ai", "head") if n in by and subtree(n)), None)
+    hb = next((n for n in ("head_ai", "head", "tete") if n in by and subtree(n)), None)
     if hb:
         hl, hh = bounds(subtree(hb))
         hc = [(hl[k] + hh[k]) / 2 for k in range(3)]
@@ -75,19 +75,20 @@ def add(path):
         for n in ("mouth", "physical", "special", "item", "item_face"):
             put(hb, n, front)
         put(hb, "item_hat", [hc[0], hh[1], hc[2]])
-        for eye, n in (("eye_left", "eye2"), ("eye_right", "eye1")):
+        for eye, n in (("eye_left", "eye2"), ("eye_right", "eye1"), ("yeux", "eye1")):
             if eye in by and by[eye].get("cubes"):
                 el, eh = bounds(by[eye]["cubes"])
                 put(eye, n, [(el[k] + eh[k]) / 2 for k in range(3)])
     else:
         for n in ("head", "face", "mouth", "physical", "special", "item"):
             put(body, n, [mid[0], hi[1] * 0.8, lo[2]])
-    if "tail" in by:
-        tc = subtree("tail")
+    tail = next((n for n in ("tail", "queue", "queue1") if n in by), None)
+    if tail:
+        tc = subtree(tail)
         if tc:
             tl, th = bounds(tc)
-            put("tail", "tail", by["tail"]["pivot"])
-            put("tail", "tail_tip", [(tl[0] + th[0]) / 2, (tl[1] + th[1]) / 2, th[2]])
+            put(tail, "tail", by[tail]["pivot"])
+            put(tail, "tail_tip", [(tl[0] + th[0]) / 2, (tl[1] + th[1]) / 2, th[2]])
     for legs, n in ((("front_leg_left", "leg_front_left"), "foot_primary1"), (("front_leg_right", "leg_front_right"), "foot_primary2"),
                     (("back_leg_left", "leg_back_left"), "foot_secondary1"), (("back_leg_right", "leg_back_right"), "foot_secondary2")):
         leg = next((l for l in legs if l in by), None)

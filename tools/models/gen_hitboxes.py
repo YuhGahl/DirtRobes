@@ -42,7 +42,7 @@ def model_file(model_id):
 
 _BOUNDS = {}
 _SEAT = {}
-BACK = ("body", "torso", "waist")
+BACK = ("body", "torso", "waist", "corps", "torse", "buste", "carapace", "shell")
 
 
 def seat(path):

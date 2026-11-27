@@ -1,0 +1,8 @@
+{
+  "species": "dirtrobes:vilanox",
+  "model": "dirtrobes:vilanox",
+  "texture": "dirtrobes:textures/spectrobes/vilanox.png",
+  "tint": false,
+  "scale": 0.803,
+  "poser": "dirtrobes:vilanox"
+}

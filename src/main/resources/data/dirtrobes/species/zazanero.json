@@ -79,10 +79,10 @@
   "aspects": [],
   "pokedex": [],
   "evolutions": [],
-  "baseScale": 1.25,
+  "baseScale": 1.042,
   "hitbox": {
-    "width": 1.05,
-    "height": 1.55,
+    "width": 1.019,
+    "height": 3.417,
     "fixed": false
   },
   "height": 18,

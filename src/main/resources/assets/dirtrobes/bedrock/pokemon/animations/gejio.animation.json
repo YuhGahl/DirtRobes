@@ -1,0 +1,1764 @@
+{
+  "format_version": "1.8.0",
+  "animations": {
+    "animation.gejio.ground_idle": {
+      "loop": true,
+      "animation_length": 4.0,
+      "bones": {
+        "corps": {
+          "rotation": [
+            "1.5*math.sin(q.anim_time*90.0+0)",
+            0,
+            0
+          ]
+        },
+        "tete": {
+          "rotation": [
+            "2.0*math.sin(q.anim_time*90.0+60)",
+            "2.0*math.sin(q.anim_time*45.0+0)",
+            0
+          ]
+        },
+        "mandibule_g": {
+          "rotation": [
+            0,
+            "-4.0*math.sin(q.anim_time*90.0+0)",
+            0
+          ]
+        },
+        "mandibule_d": {
+          "rotation": [
+            0,
+            "4.0*math.sin(q.anim_time*90.0+0)",
+            0
+          ]
+        },
+        "bras_g": {
+          "rotation": [
+            "5.0*math.sin(q.anim_time*90.0+90)",
+            0,
+            0
+          ]
+        },
+        "bras_d": {
+          "rotation": [
+            "5.0*math.sin(q.anim_time*90.0+270)",
+            0,
+            0
+          ]
+        },
+        "queue": {
+          "rotation": [
+            "4.0*math.sin(q.anim_time*90.0+30)",
+            "6.0*math.sin(q.anim_time*45.0+0)",
+            0
+          ]
+        }
+      }
+    },
+    "animation.gejio.ground_walk": {
+      "loop": true,
+      "animation_length": 4.0,
+      "bones": {
+        "corps": {
+          "rotation": [
+            "-6*math.sin(q.anim_time*400+90)",
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            "1+0.05*math.sin(q.anim_time*400+270)",
+            1
+          ]
+        },
+        "tete": {
+          "rotation": [
+            "5*math.sin(q.anim_time*400+0)",
+            0,
+            0
+          ]
+        },
+        "mandibule_g": {
+          "rotation": [
+            0,
+            "-4.0*math.sin(q.anim_time*216.0+0)",
+            0
+          ]
+        },
+        "mandibule_d": {
+          "rotation": [
+            0,
+            "4.0*math.sin(q.anim_time*216.0+0)",
+            0
+          ]
+        },
+        "bras_g": {
+          "rotation": [
+            "-20+15*math.sin(q.anim_time*400+90)",
+            0,
+            0
+          ]
+        },
+        "bras_d": {
+          "rotation": [
+            "-20+15*math.sin(q.anim_time*400+90)",
+            0,
+            0
+          ]
+        },
+        "queue": {
+          "rotation": [
+            "10*math.sin(q.anim_time*400+180)",
+            0,
+            0
+          ]
+        },
+        "gejio": {
+          "position": [
+            0,
+            "math.abs(3.2*math.sin(q.anim_time*200.0+0))",
+            0
+          ]
+        },
+        "dard_g": {
+          "rotation": [
+            "18*math.sin(q.anim_time*400+90)",
+            0,
+            0
+          ]
+        },
+        "dard_d": {
+          "rotation": [
+            "18*math.sin(q.anim_time*400+90)",
+            0,
+            0
+          ]
+        },
+        "patte_g": {
+          "rotation": [
+            "-15+-20*math.sin(q.anim_time*400+90)",
+            0,
+            0
+          ]
+        },
+        "patte_d": {
+          "rotation": [
+            "-15+-20*math.sin(q.anim_time*400+90)",
+            0,
+            0
+          ]
+        }
+      }
+    },
+    "animation.gejio.battle_idle": {
+      "loop": true,
+      "animation_length": 4.0,
+      "bones": {
+        "corps": {
+          "rotation": [
+            "6+2*math.sin(q.anim_time*162+0)",
+            0,
+            0
+          ],
+          "position": [
+            0,
+            -0.5,
+            0
+          ]
+        },
+        "tete": {
+          "rotation": [
+            "2.4*math.sin(q.anim_time*162.0+60)",
+            "2.4*math.sin(q.anim_time*81.0+0)",
+            0
+          ]
+        },
+        "mandibule_g": {
+          "rotation": [
+            0,
+            "-15+6*math.sin(q.anim_time*324+0)",
+            0
+          ]
+        },
+        "mandibule_d": {
+          "rotation": [
+            0,
+            "15+-6*math.sin(q.anim_time*324+0)",
+            0
+          ]
+        },
+        "bras_g": {
+          "rotation": [
+            "-25+8*math.sin(q.anim_time*162+0)",
+            0,
+            0
+          ]
+        },
+        "bras_d": {
+          "rotation": [
+            "-25+8*math.sin(q.anim_time*162+180)",
+            0,
+            0
+          ]
+        },
+        "queue": {
+          "rotation": [
+            "4.8*math.sin(q.anim_time*162.0+30)",
+            "7.199999999999999*math.sin(q.anim_time*81.0+0)",
+            0
+          ]
+        }
+      }
+    },
+    "animation.gejio.sleep": {
+      "loop": true,
+      "animation_length": 4.0,
+      "bones": {
+        "corps": {
+          "position": [
+            0,
+            -1.5,
+            0
+          ],
+          "rotation": [
+            6,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            "1+0.03*math.sin(q.anim_time*40+0)",
+            1
+          ]
+        },
+        "tete": {
+          "rotation": [
+            8,
+            0,
+            0
+          ]
+        },
+        "bras_g": {
+          "rotation": [
+            40,
+            0,
+            0
+          ]
+        },
+        "bras_d": {
+          "rotation": [
+            40,
+            0,
+            0
+          ]
+        },
+        "dard_g": {
+          "rotation": [
+            -15,
+            0,
+            0
+          ]
+        },
+        "dard_d": {
+          "rotation": [
+            -15,
+            0,
+            0
+          ]
+        },
+        "patte_g": {
+          "rotation": [
+            60,
+            0,
+            0
+          ]
+        },
+        "patte_d": {
+          "rotation": [
+            60,
+            0,
+            0
+          ]
+        },
+        "queue": {
+          "rotation": [
+            -15,
+            25,
+            0
+          ]
+        }
+      }
+    },
+    "animation.gejio.cry": {
+      "animation_length": 1.4,
+      "bones": {
+        "corps": {
+          "rotation": {
+            "0.0": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.3": {
+              "post": [
+                -25,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.0": {
+              "post": [
+                -25,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.4": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          }
+        },
+        "tete": {
+          "rotation": {
+            "0.0": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.3": {
+              "post": [
+                -15,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.0": {
+              "post": [
+                -15,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.4": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          }
+        },
+        "mandibule_g": {
+          "rotation": {
+            "0.0": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.3": {
+              "post": [
+                0,
+                -30,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.5": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.7": {
+              "post": [
+                0,
+                -30,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.0": {
+              "post": [
+                0,
+                -30,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.4": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          }
+        },
+        "mandibule_d": {
+          "rotation": {
+            "0.0": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.3": {
+              "post": [
+                0,
+                30,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.5": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.7": {
+              "post": [
+                0,
+                30,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.0": {
+              "post": [
+                0,
+                30,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.4": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          }
+        },
+        "bras_g": {
+          "rotation": {
+            "0.0": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.3": {
+              "post": [
+                -60,
+                0,
+                -20
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.0": {
+              "post": [
+                -60,
+                0,
+                -20
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.4": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          }
+        },
+        "bras_d": {
+          "rotation": {
+            "0.0": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.3": {
+              "post": [
+                -60,
+                0,
+                20
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.0": {
+              "post": [
+                -60,
+                0,
+                20
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.4": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          }
+        },
+        "queue": {
+          "rotation": [
+            "4.0*math.sin(q.anim_time*108.0+30)",
+            "6.0*math.sin(q.anim_time*54.0+0)",
+            0
+          ]
+        }
+      }
+    },
+    "animation.gejio.physical": {
+      "animation_length": 1.0,
+      "bones": {
+        "corps": {
+          "rotation": {
+            "0.0": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.25": {
+              "post": [
+                -10,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.45": {
+              "post": [
+                15,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.0": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          },
+          "position": {
+            "0.0": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.25": {
+              "post": [
+                0,
+                -1,
+                1
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.45": {
+              "post": [
+                0,
+                2,
+                -6
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.7": {
+              "post": [
+                0,
+                0,
+                -6
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.0": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          }
+        },
+        "tete": {
+          "rotation": [
+            "2.0*math.sin(q.anim_time*144.0+60)",
+            "2.0*math.sin(q.anim_time*72.0+0)",
+            0
+          ]
+        },
+        "mandibule_g": {
+          "rotation": {
+            "0.0": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.3": {
+              "post": [
+                0,
+                -35,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.5": {
+              "post": [
+                0,
+                12,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.8": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          }
+        },
+        "mandibule_d": {
+          "rotation": {
+            "0.0": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.3": {
+              "post": [
+                0,
+                35,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.5": {
+              "post": [
+                0,
+                -12,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.8": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          }
+        },
+        "bras_g": {
+          "rotation": {
+            "0.0": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.3": {
+              "post": [
+                -50,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.5": {
+              "post": [
+                20,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.0": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          }
+        },
+        "bras_d": {
+          "rotation": {
+            "0.0": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.3": {
+              "post": [
+                -50,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.5": {
+              "post": [
+                20,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.0": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          }
+        },
+        "queue": {
+          "rotation": [
+            "4.0*math.sin(q.anim_time*144.0+30)",
+            "6.0*math.sin(q.anim_time*72.0+0)",
+            0
+          ]
+        }
+      }
+    },
+    "animation.gejio.special": {
+      "animation_length": 1.6,
+      "bones": {
+        "corps": {
+          "rotation": [
+            "1.5*math.sin(q.anim_time*144.0+0)",
+            0,
+            0
+          ],
+          "position": [
+            0,
+            "0.3*math.sin(q.anim_time*2400+0)",
+            0
+          ]
+        },
+        "tete": {
+          "rotation": {
+            "0.0": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.3": {
+              "post": [
+                -20,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.2": {
+              "post": [
+                -20,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.6": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          }
+        },
+        "mandibule_g": {
+          "rotation": [
+            0,
+            "-4.0*math.sin(q.anim_time*144.0+0)",
+            0
+          ]
+        },
+        "mandibule_d": {
+          "rotation": [
+            0,
+            "4.0*math.sin(q.anim_time*144.0+0)",
+            0
+          ]
+        },
+        "bras_g": {
+          "rotation": [
+            "5.0*math.sin(q.anim_time*144.0+90)",
+            0,
+            0
+          ]
+        },
+        "bras_d": {
+          "rotation": [
+            "5.0*math.sin(q.anim_time*144.0+270)",
+            0,
+            0
+          ]
+        },
+        "queue": {
+          "rotation": [
+            "8*math.sin(q.anim_time*1800+0)",
+            0,
+            0
+          ]
+        },
+        "dard_g": {
+          "rotation": [
+            "10*math.sin(q.anim_time*2400+0)",
+            0,
+            "6*math.sin(q.anim_time*2400+90)"
+          ]
+        },
+        "dard_d": {
+          "rotation": [
+            "10*math.sin(q.anim_time*2400+180)",
+            0,
+            "-6*math.sin(q.anim_time*2400+270)"
+          ]
+        }
+      }
+    },
+    "animation.gejio.status": {
+      "animation_length": 1.4,
+      "bones": {
+        "corps": {
+          "rotation": [
+            "1.5*math.sin(q.anim_time*144.0+0)",
+            0,
+            0
+          ]
+        },
+        "tete": {
+          "rotation": {
+            "0.0": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.35": {
+              "post": [
+                0,
+                0,
+                14
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.7": {
+              "post": [
+                0,
+                0,
+                -14
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.05": {
+              "post": [
+                0,
+                0,
+                14
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.4": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          }
+        },
+        "mandibule_g": {
+          "rotation": [
+            0,
+            "-4.0*math.sin(q.anim_time*144.0+0)",
+            0
+          ]
+        },
+        "mandibule_d": {
+          "rotation": [
+            0,
+            "4.0*math.sin(q.anim_time*144.0+0)",
+            0
+          ]
+        },
+        "bras_g": {
+          "rotation": {
+            "0.0": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.4": {
+              "post": [
+                -40,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.0": {
+              "post": [
+                -40,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.4": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          }
+        },
+        "bras_d": {
+          "rotation": {
+            "0.0": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.4": {
+              "post": [
+                -40,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.0": {
+              "post": [
+                -40,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.4": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          }
+        },
+        "queue": {
+          "rotation": [
+            "4.0*math.sin(q.anim_time*144.0+30)",
+            "6.0*math.sin(q.anim_time*72.0+0)",
+            0
+          ]
+        }
+      }
+    },
+    "animation.gejio.recoil": {
+      "animation_length": 0.6,
+      "bones": {
+        "corps": {
+          "rotation": {
+            "0.0": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.12": {
+              "post": [
+                -15,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.6": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          },
+          "position": {
+            "0.0": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.12": {
+              "post": [
+                0,
+                1,
+                2
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.6": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          }
+        },
+        "tete": {
+          "rotation": {
+            "0.0": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.12": {
+              "post": [
+                -15,
+                10,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.6": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          }
+        },
+        "mandibule_g": {
+          "rotation": [
+            0,
+            "-4.0*math.sin(q.anim_time*144.0+0)",
+            0
+          ]
+        },
+        "mandibule_d": {
+          "rotation": [
+            0,
+            "4.0*math.sin(q.anim_time*144.0+0)",
+            0
+          ]
+        },
+        "bras_g": {
+          "rotation": [
+            "5.0*math.sin(q.anim_time*144.0+90)",
+            0,
+            0
+          ]
+        },
+        "bras_d": {
+          "rotation": [
+            "5.0*math.sin(q.anim_time*144.0+270)",
+            0,
+            0
+          ]
+        },
+        "queue": {
+          "rotation": [
+            "4.0*math.sin(q.anim_time*144.0+30)",
+            "6.0*math.sin(q.anim_time*72.0+0)",
+            0
+          ]
+        }
+      }
+    },
+    "animation.gejio.faint": {
+      "loop": "hold_on_last_frame",
+      "animation_length": 1.6,
+      "bones": {
+        "gejio": {
+          "rotation": {
+            "0.0": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.5": {
+              "post": [
+                0,
+                0,
+                25
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.1": {
+              "post": [
+                0,
+                0,
+                90
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.6": {
+              "post": [
+                0,
+                0,
+                90
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          },
+          "position": {
+            "0.0": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.1": {
+              "post": [
+                0,
+                4,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.6": {
+              "post": [
+                0,
+                4,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          }
+        },
+        "patte_g": {
+          "rotation": [
+            "20*math.sin(q.anim_time*900+0)",
+            0,
+            0
+          ]
+        },
+        "patte_d": {
+          "rotation": [
+            "20*math.sin(q.anim_time*900+180)",
+            0,
+            0
+          ]
+        },
+        "bras_g": {
+          "rotation": {
+            "0.0": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.1": {
+              "post": [
+                -40,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.6": {
+              "post": [
+                -40,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          }
+        },
+        "bras_d": {
+          "rotation": {
+            "0.0": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.1": {
+              "post": [
+                -40,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.6": {
+              "post": [
+                -40,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          }
+        }
+      }
+    },
+    "animation.gejio.idle_quirk": {
+      "animation_length": 1.2,
+      "bones": {
+        "corps": {
+          "rotation": [
+            "1.5*math.sin(q.anim_time*90.0+0)",
+            0,
+            0
+          ]
+        },
+        "tete": {
+          "rotation": [
+            "2.0*math.sin(q.anim_time*90.0+60)",
+            "2.0*math.sin(q.anim_time*45.0+0)",
+            0
+          ]
+        },
+        "mandibule_g": {
+          "rotation": {
+            "0.0": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.15": {
+              "post": [
+                0,
+                -25,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.3": {
+              "post": [
+                0,
+                5,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.45": {
+              "post": [
+                0,
+                -25,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.6": {
+              "post": [
+                0,
+                5,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.8": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          }
+        },
+        "mandibule_d": {
+          "rotation": {
+            "0.0": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.15": {
+              "post": [
+                0,
+                25,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.3": {
+              "post": [
+                0,
+                -5,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.45": {
+              "post": [
+                0,
+                25,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.6": {
+              "post": [
+                0,
+                -5,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.8": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          }
+        },
+        "bras_g": {
+          "rotation": [
+            "5.0*math.sin(q.anim_time*90.0+90)",
+            0,
+            0
+          ]
+        },
+        "bras_d": {
+          "rotation": [
+            "5.0*math.sin(q.anim_time*90.0+270)",
+            0,
+            0
+          ]
+        },
+        "queue": {
+          "rotation": [
+            "4.0*math.sin(q.anim_time*90.0+30)",
+            "6.0*math.sin(q.anim_time*45.0+0)",
+            0
+          ]
+        }
+      }
+    },
+    "animation.gejio.gratte": {
+      "animation_length": 1.8,
+      "bones": {
+        "corps": {
+          "rotation": [
+            "1.5*math.sin(q.anim_time*90.0+0)",
+            0,
+            0
+          ]
+        },
+        "tete": {
+          "rotation": {
+            "0.0": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.4": {
+              "post": [
+                5,
+                0,
+                12
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.2": {
+              "post": [
+                5,
+                0,
+                12
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.8": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          }
+        },
+        "mandibule_g": {
+          "rotation": [
+            0,
+            "-4.0*math.sin(q.anim_time*90.0+0)",
+            0
+          ]
+        },
+        "mandibule_d": {
+          "rotation": [
+            0,
+            "4.0*math.sin(q.anim_time*90.0+0)",
+            0
+          ]
+        },
+        "bras_g": {
+          "rotation": [
+            "5.0*math.sin(q.anim_time*90.0+90)",
+            0,
+            0
+          ]
+        },
+        "bras_d": {
+          "rotation": {
+            "0.0": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.4": {
+              "post": [
+                -110,
+                0,
+                15
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.6": {
+              "post": [
+                -95,
+                0,
+                15
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.8": {
+              "post": [
+                -110,
+                0,
+                15
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.0": {
+              "post": [
+                -95,
+                0,
+                15
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.2": {
+              "post": [
+                -110,
+                0,
+                15
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.8": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          }
+        },
+        "queue": {
+          "rotation": [
+            "4.0*math.sin(q.anim_time*90.0+30)",
+            "6.0*math.sin(q.anim_time*45.0+0)",
+            0
+          ]
+        }
+      }
+    },
+    "animation.gejio.saut": {
+      "animation_length": 1.0,
+      "bones": {
+        "corps": {
+          "rotation": [
+            "1.5*math.sin(q.anim_time*90.0+0)",
+            0,
+            0
+          ]
+        },
+        "tete": {
+          "rotation": [
+            "2.0*math.sin(q.anim_time*90.0+60)",
+            "2.0*math.sin(q.anim_time*45.0+0)",
+            0
+          ]
+        },
+        "mandibule_g": {
+          "rotation": [
+            0,
+            "-4.0*math.sin(q.anim_time*90.0+0)",
+            0
+          ]
+        },
+        "mandibule_d": {
+          "rotation": [
+            0,
+            "4.0*math.sin(q.anim_time*90.0+0)",
+            0
+          ]
+        },
+        "bras_g": {
+          "rotation": [
+            "5.0*math.sin(q.anim_time*90.0+90)",
+            0,
+            0
+          ]
+        },
+        "bras_d": {
+          "rotation": [
+            "5.0*math.sin(q.anim_time*90.0+270)",
+            0,
+            0
+          ]
+        },
+        "queue": {
+          "rotation": [
+            "4.0*math.sin(q.anim_time*90.0+30)",
+            "6.0*math.sin(q.anim_time*45.0+0)",
+            0
+          ]
+        },
+        "gejio": {
+          "position": {
+            "0.0": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.15": {
+              "post": [
+                0,
+                -1,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.45": {
+              "post": [
+                0,
+                6,
+                2
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.75": {
+              "post": [
+                0,
+                0,
+                3
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.85": {
+              "post": [
+                0,
+                -0.5,
+                3
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.0": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          }
+        },
+        "dard_g": {
+          "rotation": {
+            "0.0": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.15": {
+              "post": [
+                -20,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.45": {
+              "post": [
+                35,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.75": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          }
+        },
+        "dard_d": {
+          "rotation": {
+            "0.0": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.15": {
+              "post": [
+                -20,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.45": {
+              "post": [
+                35,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.75": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          }
+        }
+      }
+    }
+  }
+}

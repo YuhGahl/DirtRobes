@@ -5,28 +5,9 @@
     {
       "aspects": [],
       "poser": "dirtrobes:cb_segu",
-      "model": "dirtrobes:placeholder_child.geo",
-      "texture": "dirtrobes:textures/spectrobes/cobblemon/placeholder_child_aurora.png",
-      "layers": [
-        {
-          "name": "glow",
-          "emissive": true,
-          "texture": "dirtrobes:textures/spectrobes/cobblemon/placeholder_child_emissive_aurora.png"
-        }
-      ]
-    },
-    {
-      "aspects": [
-        "shiny"
-      ],
-      "texture": "dirtrobes:textures/spectrobes/cobblemon/placeholder_child_aurora_chroma1.png",
-      "layers": [
-        {
-          "name": "glow",
-          "emissive": true,
-          "texture": "dirtrobes:textures/spectrobes/cobblemon/placeholder_child_emissive_aurora_chroma1.png"
-        }
-      ]
+      "model": "dirtrobes:segu.geo",
+      "texture": "dirtrobes:textures/spectrobes/segu.png",
+      "layers": []
     }
   ]
 }

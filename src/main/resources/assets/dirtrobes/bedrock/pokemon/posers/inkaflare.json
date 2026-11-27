@@ -1,0 +1,79 @@
+{
+  "portraitScale": 1.0,
+  "portraitTranslation": [
+    0,
+    0,
+    0
+  ],
+  "profileScale": 0.6,
+  "profileTranslation": [
+    0,
+    0.6,
+    0
+  ],
+  "rootBone": "inkaflare",
+  "animations": {
+    "cry": "q.bedrock_stateful('inkaflare', 'cry')",
+    "recoil": "q.bedrock_stateful('inkaflare', 'recoil')",
+    "faint": "q.bedrock_primary('inkaflare', 'faint', q.curve('one'))",
+    "physical": "q.bedrock_primary('inkaflare', 'physical', q.curve('symmetrical_wide'))",
+    "special": "q.bedrock_primary('inkaflare', 'special', q.curve('symmetrical_wide'))",
+    "status": "q.bedrock_primary('inkaflare', 'status', q.curve('symmetrical_wide'))"
+  },
+  "poses": {
+    "battle-standing": {
+      "poseTypes": [
+        "STAND"
+      ],
+      "animations": [
+        "q.look('tete')",
+        "q.bedrock('inkaflare', 'battle_idle')"
+      ],
+      "isBattle": true,
+      "quirks": [
+        "q.bedrock_quirk('inkaflare', 'idle_quirk')"
+      ]
+    },
+    "standing": {
+      "poseTypes": [
+        "STAND",
+        "PORTRAIT",
+        "PROFILE",
+        "NONE",
+        "SHOULDER_LEFT",
+        "SHOULDER_RIGHT",
+        "FLOAT",
+        "HOVER"
+      ],
+      "animations": [
+        "q.look('tete')",
+        "q.bedrock('inkaflare', 'ground_idle')"
+      ],
+      "isBattle": false,
+      "quirks": [
+        "q.bedrock_quirk('inkaflare', 'idle_quirk')"
+      ]
+    },
+    "walking": {
+      "poseTypes": [
+        "WALK",
+        "SWIM"
+      ],
+      "animations": [
+        "q.look('tete')",
+        "q.bedrock('inkaflare', 'ground_walk')"
+      ],
+      "quirks": [
+        "q.bedrock_quirk('inkaflare', 'idle_quirk')"
+      ]
+    },
+    "sleep": {
+      "poseTypes": [
+        "SLEEP"
+      ],
+      "animations": [
+        "q.bedrock('inkaflare', 'sleep')"
+      ]
+    }
+  }
+}

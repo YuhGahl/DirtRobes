@@ -14,8 +14,8 @@
     "speed": 107
   },
   "hitbox": {
-    "width": 1.05,
-    "height": 1.55,
-    "seat": 1.0
+    "width": 1.25,
+    "height": 2.7,
+    "seat": 1.5
   }
 }

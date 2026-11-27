@@ -1,0 +1,8 @@
+{
+  "species": "dirtrobes:segu",
+  "model": "dirtrobes:segu",
+  "texture": "dirtrobes:textures/spectrobes/segu.png",
+  "tint": false,
+  "scale": 0.57,
+  "poser": "dirtrobes:segu"
+}

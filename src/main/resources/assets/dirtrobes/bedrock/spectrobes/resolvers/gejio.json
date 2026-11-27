@@ -1,0 +1,8 @@
+{
+  "species": "dirtrobes:gejio",
+  "model": "dirtrobes:gejio",
+  "texture": "dirtrobes:textures/spectrobes/gejio.png",
+  "tint": false,
+  "scale": 1.254,
+  "poser": "dirtrobes:gejio"
+}

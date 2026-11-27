@@ -16,7 +16,7 @@
   "evolves_into": "dirtrobes:komanoto_mizusar",
   "evolution_level": 10,
   "hitbox": {
-    "width": 0.65,
-    "height": 0.95
+    "width": 0.95,
+    "height": 1.45
   }
 }

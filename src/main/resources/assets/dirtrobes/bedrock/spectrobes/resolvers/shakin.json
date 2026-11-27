@@ -1,0 +1,8 @@
+{
+  "species": "dirtrobes:shakin",
+  "model": "dirtrobes:shakin",
+  "texture": "dirtrobes:textures/spectrobes/shakin.png",
+  "tint": false,
+  "scale": 0.69,
+  "poser": "dirtrobes:shakin"
+}

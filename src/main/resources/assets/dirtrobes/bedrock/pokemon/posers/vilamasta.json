@@ -1,0 +1,76 @@
+{
+  "portraitScale": 1.0,
+  "portraitTranslation": [
+    0,
+    0,
+    0
+  ],
+  "profileScale": 0.6,
+  "profileTranslation": [
+    0,
+    0.6,
+    0
+  ],
+  "rootBone": "vilamasta",
+  "animations": {
+    "cry": "q.bedrock_stateful('vilamasta', 'cry')",
+    "recoil": "q.bedrock_stateful('vilamasta', 'recoil')",
+    "faint": "q.bedrock_primary('vilamasta', 'faint', q.curve('one'))"
+  },
+  "poses": {
+    "battle-standing": {
+      "poseTypes": [
+        "STAND"
+      ],
+      "animations": [
+        "q.look('head_ai')",
+        "q.bedrock('vilamasta', 'battle_idle')"
+      ],
+      "isBattle": true,
+      "quirks": [
+        "q.bedrock_quirk('vilamasta', 'idle_quirk')"
+      ]
+    },
+    "standing": {
+      "poseTypes": [
+        "STAND",
+        "PORTRAIT",
+        "PROFILE",
+        "NONE",
+        "SHOULDER_LEFT",
+        "SHOULDER_RIGHT",
+        "FLOAT",
+        "HOVER"
+      ],
+      "animations": [
+        "q.look('head_ai')",
+        "q.bedrock('vilamasta', 'ground_idle')"
+      ],
+      "isBattle": false,
+      "quirks": [
+        "q.bedrock_quirk('vilamasta', 'idle_quirk')"
+      ]
+    },
+    "walking": {
+      "poseTypes": [
+        "WALK",
+        "SWIM"
+      ],
+      "animations": [
+        "q.look('head_ai')",
+        "q.bedrock('vilamasta', 'ground_walk')"
+      ],
+      "quirks": [
+        "q.bedrock_quirk('vilamasta', 'idle_quirk')"
+      ]
+    },
+    "sleep": {
+      "poseTypes": [
+        "SLEEP"
+      ],
+      "animations": [
+        "q.bedrock('vilamasta', 'sleep')"
+      ]
+    }
+  }
+}

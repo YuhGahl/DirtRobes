@@ -1,0 +1,8 @@
+{
+  "species": "dirtrobes:vilamasta",
+  "model": "dirtrobes:vilamasta",
+  "texture": "dirtrobes:textures/spectrobes/vilamasta.png",
+  "tint": false,
+  "scale": 0.997,
+  "poser": "dirtrobes:vilamasta"
+}

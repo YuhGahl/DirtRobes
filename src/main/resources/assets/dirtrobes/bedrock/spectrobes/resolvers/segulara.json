@@ -1,0 +1,9 @@
+{
+  "species": "dirtrobes:segulara",
+  "model": "dirtrobes:segulara",
+  "texture": "dirtrobes:textures/spectrobes/segulara.png",
+  "tint": false,
+  "scale": 1.085,
+  "poser": "dirtrobes:segulara",
+  "translucent": true
+}

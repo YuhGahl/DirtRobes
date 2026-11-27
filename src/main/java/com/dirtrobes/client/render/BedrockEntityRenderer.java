@@ -72,7 +72,8 @@ public class BedrockEntityRenderer<T extends LivingEntity & BedrockPosable> exte
             ResourceLocation tex = resolver.variantTexture(variant);
             int color = resolver.tint() ? tint(chromaShift(entity.tintColor(), tex == null ? variant : 0), 0.45f)
                     : (tex == null ? chromaFallback(variant) : 0xFFFFFFFF);
-            VertexConsumer base = buffers.getBuffer(RenderType.entityCutoutNoCull(tex != null ? tex : resolver.texture()));
+            ResourceLocation baseTex = tex != null ? tex : resolver.texture();
+            VertexConsumer base = buffers.getBuffer(resolver.translucent() ? RenderType.entityTranslucent(baseTex) : RenderType.entityCutoutNoCull(baseTex));
             for (BedrockModel.Bone bone : model.roots) renderBone(bone, pose, poseStack, base, packedLight, overlay, color);
             ResourceLocation glowTex = resolver.variantEmissive(variant) != null ? resolver.variantEmissive(variant) : resolver.emissive();
             if (glowTex != null) {

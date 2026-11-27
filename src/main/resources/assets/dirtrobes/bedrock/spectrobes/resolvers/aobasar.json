@@ -1,0 +1,8 @@
+{
+  "species": "dirtrobes:aobasar",
+  "model": "dirtrobes:aobasar",
+  "texture": "dirtrobes:textures/spectrobes/aobasar.png",
+  "tint": false,
+  "scale": 0.441,
+  "poser": "dirtrobes:aobasar"
+}

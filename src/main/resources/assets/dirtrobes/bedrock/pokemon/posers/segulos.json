@@ -1,0 +1,76 @@
+{
+  "portraitScale": 1.0,
+  "portraitTranslation": [
+    0,
+    0,
+    0
+  ],
+  "profileScale": 0.6,
+  "profileTranslation": [
+    0,
+    0.6,
+    0
+  ],
+  "rootBone": "segulos",
+  "animations": {
+    "cry": "q.bedrock_stateful('segulos', 'cry')",
+    "recoil": "q.bedrock_stateful('segulos', 'recoil')",
+    "faint": "q.bedrock_primary('segulos', 'faint', q.curve('one'))"
+  },
+  "poses": {
+    "battle-standing": {
+      "poseTypes": [
+        "STAND"
+      ],
+      "animations": [
+        "q.look('head_ai')",
+        "q.bedrock('segulos', 'battle_idle')"
+      ],
+      "isBattle": true,
+      "quirks": [
+        "q.bedrock_quirk('segulos', 'idle_quirk')"
+      ]
+    },
+    "standing": {
+      "poseTypes": [
+        "STAND",
+        "PORTRAIT",
+        "PROFILE",
+        "NONE",
+        "SHOULDER_LEFT",
+        "SHOULDER_RIGHT",
+        "FLOAT",
+        "HOVER"
+      ],
+      "animations": [
+        "q.look('head_ai')",
+        "q.bedrock('segulos', 'ground_idle')"
+      ],
+      "isBattle": false,
+      "quirks": [
+        "q.bedrock_quirk('segulos', 'idle_quirk')"
+      ]
+    },
+    "walking": {
+      "poseTypes": [
+        "WALK",
+        "SWIM"
+      ],
+      "animations": [
+        "q.look('head_ai')",
+        "q.bedrock('segulos', 'ground_walk')"
+      ],
+      "quirks": [
+        "q.bedrock_quirk('segulos', 'idle_quirk')"
+      ]
+    },
+    "sleep": {
+      "poseTypes": [
+        "SLEEP"
+      ],
+      "animations": [
+        "q.bedrock('segulos', 'sleep')"
+      ]
+    }
+  }
+}

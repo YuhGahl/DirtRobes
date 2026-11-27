@@ -1,0 +1,8 @@
+{
+  "species": "dirtrobes:zoza",
+  "model": "dirtrobes:zoza",
+  "texture": "dirtrobes:textures/spectrobes/zoza.png",
+  "tint": false,
+  "scale": 0.564,
+  "poser": "dirtrobes:zoza"
+}

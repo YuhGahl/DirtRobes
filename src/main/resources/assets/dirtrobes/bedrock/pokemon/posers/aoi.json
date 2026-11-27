@@ -1,0 +1,102 @@
+{
+  "portraitScale": 1.0,
+  "portraitTranslation": [
+    0,
+    0,
+    0
+  ],
+  "profileScale": 0.6,
+  "profileTranslation": [
+    0,
+    0.6,
+    0
+  ],
+  "rootBone": "aoi",
+  "animations": {
+    "cry": "q.bedrock_stateful('aoi', 'cry')",
+    "recoil": "q.bedrock_stateful('aoi', 'recoil')",
+    "faint": "q.bedrock_primary('aoi', 'faint', q.curve('one'))",
+    "physical": "q.bedrock_primary('aoi', 'physical', q.curve('symmetrical_wide'))",
+    "special": "q.bedrock_primary('aoi', 'special', q.curve('symmetrical_wide'))",
+    "status": "q.bedrock_primary('aoi', 'status', q.curve('symmetrical_wide'))"
+  },
+  "poses": {
+    "battle-standing": {
+      "poseTypes": [
+        "STAND"
+      ],
+      "animations": [
+        "q.look('tete')",
+        "q.bedrock('aoi', 'battle_idle')"
+      ],
+      "isBattle": true,
+      "quirks": [
+        "q.bedrock_quirk('aoi', 'idle_quirk')"
+      ]
+    },
+    "standing": {
+      "poseTypes": [
+        "STAND",
+        "PORTRAIT",
+        "PROFILE",
+        "NONE",
+        "SHOULDER_LEFT",
+        "SHOULDER_RIGHT"
+      ],
+      "animations": [
+        "q.look('tete')",
+        "q.bedrock('aoi', 'ground_idle')"
+      ],
+      "isBattle": false,
+      "quirks": [
+        "q.bedrock_quirk('aoi', 'idle_quirk')"
+      ]
+    },
+    "walking": {
+      "poseTypes": [
+        "WALK",
+        "SWIM"
+      ],
+      "animations": [
+        "q.look('tete')",
+        "q.bedrock('aoi', 'ground_walk')"
+      ],
+      "quirks": [
+        "q.bedrock_quirk('aoi', 'idle_quirk')"
+      ]
+    },
+    "hovering": {
+      "poseTypes": [
+        "HOVER",
+        "FLOAT"
+      ],
+      "animations": [
+        "q.look('tete')",
+        "q.bedrock('aoi', 'air_idle')"
+      ],
+      "quirks": [
+        "q.bedrock_quirk('aoi', 'idle_quirk')"
+      ]
+    },
+    "flying": {
+      "poseTypes": [
+        "FLY"
+      ],
+      "animations": [
+        "q.look('tete')",
+        "q.bedrock('aoi', 'air_fly')"
+      ],
+      "quirks": [
+        "q.bedrock_quirk('aoi', 'idle_quirk')"
+      ]
+    },
+    "sleep": {
+      "poseTypes": [
+        "SLEEP"
+      ],
+      "animations": [
+        "q.bedrock('aoi', 'sleep')"
+      ]
+    }
+  }
+}

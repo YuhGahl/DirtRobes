@@ -1,0 +1,8 @@
+{
+  "species": "dirtrobes:inkaflare",
+  "model": "dirtrobes:inkaflare",
+  "texture": "dirtrobes:textures/spectrobes/inkaflare.png",
+  "tint": false,
+  "scale": 0.878,
+  "poser": "dirtrobes:inkaflare"
+}

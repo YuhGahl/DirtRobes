@@ -16,7 +16,7 @@
   "evolves_into": "dirtrobes:shakoblad",
   "evolution_level": 30,
   "hitbox": {
-    "width": 1.05,
-    "height": 1.55
+    "width": 0.55,
+    "height": 1.25
   }
 }

@@ -1,0 +1,2889 @@
+{
+  "format_version": "1.8.0",
+  "animations": {
+    "animation.aobasar.ground_idle": {
+      "loop": true,
+      "animation_length": 4.0,
+      "bones": {
+        "corps": {
+          "rotation": [
+            "1*(24+1.5*math.sin(q.anim_time*60+0))",
+            0,
+            0
+          ],
+          "position": [
+            0,
+            "-10+0.4*math.sin(q.anim_time*60+0)",
+            2.5
+          ]
+        },
+        "tete": {
+          "rotation": [
+            "1*-(20+2*math.sin(q.anim_time*60+40))",
+            "5*math.sin(q.anim_time*30+0)",
+            0
+          ]
+        },
+        "coiffe": {
+          "rotation": [
+            "2*math.sin(q.anim_time*120+0)",
+            0,
+            0
+          ]
+        },
+        "jambe_g": {
+          "rotation": [
+            "1*-(79+1.5*math.sin(q.anim_time*60+0))",
+            0,
+            "-1*4"
+          ]
+        },
+        "tibia_g": {
+          "rotation": [
+            "1*(110+3*math.sin(q.anim_time*60+0))",
+            0,
+            0
+          ]
+        },
+        "pied_g": {
+          "rotation": [
+            "1*-(55+1.5*math.sin(q.anim_time*60+0))",
+            0,
+            "1*4"
+          ]
+        },
+        "ruban_g": {
+          "rotation": [
+            "6*math.sin(q.anim_time*90+40)",
+            "8*math.sin(q.anim_time*70+-60)",
+            "6*math.sin(q.anim_time*80+0)"
+          ]
+        },
+        "aile_g": {
+          "rotation": [
+            -30.0,
+            "1*(60+2*math.sin(q.anim_time*60+90))",
+            "1*(62+2*math.sin(q.anim_time*60+0))"
+          ]
+        },
+        "aile_bout_g": {
+          "rotation": [
+            0,
+            "1*9.0",
+            0
+          ]
+        },
+        "main_aile_g": {
+          "rotation": [
+            0,
+            0,
+            "-1*4*math.sin(q.anim_time*60+0)"
+          ]
+        },
+        "jambe_d": {
+          "rotation": [
+            "1*-(79+1.5*math.sin(q.anim_time*60+0))",
+            0,
+            "1*4"
+          ]
+        },
+        "tibia_d": {
+          "rotation": [
+            "1*(110+3*math.sin(q.anim_time*60+0))",
+            0,
+            0
+          ]
+        },
+        "pied_d": {
+          "rotation": [
+            "1*-(55+1.5*math.sin(q.anim_time*60+0))",
+            0,
+            "-1*4"
+          ]
+        },
+        "ruban_d": {
+          "rotation": [
+            "6*math.sin(q.anim_time*90+160)",
+            "8*math.sin(q.anim_time*70+60)",
+            "6*math.sin(q.anim_time*80+0)"
+          ]
+        },
+        "aile_d": {
+          "rotation": [
+            -30.0,
+            "-1*(60+2*math.sin(q.anim_time*60+90))",
+            "-1*(62+2*math.sin(q.anim_time*60+0))"
+          ]
+        },
+        "aile_bout_d": {
+          "rotation": [
+            0,
+            "-1*9.0",
+            0
+          ]
+        },
+        "main_aile_d": {
+          "rotation": [
+            0,
+            0,
+            "1*4*math.sin(q.anim_time*60+0)"
+          ]
+        }
+      }
+    },
+    "animation.aobasar.air_idle": {
+      "loop": true,
+      "animation_length": 4.0,
+      "bones": {
+        "corps": {
+          "rotation": [
+            "1*(10+2*math.sin(q.anim_time*180+0))",
+            0,
+            0
+          ],
+          "position": [
+            0,
+            "8+1.2*math.sin(q.anim_time*180+0)",
+            0
+          ]
+        },
+        "tete": {
+          "rotation": [
+            "1*-8",
+            "6*math.sin(q.anim_time*40+0)",
+            0
+          ]
+        },
+        "queue": {
+          "rotation": [
+            "1*-10+5*math.sin(q.anim_time*180+60)",
+            0,
+            0
+          ]
+        },
+        "aile_g": {
+          "rotation": [
+            0,
+            0,
+            "1*(28*math.sin(q.anim_time*630+0))"
+          ]
+        },
+        "aile_bout_g": {
+          "rotation": [
+            0,
+            0,
+            "1*(14.0*math.sin(q.anim_time*630+-50))"
+          ]
+        },
+        "jambe_g": {
+          "rotation": [
+            "1*-20",
+            0,
+            0
+          ]
+        },
+        "pied_g": {
+          "rotation": [
+            "1*40",
+            0,
+            0
+          ]
+        },
+        "ruban_g": {
+          "rotation": [
+            "10*math.sin(q.anim_time*180+40)",
+            "10*math.sin(q.anim_time*70+-60)",
+            0
+          ]
+        },
+        "aile_d": {
+          "rotation": [
+            0,
+            0,
+            "-1*(28*math.sin(q.anim_time*630+0))"
+          ]
+        },
+        "aile_bout_d": {
+          "rotation": [
+            0,
+            0,
+            "-1*(14.0*math.sin(q.anim_time*630+-50))"
+          ]
+        },
+        "jambe_d": {
+          "rotation": [
+            "1*-20",
+            0,
+            0
+          ]
+        },
+        "pied_d": {
+          "rotation": [
+            "1*40",
+            0,
+            0
+          ]
+        },
+        "ruban_d": {
+          "rotation": [
+            "10*math.sin(q.anim_time*180+40)",
+            "10*math.sin(q.anim_time*70+60)",
+            0
+          ]
+        }
+      }
+    },
+    "animation.aobasar.air_fly": {
+      "loop": true,
+      "animation_length": 4.0,
+      "bones": {
+        "corps": {
+          "rotation": [
+            "1*(60+3*math.sin(q.anim_time*270+90))",
+            0,
+            "3*math.sin(q.anim_time*90+0)"
+          ],
+          "position": [
+            0,
+            "10+1.5*math.sin(q.anim_time*270+180)",
+            0
+          ]
+        },
+        "tete": {
+          "rotation": [
+            "1*-(50+3*math.sin(q.anim_time*270+90))",
+            0,
+            0
+          ]
+        },
+        "queue": {
+          "rotation": [
+            "1*-(20+6*math.sin(q.anim_time*270+200))",
+            0,
+            0
+          ]
+        },
+        "aile_g": {
+          "rotation": [
+            0,
+            0,
+            "1*(15+40*math.sin(q.anim_time*270+0))"
+          ]
+        },
+        "aile_bout_g": {
+          "rotation": [
+            0,
+            0,
+            "1*(20.0*math.sin(q.anim_time*270+-60))"
+          ]
+        },
+        "jambe_g": {
+          "rotation": [
+            "1*-65",
+            0,
+            0
+          ]
+        },
+        "pied_g": {
+          "rotation": [
+            "1*30",
+            0,
+            0
+          ]
+        },
+        "ruban_g": {
+          "rotation": [
+            "1*-40+10*math.sin(q.anim_time*360+0)",
+            0,
+            0
+          ]
+        },
+        "aile_d": {
+          "rotation": [
+            0,
+            0,
+            "-1*(15+40*math.sin(q.anim_time*270+0))"
+          ]
+        },
+        "aile_bout_d": {
+          "rotation": [
+            0,
+            0,
+            "-1*(20.0*math.sin(q.anim_time*270+-60))"
+          ]
+        },
+        "jambe_d": {
+          "rotation": [
+            "1*-65",
+            0,
+            0
+          ]
+        },
+        "pied_d": {
+          "rotation": [
+            "1*30",
+            0,
+            0
+          ]
+        },
+        "ruban_d": {
+          "rotation": [
+            "1*-40+10*math.sin(q.anim_time*360+0)",
+            0,
+            0
+          ]
+        }
+      }
+    },
+    "animation.aobasar.ground_walk": {
+      "loop": true,
+      "animation_length": 4.0,
+      "bones": {
+        "corps": {
+          "rotation": [
+            "1*28",
+            "4*math.sin(q.anim_time*180+0)",
+            0
+          ],
+          "position": [
+            0,
+            "-10+0.8*math.abs(math.sin(q.anim_time*180))",
+            2.5
+          ]
+        },
+        "tete": {
+          "rotation": [
+            "1*-(24+2*math.sin(q.anim_time*60+40))",
+            "5*math.sin(q.anim_time*30+0)",
+            0
+          ]
+        },
+        "coiffe": {
+          "rotation": [
+            "2*math.sin(q.anim_time*120+0)",
+            0,
+            0
+          ]
+        },
+        "jambe_g": {
+          "rotation": [
+            "1*-(78+22*math.sin(q.anim_time*180+0))",
+            0,
+            0
+          ]
+        },
+        "tibia_g": {
+          "rotation": [
+            "1*(100+20*math.sin(q.anim_time*180+90))",
+            0,
+            0
+          ]
+        },
+        "pied_g": {
+          "rotation": [
+            "1*-(50+15*math.sin(q.anim_time*180+60))",
+            0,
+            0
+          ]
+        },
+        "ruban_g": {
+          "rotation": [
+            "6*math.sin(q.anim_time*90+40)",
+            "8*math.sin(q.anim_time*70+-60)",
+            "6*math.sin(q.anim_time*80+0)"
+          ]
+        },
+        "aile_g": {
+          "rotation": [
+            -30.0,
+            "1*(60+2*math.sin(q.anim_time*60+90))",
+            "1*(62+2*math.sin(q.anim_time*60+0))"
+          ]
+        },
+        "aile_bout_g": {
+          "rotation": [
+            0,
+            "1*9.0",
+            0
+          ]
+        },
+        "main_aile_g": {
+          "rotation": [
+            0,
+            0,
+            "-1*4*math.sin(q.anim_time*60+0)"
+          ]
+        },
+        "jambe_d": {
+          "rotation": [
+            "1*-(78+22*math.sin(q.anim_time*180+180))",
+            0,
+            0
+          ]
+        },
+        "tibia_d": {
+          "rotation": [
+            "1*(100+20*math.sin(q.anim_time*180+270))",
+            0,
+            0
+          ]
+        },
+        "pied_d": {
+          "rotation": [
+            "1*-(50+15*math.sin(q.anim_time*180+240))",
+            0,
+            0
+          ]
+        },
+        "ruban_d": {
+          "rotation": [
+            "6*math.sin(q.anim_time*90+160)",
+            "8*math.sin(q.anim_time*70+60)",
+            "6*math.sin(q.anim_time*80+0)"
+          ]
+        },
+        "aile_d": {
+          "rotation": [
+            -30.0,
+            "-1*(60+2*math.sin(q.anim_time*60+90))",
+            "-1*(62+2*math.sin(q.anim_time*60+0))"
+          ]
+        },
+        "aile_bout_d": {
+          "rotation": [
+            0,
+            "-1*9.0",
+            0
+          ]
+        },
+        "main_aile_d": {
+          "rotation": [
+            0,
+            0,
+            "1*4*math.sin(q.anim_time*60+0)"
+          ]
+        }
+      }
+    },
+    "animation.aobasar.battle_idle": {
+      "loop": true,
+      "animation_length": 4.0,
+      "bones": {
+        "corps": {
+          "rotation": [
+            "1*(30+1.5*math.sin(q.anim_time*60+0))",
+            0,
+            0
+          ],
+          "position": [
+            0,
+            "-10+0.4*math.sin(q.anim_time*60+0)",
+            2.5
+          ]
+        },
+        "tete": {
+          "rotation": [
+            "1*-(26+2*math.sin(q.anim_time*60+40))",
+            "5*math.sin(q.anim_time*30+0)",
+            0
+          ]
+        },
+        "coiffe": {
+          "rotation": [
+            "2*math.sin(q.anim_time*120+0)",
+            0,
+            0
+          ]
+        },
+        "jambe_g": {
+          "rotation": [
+            "1*-(80+1.5*math.sin(q.anim_time*60+0))",
+            0,
+            "-1*4"
+          ]
+        },
+        "tibia_g": {
+          "rotation": [
+            "1*(100+3*math.sin(q.anim_time*60+0))",
+            0,
+            0
+          ]
+        },
+        "pied_g": {
+          "rotation": [
+            "1*-(50+1.5*math.sin(q.anim_time*60+0))",
+            0,
+            "1*4"
+          ]
+        },
+        "ruban_g": {
+          "rotation": [
+            "6*math.sin(q.anim_time*90+40)",
+            "8*math.sin(q.anim_time*70+-60)",
+            "6*math.sin(q.anim_time*80+0)"
+          ]
+        },
+        "aile_g": {
+          "rotation": [
+            -20.0,
+            "1*(45+2*math.sin(q.anim_time*60+90))",
+            "1*(40+2*math.sin(q.anim_time*60+0))"
+          ]
+        },
+        "aile_bout_g": {
+          "rotation": [
+            0,
+            "1*6.75",
+            0
+          ]
+        },
+        "main_aile_g": {
+          "rotation": [
+            0,
+            0,
+            "-1*(15+5*math.sin(q.anim_time*120+0))"
+          ]
+        },
+        "jambe_d": {
+          "rotation": [
+            "1*-(80+1.5*math.sin(q.anim_time*60+0))",
+            0,
+            "1*4"
+          ]
+        },
+        "tibia_d": {
+          "rotation": [
+            "1*(100+3*math.sin(q.anim_time*60+0))",
+            0,
+            0
+          ]
+        },
+        "pied_d": {
+          "rotation": [
+            "1*-(50+1.5*math.sin(q.anim_time*60+0))",
+            0,
+            "-1*4"
+          ]
+        },
+        "ruban_d": {
+          "rotation": [
+            "6*math.sin(q.anim_time*90+160)",
+            "8*math.sin(q.anim_time*70+60)",
+            "6*math.sin(q.anim_time*80+0)"
+          ]
+        },
+        "aile_d": {
+          "rotation": [
+            -20.0,
+            "-1*(45+2*math.sin(q.anim_time*60+90))",
+            "-1*(40+2*math.sin(q.anim_time*60+0))"
+          ]
+        },
+        "aile_bout_d": {
+          "rotation": [
+            0,
+            "-1*6.75",
+            0
+          ]
+        },
+        "main_aile_d": {
+          "rotation": [
+            0,
+            0,
+            "1*(15+5*math.sin(q.anim_time*120+0))"
+          ]
+        }
+      }
+    },
+    "animation.aobasar.sleep": {
+      "loop": true,
+      "animation_length": 4.0,
+      "bones": {
+        "corps": {
+          "rotation": [
+            "1*10",
+            0,
+            0
+          ],
+          "position": [
+            0,
+            "-9+0.3*math.sin(q.anim_time*40+0)",
+            0
+          ]
+        },
+        "tete": {
+          "rotation": [
+            "1*35",
+            0,
+            20
+          ]
+        },
+        "coiffe": {
+          "rotation": [
+            "2*math.sin(q.anim_time*120+0)",
+            0,
+            0
+          ]
+        },
+        "jambe_g": {
+          "rotation": [
+            "1*-(70+1.5*math.sin(q.anim_time*60+0))",
+            0,
+            "-1*4"
+          ]
+        },
+        "tibia_g": {
+          "rotation": [
+            "1*(120+3*math.sin(q.anim_time*60+0))",
+            0,
+            0
+          ]
+        },
+        "pied_g": {
+          "rotation": [
+            "1*-(60+1.5*math.sin(q.anim_time*60+0))",
+            0,
+            "1*4"
+          ]
+        },
+        "ruban_g": {
+          "rotation": [
+            "6*math.sin(q.anim_time*90+40)",
+            "8*math.sin(q.anim_time*70+-60)",
+            "6*math.sin(q.anim_time*80+0)"
+          ]
+        },
+        "aile_g": {
+          "rotation": [
+            "1*-20",
+            "-1*40",
+            "1*45"
+          ]
+        },
+        "aile_bout_g": {
+          "rotation": [
+            0,
+            "-1*30",
+            "1*40"
+          ]
+        },
+        "main_aile_g": {
+          "rotation": [
+            0,
+            0,
+            "-1*4*math.sin(q.anim_time*60+0)"
+          ]
+        },
+        "jambe_d": {
+          "rotation": [
+            "1*-(70+1.5*math.sin(q.anim_time*60+0))",
+            0,
+            "1*4"
+          ]
+        },
+        "tibia_d": {
+          "rotation": [
+            "1*(120+3*math.sin(q.anim_time*60+0))",
+            0,
+            0
+          ]
+        },
+        "pied_d": {
+          "rotation": [
+            "1*-(60+1.5*math.sin(q.anim_time*60+0))",
+            0,
+            "-1*4"
+          ]
+        },
+        "ruban_d": {
+          "rotation": [
+            "6*math.sin(q.anim_time*90+160)",
+            "8*math.sin(q.anim_time*70+60)",
+            "6*math.sin(q.anim_time*80+0)"
+          ]
+        },
+        "aile_d": {
+          "rotation": [
+            "1*-20",
+            "1*40",
+            "-1*45"
+          ]
+        },
+        "aile_bout_d": {
+          "rotation": [
+            0,
+            "1*30",
+            "-1*40"
+          ]
+        },
+        "main_aile_d": {
+          "rotation": [
+            0,
+            0,
+            "1*4*math.sin(q.anim_time*60+0)"
+          ]
+        },
+        "yeux": {
+          "scale": [
+            1,
+            0.15,
+            1
+          ]
+        }
+      }
+    },
+    "animation.aobasar.cry": {
+      "animation_length": 2.0,
+      "bones": {
+        "corps": {
+          "rotation": {
+            "0.0": {
+              "post": [
+                22,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.35": {
+              "post": [
+                -5,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.5": {
+              "post": [
+                -5,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "2.0": {
+              "post": [
+                22,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          },
+          "position": {
+            "0.0": {
+              "post": [
+                0,
+                -3,
+                1.5
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.35": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.5": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "2.0": {
+              "post": [
+                0,
+                -3,
+                1.5
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          }
+        },
+        "tete": {
+          "rotation": {
+            "0.0": {
+              "post": [
+                -18,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.35": {
+              "post": [
+                -25,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.5": {
+              "post": [
+                -25,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "2.0": {
+              "post": [
+                -18,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          }
+        },
+        "coiffe": {
+          "scale": {
+            "0.0": {
+              "post": [
+                1,
+                1,
+                1
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.35": {
+              "post": [
+                1.25,
+                1.25,
+                1
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.5": {
+              "post": [
+                1.25,
+                1.25,
+                1
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "2.0": {
+              "post": [
+                1,
+                1,
+                1
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          }
+        },
+        "jambe_g": {
+          "rotation": [
+            "1*-(79+1.5*math.sin(q.anim_time*60+0))",
+            0,
+            "-1*4"
+          ]
+        },
+        "tibia_g": {
+          "rotation": [
+            "1*(110+3*math.sin(q.anim_time*60+0))",
+            0,
+            0
+          ]
+        },
+        "pied_g": {
+          "rotation": [
+            "1*-(55+1.5*math.sin(q.anim_time*60+0))",
+            0,
+            "1*4"
+          ]
+        },
+        "ruban_g": {
+          "rotation": [
+            "6*math.sin(q.anim_time*90+40)",
+            "8*math.sin(q.anim_time*70+-60)",
+            "6*math.sin(q.anim_time*80+0)"
+          ]
+        },
+        "aile_g": {
+          "rotation": {
+            "0.0": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.35": {
+              "post": [
+                0,
+                15,
+                -20
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.5": {
+              "post": [
+                0,
+                15,
+                -20
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "2.0": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          }
+        },
+        "aile_bout_g": {
+          "rotation": [
+            0,
+            "1*9.0",
+            0
+          ]
+        },
+        "main_aile_g": {
+          "rotation": {
+            "0.0": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.35": {
+              "post": [
+                0,
+                0,
+                -30
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.5": {
+              "post": [
+                0,
+                0,
+                -30
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "2.0": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          }
+        },
+        "jambe_d": {
+          "rotation": [
+            "1*-(79+1.5*math.sin(q.anim_time*60+0))",
+            0,
+            "1*4"
+          ]
+        },
+        "tibia_d": {
+          "rotation": [
+            "1*(110+3*math.sin(q.anim_time*60+0))",
+            0,
+            0
+          ]
+        },
+        "pied_d": {
+          "rotation": [
+            "1*-(55+1.5*math.sin(q.anim_time*60+0))",
+            0,
+            "-1*4"
+          ]
+        },
+        "ruban_d": {
+          "rotation": [
+            "6*math.sin(q.anim_time*90+160)",
+            "8*math.sin(q.anim_time*70+60)",
+            "6*math.sin(q.anim_time*80+0)"
+          ]
+        },
+        "aile_d": {
+          "rotation": {
+            "0.0": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.35": {
+              "post": [
+                0,
+                -15,
+                20
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.5": {
+              "post": [
+                0,
+                -15,
+                20
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "2.0": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          }
+        },
+        "aile_bout_d": {
+          "rotation": [
+            0,
+            "-1*9.0",
+            0
+          ]
+        },
+        "main_aile_d": {
+          "rotation": {
+            "0.0": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.35": {
+              "post": [
+                0,
+                0,
+                30
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.5": {
+              "post": [
+                0,
+                0,
+                30
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "2.0": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          }
+        }
+      }
+    },
+    "animation.aobasar.physical": {
+      "animation_length": 1.4,
+      "bones": {
+        "corps": {
+          "rotation": {
+            "0.0": {
+              "post": [
+                22,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.35": {
+              "post": [
+                35,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.6": {
+              "post": [
+                -15,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.9": {
+              "post": [
+                -15,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.4": {
+              "post": [
+                22,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          },
+          "position": {
+            "0.0": {
+              "post": [
+                0,
+                -3,
+                1.5
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.35": {
+              "post": [
+                0,
+                -5,
+                2
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.6": {
+              "post": [
+                0,
+                6,
+                -8
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.9": {
+              "post": [
+                0,
+                4,
+                -8
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.4": {
+              "post": [
+                0,
+                -3,
+                1.5
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          }
+        },
+        "tete": {
+          "rotation": [
+            "1*-(20+2*math.sin(q.anim_time*60+40))",
+            "5*math.sin(q.anim_time*30+0)",
+            0
+          ]
+        },
+        "coiffe": {
+          "rotation": [
+            "2*math.sin(q.anim_time*120+0)",
+            0,
+            0
+          ]
+        },
+        "jambe_g": {
+          "rotation": {
+            "0.0": {
+              "post": [
+                -50,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.35": {
+              "post": [
+                -60,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.6": {
+              "post": [
+                -95,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.9": {
+              "post": [
+                -95,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.4": {
+              "post": [
+                -50,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          }
+        },
+        "tibia_g": {
+          "rotation": [
+            "1*(110+3*math.sin(q.anim_time*60+0))",
+            0,
+            0
+          ]
+        },
+        "pied_g": {
+          "rotation": [
+            "1*-(55+1.5*math.sin(q.anim_time*60+0))",
+            0,
+            "1*4"
+          ]
+        },
+        "ruban_g": {
+          "rotation": [
+            "6*math.sin(q.anim_time*90+40)",
+            "8*math.sin(q.anim_time*70+-60)",
+            "6*math.sin(q.anim_time*80+0)"
+          ]
+        },
+        "aile_g": {
+          "rotation": {
+            "0.0": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.35": {
+              "post": [
+                0,
+                0,
+                -25
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.6": {
+              "post": [
+                0,
+                0,
+                40
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.4": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          }
+        },
+        "aile_bout_g": {
+          "rotation": [
+            0,
+            "1*9.0",
+            0
+          ]
+        },
+        "main_aile_g": {
+          "rotation": [
+            0,
+            0,
+            "-1*4*math.sin(q.anim_time*60+0)"
+          ]
+        },
+        "jambe_d": {
+          "rotation": {
+            "0.0": {
+              "post": [
+                -50,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.35": {
+              "post": [
+                -60,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.6": {
+              "post": [
+                -95,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.9": {
+              "post": [
+                -95,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.4": {
+              "post": [
+                -50,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          }
+        },
+        "tibia_d": {
+          "rotation": [
+            "1*(110+3*math.sin(q.anim_time*60+0))",
+            0,
+            0
+          ]
+        },
+        "pied_d": {
+          "rotation": [
+            "1*-(55+1.5*math.sin(q.anim_time*60+0))",
+            0,
+            "-1*4"
+          ]
+        },
+        "ruban_d": {
+          "rotation": [
+            "6*math.sin(q.anim_time*90+160)",
+            "8*math.sin(q.anim_time*70+60)",
+            "6*math.sin(q.anim_time*80+0)"
+          ]
+        },
+        "aile_d": {
+          "rotation": {
+            "0.0": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.35": {
+              "post": [
+                0,
+                0,
+                25
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.6": {
+              "post": [
+                0,
+                0,
+                -40
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.4": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          }
+        },
+        "aile_bout_d": {
+          "rotation": [
+            0,
+            "-1*9.0",
+            0
+          ]
+        },
+        "main_aile_d": {
+          "rotation": [
+            0,
+            0,
+            "1*4*math.sin(q.anim_time*60+0)"
+          ]
+        }
+      }
+    },
+    "animation.aobasar.special": {
+      "animation_length": 2.4,
+      "bones": {
+        "corps": {
+          "rotation": {
+            "0.0": {
+              "post": [
+                22,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.6": {
+              "post": [
+                -10,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.8": {
+              "post": [
+                -10,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "2.4": {
+              "post": [
+                22,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          },
+          "position": {
+            "0.0": {
+              "post": [
+                0,
+                -3,
+                1.5
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.6": {
+              "post": [
+                0,
+                10,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.8": {
+              "post": [
+                0,
+                10,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "2.4": {
+              "post": [
+                0,
+                -3,
+                1.5
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          }
+        },
+        "tete": {
+          "rotation": [
+            "1*-8",
+            "6*math.sin(q.anim_time*40+0)",
+            0
+          ]
+        },
+        "queue": {
+          "rotation": [
+            "1*-10+5*math.sin(q.anim_time*180+60)",
+            0,
+            0
+          ]
+        },
+        "aile_g": {
+          "rotation": {
+            "0.0": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.6": {
+              "post": [
+                0,
+                10,
+                -15
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.0": {
+              "post": [
+                0,
+                10,
+                10
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.4": {
+              "post": [
+                0,
+                10,
+                -15
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.8": {
+              "post": [
+                0,
+                10,
+                -15
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "2.4": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          }
+        },
+        "aile_bout_g": {
+          "rotation": [
+            0,
+            0,
+            "1*(14.0*math.sin(q.anim_time*630+-50))"
+          ]
+        },
+        "jambe_g": {
+          "rotation": [
+            "1*-20",
+            0,
+            0
+          ]
+        },
+        "pied_g": {
+          "rotation": [
+            "1*40",
+            0,
+            0
+          ]
+        },
+        "ruban_g": {
+          "rotation": [
+            "10*math.sin(q.anim_time*180+40)",
+            "10*math.sin(q.anim_time*70+-60)",
+            0
+          ]
+        },
+        "aile_d": {
+          "rotation": {
+            "0.0": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.6": {
+              "post": [
+                0,
+                -10,
+                15
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.0": {
+              "post": [
+                0,
+                -10,
+                -10
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.4": {
+              "post": [
+                0,
+                -10,
+                15
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.8": {
+              "post": [
+                0,
+                -10,
+                15
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "2.4": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          }
+        },
+        "aile_bout_d": {
+          "rotation": [
+            0,
+            0,
+            "-1*(14.0*math.sin(q.anim_time*630+-50))"
+          ]
+        },
+        "jambe_d": {
+          "rotation": [
+            "1*-20",
+            0,
+            0
+          ]
+        },
+        "pied_d": {
+          "rotation": [
+            "1*40",
+            0,
+            0
+          ]
+        },
+        "ruban_d": {
+          "rotation": [
+            "10*math.sin(q.anim_time*180+40)",
+            "10*math.sin(q.anim_time*70+60)",
+            0
+          ]
+        },
+        "coiffe": {
+          "scale": {
+            "0.0": {
+              "post": [
+                1,
+                1,
+                1
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.6": {
+              "post": [
+                1.3,
+                1.3,
+                1
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.8": {
+              "post": [
+                1.3,
+                1.3,
+                1
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "2.4": {
+              "post": [
+                1,
+                1,
+                1
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          }
+        },
+        "main_aile_g": {
+          "rotation": {
+            "0.0": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.6": {
+              "post": [
+                0,
+                0,
+                -40
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.8": {
+              "post": [
+                0,
+                0,
+                -40
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "2.4": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          },
+          "scale": {
+            "0.0": {
+              "post": [
+                1,
+                1,
+                1
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.6": {
+              "post": [
+                1.3,
+                1.3,
+                1.3
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.8": {
+              "post": [
+                1.3,
+                1.3,
+                1.3
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "2.4": {
+              "post": [
+                1,
+                1,
+                1
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          }
+        },
+        "main_aile_d": {
+          "rotation": {
+            "0.0": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.6": {
+              "post": [
+                0,
+                0,
+                40
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.8": {
+              "post": [
+                0,
+                0,
+                40
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "2.4": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          },
+          "scale": {
+            "0.0": {
+              "post": [
+                1,
+                1,
+                1
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.6": {
+              "post": [
+                1.3,
+                1.3,
+                1.3
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.8": {
+              "post": [
+                1.3,
+                1.3,
+                1.3
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "2.4": {
+              "post": [
+                1,
+                1,
+                1
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          }
+        }
+      }
+    },
+    "animation.aobasar.status": {
+      "animation_length": 1.8,
+      "bones": {
+        "corps": {
+          "rotation": [
+            "1*(24+1.5*math.sin(q.anim_time*60+0))",
+            0,
+            0
+          ],
+          "position": [
+            0,
+            "-10+0.4*math.sin(q.anim_time*60+0)",
+            2.5
+          ]
+        },
+        "tete": {
+          "rotation": {
+            "0.0": {
+              "post": [
+                -18,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.45": {
+              "post": [
+                -18,
+                0,
+                25
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.9": {
+              "post": [
+                -18,
+                0,
+                -25
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.35": {
+              "post": [
+                -18,
+                0,
+                25
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.8": {
+              "post": [
+                -18,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          }
+        },
+        "coiffe": {
+          "scale": {
+            "0.0": {
+              "post": [
+                1,
+                1,
+                1
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.45": {
+              "post": [
+                1.2,
+                1.2,
+                1
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.9": {
+              "post": [
+                1,
+                1,
+                1
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.35": {
+              "post": [
+                1.2,
+                1.2,
+                1
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.8": {
+              "post": [
+                1,
+                1,
+                1
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          }
+        },
+        "jambe_g": {
+          "rotation": [
+            "1*-(79+1.5*math.sin(q.anim_time*60+0))",
+            0,
+            "-1*4"
+          ]
+        },
+        "tibia_g": {
+          "rotation": [
+            "1*(110+3*math.sin(q.anim_time*60+0))",
+            0,
+            0
+          ]
+        },
+        "pied_g": {
+          "rotation": [
+            "1*-(55+1.5*math.sin(q.anim_time*60+0))",
+            0,
+            "1*4"
+          ]
+        },
+        "ruban_g": {
+          "rotation": [
+            "6*math.sin(q.anim_time*90+40)",
+            "8*math.sin(q.anim_time*70+-60)",
+            "6*math.sin(q.anim_time*80+0)"
+          ]
+        },
+        "aile_g": {
+          "rotation": {
+            "0.0": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.45": {
+              "post": [
+                0,
+                25,
+                10
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.35": {
+              "post": [
+                0,
+                25,
+                10
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.8": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          }
+        },
+        "aile_bout_g": {
+          "rotation": [
+            0,
+            "1*9.0",
+            0
+          ]
+        },
+        "main_aile_g": {
+          "rotation": [
+            0,
+            0,
+            "-1*4*math.sin(q.anim_time*60+0)"
+          ]
+        },
+        "jambe_d": {
+          "rotation": [
+            "1*-(79+1.5*math.sin(q.anim_time*60+0))",
+            0,
+            "1*4"
+          ]
+        },
+        "tibia_d": {
+          "rotation": [
+            "1*(110+3*math.sin(q.anim_time*60+0))",
+            0,
+            0
+          ]
+        },
+        "pied_d": {
+          "rotation": [
+            "1*-(55+1.5*math.sin(q.anim_time*60+0))",
+            0,
+            "-1*4"
+          ]
+        },
+        "ruban_d": {
+          "rotation": [
+            "6*math.sin(q.anim_time*90+160)",
+            "8*math.sin(q.anim_time*70+60)",
+            "6*math.sin(q.anim_time*80+0)"
+          ]
+        },
+        "aile_d": {
+          "rotation": {
+            "0.0": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.45": {
+              "post": [
+                0,
+                -25,
+                -10
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.35": {
+              "post": [
+                0,
+                -25,
+                -10
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.8": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          }
+        },
+        "aile_bout_d": {
+          "rotation": [
+            0,
+            "-1*9.0",
+            0
+          ]
+        },
+        "main_aile_d": {
+          "rotation": [
+            0,
+            0,
+            "1*4*math.sin(q.anim_time*60+0)"
+          ]
+        }
+      }
+    },
+    "animation.aobasar.recoil": {
+      "animation_length": 0.7,
+      "bones": {
+        "corps": {
+          "rotation": {
+            "0.0": {
+              "post": [
+                22,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.15": {
+              "post": [
+                5,
+                0,
+                10
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.7": {
+              "post": [
+                22,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          },
+          "position": {
+            "0.0": {
+              "post": [
+                0,
+                -3,
+                1.5
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.15": {
+              "post": [
+                0,
+                -2,
+                5
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.7": {
+              "post": [
+                0,
+                -3,
+                1.5
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          }
+        },
+        "tete": {
+          "rotation": [
+            "1*-(20+2*math.sin(q.anim_time*60+40))",
+            "5*math.sin(q.anim_time*30+0)",
+            0
+          ]
+        },
+        "coiffe": {
+          "rotation": [
+            "2*math.sin(q.anim_time*120+0)",
+            0,
+            0
+          ]
+        },
+        "jambe_g": {
+          "rotation": [
+            "1*-(79+1.5*math.sin(q.anim_time*60+0))",
+            0,
+            "-1*4"
+          ]
+        },
+        "tibia_g": {
+          "rotation": [
+            "1*(110+3*math.sin(q.anim_time*60+0))",
+            0,
+            0
+          ]
+        },
+        "pied_g": {
+          "rotation": [
+            "1*-(55+1.5*math.sin(q.anim_time*60+0))",
+            0,
+            "1*4"
+          ]
+        },
+        "ruban_g": {
+          "rotation": [
+            "6*math.sin(q.anim_time*90+40)",
+            "8*math.sin(q.anim_time*70+-60)",
+            "6*math.sin(q.anim_time*80+0)"
+          ]
+        },
+        "aile_g": {
+          "rotation": [
+            -30.0,
+            "1*(60+2*math.sin(q.anim_time*60+90))",
+            "1*(62+2*math.sin(q.anim_time*60+0))"
+          ]
+        },
+        "aile_bout_g": {
+          "rotation": [
+            0,
+            "1*9.0",
+            0
+          ]
+        },
+        "main_aile_g": {
+          "rotation": [
+            0,
+            0,
+            "-1*4*math.sin(q.anim_time*60+0)"
+          ]
+        },
+        "jambe_d": {
+          "rotation": [
+            "1*-(79+1.5*math.sin(q.anim_time*60+0))",
+            0,
+            "1*4"
+          ]
+        },
+        "tibia_d": {
+          "rotation": [
+            "1*(110+3*math.sin(q.anim_time*60+0))",
+            0,
+            0
+          ]
+        },
+        "pied_d": {
+          "rotation": [
+            "1*-(55+1.5*math.sin(q.anim_time*60+0))",
+            0,
+            "-1*4"
+          ]
+        },
+        "ruban_d": {
+          "rotation": [
+            "6*math.sin(q.anim_time*90+160)",
+            "8*math.sin(q.anim_time*70+60)",
+            "6*math.sin(q.anim_time*80+0)"
+          ]
+        },
+        "aile_d": {
+          "rotation": [
+            -30.0,
+            "-1*(60+2*math.sin(q.anim_time*60+90))",
+            "-1*(62+2*math.sin(q.anim_time*60+0))"
+          ]
+        },
+        "aile_bout_d": {
+          "rotation": [
+            0,
+            "-1*9.0",
+            0
+          ]
+        },
+        "main_aile_d": {
+          "rotation": [
+            0,
+            0,
+            "1*4*math.sin(q.anim_time*60+0)"
+          ]
+        },
+        "yeux": {
+          "scale": {
+            "0.0": {
+              "post": [
+                1,
+                1,
+                1
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.15": {
+              "post": [
+                1,
+                0.15,
+                1
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.5": {
+              "post": [
+                1,
+                0.15,
+                1
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.7": {
+              "post": [
+                1,
+                1,
+                1
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          }
+        }
+      }
+    },
+    "animation.aobasar.faint": {
+      "loop": "hold_on_last_frame",
+      "animation_length": 2.4,
+      "bones": {
+        "corps": {
+          "rotation": {
+            "0.0": {
+              "post": [
+                22,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.6": {
+              "post": [
+                30,
+                0,
+                15
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.6": {
+              "post": [
+                20,
+                0,
+                80
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "2.4": {
+              "post": [
+                20,
+                0,
+                85
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          },
+          "position": {
+            "0.0": {
+              "post": [
+                0,
+                -3,
+                1.5
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.6": {
+              "post": [
+                0,
+                -5,
+                1.5
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.6": {
+              "post": [
+                0,
+                -12,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "2.4": {
+              "post": [
+                0,
+                -12,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          }
+        },
+        "tete": {
+          "rotation": [
+            "1*-(20+2*math.sin(q.anim_time*60+40))",
+            "5*math.sin(q.anim_time*30+0)",
+            0
+          ]
+        },
+        "coiffe": {
+          "rotation": [
+            "2*math.sin(q.anim_time*120+0)",
+            0,
+            0
+          ]
+        },
+        "jambe_g": {
+          "rotation": [
+            "1*-(79+1.5*math.sin(q.anim_time*60+0))",
+            0,
+            "-1*4"
+          ]
+        },
+        "tibia_g": {
+          "rotation": [
+            "1*(110+3*math.sin(q.anim_time*60+0))",
+            0,
+            0
+          ]
+        },
+        "pied_g": {
+          "rotation": [
+            "1*-(55+1.5*math.sin(q.anim_time*60+0))",
+            0,
+            "1*4"
+          ]
+        },
+        "ruban_g": {
+          "rotation": [
+            "6*math.sin(q.anim_time*90+40)",
+            "8*math.sin(q.anim_time*70+-60)",
+            "6*math.sin(q.anim_time*80+0)"
+          ]
+        },
+        "aile_g": {
+          "rotation": {
+            "0.0": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.6": {
+              "post": [
+                0,
+                -20,
+                55
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "2.4": {
+              "post": [
+                0,
+                -20,
+                60
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          }
+        },
+        "aile_bout_g": {
+          "rotation": [
+            0,
+            "1*9.0",
+            0
+          ]
+        },
+        "main_aile_g": {
+          "rotation": [
+            0,
+            0,
+            "-1*4*math.sin(q.anim_time*60+0)"
+          ]
+        },
+        "jambe_d": {
+          "rotation": [
+            "1*-(79+1.5*math.sin(q.anim_time*60+0))",
+            0,
+            "1*4"
+          ]
+        },
+        "tibia_d": {
+          "rotation": [
+            "1*(110+3*math.sin(q.anim_time*60+0))",
+            0,
+            0
+          ]
+        },
+        "pied_d": {
+          "rotation": [
+            "1*-(55+1.5*math.sin(q.anim_time*60+0))",
+            0,
+            "-1*4"
+          ]
+        },
+        "ruban_d": {
+          "rotation": [
+            "6*math.sin(q.anim_time*90+160)",
+            "8*math.sin(q.anim_time*70+60)",
+            "6*math.sin(q.anim_time*80+0)"
+          ]
+        },
+        "aile_d": {
+          "rotation": {
+            "0.0": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.6": {
+              "post": [
+                0,
+                20,
+                -55
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "2.4": {
+              "post": [
+                0,
+                20,
+                -60
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          }
+        },
+        "aile_bout_d": {
+          "rotation": [
+            0,
+            "-1*9.0",
+            0
+          ]
+        },
+        "main_aile_d": {
+          "rotation": [
+            0,
+            0,
+            "1*4*math.sin(q.anim_time*60+0)"
+          ]
+        },
+        "yeux": {
+          "scale": {
+            "0.0": {
+              "post": [
+                1,
+                1,
+                1
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.8": {
+              "post": [
+                1,
+                0.15,
+                1
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "2.4": {
+              "post": [
+                1,
+                0.15,
+                1
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          }
+        }
+      }
+    },
+    "animation.aobasar.idle_quirk": {
+      "animation_length": 2.4,
+      "bones": {
+        "corps": {
+          "rotation": [
+            "1*(24+1.5*math.sin(q.anim_time*60+0))",
+            0,
+            0
+          ],
+          "position": [
+            0,
+            "-10+0.4*math.sin(q.anim_time*60+0)",
+            2.5
+          ]
+        },
+        "tete": {
+          "rotation": {
+            "0.0": {
+              "post": [
+                -18,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.5": {
+              "post": [
+                -30,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.5": {
+              "post": [
+                -30,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "2.4": {
+              "post": [
+                -18,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          }
+        },
+        "coiffe": {
+          "rotation": [
+            "2*math.sin(q.anim_time*120+0)",
+            0,
+            0
+          ]
+        },
+        "jambe_g": {
+          "rotation": [
+            "1*-(79+1.5*math.sin(q.anim_time*60+0))",
+            0,
+            "-1*4"
+          ]
+        },
+        "tibia_g": {
+          "rotation": [
+            "1*(110+3*math.sin(q.anim_time*60+0))",
+            0,
+            0
+          ]
+        },
+        "pied_g": {
+          "rotation": [
+            "1*-(55+1.5*math.sin(q.anim_time*60+0))",
+            0,
+            "1*4"
+          ]
+        },
+        "ruban_g": {
+          "rotation": [
+            "6*math.sin(q.anim_time*90+40)",
+            "8*math.sin(q.anim_time*70+-60)",
+            "6*math.sin(q.anim_time*80+0)"
+          ]
+        },
+        "aile_g": {
+          "rotation": {
+            "0.0": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.5": {
+              "post": [
+                0,
+                20,
+                -25
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.0": {
+              "post": [
+                0,
+                20,
+                -15
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.5": {
+              "post": [
+                0,
+                20,
+                -25
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "2.4": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          }
+        },
+        "aile_bout_g": {
+          "rotation": [
+            0,
+            "1*9.0",
+            0
+          ]
+        },
+        "main_aile_g": {
+          "rotation": {
+            "0.0": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.6": {
+              "post": [
+                0,
+                0,
+                -35
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.8": {
+              "post": [
+                0,
+                0,
+                -10
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.0": {
+              "post": [
+                0,
+                0,
+                -35
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "2.4": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          }
+        },
+        "jambe_d": {
+          "rotation": [
+            "1*-(79+1.5*math.sin(q.anim_time*60+0))",
+            0,
+            "1*4"
+          ]
+        },
+        "tibia_d": {
+          "rotation": [
+            "1*(110+3*math.sin(q.anim_time*60+0))",
+            0,
+            0
+          ]
+        },
+        "pied_d": {
+          "rotation": [
+            "1*-(55+1.5*math.sin(q.anim_time*60+0))",
+            0,
+            "-1*4"
+          ]
+        },
+        "ruban_d": {
+          "rotation": [
+            "6*math.sin(q.anim_time*90+160)",
+            "8*math.sin(q.anim_time*70+60)",
+            "6*math.sin(q.anim_time*80+0)"
+          ]
+        },
+        "aile_d": {
+          "rotation": {
+            "0.0": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.5": {
+              "post": [
+                0,
+                -20,
+                25
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.0": {
+              "post": [
+                0,
+                -20,
+                15
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.5": {
+              "post": [
+                0,
+                -20,
+                25
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "2.4": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          }
+        },
+        "aile_bout_d": {
+          "rotation": [
+            0,
+            "-1*9.0",
+            0
+          ]
+        },
+        "main_aile_d": {
+          "rotation": {
+            "0.0": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.6": {
+              "post": [
+                0,
+                0,
+                35
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "0.8": {
+              "post": [
+                0,
+                0,
+                10
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "1.0": {
+              "post": [
+                0,
+                0,
+                35
+              ],
+              "lerp_mode": "catmullrom"
+            },
+            "2.4": {
+              "post": [
+                0,
+                0,
+                0
+              ],
+              "lerp_mode": "catmullrom"
+            }
+          }
+        }
+      }
+    }
+  }
+}

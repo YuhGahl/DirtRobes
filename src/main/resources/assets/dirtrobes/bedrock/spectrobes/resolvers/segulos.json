@@ -1,0 +1,8 @@
+{
+  "species": "dirtrobes:segulos",
+  "model": "dirtrobes:segulos",
+  "texture": "dirtrobes:textures/spectrobes/segulos.png",
+  "tint": false,
+  "scale": 0.984,
+  "poser": "dirtrobes:segulos"
+}

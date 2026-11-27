@@ -16,11 +16,12 @@ import java.util.List;
  *   <li>« variant_textures » / « variant_emissives » : textures des couleurs Chroma 2 et Chroma 3 (dans cet ordre).
  *   Sans elles, une teinte de secours est appliquée.</li>
  *   <li>« scale » : agrandit ou réduit le modèle à l'affichage (1 par défaut), sans toucher à la hitbox.</li>
+ *   <li>« translucent » : la texture a des parties semi-transparentes (aura, verre…), rendues comme telles.</li>
  * </ul>
  */
 public record Resolver(String key, ResourceLocation model, ResourceLocation texture, @Nullable ResourceLocation emissive,
                        ResourceLocation poser, boolean tint, List<ResourceLocation> variantTextures, List<ResourceLocation> variantEmissives,
-                       float scale) {
+                       float scale, boolean translucent) {
     public static Resolver parse(JsonObject json, String fallbackKey) {
         String emissive = GsonHelper.getAsString(json, "emissive", "");
         return new Resolver(
@@ -32,7 +33,8 @@ public record Resolver(String key, ResourceLocation model, ResourceLocation text
                 GsonHelper.getAsBoolean(json, "tint", false),
                 list(json, "variant_textures"),
                 list(json, "variant_emissives"),
-                GsonHelper.getAsFloat(json, "scale", 1f));
+                GsonHelper.getAsFloat(json, "scale", 1f),
+                GsonHelper.getAsBoolean(json, "translucent", false));
     }
 
     private static List<ResourceLocation> list(JsonObject json, String key) {

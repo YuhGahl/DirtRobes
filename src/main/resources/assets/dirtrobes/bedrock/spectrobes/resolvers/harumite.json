@@ -1,0 +1,8 @@
+{
+  "species": "dirtrobes:harumite",
+  "model": "dirtrobes:harumite",
+  "texture": "dirtrobes:textures/spectrobes/harumite.png",
+  "tint": false,
+  "scale": 1.06,
+  "poser": "dirtrobes:harumite"
+}

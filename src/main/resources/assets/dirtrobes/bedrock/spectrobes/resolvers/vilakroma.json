@@ -1,0 +1,8 @@
+{
+  "species": "dirtrobes:vilakroma",
+  "model": "dirtrobes:vilakroma",
+  "texture": "dirtrobes:textures/spectrobes/vilakroma.png",
+  "tint": false,
+  "scale": 0.803,
+  "poser": "dirtrobes:vilakroma"
+}

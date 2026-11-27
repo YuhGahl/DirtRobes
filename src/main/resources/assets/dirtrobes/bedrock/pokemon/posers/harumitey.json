@@ -1,0 +1,79 @@
+{
+  "portraitScale": 1.0,
+  "portraitTranslation": [
+    0,
+    0,
+    0
+  ],
+  "profileScale": 0.6,
+  "profileTranslation": [
+    0,
+    0.6,
+    0
+  ],
+  "rootBone": "harumitey",
+  "animations": {
+    "cry": "q.bedrock_stateful('harumitey', 'cry')",
+    "recoil": "q.bedrock_stateful('harumitey', 'recoil')",
+    "faint": "q.bedrock_primary('harumitey', 'faint', q.curve('one'))",
+    "physical": "q.bedrock_primary('harumitey', 'physical', q.curve('symmetrical_wide'))",
+    "special": "q.bedrock_primary('harumitey', 'special', q.curve('symmetrical_wide'))",
+    "status": "q.bedrock_primary('harumitey', 'status', q.curve('symmetrical_wide'))"
+  },
+  "poses": {
+    "battle-standing": {
+      "poseTypes": [
+        "STAND"
+      ],
+      "animations": [
+        "q.look('tete')",
+        "q.bedrock('harumitey', 'battle_idle')"
+      ],
+      "isBattle": true,
+      "quirks": [
+        "q.bedrock_quirk('harumitey', 'idle_quirk')"
+      ]
+    },
+    "standing": {
+      "poseTypes": [
+        "STAND",
+        "PORTRAIT",
+        "PROFILE",
+        "NONE",
+        "SHOULDER_LEFT",
+        "SHOULDER_RIGHT",
+        "FLOAT",
+        "HOVER"
+      ],
+      "animations": [
+        "q.look('tete')",
+        "q.bedrock('harumitey', 'ground_idle')"
+      ],
+      "isBattle": false,
+      "quirks": [
+        "q.bedrock_quirk('harumitey', 'idle_quirk')"
+      ]
+    },
+    "walking": {
+      "poseTypes": [
+        "WALK",
+        "SWIM"
+      ],
+      "animations": [
+        "q.look('tete')",
+        "q.bedrock('harumitey', 'ground_walk')"
+      ],
+      "quirks": [
+        "q.bedrock_quirk('harumitey', 'idle_quirk')"
+      ]
+    },
+    "sleep": {
+      "poseTypes": [
+        "SLEEP"
+      ],
+      "animations": [
+        "q.bedrock('harumitey', 'sleep')"
+      ]
+    }
+  }
+}
