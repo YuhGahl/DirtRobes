@@ -346,7 +346,7 @@ _DONORS = None
 
 
 def donor_moves(sid):
-    """Movepool du Pokémon d'Insurgence qui sert de modèle (tools/cobblemon/insurgence_donors.py)."""
+    """Movepool mélangé des Pokémon d'Insurgence qui servent de modèles (tools/cobblemon/insurgence_donors.py)."""
     global _DONORS
     if _DONORS is None:
         p = os.path.join(os.path.dirname(os.path.abspath(__file__)), "insurgence_movepools.json")
@@ -545,7 +545,9 @@ def export_doc_table():
         tms = [m[3:] for m in c["moves"] if m.startswith("tm:")]
         tutor = [m[6:] for m in c["moves"] if m.startswith("tutor:")]
         egg = [m[4:] for m in c["moves"] if m.startswith("egg:")]
-        donor = (donor_moves(sid) or {}).get("donor", "")
+        dm = donor_moves(sid) or {}
+        ds = dm.get("donors") or ([dm["donor"]] if dm.get("donor") else [])
+        donor = ", ".join(ds[:-1]) + " et " + ds[-1] if len(ds) > 1 else "".join(ds)
         evo = []
         for e in c["evolutions"]:
             res = src[e["result"].split(":")[1]]["name"]
